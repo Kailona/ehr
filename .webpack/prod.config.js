@@ -14,7 +14,7 @@ module.exports = {
 	mode: 'production',
 	context: path.resolve(__dirname, '..'),
 	entry: [
-		'./js/index.js'
+		'./js/platform/main/src/index.js'
 	],
 	output: {
 		path: assetsPath,

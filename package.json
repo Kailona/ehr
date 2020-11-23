@@ -1,4 +1,10 @@
 {
+  "name": "ehr",
+  "private": true,
+  "workspaces": [
+    "js/platform/*",
+    "js/plugins/*"
+  ],
   "devDependencies": {
     "@babel/core": "^7.11.5",
     "@babel/plugin-proposal-class-properties": "^7.10.4",
@@ -18,6 +24,7 @@
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-react": "^7.20.6",
     "json-loader": "0.5.7",
+    "lerna": "^3.22.1",
     "mini-css-extract-plugin": "^0.11.0",
     "postcss-loader": "^3.0.0",
     "postcss-nested": "^4.2.3",
@@ -36,10 +43,12 @@
     "@babel/runtime": "^7.11.2",
     "axios": "^0.21.0",
     "oc-react-components": "^0.2.0",
+    "prop-types": "^15.7.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-dropzone": "11.0.3",
-    "react-responsive": "8.1.0",
-    "react-scrolla": "0.3.1"
+    "uuid": "^8.3.1"
+  },
+  "resolutions": {
+    "**/@babel/runtime": "7.11.2"
   }
 }

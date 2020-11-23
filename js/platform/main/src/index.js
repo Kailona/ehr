@@ -1,9 +1,11 @@
 'use strict';
 
-import { App } from './App';
 import { AppContainer } from 'react-hot-loader';
 import React from 'react';
 import ReactDom from 'react-dom';
+
+import App from './App';
+import config from './config';
 
 // Enable React devtools
 window.React = React;
@@ -11,7 +13,7 @@ window.React = React;
 function render (App, rootElement) {
 	ReactDom.render(
 		<AppContainer>
-			<App />
+			<App config={config}/>
 		</AppContainer>, rootElement);
 }
 

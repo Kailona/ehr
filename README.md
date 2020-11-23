@@ -1,3 +1,6 @@
+[monorepo]: https://en.wikipedia.org/wiki/Monorepo
+
+
 # Nextcloud Electronic Health Records (EHR)
 
 Private Electronic Health Records (EHR) in Nextcloud
@@ -73,7 +76,7 @@ This will run the proxy at http://localhost:3001/
 
 With the proxy configured you can start the webpack dev server and specify where the
 Nextcloud proxy is.
- 
+
 ```
 PROXY_URL=http://localhost:3001/ make watch
 ```
@@ -89,3 +92,36 @@ using the following steps:
 - Clone the repo in the `$HOME/NextcloudWorkspace/nextcloud/apps` folder
 - Run `PROXY_URL=http://localhost:3001/ make watch`
 - Go to `http://localhost:3001` and enable `Electronic Health Records (EHR)` application in Nextcloud
+
+### Project Structure
+
+The JavaScript packages are maintained as [monorepo][monorepo] containing many repositories.
+
+```
+.
+├── appinfo                     # Nextcloud App metadata and configuration
+│
+├── img                         # Icons and images
+│
+├── js                          # JavaScript files
+│   ├── platform                # Platform modules
+│   │   ├── core                # Business logic
+│   │   ├── ui                  # Generic UI elements
+│   │   └── main                # Main app components
+│   │
+│   └── plugins                 # Custom plugins
+│
+├── i10n                        # Translation files
+│
+├── lib                         # PHP classes
+│
+├── templates                   # PHP templates
+│
+├── tests                       # PHP unit tests
+│
+├── ...                         # Misc. configuration files
+│
+├── lerna.json                  # MonoRepo (Lerna) settings for client-side packages
+├── package.json                # Client-side package configuration
+└── README.md                   # This file
+```
