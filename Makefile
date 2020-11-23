@@ -22,6 +22,7 @@ node_modules: package.json
 	yarn install
 
 build/main.js: node_modules $(jssources)
+	yarn lint
 	$(webpack) --verbose --colors --display-error-details --config .webpack/prod.config.js
 
 .PHONY: watch
@@ -33,7 +34,7 @@ appstore: clean build/main.js package
 package: build/appstore/$(package_name).tar.gz
 build/appstore/$(package_name).tar.gz: build/main.js $(othersources)
 	mkdir -p $(appstore_dir)
-	tar --exclude-vcs \
+	tar --exclude=$(project_dir)/.git \
 	--exclude=$(appstore_dir) \
 	--exclude=$(project_dir)/.development \
 	--exclude=$(project_dir)/.github \
