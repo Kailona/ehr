@@ -4,24 +4,22 @@ import { PluginManager } from '@kailona/core';
 import Dashboard from './components/Dashboard';
 
 export default class App extends Component {
-	static propTypes = {
-		config: PropTypes.shape({
-			plugins: PropTypes.array,
-		}).isRequired,
-	};
+    static propTypes = {
+        config: PropTypes.shape({
+            plugins: PropTypes.array,
+        }).isRequired,
+    };
 
-	constructor(props) {
-		super(props);
+    constructor(props) {
+        super(props);
 
-		const { plugins } = this.props.config;
-		plugins.forEach(plugin => {
-			PluginManager.registerPlugin(plugin);
-		});
-	}
+        const { plugins } = this.props.config;
+        plugins.forEach(plugin => {
+            PluginManager.registerPlugin(plugin);
+        });
+    }
 
-	render () {
-		return (
-			<Dashboard />
-		);
-	}
-};
+    render() {
+        return <Dashboard />;
+    }
+}
