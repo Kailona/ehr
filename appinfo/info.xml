@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<info xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	  xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+	<id>ehr</id>
+	<name>EHR (Electronic Health Records)</name>
+	<summary>Private Electronic Health Records in Nextcloud</summary>
+	<description>Private Electronic Health Records in Nextcloud</description>
+	<version>0.1.0</version>
+	<licence>agpl</licence>
+	<author>Kailona</author>
+	<namespace>EHR</namespace>
+
+	<category>tools</category>
+	<website>https://kailona.org</website>
+	<bugs>https://github.com/Kailona/ehr/issues</bugs>
+	<repository type="git">https://github.com/Kailona/ehr</repository>
+
+	<dependencies>
+		<nextcloud min-version="19" max-version="21" />
+	</dependencies>
+
+	<navigations>
+		<navigation>
+			<name>EHR</name>
+			<route>ehr.page.index</route>
+		</navigation>
+	</navigations>
+</info>

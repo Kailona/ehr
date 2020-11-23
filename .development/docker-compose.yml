@@ -1,0 +1,47 @@
+version: '3.2'
+
+services:
+  db:
+    image: mariadb
+    hostname: db
+    command: --transaction-isolation=READ-COMMITTED --binlog-format=ROW
+    restart: always
+    volumes:
+      - type: bind
+        source: $HOME/NextcloudWorkspace/db
+        target: /var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=nextcloud
+      - MYSQL_PASSWORD=nextcloud
+      - MYSQL_DATABASE=nextcloud
+      - MYSQL_USER=nextcloud
+
+  nextcloud:
+    image: nextcloud:stable
+    hostname: nextcloud
+    links:
+      - db
+    volumes:
+      - type: bind
+        source: $HOME/NextcloudWorkspace/nextcloud
+        target: /var/www/html
+    restart: always
+    environment:
+      MYSQL_DATABASE: nextcloud
+      MYSQL_USER: nextcloud
+      MYSQL_PASSWORD: nextcloud
+      MYSQL_HOST: db
+      NEXTCLOUD_ADMIN_USER: nextcloud
+      NEXTCLOUD_ADMIN_PASSWORD: nextcloud
+
+  nginx:
+    image: nginx:1.19.4
+    links:
+      - nextcloud
+    volumes:
+      - type: bind
+        source: ./nginx
+        target: /etc/nginx/conf.d
+    ports:
+      - 3001:3001
+    restart: always

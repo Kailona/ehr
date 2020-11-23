@@ -1,0 +1,15 @@
+{
+    "name": "kailona/ehr",
+    "description": "Private Electronic Health Records in Nextcloud",
+    "type": "project",
+    "license": "AGPL",
+    "authors": [
+        {
+            "name": "Kailona"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^7"
+    }
+}
