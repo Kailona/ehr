@@ -18,7 +18,7 @@ clean:
 	rm -rf node_modules
 
 node_modules: package.json
-	npm install --deps
+	yarn install
 
 build/main.js: node_modules $(jssources)
 	$(webpack) --verbose --colors --display-error-details --config webpack/prod.config.js
