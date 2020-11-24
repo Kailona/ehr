@@ -1,0 +1,27 @@
+{
+  "extends": ["prettier", "prettier/react"],
+  "plugins": ["react", "prettier"],
+  "rules": {
+    "max-len": ["error", 120],
+    "indent": ["error", 4, { "SwitchCase": 1 }],
+    "semi": 0,
+    "no-console": 0,
+    "comma-dangle": 0,
+    "no-underscore-dangle": 0,
+    "no-use-before-define": 0,
+    "spaced-comment": 0,
+    "no-return-await": 0,
+    "func-names": 0,
+    "no-param-reassign": 0
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "settings": {
+    "react": {
+      "version": "latest"
+    }
+  }
+}

@@ -8,7 +8,7 @@ module.exports = {
 	entry: {
 		'main': [
 			'react-hot-loader/patch',
-			'./js/index.js'
+			'./js/platform/main/src/index.js'
 		]
 	},
 	output: {
