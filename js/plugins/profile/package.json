@@ -1,7 +1,7 @@
 {
-    "name": "@kailona/main",
+    "name": "@kailona/plugin-profile",
     "version": "0.1.0",
-    "description": "Kailona EHR Main",
+    "description": "Kailona EHR Plugin - Profile",
     "author": "Kailona",
     "license": "MIT",
     "main": "dist/index.umd.js",
@@ -9,9 +9,5 @@
     "peerDependencies": {
         "react": "16.13.1",
         "react-dom": "16.13.1"
-    },
-    "dependencies": {
-        "@kailona/core": "^0.1.0",
-        "@kailona/plugin-profile": "^0.1.0"
     }
 }
