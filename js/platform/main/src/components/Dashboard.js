@@ -24,7 +24,7 @@ export default class Dashboard extends Component {
 
         return (
             <>
-                <h1>Dashboard coming...</h1>
+                <h1>{t('ehr', 'Dashboard coming...')}</h1>
                 <div>{widgets}</div>
             </>
         );
