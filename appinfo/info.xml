@@ -25,4 +25,9 @@
 			<route>ehr.page.index</route>
 		</navigation>
 	</navigations>
+
+	<settings>
+		<admin>OCA\EHR\Settings\Admin</admin>
+		<admin-section>OCA\EHR\Settings\Section</admin-section>
+	</settings>
 </info>

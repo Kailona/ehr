@@ -2,6 +2,8 @@
 
 namespace OCA\EHR\Service;
 
+use OCP\AppFramework\Http;
+use OCP\AppFramework\Http\DataResponse;
 use OCP\Http\Client\IClientService;
 use OCP\ILogger;
 use Exception;
@@ -12,11 +14,19 @@ class FHIRService {
         $this->appName = $appName;
         $this->clientService = $clientService;
 
-        // TODO: Get fhirConfig from nextcloud admin settings
+        $fhirBaseUrl = \OC::$server->getConfig()->getAppValue('ehr', 'fhirBaseUrl');
+        $fhirUsername = \OC::$server->getConfig()->getAppValue('ehr', 'fhirUsername');
+        $fhirPassword = \OC::$server->getConfig()->getAppValue('ehr', 'fhirPassword');
+
         $this->fhirConfig = [
-            'baseUrl' => '',
-            'auth' => ['', '']
+            'baseUrl' => $fhirBaseUrl,
+            'auth' => [$fhirUsername, $fhirPassword]
         ];
+
+        // Alert if FHIR Server is not configured yet
+        if (!$fhirBaseUrl || !$fhirUsername || !$fhirPassword) {
+            $this->logger->error("FHIR Server credentials are invalid. Please configure FHIR Server in the admin settings.");
+        }
     }
 
     private function fetch(string $method, string $url, string $queryParams = null, string $body = null) {
@@ -62,8 +72,8 @@ class FHIRService {
 
 			return json_decode($response->getBody(), true) ?? '';
 		} catch (Exception $e) {
-            // TODO: Wrap the exception
-            throw $e;
+            $this->logger->error("Failed to fetch FHIR Server", ['message' => $e->getMessage(), 'trace' => $e->getTrace()]);
+            return new DataResponse([], Http::STATUS_BAD_REQUEST);
 		}
     }
 
