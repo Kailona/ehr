@@ -27,6 +27,11 @@ class SettingsService {
                 continue;
             }
 
+            // Do not update fhir password when hidden mask was sent
+            if ($name == 'fhirPassword' && $value == '*****') {
+                continue;
+            }
+
             \OC::$server->getConfig()->setAppValue(
                 'ehr',
                 $name,

@@ -72,7 +72,7 @@ class FHIRService {
 
 			return json_decode($response->getBody(), true) ?? '';
 		} catch (Exception $e) {
-            $this->logger->error("Failed to fetch FHIR Server", ['message' => $e->getMessage(), 'trace' => $e->getTrace()]);
+            $this->logger->logException($e);
             return new DataResponse([], Http::STATUS_BAD_REQUEST);
 		}
     }
