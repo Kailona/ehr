@@ -1,6 +1,8 @@
+import initialize from './initialize';
 import ProfileWidget from './ProfileWidget';
 
 export default {
-    id: 'profile',
+    id: 'plugin-profile',
+    onPreRegisteration: initialize,
     WidgetModule: ProfileWidget,
 };

@@ -1,9 +1,9 @@
 import axios from 'axios';
+import ConfigManager from '../managers/ConfigManager';
 
 export default class SettingsService {
-    constructor(options) {
-        const { adminSettingsUrl } = options || {};
-        this.adminSettingsUrl = adminSettingsUrl || `${OC.generateUrl('/apps/ehr')}/settings/admin`;
+    constructor() {
+        this.adminSettingsUrl = ConfigManager.appConfig.settings.adminSettingsUrl;
     }
 
     async retrieveAdminSettings() {

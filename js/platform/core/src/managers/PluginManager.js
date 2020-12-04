@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import Logger from '../utils/Logger';
 import ModuleTypeEnum from '../enums/ModuleType.enum';
 
-const logger = new Logger('PluginManager');
+const logger = new Logger('core.PluginManager');
 
 class PluginManager {
     constructor() {
