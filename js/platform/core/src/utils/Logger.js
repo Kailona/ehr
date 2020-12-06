@@ -7,6 +7,10 @@ export default class Logger {
         console.error(this._namespace, ...params);
     }
 
+    warn(...params) {
+        console.warn(this._namespace, ...params);
+    }
+
     info(...params) {
         console.info(this._namespace, ...params);
     }
