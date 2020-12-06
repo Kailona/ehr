@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Logger, SettingsService } from '@kailona/core';
-import config from '../../config';
 
 import './AdminSettings.css';
 
-const logger = new Logger('PluginManager');
+const logger = new Logger('main.PluginManager');
 
 export default class AdminSettings extends Component {
     static propTypes = {
@@ -25,19 +24,17 @@ export default class AdminSettings extends Component {
                 fhirUsername: null,
                 fhirPassword: null,
             },
-            settings: config.adminSettingsUrl ? {} : this.props.settings,
+            settings: this.props.settings,
         };
 
-        this.settingsCache = config.adminSettingsUrl ? {} : this.props.settings;
-
-        this.settingsService = new SettingsService({
-            adminSettingsUrl: config.adminSettingsUrl,
-        });
+        this.settingsCache = this.props.settings;
+        this.settingsService = new SettingsService();
     }
 
     async componentDidMount() {
-        if (config.adminSettingsUrl) {
+        if (!this.state.settings) {
             const settings = await this.settingsService.retrieveAdminSettings();
+            this.settingsCache = settings;
             this.setState({
                 settings,
             });

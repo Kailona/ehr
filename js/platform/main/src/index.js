@@ -3,11 +3,15 @@
 import { AppContainer } from 'react-hot-loader';
 import React from 'react';
 import ReactDom from 'react-dom';
+import { ConfigManager } from '@kailona/core';
 
 import App from './App';
 import AppAdminSettings from './AppAdminSettings';
 
-import config from './config';
+import config from './config/default';
+
+// Set App Config
+ConfigManager.appConfig = config;
 
 // Enable React devtools
 window.React = React;
@@ -15,7 +19,7 @@ window.React = React;
 function render(App, rootElement, props = {}) {
     ReactDom.render(
         <AppContainer>
-            <App config={config} {...props} />
+            <App {...props} />
         </AppContainer>,
         rootElement
     );

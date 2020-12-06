@@ -1,8 +1,9 @@
 import axios from 'axios';
+import ConfigManager from '../managers/ConfigManager';
 
 export default class FHIRService {
     constructor(resourceType) {
-        this.baseUrl = OC.generateUrl('/apps/ehr');
+        this.baseUrl = ConfigManager.appConfig.settings.fhirBaseUrl;
         this.resourceType = resourceType;
     }
 
@@ -55,7 +56,7 @@ export default class FHIRService {
         const url = `${this.baseUrl}/fhir/${this.resourceType}/${id}/_history`;
         return await axios.get(url);
     }
-    
+
     async search(filter) {
         let url = `${this.baseUrl}/fhir/${this.resourceType}`;
 
