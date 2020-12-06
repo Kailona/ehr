@@ -1,6 +1,7 @@
 import ProfilePlugin from '@kailona/plugin-profile';
 
 export default {
+    basename: '/apps/ehr',
     plugins: [ProfilePlugin],
     settings: {
         fhirBaseUrl: OC.generateUrl('/apps/ehr'),
