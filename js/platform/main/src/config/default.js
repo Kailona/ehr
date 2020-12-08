@@ -1,8 +1,8 @@
-import ProfilePlugin from '@kailona/plugin-profile';
+import PhysicalDataPlugin from '@kailona/plugin-physical-data';
 
 export default {
     basename: '/apps/ehr',
-    plugins: [ProfilePlugin],
+    plugins: [PhysicalDataPlugin],
     settings: {
         fhirBaseUrl: OC.generateUrl('/apps/ehr'),
         adminSettingsUrl: `${OC.generateUrl('/apps/ehr')}/settings/admin`,

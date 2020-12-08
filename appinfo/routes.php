@@ -3,7 +3,6 @@
 return ['routes' => [
     // Client Pages
     ['name' => 'page#index', 'url' => '/', 'verb' => 'GET'],
-    ['name' => 'page#index', 'url' => '/profile', 'verb' => 'GET', 'postfix' => 'profile'],
 
     // API Endpoints
     ['name' => 'settings#admin', 'url' => '/settings/admin', 'verb' => 'POST'],

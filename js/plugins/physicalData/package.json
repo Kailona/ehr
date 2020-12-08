@@ -1,7 +1,7 @@
 {
-    "name": "@kailona/plugin-profile",
+    "name": "@kailona/plugin-physical-data",
     "version": "0.1.0",
-    "description": "Kailona EHR Plugin - Profile",
+    "description": "Kailona EHR Plugin - Physical Data",
     "author": "Kailona",
     "license": "MIT",
     "main": "dist/index.umd.js",
