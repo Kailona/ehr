@@ -1,8 +1,8 @@
 import { Logger, ConfigManager, FHIRService, UserManager } from '@kailona/core';
 
-const logger = new Logger('plugin-profile.initialize');
+const logger = new Logger('main.initFHIRPatients');
 
-const initializeFHIRPatient = async () => {
+export default async function initFHIRPatients() {
     try {
         const { id: appUserId, name: appUserName } = ConfigManager.appConfig.currentUser;
         const patientFhirService = new FHIRService('Patient');
@@ -47,10 +47,6 @@ const initializeFHIRPatient = async () => {
         const { id: newPatientId } = newPatientBundle.entry[0].resource;
         UserManager.patientId = newPatientId;
     } catch (error) {
-        logger.error('Failed to initialize FHIR Patient', error);
+        logger.error('Failed to initialize FHIR Patients by user data', error);
     }
-};
-
-export default function initialize() {
-    initializeFHIRPatient();
 }

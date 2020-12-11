@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Logger, SettingsService } from '@kailona/core';
 
-import './AdminSettings.css';
+import './AdminSettings.styl';
 
 const logger = new Logger('main.PluginManager');
 

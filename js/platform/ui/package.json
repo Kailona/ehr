@@ -1,7 +1,7 @@
 {
-    "name": "@kailona/main",
+    "name": "@kailona/ui",
     "version": "0.1.0",
-    "description": "Kailona EHR Main",
+    "description": "Kailona EHR UI",
     "author": "Kailona",
     "license": "MIT",
     "main": "dist/index.umd.js",
@@ -11,9 +11,6 @@
         "react-dom": "16.13.1"
     },
     "dependencies": {
-        "@kailona/core": "^0.1.0",
-        "@kailona/ui": "^0.1.0",
-        "@kailona/plugin-physical-data": "^0.1.0",
-        "react-router-dom": "^5.2.0"
+        "@kailona/core": "^0.1.0"
     }
 }

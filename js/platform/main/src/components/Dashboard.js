@@ -32,6 +32,9 @@ export default class Dashboard extends Component {
             menuItems.push(menuModule);
         });
 
+        // Sort by priority (high priority comes first)
+        menuItems.sort((mi1, mi2) => (mi1.priority < mi2.priority ? 1 : -1));
+
         return menuItems.map((menuItem, index) => (
             <Link key={index} to={menuItem.path}>
                 {menuItem.name}
