@@ -1,14 +1,19 @@
 import PhysicalDataModule from './components/PhysicalDataModule';
-import PhysicalDataWidget from './components/PhysicalDataWidget';
 
 export default {
     id: 'plugin-physical-data',
+    path: '/physical-data',
     MenuModule: {
         name: 'Physical Data',
-        icon: null, // TODO: Add menu icon
-        path: '/physical-data',
+        icon: 'FolderSharedOutlined',
         priority: 100,
     },
-    DataModule: PhysicalDataModule,
-    WidgetModule: PhysicalDataWidget,
+    WidgetModule: {
+        name: 'Physical Data',
+        icon: 'FolderSharedOutlined',
+        priority: 100,
+    },
+    DataModule: {
+        Component: PhysicalDataModule,
+    },
 };

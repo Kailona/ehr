@@ -1,26 +1,9 @@
 import React, { Component } from 'react';
-import IconButton from '@material-ui/core/IconButton';
-import Menu from '@material-ui/core/Menu';
-import { MenuItem as MuiMenuItem } from '@material-ui/core';
-import {
-    ArrowDropDown,
-    FolderShared,
-    Grain,
-    AssignmentTurnedIn,
-    EnhancedEncryption,
-    Cached,
-    DirectionsRun,
-    CallMerge,
-    Layers,
-    VerifiedUser,
-    FavoriteBorder,
-    List,
-    Restaurant,
-    Archive,
-    CloudUpload,
-    PermIdentity,
-} from '@material-ui/icons';
+import { withRouter } from 'react-router-dom';
+import { Menu, MenuItem as MuiMenuItem, IconButton } from '@material-ui/core';
+import { ArrowDropDown } from '@material-ui/icons';
 import { styled } from '@material-ui/core/styles';
+import { ModuleTypeEnum, PluginManager, getIcon } from '@kailona/core';
 
 const DropdownIcon = styled(IconButton)({
     padding: 0,
@@ -50,90 +33,61 @@ const MenuItem = styled(MuiMenuItem)({
     },
 });
 
-export default class ProfileMenu extends Component {
+class ProfileMenu extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             anchorEl: null,
         };
-
-        this.options = [
-            {
-                label: 'Physical Data',
-                icon: <FolderShared />,
-            },
-            {
-                label: 'Allergies',
-                icon: <Grain />,
-            },
-            {
-                label: 'Blood Results',
-                icon: <AssignmentTurnedIn />,
-            },
-            {
-                label: 'Conditions',
-                icon: <EnhancedEncryption />,
-            },
-            {
-                label: 'Cycle',
-                icon: <Cached />,
-            },
-            {
-                label: 'Exercise',
-                icon: <DirectionsRun />,
-            },
-            {
-                label: 'Genomics',
-                icon: <CallMerge />,
-            },
-            {
-                label: 'Imaging',
-                icon: <Layers />,
-            },
-            {
-                label: 'Immunizations',
-                icon: <VerifiedUser />,
-            },
-            {
-                label: 'Medications',
-                icon: <List />,
-            },
-            {
-                label: 'Nutrition',
-                icon: <Restaurant />,
-            },
-            {
-                label: 'Vitals',
-                icon: <FavoriteBorder />,
-            },
-            {
-                label: 'Data Requests',
-                icon: <Archive />,
-            },
-            {
-                label: 'Import Data',
-                icon: <CloudUpload />,
-            },
-            {
-                label: 'Patient Profile',
-                icon: <PermIdentity />,
-            },
-        ];
-
-        this.handleClick = this.handleClick.bind(this);
-        this.handleClose = this.handleClose.bind(this);
     }
 
-    handleClose() {
+    getMenuItems = () => {
+        const menuItems = [];
+
+        // Get menu modules from plugins
+        PluginManager.plugins.forEach(plugin => {
+            const { path, modules } = plugin;
+            const menuModule = modules[ModuleTypeEnum.MenuModule];
+            if (!menuModule) {
+                return;
+            }
+            menuItems.push({
+                path,
+                ...menuModule,
+            });
+        });
+
+        // Sort by priority (high priority comes first)
+        menuItems.sort((mi1, mi2) => (mi1.priority < mi2.priority ? 1 : -1));
+
+        return menuItems.map((menuItem, index) => {
+            const menuItemIcon = getIcon(menuItem.icon);
+
+            return (
+                <MenuItem key={index} className="menuItem" onClick={() => this.onMenuItemClick(menuItem.path)}>
+                    <span className="menuItemIcon">{menuItemIcon}</span>
+                    <span className="menuItemLabel">{menuItem.name}</span>
+                </MenuItem>
+            );
+        });
+    };
+
+    onMenuItemClick = path => {
+        this.handleClose();
+        this.props.history.push(path);
+    };
+
+    handleClose = () => {
         this.setState({ anchorEl: null });
-    }
+    };
 
-    handleClick() {
+    handleClick = () => {
         this.setState({ anchorEl: event.target });
-    }
+    };
 
     render() {
+        const menuItems = this.getMenuItems();
         const { anchorEl } = this.state;
         const open = Boolean(anchorEl);
 
@@ -160,14 +114,11 @@ export default class ProfileMenu extends Component {
                     transformOrigin={{ vertical: 'top', horizontal: 'left' }}
                     style={{ marginTop: '9px' }}
                 >
-                    {this.options.map(option => (
-                        <MenuItem onClick={this.handleClose} className="menuItem">
-                            <span className="menuItemIcon">{option.icon}</span>
-                            <span className="menuItemLabel">{option.label}</span>
-                        </MenuItem>
-                    ))}
+                    {menuItems}
                 </Menu>
             </div>
         );
     }
 }
+
+export default withRouter(ProfileMenu);

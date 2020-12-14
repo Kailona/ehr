@@ -54,8 +54,9 @@ export default class ProfileHeader extends Component {
                 aria-label="profile tabs"
                 TabIndicatorProps={{ style: { background: 'none' } }}
             >
-                {this.state.users.map(user => (
+                {this.state.users.map((user, index) => (
                     <HeaderTab
+                        key={index}
                         label={user.name}
                         id={user.id}
                         value={user.id}

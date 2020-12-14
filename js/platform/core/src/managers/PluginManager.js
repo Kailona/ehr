@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import Logger from '../utils/Logger';
+import Logger from '../services/Logger';
 import ModuleTypeEnum from '../enums/ModuleType.enum';
 
 const logger = new Logger('core.PluginManager');
@@ -38,6 +38,7 @@ class PluginManager {
         // Register the plugin
         this._plugins.push({
             id: plugin.id,
+            path: plugin.path,
             modules,
         });
     }
