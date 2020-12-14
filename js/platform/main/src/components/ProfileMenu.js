@@ -7,13 +7,13 @@ import { ModuleTypeEnum, PluginManager, getIcon } from '@kailona/core';
 
 const DropdownIcon = styled(IconButton)({
     padding: 0,
-    borderLeft: '1px solid #000',
+    borderLeft: '1px solid #c8c8c8',
     borderRadius: 0,
     marginLeft: '10px',
     paddingLeft: '5px',
     '&:hover, &:focus': {
         backgroundColor: 'transparent',
-        borderColor: '#000 !important',
+        borderColor: '#c8c8c8 !important',
     },
 });
 
