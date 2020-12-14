@@ -21,15 +21,20 @@ const MenuItem = styled(MuiMenuItem)({
     fontSize: '14px',
     display: 'flex',
     alignItems: 'center',
+    cursor: 'pointer',
     '& > .menuItemIcon': {
         marginRight: '15px',
         width: '21px',
         height: '21px',
+        cursor: 'pointer',
 
         '& > svg': {
             width: '21px',
             height: '21px',
         },
+    },
+    '& > .menuItemLabel': {
+        cursor: 'pointer',
     },
 });
 
