@@ -1,12 +1,77 @@
 import React, { Component } from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import Chart from 'chart.js';
 import { Grid, Divider, Box, Typography } from '@material-ui/core';
+import { DirectionsWalk, FavoriteBorder } from '@material-ui/icons';
 import { PluginManager, ModuleTypeEnum } from '@kailona/core';
+import { DashboardWidget } from '@kailona/ui';
 import ImportDataWidget from './ImportData/ImportDataWidget';
 import RequestDataWidget from './RequestData/RequestDataWidget';
-import { DashboardWidget } from '@kailona/ui';
 
 class Dashboard extends Component {
+    constructor(props) {
+        super(props);
+        this.chartRef = React.createRef();
+    }
+
+    componentDidMount() {
+        const chartData = {
+            labels: ['July 2020', 'Aug 2020', 'Sep 2020', 'Oct 2020', 'Nov 2020', 'Dec 2020'],
+            datasets: [
+                {
+                    label: 'Steps',
+                    data: [12, 19, 3, 5, 2, 3],
+                    fill: false,
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgba(255, 99, 132, 0.4)',
+                    yAxisID: 'yAxisSteps',
+                    lineTension: 0,
+                },
+                {
+                    label: 'Blood Pressure',
+                    data: [1, 2, 1, 1, 2, 2],
+                    fill: false,
+                    backgroundColor: 'rgb(54, 162, 235)',
+                    borderColor: 'rgba(54, 162, 235, 0.4)',
+                    yAxisID: 'yAxisBloodPressure',
+                    lineTension: 0,
+                },
+            ],
+        };
+
+        const chartOptions = {
+            responsive: true,
+            aspectRatio: 4,
+            legend: {
+                display: false,
+            },
+            scales: {
+                yAxes: [
+                    {
+                        id: 'yAxisSteps',
+                        display: false,
+                        gridLines: {
+                            drawOnArea: false,
+                        },
+                    },
+                    {
+                        id: 'yAxisBloodPressure',
+                        display: false,
+                        gridLines: {
+                            drawOnArea: false,
+                        },
+                    },
+                ],
+            },
+        };
+
+        new Chart(this.chartRef.current, {
+            type: 'line',
+            data: chartData,
+            options: chartOptions,
+        });
+    }
+
     onRedirectWidgetClick = path => {
         this.props.history.push(path);
     };
@@ -57,24 +122,55 @@ class Dashboard extends Component {
         const widgets = this.getWidgets();
 
         return (
-            <>
-                <h1>{t('ehr', 'Dashboard coming...')}</h1>
-                <Box>
+            <Grid container direction="column" spacing={2}>
+                <Grid item>
+                    <Typography variant="h5">{t('ehr', 'Chart')}</Typography>
+                    <Box mt={1} border={1}>
+                        <Box m={4}>
+                            <canvas ref={this.chartRef} />
+                        </Box>
+                    </Box>
+                    <Box border={1}>
+                        <Box ml={8} mr={8} mt={2} mb={2}>
+                            <Grid container direction="row" spacing={2}>
+                                <Grid item>
+                                    <Grid container direction="column" alignItems="center">
+                                        <Typography style={{ fontSize: '12px', color: 'rgb(255, 99, 132)' }}>
+                                            Steps
+                                        </Typography>
+                                        <DirectionsWalk style={{ color: 'rgb(255, 99, 132)' }} />
+                                    </Grid>
+                                </Grid>
+                                <Grid item>
+                                    <Grid container direction="column" alignItems="center">
+                                        <Typography style={{ fontSize: '12px', color: 'rgb(54, 162, 235)' }}>
+                                            Blood Pressure
+                                        </Typography>
+                                        <FavoriteBorder style={{ color: 'rgb(54, 162, 235)' }} />
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Box>
+                    </Box>
+                </Grid>
+                <Grid item>
                     <Typography variant="h5">{t('ehr', 'Shortcuts')}</Typography>
-                    <Grid container direction="row" spacing={2}>
-                        <Grid item>
-                            <RequestDataWidget />
+                    <Box mt={1}>
+                        <Grid container direction="row" spacing={2}>
+                            <Grid item>
+                                <RequestDataWidget />
+                            </Grid>
+                            <Grid item>
+                                <ImportDataWidget />
+                            </Grid>
+                            <Grid item>
+                                <Divider orientation="vertical" />
+                            </Grid>
+                            {widgets}
                         </Grid>
-                        <Grid item>
-                            <ImportDataWidget />
-                        </Grid>
-                        <Grid item>
-                            <Divider orientation="vertical" />
-                        </Grid>
-                        {widgets}
-                    </Grid>
-                </Box>
-            </>
+                    </Box>
+                </Grid>
+            </Grid>
         );
     }
 }
