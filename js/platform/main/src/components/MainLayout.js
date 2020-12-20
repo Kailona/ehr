@@ -6,10 +6,10 @@ export default class MainLayout extends Component {
         const { children } = this.props;
 
         return (
-            <>
+            <div style={{ padding: '15px' }}>
                 <ProfileHeader />
                 {children}
-            </>
+            </div>
         );
     }
 }

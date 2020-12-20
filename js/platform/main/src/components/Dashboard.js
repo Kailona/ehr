@@ -1,57 +1,82 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+import { Grid, Divider, Box, Typography } from '@material-ui/core';
 import { PluginManager, ModuleTypeEnum } from '@kailona/core';
+import ImportDataWidget from './ImportData/ImportDataWidget';
+import RequestDataWidget from './RequestData/RequestDataWidget';
+import { DashboardWidget } from '@kailona/ui';
 
-export default class Dashboard extends Component {
+class Dashboard extends Component {
+    onRedirectWidgetClick = path => {
+        this.props.history.push(path);
+    };
+
     getWidgets() {
-        const widgetModules = [];
+        const widgets = [];
 
         // Get widget modules from plugins
         PluginManager.plugins.forEach(plugin => {
-            const widgetModule = plugin.modules[ModuleTypeEnum.WidgetModule];
+            const { path, modules } = plugin;
+            const widgetModule = modules[ModuleTypeEnum.WidgetModule];
             if (!widgetModule) {
                 return;
             }
-            widgetModules.push(widgetModule);
-        });
-
-        return widgetModules.map((WidgetComponent, index) => {
-            return <WidgetComponent key={index} />;
-        });
-    }
-
-    getMenuItems = () => {
-        const menuItems = [];
-
-        // Get menu modules from plugins
-        PluginManager.plugins.forEach(plugin => {
-            const menuModule = plugin.modules[ModuleTypeEnum.MenuModule];
-            if (!menuModule) {
-                return;
-            }
-            menuItems.push(menuModule);
+            widgets.push({
+                path,
+                ...widgetModule,
+            });
         });
 
         // Sort by priority (high priority comes first)
-        menuItems.sort((mi1, mi2) => (mi1.priority < mi2.priority ? 1 : -1));
+        widgets.sort((i1, i2) => (i1.priority < i2.priority ? 1 : -1));
 
-        return menuItems.map((menuItem, index) => (
-            <Link key={index} to={menuItem.path}>
-                {menuItem.name}
-            </Link>
-        ));
-    };
+        return widgets.map((widget, index) => {
+            const { Component: WidgetComponent, name, icon, path } = widget;
+
+            // Render a widget with custom component
+            if (WidgetComponent) {
+                return (
+                    <Grid key={index} item>
+                        <DashboardWidget>
+                            <WidgetComponent key={index} />
+                        </DashboardWidget>
+                    </Grid>
+                );
+            }
+
+            // Render a widget with name and icon redirecting user to a page
+            return (
+                <Grid key={index} item>
+                    <DashboardWidget onClick={() => this.onRedirectWidgetClick(path)} icon={icon} name={name} />
+                </Grid>
+            );
+        });
+    }
 
     render() {
         const widgets = this.getWidgets();
-        const menuItems = this.getMenuItems();
 
         return (
             <>
                 <h1>{t('ehr', 'Dashboard coming...')}</h1>
-                <div>{menuItems}</div>
-                <div>{widgets}</div>
+                <Box>
+                    <Typography variant="h5">{t('ehr', 'Shortcuts')}</Typography>
+                    <Grid container direction="row" spacing={2}>
+                        <Grid item>
+                            <RequestDataWidget />
+                        </Grid>
+                        <Grid item>
+                            <ImportDataWidget />
+                        </Grid>
+                        <Grid item>
+                            <Divider orientation="vertical" />
+                        </Grid>
+                        {widgets}
+                    </Grid>
+                </Box>
             </>
         );
     }
 }
+
+export default withRouter(Dashboard);

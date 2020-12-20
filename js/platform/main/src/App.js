@@ -33,16 +33,13 @@ export default class App extends Component {
         const routes = [];
 
         PluginManager.plugins.forEach((plugin, index) => {
-            const menuModule = plugin.modules[ModuleTypeEnum.WidgetModule];
-            if (!menuModule) {
-                return;
-            }
+            const { path, modules } = plugin;
+            const { Component: DataModule } = modules[ModuleTypeEnum.DataModule];
 
-            const DataModule = plugin.modules[ModuleTypeEnum.DataModule];
             routes.push(
                 <Route
                     key={index}
-                    path={menuModule.path}
+                    path={path}
                     render={() => (
                         <MainLayout>
                             <DataModule />

@@ -14,6 +14,7 @@
         "@kailona/core": "^0.1.0",
         "@kailona/ui": "^0.1.0",
         "@kailona/plugin-physical-data": "^0.1.0",
+        "@kailona/plugin-activities": "^0.1.0",
         "react-router-dom": "^5.2.0"
     }
 }
