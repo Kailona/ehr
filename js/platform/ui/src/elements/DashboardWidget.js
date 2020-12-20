@@ -12,8 +12,8 @@ import { getIcon } from '@kailona/core';
 const Card = withStyles({
     root: {
         display: 'inline-block',
-        width: '150px',
-        height: '150px',
+        width: '120px',
+        height: '120px',
     },
 })(props => <MuiCard {...props} />);
 
@@ -49,13 +49,15 @@ export default class DashboardWidget extends Component {
                             display: 'flex',
                             alignItems: 'center',
                             flexDirection: 'column',
-                            margin: '15px 0 15px 0',
+                            margin: '5px 0 5px 0',
                         }}
                     >
                         {widgetIcon && (
                             <>
                                 {widgetIcon}
-                                <Typography style={{ marginTop: '10px', textAlign: 'center' }}>{name}</Typography>
+                                <Typography variant="body2" style={{ marginTop: '5px', textAlign: 'center' }}>
+                                    {name}
+                                </Typography>
                             </>
                         )}
                         {children}

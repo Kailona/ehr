@@ -1,16 +1,8 @@
 import React from 'react';
-import { Box, Dialog as MuiDialog, DialogContent, DialogTitle, IconButton, withStyles } from '@material-ui/core';
+import { Box, Dialog, DialogContent, DialogTitle, IconButton } from '@material-ui/core';
 import { Close as CloseIcon } from '@material-ui/icons';
 
 import './RequestDataModal.styl';
-
-const Dialog = withStyles({
-    paper: {
-        position: 'absolute',
-        top: '10%',
-        bottom: '10%',
-    },
-})(props => <MuiDialog {...props} />);
 
 export default class RequestDataModal extends React.Component {
     constructor(props) {
@@ -46,9 +38,6 @@ export default class RequestDataModal extends React.Component {
                                     <textarea placeholder="Message..."></textarea>
                                 </div>
                                 <div className="messageActions">
-                                    <div className="editMessage">
-                                        <input type="checkbox" /> Edit Message
-                                    </div>
                                     <div className="useDefault">
                                         <a>Use Default</a>
                                     </div>
