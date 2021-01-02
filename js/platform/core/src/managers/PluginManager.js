@@ -39,6 +39,7 @@ class PluginManager {
         this._plugins.push({
             id: plugin.id,
             path: plugin.path,
+            name: plugin.name,
             modules,
         });
     }

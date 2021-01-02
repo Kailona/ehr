@@ -1,8 +1,10 @@
 import ActivitiesDataModule from './components/ActivitiesDataModule';
+import importData from './importData';
 
 export default {
     id: 'plugin-activities',
     path: '/activities',
+    name: 'Activities',
     MenuModule: {
         name: 'Activities',
         icon: 'DirectionsRun',
@@ -15,5 +17,6 @@ export default {
     },
     DataModule: {
         Component: ActivitiesDataModule,
+        importData,
     },
 };

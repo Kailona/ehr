@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Menu, MenuItem as MuiMenuItem, IconButton } from '@material-ui/core';
+import { Box, Menu, MenuItem as MuiMenuItem, IconButton, Divider, Icon } from '@material-ui/core';
 import { ArrowDropDown } from '@material-ui/icons';
 import { styled } from '@material-ui/core/styles';
 import { ModuleTypeEnum, PluginManager, getIcon } from '@kailona/core';
+import { withModal } from '../context/ModalContext';
 
 const DropdownIcon = styled(IconButton)({
     padding: 0,
@@ -80,7 +81,16 @@ class ProfileMenu extends Component {
 
     onMenuItemClick = path => {
         this.handleClose();
-        this.props.history.push(path);
+
+        if (path) {
+            this.props.history.push(path);
+        }
+    };
+
+    onImportDataMenuItemClick = () => {
+        this.handleClose();
+
+        this.props.toggleImportDataModal(true);
     };
 
     handleClose = () => {
@@ -120,10 +130,17 @@ class ProfileMenu extends Component {
                     style={{ marginTop: '9px' }}
                 >
                     {menuItems}
+                    <Box m={1}>
+                        <Divider />
+                    </Box>
+                    <MenuItem className="menuItem" onClick={this.onImportDataMenuItemClick}>
+                        <span className="menuItemIcon">{getIcon('CloudUploadOutlined')}</span>
+                        <span className="menuItemLabel">Import Data</span>
+                    </MenuItem>
                 </Menu>
             </div>
         );
     }
 }
 
-export default withRouter(ProfileMenu);
+export default withRouter(withModal(ProfileMenu));

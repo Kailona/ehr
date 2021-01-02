@@ -5,8 +5,7 @@ import { Grid, Divider, Box, Typography } from '@material-ui/core';
 import { DirectionsWalk, FavoriteBorder } from '@material-ui/icons';
 import { PluginManager, ModuleTypeEnum } from '@kailona/core';
 import { DashboardWidget } from '@kailona/ui';
-import ImportDataWidget from './ImportData/ImportDataWidget';
-import RequestDataWidget from './RequestData/RequestDataWidget';
+import { withModal } from '../context/ModalContext';
 
 class Dashboard extends Component {
     constructor(props) {
@@ -158,10 +157,18 @@ class Dashboard extends Component {
                     <Box mt={1}>
                         <Grid container direction="row" spacing={2}>
                             <Grid item>
-                                <RequestDataWidget />
+                                <DashboardWidget
+                                    onClick={() => this.props.toggleRequestDataModal(true)}
+                                    icon="ArchiveOutlined"
+                                    name={t('ehr', 'Request Data from Provider')}
+                                />
                             </Grid>
                             <Grid item>
-                                <ImportDataWidget />
+                                <DashboardWidget
+                                    onClick={() => this.props.toggleImportDataModal(true)}
+                                    icon="CloudUploadOutlined"
+                                    name={t('ehr', 'Import Data')}
+                                />
                             </Grid>
                             <Grid item>
                                 <Divider orientation="vertical" />
@@ -175,4 +182,4 @@ class Dashboard extends Component {
     }
 }
 
-export default withRouter(Dashboard);
+export default withRouter(withModal(Dashboard));
