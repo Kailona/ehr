@@ -1,13 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
-import { Box, Typography, Dialog as MuiDialog, DialogTitle, IconButton, Button } from '@material-ui/core';
+import {
+    Box,
+    Grid,
+    Typography,
+    Dialog as MuiDialog,
+    DialogTitle,
+    IconButton,
+    Button,
+    CircularProgress,
+} from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Close as CloseIcon } from '@material-ui/icons';
+import { ModuleTypeEnum, PluginManager } from '@kailona/core';
 import ImportDataBrowser from './ImportDataBrowser';
 
 import './ImportDataModal.styl';
-import { ModuleTypeEnum, PluginManager } from '@kailona/core';
 
 const Dialog = withStyles({
     paper: {
@@ -29,6 +38,7 @@ export default class ImportDataModal extends Component {
         this.dropzoneRef = React.createRef();
 
         this.state = {
+            importing: false,
             files: [],
         };
     }
@@ -87,8 +97,14 @@ export default class ImportDataModal extends Component {
         this.dropzoneRef.current.open();
     };
 
-    importFiles = () => {
+    importFiles = async () => {
         const { files } = this.state;
+
+        this.setState({
+            importing: true,
+        });
+
+        const promises = [];
 
         // Import files to selected plugins
         files.forEach(fileData => {
@@ -108,13 +124,26 @@ export default class ImportDataModal extends Component {
                     return;
                 }
 
-                dataModule.importData(file);
+                const promise = dataModule.importData(file);
+                promises.push(promise);
             });
         });
+
+        // Wait for all files to be imported
+        await Promise.all(promises);
+
+        // TODO: Show data import notification to user
+
+        this.setState({
+            importing: false,
+            files: [],
+        });
+
+        this.props.onClose();
     };
 
     render() {
-        const { files } = this.state;
+        const { importing, files } = this.state;
 
         return (
             <Dialog maxWidth="md" fullWidth={true} open={this.props.isOpen}>
@@ -145,20 +174,31 @@ export default class ImportDataModal extends Component {
                             )
                         }
                     </Dropzone>
-                    {files.length && (
+                    {!!files.length && (
                         <ImportDataBrowser
                             files={files}
                             onDataTypesChanged={this.onDataTypesChanged}
                             onFileRemove={this.onFileRemove}
                         />
                     )}
-                    <Box display="flex" justifyContent="center" m={2}>
-                        <Button variant="outlined" onClick={this.browseFiles}>
-                            Browse
-                        </Button>
-                        <Button variant="outlined" onClick={this.importFiles}>
-                            Import
-                        </Button>
+                    <Box m={2}>
+                        <Grid container direction="row" justify="center" alignItems="center" spacing={2}>
+                            <Grid item>
+                                <Button variant="outlined" disabled={importing} onClick={this.browseFiles}>
+                                    Browse
+                                </Button>
+                            </Grid>
+                            <Grid item>
+                                <Button variant="outlined" disabled={importing} onClick={this.importFiles}>
+                                    Import
+                                </Button>
+                            </Grid>
+                            {importing && (
+                                <Grid item>
+                                    <CircularProgress color="primary" size={20} />
+                                </Grid>
+                            )}
+                        </Grid>
                     </Box>
                 </div>
             </Dialog>

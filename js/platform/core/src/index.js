@@ -6,5 +6,16 @@ import Logger from './services/Logger';
 import FHIRService from './services/FHIRService';
 import SettingsService from './services/SettingsService';
 import getIcon from './utils/getIcon';
+import readFileAsText from './utils/readFileAsText';
 
-export { Logger, ConfigManager, UserManager, PluginManager, ModuleTypeEnum, FHIRService, SettingsService, getIcon };
+export {
+    Logger,
+    ConfigManager,
+    UserManager,
+    PluginManager,
+    ModuleTypeEnum,
+    FHIRService,
+    SettingsService,
+    getIcon,
+    readFileAsText,
+};

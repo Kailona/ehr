@@ -39,6 +39,15 @@ class FHIRController extends Controller {
      * @NoAdminRequired
      * @NoCSRFRequired
      */
+	public function transaction() {
+        $body = $this->getRawBody();
+        return $this->service->create('', $body);
+    }
+
+    /**
+     * @NoAdminRequired
+     * @NoCSRFRequired
+     */
 	public function create(string $type) {
         $body = $this->getRawBody();
         return $this->service->create($type, $body);

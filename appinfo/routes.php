@@ -6,6 +6,7 @@ return ['routes' => [
 
     // API Endpoints
     ['name' => 'settings#admin', 'url' => '/settings/admin', 'verb' => 'POST'],
+    ['name' => 'fhir#transaction', 'url' => '/fhir', 'verb' => 'POST'],
     ['name' => 'fhir#create', 'url' => '/fhir/{type}', 'verb' => 'POST'],
     ['name' => 'fhir#read', 'url' => '/fhir/{type}/{id}', 'verb' => 'GET'],
     ['name' => 'fhir#vread', 'url' => '/fhir/{type}/{id}/_history/{vid}', 'verb' => 'GET'],

@@ -7,19 +7,24 @@ export default class FHIRService {
         this.resourceType = resourceType;
     }
 
-    _mapFilterToQueryParams(filter) {
-        if (!filter) {
+    _mapToQueryParams(param) {
+        if (!param) {
             return '';
         }
 
         let queryParams = '';
-        Object.keys(filter).forEach(filterName => {
-            const filterValue = filter[filterName];
+        Object.keys(param).forEach(filterName => {
+            const filterValue = param[filterName];
             const queryParam = `${encodeURI(filterName)}=${encodeURI(filterValue)}`;
             queryParams += queryParams.length ? `&${queryParam}` : queryParam;
         });
 
         return queryParams;
+    }
+
+    async transaction(resource) {
+        const url = `${this.baseUrl}/fhir`;
+        return await axios.post(url, resource);
     }
 
     async create(resource) {
@@ -57,13 +62,19 @@ export default class FHIRService {
         return await axios.get(url);
     }
 
-    async search(filter) {
+    async search(params) {
         let url = `${this.baseUrl}/fhir/${this.resourceType}`;
 
-        // Append query string parameters if exists
-        const queryParams = this._mapFilterToQueryParams(filter);
-        if (queryParams) {
-            url += `?${queryParams}`;
+        // Append query string parameters if exist
+        if (params && params.length) {
+            const queryParamsList = [];
+
+            params.forEach(param => {
+                const queryParams = this._mapToQueryParams(param);
+                queryParamsList.push(queryParams);
+            });
+
+            url += `?${queryParamsList.join('&')}`;
         }
 
         return await axios.get(url);
