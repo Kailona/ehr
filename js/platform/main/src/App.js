@@ -7,6 +7,8 @@ import Dashboard from './components/Dashboard';
 import MainLayout from './components/MainLayout';
 import initFHIRPatients from './lib/initFHIRPatients';
 
+import './App.styl';
+
 export default class App extends Component {
     constructor(props) {
         super(props);

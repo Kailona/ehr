@@ -153,8 +153,8 @@ class Dashboard extends Component {
                     </Box>
                 </Grid>
                 <Grid item>
-                    <Typography variant="h5">{t('ehr', 'Shortcuts')}</Typography>
-                    <Box mt={1}>
+                    <Typography variant="h3">{t('ehr', 'Shortcuts')}</Typography>
+                    <Box mt={1} pl={2}>
                         <Grid container direction="row" spacing={2}>
                             <Grid item>
                                 <DashboardWidget
@@ -169,9 +169,6 @@ class Dashboard extends Component {
                                     icon="CloudUploadOutlined"
                                     name={t('ehr', 'Import Data')}
                                 />
-                            </Grid>
-                            <Grid item>
-                                <Divider orientation="vertical" />
                             </Grid>
                             {widgets}
                         </Grid>
