@@ -7,9 +7,11 @@ export default class MainLayout extends Component {
         const { children } = this.props;
 
         return (
-            <div style={{ padding: '15px' }}>
+            <div>
                 <ProfileHeader />
-                <Box mt={2}>{children}</Box>
+                <Box mt={2} p={2}>
+                    {children}
+                </Box>
             </div>
         );
     }

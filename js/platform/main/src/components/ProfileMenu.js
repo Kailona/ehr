@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Box, Menu, MenuItem as MuiMenuItem, IconButton, Divider, Icon } from '@material-ui/core';
+import { Box, Menu, MenuItem as MuiMenuItem, IconButton, Divider } from '@material-ui/core';
 import { ArrowDropDown } from '@material-ui/icons';
 import { styled } from '@material-ui/core/styles';
 import { ModuleTypeEnum, PluginManager, getIcon } from '@kailona/core';
@@ -8,9 +8,7 @@ import { withModal } from '../context/ModalContext';
 
 const DropdownIcon = styled(IconButton)({
     padding: 0,
-    borderLeft: '1px solid #c8c8c8',
     borderRadius: 0,
-    marginLeft: '10px',
     paddingLeft: '5px',
     '&:hover, &:focus': {
         backgroundColor: 'transparent',

@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
-import { styled } from '@material-ui/core/styles';
+import { styled, withTheme } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
-import IconButton from '@material-ui/core/IconButton';
-import { Add } from '@material-ui/icons';
 import HeaderTab from './HeaderTab';
 
-import './ProfileHeader.styl';
-
-const StyledTabs = styled(Tabs)({
-    backgroundColor: '#fff',
-    height: '44px',
-});
+const StyledTabs = styled(withTheme(Tabs))(props => ({
+    backgroundColor: props.theme.palette.whiteSmoke.main,
+    padding: '0 15px',
+    minHeight: '38px !important',
+}));
 
 export default class ProfileHeader extends Component {
     constructor(props) {
@@ -64,11 +61,6 @@ export default class ProfileHeader extends Component {
                         active={selectedTab === user.id}
                     />
                 ))}
-                <div className="header-tab add-user" style={{ opacity: 1, fontWeight: 'bold' }}>
-                    <IconButton disableRipple={true}>
-                        <Add />
-                    </IconButton>
-                </div>
             </StyledTabs>
         );
     }
