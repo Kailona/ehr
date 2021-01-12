@@ -153,25 +153,27 @@ class Dashboard extends Component {
                     </Box>
                 </Grid>
                 <Grid item>
-                    <Typography variant="h3">{t('ehr', 'Shortcuts')}</Typography>
-                    <Box mt={1} pl={2}>
-                        <Grid container direction="row" spacing={2}>
-                            <Grid item>
-                                <DashboardWidget
-                                    onClick={() => this.props.toggleRequestDataModal(true)}
-                                    icon="ArchiveOutlined"
-                                    name={t('ehr', 'Request Data from Provider')}
-                                />
+                    <Box mt={2}>
+                        <Typography variant="h3">{t('ehr', 'Shortcuts')}</Typography>
+                        <Box mt={1} pl={2}>
+                            <Grid container direction="row" spacing={2}>
+                                <Grid item>
+                                    <DashboardWidget
+                                        onClick={() => this.props.toggleRequestDataModal(true)}
+                                        icon="ArchiveOutlined"
+                                        name={t('ehr', 'Request Data from Provider')}
+                                    />
+                                </Grid>
+                                <Grid item>
+                                    <DashboardWidget
+                                        onClick={() => this.props.toggleImportDataModal(true)}
+                                        icon="CloudUploadOutlined"
+                                        name={t('ehr', 'Import Data')}
+                                    />
+                                </Grid>
+                                {widgets}
                             </Grid>
-                            <Grid item>
-                                <DashboardWidget
-                                    onClick={() => this.props.toggleImportDataModal(true)}
-                                    icon="CloudUploadOutlined"
-                                    name={t('ehr', 'Import Data')}
-                                />
-                            </Grid>
-                            {widgets}
-                        </Grid>
+                        </Box>
                     </Box>
                 </Grid>
             </Grid>
