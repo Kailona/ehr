@@ -71,6 +71,12 @@ const theme = createMuiTheme({
             color: '#000',
             fontWeight: '600',
         },
+        h5: {
+            fontSize: '15px',
+            letterSpacing: '0.05px',
+            color: '#000',
+            fontWeight: '600',
+        },
         body1: {
             fontSize: '15px',
             letterSpacing: '0.1px',
@@ -90,6 +96,11 @@ const theme = createMuiTheme({
             fontWeight: '600',
         },
         button: {
+            height: '40px',
+            borderRadius: '4px',
+            borderColor: '#9FA8DA',
+            textAlign: 'center',
+            fontFamily: 'Nunito Sans',
             fontSize: '15px',
             letterSpacing: '0.5px',
             color: '#3F51B5',

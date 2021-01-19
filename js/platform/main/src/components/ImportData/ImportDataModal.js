@@ -8,12 +8,12 @@ import {
     Dialog as MuiDialog,
     DialogTitle,
     IconButton,
-    Button,
     CircularProgress,
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Close as CloseIcon } from '@material-ui/icons';
-import { ModuleTypeEnum, PluginManager } from '@kailona/core';
+import { ModuleTypeEnum, PluginManager, getIcon } from '@kailona/core';
+import { KailonaButton } from '@kailona/ui';
 import ImportDataBrowser from './ImportDataBrowser';
 
 import './ImportDataModal.styl';
@@ -26,7 +26,14 @@ const Dialog = withStyles({
     },
 })(props => <MuiDialog {...props} />);
 
-export default class ImportDataModal extends Component {
+const styles = theme => ({
+    importIcon: {
+        textAlign: 'center',
+        color: theme.palette.primary.dark,
+    },
+});
+
+class ImportDataModal extends Component {
     static propTypes = {
         onClose: PropTypes.func.isRequired,
         isOpen: PropTypes.bool.isRequired,
@@ -144,12 +151,15 @@ export default class ImportDataModal extends Component {
 
     render() {
         const { importing, files } = this.state;
-
+        const importIcon = getIcon('CloudUploadOutlined');
+        const browseFilesButtonTitle = files && files.length ? 'Add More Files' : 'Browse Files';
         return (
-            <Dialog maxWidth="md" fullWidth={true} open={this.props.isOpen}>
+            <Dialog maxWidth="sm" fullWidth={true} open={this.props.isOpen}>
                 <DialogTitle>
                     <Box display="flex" alignItems="center">
-                        <Box flexGrow={1}>{t('ehr', 'Import Data')}</Box>
+                        <Box flexGrow={1}>
+                            <Typography variant="h3">{t('ehr', 'Import Data')}</Typography>
+                        </Box>
                         <Box>
                             <IconButton onClick={this.props.onClose}>
                                 <CloseIcon />
@@ -168,13 +178,20 @@ export default class ImportDataModal extends Component {
                                 <section className="dropzone-section">
                                     <div className="dropzone-dragarea" {...getRootProps()}>
                                         <input {...getInputProps()} />
-                                        <Typography variant="h4">Drag and Drop File</Typography>
+                                        <div className="subtitle">
+                                            <div>
+                                                <Typography variant="h2" style={{ fontWeight: 'normal' }}>
+                                                    Drag and Drop Files
+                                                </Typography>
+                                            </div>
+                                            <div className={this.props.classes.importIcon}>{importIcon}</div>
+                                        </div>
                                     </div>
                                 </section>
                             )
                         }
                     </Dropzone>
-                    {!!files.length && (
+                    {files && !!files.length && (
                         <ImportDataBrowser
                             files={files}
                             onDataTypesChanged={this.onDataTypesChanged}
@@ -184,15 +201,24 @@ export default class ImportDataModal extends Component {
                     <Box m={2}>
                         <Grid container direction="row" justify="center" alignItems="center" spacing={2}>
                             <Grid item>
-                                <Button variant="outlined" disabled={importing} onClick={this.browseFiles}>
-                                    Browse
-                                </Button>
+                                <KailonaButton
+                                    variant="outlined"
+                                    title={browseFilesButtonTitle}
+                                    disabled={importing}
+                                    onClick={this.browseFiles}
+                                />
                             </Grid>
-                            <Grid item>
-                                <Button variant="outlined" disabled={importing} onClick={this.importFiles}>
-                                    Import
-                                </Button>
-                            </Grid>
+                            {files && !!files.length && (
+                                <Grid item>
+                                    <KailonaButton
+                                        variant="outlined"
+                                        title="Import"
+                                        disabled={importing}
+                                        onClick={this.importFiles}
+                                    />
+                                </Grid>
+                            )}
+
                             {importing && (
                                 <Grid item>
                                     <CircularProgress color="primary" size={20} />
@@ -205,3 +231,5 @@ export default class ImportDataModal extends Component {
         );
     }
 }
+
+export default withStyles(styles)(ImportDataModal);
