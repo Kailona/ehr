@@ -1,5 +1,5 @@
 import ConfigManager from './managers/ConfigManager';
-import UserManager from './managers/UserManager';
+import ProfileManager from './managers/ProfileManager';
 import PluginManager from './managers/PluginManager';
 import ModuleTypeEnum from './enums/ModuleType.enum';
 import Logger from './services/Logger';
@@ -7,15 +7,17 @@ import FHIRService from './services/FHIRService';
 import SettingsService from './services/SettingsService';
 import getIcon from './utils/getIcon';
 import readFileAsText from './utils/readFileAsText';
+import fhirDataFormatter from './utils/fhirDataFormatter';
 
 export {
     Logger,
     ConfigManager,
-    UserManager,
+    ProfileManager,
     PluginManager,
     ModuleTypeEnum,
     FHIRService,
     SettingsService,
     getIcon,
     readFileAsText,
+    fhirDataFormatter,
 };

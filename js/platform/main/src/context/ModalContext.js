@@ -1,6 +1,7 @@
 import React from 'react';
 import ImportDataModal from '../components/ImportData/ImportDataModal';
 import RequestDataModal from '../components/RequestData/RequestDataModal';
+import ProfileEditModal from '../components/ProfileHeader/ProfileEditModal';
 
 const ModalContext = React.createContext();
 
@@ -11,6 +12,8 @@ class ModalProvider extends React.Component {
         this.state = {
             isImportDataModalOpen: false,
             isRequestDataModalOpen: false,
+            isProfileEditModalOpen: false,
+            profileEditModalProps: {},
         };
     }
 
@@ -26,12 +29,20 @@ class ModalProvider extends React.Component {
         });
     };
 
+    toggleProfileEditModal = (open, props = {}) => {
+        this.setState({
+            isProfileEditModalOpen: open,
+            profileEditModalProps: props,
+        });
+    };
+
     render() {
         return (
             <ModalContext.Provider
                 value={{
                     toggleImportDataModal: this.toggleImportDataModal,
                     toggleRequestDataModal: this.toggleRequestDataModal,
+                    toggleProfileEditModal: this.toggleProfileEditModal,
                 }}
             >
                 {this.props.children}
@@ -42,6 +53,11 @@ class ModalProvider extends React.Component {
                 <RequestDataModal
                     isOpen={this.state.isRequestDataModalOpen}
                     onClose={() => this.toggleRequestDataModal(false)}
+                />
+                <ProfileEditModal
+                    isOpen={this.state.isProfileEditModalOpen}
+                    onClose={() => this.toggleProfileEditModal(false)}
+                    {...this.state.profileEditModalProps}
                 />
             </ModalContext.Provider>
         );

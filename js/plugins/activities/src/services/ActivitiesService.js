@@ -1,8 +1,8 @@
-import { UserManager, FHIRService } from '@kailona/core';
+import { ProfileManager, FHIRService } from '@kailona/core';
 
 export default class ActivitiesService {
     constructor() {
-        const fhirPatientId = UserManager.patientId;
+        const fhirPatientId = ProfileManager.activePatientId;
         if (!fhirPatientId) {
             throw new Error('Invalid patient id');
         }

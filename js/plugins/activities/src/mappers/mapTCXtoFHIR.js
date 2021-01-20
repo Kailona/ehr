@@ -1,8 +1,8 @@
 import moment from 'moment';
-import { UserManager } from '@kailona/core';
+import { ProfileManager } from '@kailona/core';
 
 export default function mapTCXtoFHIR(tcxData) {
-    const fhirPatientId = UserManager.patientId;
+    const fhirPatientId = ProfileManager.activePatientId;
     if (!fhirPatientId) {
         throw new Error('Invalid patient id');
     }

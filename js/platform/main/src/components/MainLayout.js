@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Box } from '@material-ui/core';
-import ProfileHeader from './ProfileHeader';
+import ProfileHeader from './ProfileHeader/ProfileHeader';
 
 export default class MainLayout extends Component {
     render() {

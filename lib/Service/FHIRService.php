@@ -3,7 +3,7 @@
 namespace OCA\EHR\Service;
 
 use OCP\AppFramework\Http;
-use OCP\AppFramework\Http\DataResponse;
+use OCP\AppFramework\Http\JSONResponse;
 use OCP\Http\Client\IClientService;
 use OCP\ILogger;
 use Exception;
@@ -70,10 +70,23 @@ class FHIRService {
                     break;
             }
 
-			return json_decode($response->getBody(), true) ?? '';
+            $jsonResponseToSend = new JSONResponse(json_decode($response->getBody(), true) ?? '');
+
+            foreach ($response->getHeaders() as $key => $value) {
+                if ($key == 'Location') {
+                    // Disable redirect on PUT
+                    if ($method != 'PUT') {
+                        $jsonResponseToSend->addHeader($key, str_replace($this->fhirConfig['baseUrl'], '/apps/ehr/fhir/', $value[0]));
+                    }
+                } else {
+                    $jsonResponseToSend->addHeader($key, $value[0]);
+                }
+            }
+
+			return $jsonResponseToSend;
 		} catch (Exception $e) {
             $this->logger->logException($e);
-            return new DataResponse([], Http::STATUS_BAD_REQUEST);
+            return new JSONResponse(array(), Http::STATUS_BAD_REQUEST);
 		}
     }
 
