@@ -14,16 +14,18 @@ const styles = theme => ({
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        minWidth: '110px',
         margin: '0 10px',
+        padding: '0 10px',
         height: '40px',
         '&.active': {
+            paddingRight: 0,
             borderBottom: `2px solid ${theme.palette.primary.main}`,
             '&  span': {
                 color: `${theme.palette.primary.main}`,
             },
             '& > .profile-menu': {
                 display: 'flex',
+                marginLeft: '12px',
             },
         },
         '& > .profile-menu': {
