@@ -2,34 +2,53 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
     Card as MuiCard,
-    CardActionArea as MuiCardActionArea,
     CardContent as MuiCardContent,
-    Typography,
+    Typography as MuiTypography,
     withStyles,
 } from '@material-ui/core';
 import { getIcon } from '@kailona/core';
 
+const styles = theme => ({
+    widget: {
+        width: '110px',
+        padding: '5px',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+});
+
 const Card = withStyles({
     root: {
-        display: 'inline-block',
-        width: '120px',
-        height: '120px',
+        width: '100px',
+        height: '100px',
     },
 })(props => <MuiCard {...props} />);
 
-const CardContent = withStyles({
+const CardContent = withStyles(theme => ({
     root: {
         height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: theme.palette.primary.main,
+        backgroundColor: theme.palette.whiteSmoke.main,
+        cursor: 'pointer !important',
     },
-})(props => <MuiCardContent {...props} />);
+}))(props => <MuiCardContent {...props} />);
 
-const CardActionArea = withStyles({
+const Typography = withStyles(theme => ({
     root: {
-        height: '100%',
+        width: '100%',
+        wordBreak: 'break-word',
+        textAlign: 'center',
+        padding: '10px 5px 5px !important',
+        cursor: 'pointer !important',
     },
-})(props => <MuiCardActionArea {...props} />);
+}))(props => <MuiCardContent {...props} />);
 
-export default class DashboardWidget extends Component {
+class DashboardWidget extends Component {
     static propTypes = {
         onClick: PropTypes.func.isRequired,
         icon: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
@@ -39,31 +58,20 @@ export default class DashboardWidget extends Component {
 
     render() {
         const { icon, name, children } = this.props;
-        const widgetIcon = icon && getIcon(icon);
+        const widgetIcon = icon && getIcon(icon, 80);
+        const { classes } = this.props;
 
         return (
-            <Card onClick={this.props.onClick}>
-                <CardActionArea>
-                    <CardContent
-                        style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            flexDirection: 'column',
-                            margin: '5px 0 5px 0',
-                        }}
-                    >
-                        {widgetIcon && (
-                            <>
-                                {widgetIcon}
-                                <Typography variant="body2" style={{ marginTop: '5px', textAlign: 'center' }}>
-                                    {name}
-                                </Typography>
-                            </>
-                        )}
-                        {children}
-                    </CardContent>
-                </CardActionArea>
-            </Card>
+            <div className={classes.widget}>
+                <Card onClick={this.props.onClick}>
+                    <CardContent>{widgetIcon}</CardContent>
+                </Card>
+                <Typography variant="caption" onClick={this.props.onClick}>
+                    {name}
+                </Typography>
+            </div>
         );
     }
 }
+
+export default withStyles(styles)(DashboardWidget);

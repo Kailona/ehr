@@ -1,32 +1,54 @@
 import React, { Component } from 'react';
-import { styled } from '@material-ui/core/styles';
+import { styled, withTheme } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core';
 import Tab from '@material-ui/core/Tab';
-import Avatar from '@material-ui/core/Avatar';
-import { SentimentSatisfiedAlt } from '@material-ui/icons';
 import ProfileMenu from './ProfileMenu';
 
-const StyledTab = styled(Tab)({
-    color: '#000',
+const StyledTab = styled(withTheme(Tab))(props => ({
+    color: props.theme.palette.gray80.main,
     minWidth: 'auto',
-    minHeight: '34px',
-    padding: '0 6px',
+}));
+
+const styles = theme => ({
+    headerTab: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        minWidth: '110px',
+        margin: '0 5px',
+        height: '40px',
+        '&.active': {
+            borderBottom: `2px solid ${theme.palette.primary.main}`,
+            '&  span': {
+                color: `${theme.palette.primary.main}`,
+            },
+            '& > .profile-menu': {
+                display: 'flex',
+            },
+        },
+        '& > .profile-menu': {
+            display: 'none',
+        },
+        '& button': {
+            '&:active': {
+                backgroundColor: 'transparent !important',
+            },
+        },
+    },
+    label: {
+        textTransform: 'none',
+    },
 });
 
-const TabAvatar = styled(Avatar)({
-    cursor: 'pointer',
-    width: '24px',
-    height: '24px',
-});
-
-export default class HeaderTab extends Component {
+class HeaderTab extends Component {
     render() {
+        const { classes } = this.props;
+
         return (
-            <div className={`header-tab ${this.props.active ? 'active' : ''}`}>
-                <TabAvatar onClick={() => this.props.handleClick(this.props.value)}>
-                    <SentimentSatisfiedAlt />
-                </TabAvatar>
+            <div className={`${classes.headerTab} ${this.props.active ? 'active' : ''}`}>
                 <StyledTab
                     label={this.props.label}
+                    className={classes.label}
                     id={this.props.id}
                     value={this.props.value}
                     disableRipple={true}
@@ -37,3 +59,5 @@ export default class HeaderTab extends Component {
         );
     }
 }
+
+export default withStyles(styles)(HeaderTab);

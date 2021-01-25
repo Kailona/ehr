@@ -10,9 +10,11 @@ export default async function initFHIRPatients() {
         // Set app user id
         UserManager.userId = appUserId;
 
-        const { data: patientBundle } = await patientFhirService.search({
-            identifier: appUserId,
-        });
+        const { data: patientBundle } = await patientFhirService.search([
+            {
+                identifier: appUserId,
+            },
+        ]);
 
         // Skip if patient exists in FHIR server
         if (patientBundle && patientBundle.entry && patientBundle.entry.length) {
@@ -39,9 +41,11 @@ export default async function initFHIRPatients() {
             ],
         });
 
-        const { data: newPatientBundle } = await patientFhirService.search({
-            identifier: appUserId,
-        });
+        const { data: newPatientBundle } = await patientFhirService.search([
+            {
+                identifier: appUserId,
+            },
+        ]);
 
         // Set fhir patient id
         const { id: newPatientId } = newPatientBundle.entry[0].resource;
