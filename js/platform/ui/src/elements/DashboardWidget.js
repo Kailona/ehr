@@ -34,6 +34,7 @@ const CardContent = withStyles(theme => ({
         justifyContent: 'center',
         color: theme.palette.primary.main,
         backgroundColor: theme.palette.whiteSmoke.main,
+        cursor: 'pointer !important',
     },
 }))(props => <MuiCardContent {...props} />);
 
@@ -43,6 +44,7 @@ const Typography = withStyles(theme => ({
         wordBreak: 'break-word',
         textAlign: 'center',
         padding: '10px 5px 5px !important',
+        cursor: 'pointer !important',
     },
 }))(props => <MuiCardContent {...props} />);
 
@@ -64,7 +66,9 @@ class DashboardWidget extends Component {
                 <Card onClick={this.props.onClick}>
                     <CardContent>{widgetIcon}</CardContent>
                 </Card>
-                <Typography variant="caption">{name}</Typography>
+                <Typography variant="caption" onClick={this.props.onClick}>
+                    {name}
+                </Typography>
             </div>
         );
     }

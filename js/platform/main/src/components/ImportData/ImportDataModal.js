@@ -9,6 +9,8 @@ import {
     DialogTitle,
     IconButton,
     CircularProgress,
+    Snackbar,
+    Alert,
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Close as CloseIcon } from '@material-ui/icons';
@@ -47,6 +49,7 @@ class ImportDataModal extends Component {
         this.state = {
             importing: false,
             files: [],
+            isSnackbarOpen: false,
         };
     }
 
@@ -146,11 +149,25 @@ class ImportDataModal extends Component {
             files: [],
         });
 
-        this.props.onClose();
+        this.props.onClose({
+            severity: 'success',
+            message: 'All files imported!',
+        });
+
+        // Give notification
+        this.setState({
+            isSnackbarOpen: true,
+        });
     };
 
+    handleClose() {
+        this.setState({
+            isSnackbarOpen: false,
+        });
+    }
+
     render() {
-        const { importing, files } = this.state;
+        const { importing, files, isSnackbarOpen } = this.state;
         const importIcon = getIcon('CloudUploadOutlined');
         const browseFilesButtonTitle = files && files.length ? 'Add More Files' : 'Browse Files';
         return (

@@ -17,6 +17,12 @@ const styles = theme => ({
         letterSpacing: '0.25px',
         textTransform: 'none',
 
+        '&.disabled, &:disabled': {
+            backgroundColor: '#fff !important',
+            borderColor: `${theme.palette.gray30.main} !important`,
+            color: `${theme.palette.gray30.main} !important`,
+            pointerEvents: 'none',
+        },
         '&.default': {
             color: theme.palette.gray60.main,
             backgroundColor: '#fff !important',
@@ -51,12 +57,6 @@ const styles = theme => ({
                 color: `${theme.palette.white.main} !important`,
                 borderColor: `${theme.palette.error.dark} !important`,
             },
-        },
-        '&.disabled, &:disabled': {
-            backgroundColor: '#fff !important',
-            borderColor: `${theme.palette.gray30.main} !important`,
-            color: `${theme.palette.gray30.main} !important`,
-            pointerEvents: 'none',
         },
     },
 });

@@ -10,7 +10,6 @@ const TextField = withStyles(theme => ({
             padding: '7px 6px 0 6px !important',
             height: '34px',
             '&:before': {
-                height: '1px',
                 marginTop: '0',
             },
         },
@@ -23,6 +22,9 @@ const TextField = withStyles(theme => ({
         },
         '& label + .MuiInput-formControl': {
             marginTop: '0 !important',
+        },
+        '& .MuiInput-underline:before': {
+            borderColor: `${theme.palette.primary.main} !important`,
         },
     },
 }))(MuiTextField);
