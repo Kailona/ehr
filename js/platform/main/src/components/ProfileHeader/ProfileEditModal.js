@@ -1,17 +1,21 @@
 import React from 'react';
-import {
-    Box,
-    CircularProgress,
-    Dialog,
-    DialogContent,
-    DialogTitle,
-    Grid,
-    IconButton,
-    TextField,
-} from '@material-ui/core';
+import { Box, CircularProgress, Dialog, DialogContent, DialogTitle, Grid, IconButton, Link } from '@material-ui/core';
 import { Close as CloseIcon } from '@material-ui/icons';
 import { ProfileManager } from '@kailona/core';
-import { KailonaButton } from '@kailona/ui';
+import { KailonaButton, KailonaTextField } from '@kailona/ui';
+
+const styles = {
+    dialogActions: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+    },
+
+    dialogActionsRight: {
+        display: 'flex',
+        alignItems: 'center',
+    },
+};
 
 export default class ProfileEditModal extends React.Component {
     constructor(props) {
@@ -84,7 +88,7 @@ export default class ProfileEditModal extends React.Component {
         const { loading } = this.state;
 
         return (
-            <Dialog fullWidth={false} open={this.props.isOpen}>
+            <Dialog fullWidth={true} maxWidth="xs" open={this.props.isOpen}>
                 <DialogTitle>
                     <Box display="flex" alignItems="center">
                         <Box flexGrow={1}>
@@ -99,51 +103,50 @@ export default class ProfileEditModal extends React.Component {
                 </DialogTitle>
                 <DialogContent>
                     <Box>
-                        <TextField
+                        <KailonaTextField
                             id="profile-name"
                             className="kailona-MuiTextField"
                             label="Name"
+                            style={{ backgroundColor: 'transparent !important' }}
                             inputRef={this.profileNameRef}
                             defaultValue={profile ? profile.patientFullName : null}
                         />
                     </Box>
-                    <Box mt={5} ml={2} mr={2} mb={2}>
-                        <Grid container direction="row" justify="center" alignItems="flex-end" spacing={2}>
-                            {!!profile && profile.relationship !== 'self' && (
-                                <Grid item>
+                    <Box mt={5} mr={2} mb={2}>
+                        <div style={styles.dialogActions}>
+                            <div>
+                                {!!profile && profile.relationship !== 'self' && (
+                                    <Link href="#" onClick={this.onDelete}>
+                                        {t('ehr', 'Delete')}
+                                    </Link>
+                                )}
+                            </div>
+                            <div style={styles.dialogActionsRight}>
+                                <Box mr={2}>
                                     <KailonaButton
                                         variant="outlined"
-                                        class="error"
+                                        class="default"
                                         disabled={loading}
-                                        onClick={this.onDelete}
-                                        title={t('ehr', 'Delete Profile')}
+                                        onClick={this.onCancel}
+                                        title={t('ehr', 'Cancel')}
                                     />
-                                </Grid>
-                            )}
-                            <Grid item>
-                                <KailonaButton
-                                    variant="outlined"
-                                    class="default"
-                                    disabled={loading}
-                                    onClick={this.onCancel}
-                                    title={t('ehr', 'Cancel')}
-                                />
-                            </Grid>
-                            <Grid item>
-                                <KailonaButton
-                                    variant="outlined"
-                                    class="primary"
-                                    disabled={loading}
-                                    onClick={this.onConfirm}
-                                    title={t('ehr', 'Confirm')}
-                                />
-                            </Grid>
-                            {loading && (
-                                <Grid item>
-                                    <CircularProgress color="primary" size={20} />
-                                </Grid>
-                            )}
-                        </Grid>
+                                </Box>
+                                <Box>
+                                    <KailonaButton
+                                        variant="outlined"
+                                        class="primary"
+                                        disabled={loading}
+                                        onClick={this.onConfirm}
+                                        title={t('ehr', 'Confirm')}
+                                    />
+                                </Box>
+                                {loading && (
+                                    <Box ml={2}>
+                                        <CircularProgress color="primary" size={20} />
+                                    </Box>
+                                )}
+                            </div>
+                        </div>
                     </Box>
                 </DialogContent>
             </Dialog>
