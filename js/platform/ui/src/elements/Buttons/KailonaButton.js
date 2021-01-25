@@ -6,8 +6,9 @@ const styles = theme => ({
     'kailona-button': {
         height: '40px',
         borderRadius: '4px',
-        border: '1px solid #9FA8DA',
-        backgroundColor: '#fff',
+        color: theme.palette.primary.main,
+        backgroundColor: '#fff !important',
+        border: '1px solid #9FA8DA !important',
         textAlign: 'center',
         fontFamily: 'Nunito Sans',
         fontStyle: 'normal',
@@ -15,22 +16,46 @@ const styles = theme => ({
         fontSize: '15px',
         letterSpacing: '0.25px',
         textTransform: 'none',
-        color: theme.palette.primary.main,
 
-        '&:hover': {
-            backgroundColor: '#E5E9FF !important',
-            color: `${theme.palette.primary.main} !important`,
-            borderColor: '#9FA8DA !important',
+        '&.default': {
+            color: theme.palette.gray60.main,
+            backgroundColor: '#fff !important',
+            border: `1px solid ${theme.palette.gray60.main} !important`,
+            '&:hover': {
+                backgroundColor: `${theme.palette.whiteSmoke.main} !important`,
+            },
         },
-        '&:active': {
-            backgroundColor: theme.palette.primary.light,
-            color: `${theme.palette.primary.main} !important`,
-            border: `1px solid ${theme.palette.primary.main}`,
+        '&.primary': {
+            color: theme.palette.primary.main,
+            backgroundColor: '#fff !important',
+            border: '1px solid #9FA8DA !important',
+
+            '&:hover': {
+                backgroundColor: '#E5E9FF !important',
+                color: `${theme.palette.primary.main} !important`,
+                borderColor: '#9FA8DA !important',
+            },
+            '&:active': {
+                backgroundColor: `theme.palette.primary.light !important`,
+                color: `${theme.palette.primary.main} !important`,
+                border: `1px solid ${theme.palette.primary.main}`,
+            },
         },
-        '&.disabled': {
-            backgroundColor: '#fff',
-            borderColor: theme.palette.gray30.main,
-            color: theme.palette.gray30.main,
+        '&.error': {
+            backgroundColor: theme.palette.error.main,
+            color: `${theme.palette.white.main} !important`,
+            border: `1px solid ${theme.palette.error.main}`,
+
+            '&:hover': {
+                backgroundColor: `${theme.palette.error.dark} !important`,
+                color: `${theme.palette.white.main} !important`,
+                borderColor: `${theme.palette.error.dark} !important`,
+            },
+        },
+        '&.disabled, &:disabled': {
+            backgroundColor: '#fff !important',
+            borderColor: `${theme.palette.gray30.main} !important`,
+            color: `${theme.palette.gray30.main} !important`,
             pointerEvents: 'none',
         },
     },

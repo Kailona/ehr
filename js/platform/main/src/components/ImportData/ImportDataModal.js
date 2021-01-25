@@ -203,6 +203,7 @@ class ImportDataModal extends Component {
                             <Grid item>
                                 <KailonaButton
                                     variant="outlined"
+                                    class="primary"
                                     title={browseFilesButtonTitle}
                                     disabled={importing}
                                     onClick={this.browseFiles}
@@ -212,6 +213,7 @@ class ImportDataModal extends Component {
                                 <Grid item>
                                     <KailonaButton
                                         variant="outlined"
+                                        class="primary"
                                         title="Import"
                                         disabled={importing}
                                         onClick={this.importFiles}

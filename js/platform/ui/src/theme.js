@@ -42,6 +42,7 @@ const theme = createMuiTheme({
         },
         error: {
             main: '#E53935',
+            dark: '#ce332f',
         },
     },
     spacing: 8,
