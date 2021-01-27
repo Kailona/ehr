@@ -1,39 +1,120 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import Chart from 'chart.js';
-import { Grid, Divider, Box, Typography } from '@material-ui/core';
+import moment from 'moment';
+import { Grid, Box, Typography, Link as MuiLink, withStyles } from '@material-ui/core';
 import { DirectionsWalk, FavoriteBorder } from '@material-ui/icons';
 import { PluginManager, ModuleTypeEnum } from '@kailona/core';
 import { DashboardWidget } from '@kailona/ui';
 import { withModal } from '../context/ModalContext';
+import TimeRangeFilter from './Timeline/TimeRangeFilter';
+
+const Link = withStyles(theme => ({
+    root: {
+        margin: '0 10px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        '&:hover': {
+            textDecoration: 'none',
+        },
+        '& > .plugin-name': {
+            fontSize: '12px',
+        },
+        '& > .plugin-name, & > .plugin-icon': {
+            color: theme.palette.gray40.main,
+        },
+    },
+}))(MuiLink);
+
+const chartStyle = [
+    {
+        label: 'Steps',
+        activeColor: 'rgb(255, 99, 132)',
+        inactiveColor: '#999999',
+    },
+    {
+        label: 'Blood Pressure',
+        activeColor: 'rgb(54, 162, 235)',
+        inactiveColor: '#999999',
+    },
+];
 
 class Dashboard extends Component {
     constructor(props) {
         super(props);
         this.chartRef = React.createRef();
+        this.state = {
+            activePlugins: ['Steps', 'Blood Pressure'],
+        };
+    }
+
+    getColor(id) {
+        const { activePlugins } = this.state;
+        const status = activePlugins.includes(id) ? 'active' : 'inactive';
+        const key = status.concat('Color');
+        return chartStyle.find(item => item.label === id)[key];
     }
 
     componentDidMount() {
+        const daysOfMonth = moment().daysInMonth();
+        const labels = [];
+        for (let i = 1; i <= daysOfMonth; i++) {
+            labels.push(i);
+        }
+
         const chartData = {
-            labels: ['July 2020', 'Aug 2020', 'Sep 2020', 'Oct 2020', 'Nov 2020', 'Dec 2020'],
+            labels,
             datasets: [
                 {
                     label: 'Steps',
-                    data: [12, 19, 3, 5, 2, 3],
+                    data: [
+                        {
+                            x: 1,
+                            y: 8,
+                        },
+                        {
+                            x: 10,
+                            y: 7,
+                        },
+                        {
+                            x: 20,
+                            y: 10,
+                        },
+                    ],
                     fill: false,
                     backgroundColor: 'rgb(255, 99, 132)',
-                    borderColor: 'rgba(255, 99, 132, 0.4)',
+                    borderColor: 'rgba(255, 99, 132, 1.0)',
                     yAxisID: 'yAxisSteps',
                     lineTension: 0,
+                    showLine: false,
+                    pointStyle: 'line',
+                    pointBorderWidth: 3,
+                    pointRadius: 10,
+                    pointHoverRadius: 12,
+                    pointHoverBorderWidth: 4,
+                    pointBackgroundColor: 'rgba(255, 99, 132, 1.0)',
                 },
                 {
                     label: 'Blood Pressure',
-                    data: [1, 2, 1, 1, 2, 2],
+                    data: [
+                        {
+                            x: 20,
+                            y: 132,
+                        },
+                    ],
                     fill: false,
                     backgroundColor: 'rgb(54, 162, 235)',
-                    borderColor: 'rgba(54, 162, 235, 0.4)',
+                    borderColor: 'rgba(54, 162, 235, 1.0)',
                     yAxisID: 'yAxisBloodPressure',
                     lineTension: 0,
+                    showLine: false,
+                    pointStyle: 'line',
+                    borderWidth: 3,
+                    pointRadius: 10,
+                    pointHoverRadius: 12,
+                    pointHoverBorderWidth: 4,
+                    pointBackgroundColor: 'rgba(54, 162, 235, 1.0)',
                 },
             ],
         };
@@ -49,6 +130,11 @@ class Dashboard extends Component {
                     {
                         id: 'yAxisSteps',
                         display: false,
+                        ticks: {
+                            min: 0,
+                            max: 10,
+                            stepSize: 1,
+                        },
                         gridLines: {
                             drawOnArea: false,
                         },
@@ -56,6 +142,11 @@ class Dashboard extends Component {
                     {
                         id: 'yAxisBloodPressure',
                         display: false,
+                        ticks: {
+                            min: 50,
+                            max: 160,
+                            stepSize: 5,
+                        },
                         gridLines: {
                             drawOnArea: false,
                         },
@@ -64,10 +155,16 @@ class Dashboard extends Component {
             },
         };
 
-        new Chart(this.chartRef.current, {
+        const ch = new Chart(this.chartRef.current, {
             type: 'line',
-            data: chartData,
+            data: Object.assign({}, chartData),
             options: chartOptions,
+        });
+
+        this.setState({
+            chart: ch,
+            initialChartData: chartData,
+            initialChartOptions: chartOptions,
         });
     }
 
@@ -117,6 +214,29 @@ class Dashboard extends Component {
         });
     }
 
+    changePlugin(e) {
+        debugger;
+        const { chart, activePlugins, initialChartData } = this.state;
+        const element = e.currentTarget;
+        const { id } = element;
+        const isActive = element.classList.contains('active');
+
+        if (isActive) {
+            const index = activePlugins.indexOf(id);
+            activePlugins.splice(index, 1);
+        } else {
+            // Add to active plugins
+            activePlugins.push(id);
+        }
+
+        this.setState({
+            activePlugins,
+        });
+
+        chart.data.datasets = initialChartData.datasets.filter(ds => activePlugins.includes(ds.label));
+        chart.update();
+    }
+
     render() {
         const widgets = this.getWidgets();
 
@@ -130,23 +250,57 @@ class Dashboard extends Component {
                         </Box>
                     </Box>
                     <Box border={1}>
-                        <Box ml={8} mr={8} mt={2} mb={2}>
-                            <Grid container direction="row" spacing={2}>
-                                <Grid item>
-                                    <Grid container direction="column" alignItems="center">
-                                        <Typography style={{ fontSize: '12px', color: 'rgb(255, 99, 132)' }}>
-                                            Steps
-                                        </Typography>
-                                        <DirectionsWalk style={{ color: 'rgb(255, 99, 132)' }} />
+                        <Box ml={4} mr={4} mt={2} mb={2}>
+                            <Grid container direction="row" spacing={2} alignItems="center">
+                                <Grid item xs={8}>
+                                    <Grid container alignItems="center">
+                                        <Grid item>
+                                            <Typography style={{ fontWeight: 'bold' }}>Show:</Typography>
+                                        </Grid>
+                                        <Grid item>
+                                            <Link
+                                                id="Steps"
+                                                onClick={e => this.changePlugin(e)}
+                                                className={`${
+                                                    this.state.activePlugins.includes('Steps') ? 'active' : ''
+                                                }`}
+                                            >
+                                                <DirectionsWalk
+                                                    className="plugin-icon"
+                                                    style={{ color: this.getColor('Steps') }}
+                                                />
+                                                <Typography
+                                                    className="plugin-name"
+                                                    style={{ color: this.getColor('Steps') }}
+                                                >
+                                                    Steps
+                                                </Typography>
+                                            </Link>
+                                        </Grid>
+                                        <Grid item>
+                                            <Link
+                                                id="Blood Pressure"
+                                                onClick={e => this.changePlugin(e)}
+                                                className={`${
+                                                    this.state.activePlugins.includes('Blood Pressure') ? 'active' : ''
+                                                }`}
+                                            >
+                                                <FavoriteBorder
+                                                    className="plugin-icon"
+                                                    style={{ color: this.getColor('Blood Pressure') }}
+                                                />
+                                                <Typography
+                                                    className="plugin-name"
+                                                    style={{ color: this.getColor('Blood Pressure') }}
+                                                >
+                                                    Blood Pressure
+                                                </Typography>
+                                            </Link>
+                                        </Grid>
                                     </Grid>
                                 </Grid>
-                                <Grid item>
-                                    <Grid container direction="column" alignItems="center">
-                                        <Typography style={{ fontSize: '12px', color: 'rgb(54, 162, 235)' }}>
-                                            Blood Pressure
-                                        </Typography>
-                                        <FavoriteBorder style={{ color: 'rgb(54, 162, 235)' }} />
-                                    </Grid>
+                                <Grid item xs={4} style={{ textAlign: 'right' }}>
+                                    <TimeRangeFilter />
                                 </Grid>
                             </Grid>
                         </Box>
