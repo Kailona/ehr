@@ -16,9 +16,13 @@ const Link = withStyles(theme => ({
         },
     },
 }))(MuiLink);
+
 export default class TimeRangeFilter extends Component {
-    handleDateChange(date) {
-        console.log('selected date >>> ', date);
+    handleDateRangeChange(dateRange) {
+        if (this.props.handleDateRangeChange && typeof this.props.handleDateRangeChange === 'function') {
+            return this.props.handleDateRangeChange(dateRange);
+        }
+        console.log('selected date range >>> ', dateRange);
     }
     render() {
         const dateFilters = ['1D', '1M', '3M', '6M', '9M', '1Y', '2Y', 'MAX'];
@@ -29,7 +33,7 @@ export default class TimeRangeFilter extends Component {
                 </Grid>
                 {dateFilters.map(dateFilter => (
                     <Grid item>
-                        <Link href="#" onClick={() => this.handleDateChange(dateFilter)}>
+                        <Link href="#" onClick={() => this.handleDateRangeChange(dateRange)}>
                             {dateFilter}
                         </Link>
                     </Grid>

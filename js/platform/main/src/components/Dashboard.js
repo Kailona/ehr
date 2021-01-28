@@ -15,6 +15,10 @@ const Link = withStyles(theme => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        opacity: 0.6,
+        '&.active': {
+            opacity: 1,
+        },
         '&:hover': {
             textDecoration: 'none',
         },
@@ -54,6 +58,11 @@ class Dashboard extends Component {
         const status = activePlugins.includes(id) ? 'active' : 'inactive';
         const key = status.concat('Color');
         return chartStyle.find(item => item.label === id)[key];
+    }
+
+    handleDateRangeChange(dateRange) {
+        // TODO: Send selected plugins and date to the api
+        console.log(' date range from dashboard >>> ', dateRange);
     }
 
     componentDidMount() {
@@ -158,13 +167,13 @@ class Dashboard extends Component {
         const ch = new Chart(this.chartRef.current, {
             type: 'line',
             data: Object.assign({}, chartData),
-            options: chartOptions,
+            options: Object.assign({}, chartOptions),
         });
 
         this.setState({
             chart: ch,
-            initialChartData: chartData,
-            initialChartOptions: chartOptions,
+            chartData,
+            chartOptions,
         });
     }
 
@@ -215,8 +224,7 @@ class Dashboard extends Component {
     }
 
     changePlugin(e) {
-        debugger;
-        const { chart, activePlugins, initialChartData } = this.state;
+        const { chart, activePlugins, chartData } = this.state;
         const element = e.currentTarget;
         const { id } = element;
         const isActive = element.classList.contains('active');
@@ -233,7 +241,7 @@ class Dashboard extends Component {
             activePlugins,
         });
 
-        chart.data.datasets = initialChartData.datasets.filter(ds => activePlugins.includes(ds.label));
+        chart.data.datasets = chartData.datasets.filter(ds => activePlugins.includes(ds.label));
         chart.update();
     }
 
@@ -300,7 +308,7 @@ class Dashboard extends Component {
                                     </Grid>
                                 </Grid>
                                 <Grid item xs={4} style={{ textAlign: 'right' }}>
-                                    <TimeRangeFilter />
+                                    <TimeRangeFilter handleDateRangeChange={this.handleDateRangeChange} />
                                 </Grid>
                             </Grid>
                         </Box>
