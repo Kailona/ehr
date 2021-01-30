@@ -31,6 +31,12 @@ const TextField = withStyles(theme => ({
 
 export default class KailonaTextField extends Component {
     render() {
-        return <TextField {...this.props} />;
+        return (
+            <TextField
+                {...this.props}
+                inputProps={{ style: { fontSize: 12 } }}
+                InputLabelProps={{ style: { fontSize: 12 } }}
+            />
+        );
     }
 }
