@@ -23,47 +23,46 @@ export default class FHIRService {
     }
 
     async transaction(resource) {
-        const url = `${this.baseUrl}/fhir`;
-        return await axios.post(url, resource);
+        return await axios.post(this.baseUrl, resource);
     }
 
     async create(resource) {
-        const url = `${this.baseUrl}/fhir/${this.resourceType}`;
+        const url = `${this.baseUrl}/${this.resourceType}`;
         return await axios.post(url, resource);
     }
 
     async read(id) {
-        const url = `${this.baseUrl}/fhir/${this.resourceType}/${id}`;
+        const url = `${this.baseUrl}/${this.resourceType}/${id}`;
         return await axios.get(url);
     }
 
     async vread(id, vid) {
-        const url = `${this.baseUrl}/fhir/${this.resourceType}/${id}/_history/${vid}`;
+        const url = `${this.baseUrl}/${this.resourceType}/${id}/_history/${vid}`;
         return await axios.get(url);
     }
 
     async update(id, resource) {
-        const url = `${this.baseUrl}/fhir/${this.resourceType}/${id}`;
+        const url = `${this.baseUrl}/${this.resourceType}/${id}`;
         return await axios.put(url, resource);
     }
 
     async patch(id, patch) {
-        const url = `${this.baseUrl}/fhir/${this.resourceType}/${id}`;
+        const url = `${this.baseUrl}/${this.resourceType}/${id}`;
         return await axios.patch(url, patch);
     }
 
     async delete(id) {
-        const url = `${this.baseUrl}/fhir/${this.resourceType}/${id}`;
+        const url = `${this.baseUrl}/${this.resourceType}/${id}`;
         return await axios.delete(url);
     }
 
     async history(id) {
-        const url = `${this.baseUrl}/fhir/${this.resourceType}/${id}/_history`;
+        const url = `${this.baseUrl}/${this.resourceType}/${id}/_history`;
         return await axios.get(url);
     }
 
     async search(params) {
-        let url = `${this.baseUrl}/fhir/${this.resourceType}`;
+        let url = `${this.baseUrl}/${this.resourceType}`;
 
         // Append query string parameters if exist
         if (params && params.length) {

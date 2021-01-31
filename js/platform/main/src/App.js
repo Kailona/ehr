@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ConfigManager, ModuleTypeEnum, PluginManager } from '@kailona/core';
 import { ThemeProvider, Loader } from '@kailona/ui';
 import { ModalProvider } from './context/ModalContext';
+import { NotificationProvider } from './context/NotificationContext';
 import Dashboard from './components/Dashboard';
 import MainLayout from './components/MainLayout';
 import initFHIRPatients from './lib/initFHIRPatients';
@@ -60,26 +61,28 @@ export default class App extends Component {
 
         return (
             <ThemeProvider>
-                <ModalProvider>
-                    {this.state.loading ? (
-                        <Loader />
-                    ) : (
-                        <Router basename={this.basename}>
-                            <Switch>
-                                <Route
-                                    exact
-                                    path="/"
-                                    render={() => (
-                                        <MainLayout>
-                                            <Dashboard />
-                                        </MainLayout>
-                                    )}
-                                />
-                                {pluginRoutes}
-                            </Switch>
-                        </Router>
-                    )}
-                </ModalProvider>
+                <NotificationProvider>
+                    <ModalProvider>
+                        {this.state.loading ? (
+                            <Loader />
+                        ) : (
+                            <Router basename={this.basename}>
+                                <Switch>
+                                    <Route
+                                        exact
+                                        path="/"
+                                        render={() => (
+                                            <MainLayout>
+                                                <Dashboard />
+                                            </MainLayout>
+                                        )}
+                                    />
+                                    {pluginRoutes}
+                                </Switch>
+                            </Router>
+                        )}
+                    </ModalProvider>
+                </NotificationProvider>
             </ThemeProvider>
         );
     }

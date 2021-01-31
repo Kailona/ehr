@@ -14,10 +14,9 @@ use OCA\EHR\Service\FHIRService;
  * @package OCA\EHR\Controller
  */
 class FHIRController extends Controller {
-    public function __construct(ILogger $logger, string $AppName, IRequest $request, FHIRService $service, $userId){
+    public function __construct(ILogger $logger, string $AppName, IRequest $request, FHIRService $service) {
         parent::__construct($AppName, $request);
         $this->service = $service;
-        $this->userId = $userId;
         $this->logger = $logger;
     }
 

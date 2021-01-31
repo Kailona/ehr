@@ -9,14 +9,13 @@ import {
     DialogTitle,
     IconButton,
     CircularProgress,
-    Snackbar,
-    Alert,
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Close as CloseIcon } from '@material-ui/icons';
 import { ModuleTypeEnum, PluginManager, getIcon } from '@kailona/core';
 import { KailonaButton } from '@kailona/ui';
 import ImportDataBrowser from './ImportDataBrowser';
+import { withNotification } from '../../context/NotificationContext';
 
 import './ImportDataModal.styl';
 
@@ -49,7 +48,6 @@ class ImportDataModal extends Component {
         this.state = {
             importing: false,
             files: [],
-            isSnackbarOpen: false,
         };
     }
 
@@ -142,32 +140,22 @@ class ImportDataModal extends Component {
         // Wait for all files to be imported
         await Promise.all(promises);
 
-        // TODO: Show data import notification to user
-
         this.setState({
             importing: false,
             files: [],
         });
 
-        this.props.onClose({
+        this.props.onClose();
+
+        // Give notification
+        this.props.showNotification({
             severity: 'success',
             message: 'All files imported!',
         });
-
-        // Give notification
-        this.setState({
-            isSnackbarOpen: true,
-        });
     };
 
-    handleClose() {
-        this.setState({
-            isSnackbarOpen: false,
-        });
-    }
-
     render() {
-        const { importing, files, isSnackbarOpen } = this.state;
+        const { importing, files } = this.state;
         const importIcon = getIcon('CloudUploadOutlined');
         const browseFilesButtonTitle = files && files.length ? 'Add More Files' : 'Browse Files';
         return (
@@ -251,4 +239,4 @@ class ImportDataModal extends Component {
     }
 }
 
-export default withStyles(styles)(ImportDataModal);
+export default withStyles(styles)(withNotification(ImportDataModal));
