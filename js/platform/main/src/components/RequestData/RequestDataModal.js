@@ -1,12 +1,32 @@
 import React from 'react';
-import { Box, Dialog, DialogContent, DialogTitle, IconButton } from '@material-ui/core';
+import {
+    Box,
+    Dialog,
+    DialogTitle,
+    DialogActions,
+    DialogContent as MuiDialogContent,
+    IconButton,
+    TextareaAutosize,
+    Grid,
+    Typography,
+    withStyles,
+} from '@material-ui/core';
 import { Close as CloseIcon } from '@material-ui/icons';
 import { ProfileManager, MailService, Logger } from '@kailona/core';
+import { KailonaTextField, KailonaButton } from '@kailona/ui';
 import { withNotification } from '../../context/NotificationContext';
-
-import './RequestDataModal.styl';
-
 const logger = new Logger('RequestDataModal');
+
+const DialogContent = withStyles({
+    root: {
+        height: '100%',
+        margin: '0 20px 20px 20px',
+        backgroundColor: '#FFFFFF',
+        border: '1px solid #EAEAEA',
+        borderRadius: '5px',
+        paddingBottom: '25px',
+    },
+})(MuiDialogContent);
 
 class RequestDataModal extends React.Component {
     constructor(props) {
@@ -69,29 +89,37 @@ class RequestDataModal extends React.Component {
                     </Box>
                 </DialogTitle>
                 <DialogContent>
-                    <div className="requestData">
-                        <input
-                            ref={this.toEmailRef}
-                            type="text"
-                            id="providerEmail"
-                            placeholder="Enter Provider Email"
-                        />
-                        <div className="messageContainer">
-                            <span>Message to Provider:</span>
-                            <div className="messageToProvider">
-                                <div className="message">
-                                    <textarea ref={this.emailBodyRef} placeholder={this.defaultEmailBody} />
-                                </div>
-                            </div>
-                        </div>
-                        <button type="button" onClick={this.sendRequest} className="sendRequest actionBtn">
-                            Send Request
-                        </button>
-                        <button type="button" className="cancelRequest actionBtn">
-                            Cancel
-                        </button>
-                    </div>
+                    <Grid container direction="column">
+                        <Grid item xs={6}>
+                            <KailonaTextField
+                                ref={this.toEmailRef}
+                                id="providerEmail"
+                                type="text"
+                                label="Email"
+                                style={{ width: '100%' }}
+                            />
+                        </Grid>
+                        <Grid item xs={12} style={{ marginTop: '20px' }}>
+                            <Grid container direction="column">
+                                <Grid item>
+                                    <Typography variant="body2">Message to Provider:</Typography>
+                                </Grid>
+                                <Grid item>
+                                    <TextareaAutosize
+                                        ref={this.emailBodyRef}
+                                        rowsMin={5}
+                                        placeholder={this.defaultEmailBody}
+                                        style={{ width: '100%', resize: 'vertical' }}
+                                    />
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </Grid>
                 </DialogContent>
+                <DialogActions>
+                    <KailonaButton class="default" title="Cancel" onClick={this.props.onClose} />
+                    <KailonaButton class="primary" title="Send Request" onClick={this.sendRequest} />
+                </DialogActions>
             </Dialog>
         );
     }
