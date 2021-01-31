@@ -1,9 +1,10 @@
 import PhysicalDataPlugin from '@kailona/plugin-physical-data';
 import ActivitiesPlugin from '@kailona/plugin-activities';
+import VitalsPlugin from '@kailona/plugin-vitals';
 
 export default {
     basename: '/apps/ehr',
-    plugins: [PhysicalDataPlugin, ActivitiesPlugin],
+    plugins: [PhysicalDataPlugin, ActivitiesPlugin, VitalsPlugin],
     settings: {
         fhirBaseUrl: OC.generateUrl('/apps/ehr/fhir'),
         adminSettingsUrl: OC.generateUrl('/apps/ehr/settings/admin'),
