@@ -5,6 +5,7 @@ return ['routes' => [
     ['name' => 'page#index', 'url' => '/', 'verb' => 'GET'],
 
     // API Endpoints
+    ['name' => 'mail#requestdata', 'url' => '/mail/requestdata', 'verb' => 'POST'],
     ['name' => 'settings#admin', 'url' => '/settings/admin', 'verb' => 'POST'],
     ['name' => 'fhir#transaction', 'url' => '/fhir', 'verb' => 'POST'],
     ['name' => 'fhir#create', 'url' => '/fhir/{type}', 'verb' => 'POST'],

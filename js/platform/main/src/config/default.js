@@ -5,8 +5,9 @@ export default {
     basename: '/apps/ehr',
     plugins: [PhysicalDataPlugin, ActivitiesPlugin],
     settings: {
-        fhirBaseUrl: OC.generateUrl('/apps/ehr'),
-        adminSettingsUrl: `${OC.generateUrl('/apps/ehr')}/settings/admin`,
+        fhirBaseUrl: OC.generateUrl('/apps/ehr/fhir'),
+        adminSettingsUrl: OC.generateUrl('/apps/ehr/settings/admin'),
+        mailBaseUrl: OC.generateUrl('/apps/ehr/mail'),
     },
     currentUser: {
         id: OC.getCurrentUser().uid,
