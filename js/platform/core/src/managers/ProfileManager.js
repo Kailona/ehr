@@ -35,6 +35,10 @@ class ProfileManager {
         this._profiles = value;
     }
 
+    get activeProfile() {
+        return this._profiles.find(p => p.patientId === this._activePatientId);
+    }
+
     getSelfProfile() {
         return this._profiles.find(p => p.relationship === 'self');
     }

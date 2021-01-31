@@ -16,10 +16,9 @@ use OCA\EHR\Service\SettingsService;
  * @package OCA\EHR\Controller
  */
 class SettingsController extends Controller {
-    public function __construct(ILogger $logger, string $AppName, IRequest $request, SettingsService $service, $userId) {
+    public function __construct(ILogger $logger, string $AppName, IRequest $request, SettingsService $service) {
         parent::__construct($AppName, $request);
         $this->service = $service;
-        $this->userId = $userId;
         $this->logger = $logger;
     }
 
