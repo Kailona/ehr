@@ -15,6 +15,7 @@
         "@kailona/core": "^0.1.0",
         "@material-ui/pickers": "^3.2.10",
         "date-fns": "^2.16.1",
-        "moment": "^2.29.1"
+        "moment": "^2.29.1",
+        "prop-types": "^15.7.2"
     }
 }

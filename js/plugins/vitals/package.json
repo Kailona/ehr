@@ -1,0 +1,14 @@
+{
+    "name": "@kailona/plugin-vitals",
+    "version": "0.1.0",
+    "description": "Kailona EHR Plugin - Vitals",
+    "author": "Kailona",
+    "license": "MIT",
+    "main": "dist/index.umd.js",
+    "module": "src/index.js",
+    "peerDependencies": {
+        "react": "16.13.1",
+        "react-dom": "16.13.1"
+    },
+    "dependencies": {}
+}

@@ -62,6 +62,7 @@
         "react": "16.13.1",
         "react-dom": "16.13.1",
         "react-dropzone": "^11.2.4",
+        "styled-components": "^5.2.1",
         "uuid": "^8.3.1"
     },
     "resolutions": {
