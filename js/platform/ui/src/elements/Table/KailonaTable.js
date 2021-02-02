@@ -66,13 +66,6 @@ export default class KailonaTable extends Component {
     };
 
     render() {
-        if (!this.props.loading && (!this.props.data || !this.props.data.length)) {
-            return (
-                <Paper style={{ width: '100%', textAlign: 'center', padding: '20px' }}>
-                    <Typography variant="h5">No data available</Typography>
-                </Paper>
-            );
-        }
         return (
             <Paper style={{ width: '100%' }}>
                 <TableContainer>
@@ -111,7 +104,16 @@ export default class KailonaTable extends Component {
                         <TableFooter>
                             {this.props.loading && (
                                 <TableRow>
-                                    <Loader />
+                                    <TableCell colSpan={this.props.columns.length} align="center">
+                                        <Loader />
+                                    </TableCell>
+                                </TableRow>
+                            )}
+                            {!this.props.loading && (!this.props.data || !this.props.data.length) && (
+                                <TableRow>
+                                    <TableCell colSpan={this.props.columns.length} align="center">
+                                        <Typography variant="h5">No data available</Typography>
+                                    </TableCell>
                                 </TableRow>
                             )}
                         </TableFooter>

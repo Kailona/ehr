@@ -266,7 +266,9 @@ export default class VitalsDataModule extends Component {
                 <Box className="filters" mt={2}>
                     <Grid container alignItems="center" justifyContent="center">
                         <Grid item>
-                            <Typography variant="body1">Filter by: </Typography>
+                            <Typography variant="body1" style={{ marginRight: '6px' }}>
+                                Filter by:{' '}
+                            </Typography>
                         </Grid>
                         <GridColumn className="right-column" item>
                             <FormControl>
@@ -275,6 +277,7 @@ export default class VitalsDataModule extends Component {
                                     defaultValue={filters.dateRange}
                                     onChange={this.filterByDateRange}
                                     ariaLabel={t('ehr', 'Filter by date')}
+                                    maxDate={new Date()}
                                 />
                             </FormControl>
                         </GridColumn>

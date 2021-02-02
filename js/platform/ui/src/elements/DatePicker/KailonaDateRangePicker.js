@@ -5,16 +5,22 @@ import { withStyles } from '@material-ui/core';
 import DateRangePicker from './lib/DateRangePicker';
 
 const CustomDateRangePicker = withStyles({
-    current: {
-        '& input': {
-            border: 'none !important',
-        },
+    root: {
+        border: '1px solid red',
     },
 })(DateRangePicker);
 
+const styles = {
+    datepicker: {
+        '& input, & input:hover': {
+            border: 'none !important',
+        },
+    },
+};
+
 const DATE_FORMAT = 'MMM d, yyyy';
 
-export default class KailonaDateRangePicker extends Component {
+class KailonaDateRangePicker extends Component {
     constructor(props) {
         super(props);
 
@@ -43,15 +49,18 @@ export default class KailonaDateRangePicker extends Component {
     }
 
     render() {
+        const { classes } = this.props;
         return (
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <CustomDateRangePicker
                     variant="inline"
+                    className={classes.datepicker}
                     format={this.state.dateFormat}
                     id={this.props.id}
                     value={this.state.date}
                     placeholder={t('ehr', 'Select Date')}
                     onChange={this.handleChange}
+                    maxDate={this.props.maxDate}
                     KeyboardButtonProps={{
                         'aria-label': this.props.ariaLabel,
                     }}
@@ -61,3 +70,5 @@ export default class KailonaDateRangePicker extends Component {
         );
     }
 }
+
+export default withStyles(styles)(KailonaDateRangePicker);
