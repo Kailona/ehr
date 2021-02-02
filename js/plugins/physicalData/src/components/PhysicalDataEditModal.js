@@ -15,7 +15,22 @@ import {
 } from '@material-ui/core';
 import { Close as CloseIcon } from '@material-ui/icons';
 import { KailonaButton, KailonaDateTimePicker, KailonaTextField } from '@kailona/ui';
-import GridColumn from '../lib/GridColumn';
+
+const GridColumn = withStyles({
+    root: {
+        '&.left-column': {
+            margin: '10px 10px 10px 0',
+            width: '180px',
+        },
+        '&.right-column': {
+            margin: '10 0px 10px 10px',
+            width: '180px',
+        },
+        '& > .MuiFormControl-root': {
+            width: '100%',
+        },
+    },
+})(Grid);
 
 const DialogContent = withStyles({
     root: {
@@ -36,7 +51,7 @@ const InputAdornment = withStyles({
     },
 })(MuiInputAdornment);
 
-export default class VitalsEditModal extends Component {
+export default class PhysicalDataEditModal extends Component {
     constructor(props) {
         super(props);
 
@@ -45,10 +60,10 @@ export default class VitalsEditModal extends Component {
         };
 
         this.dateRef = React.createRef();
-        this.systolicBloodPressureRef = React.createRef();
-        this.diastolicBloodPressureRef = React.createRef();
-        this.heartRateRef = React.createRef();
-        this.oxygenSaturationRef = React.createRef();
+        this.ageRef = React.createRef();
+        this.heightRef = React.createRef();
+        this.weightRef = React.createRef();
+        this.bmiRef = React.createRef();
     }
 
     toggleModal = isOpen => {
@@ -58,19 +73,19 @@ export default class VitalsEditModal extends Component {
     };
 
     onConfirm = () => {
-        const vitalsData = {
+        const physicalData = {
             date: moment(this.dateRef.current.value),
-            systolicBloodPressure: this.systolicBloodPressureRef.current.value,
-            diastolicBloodPressure: this.diastolicBloodPressureRef.current.value,
-            heartRate: this.heartRateRef.current.value,
-            oxygenSaturation: this.oxygenSaturationRef.current.value,
+            age: this.ageRef.current.value,
+            height: this.heightRef.current.value,
+            weight: this.weightRef.current.value,
+            bmi: this.bmiRef.current.value,
         };
 
-        this.props.handleSave(vitalsData);
+        this.props.handleSave(physicalData);
     };
 
     getValue = text => {
-        if (!text) {
+        if (!text || !text.length) {
             return '';
         }
 
@@ -79,9 +94,7 @@ export default class VitalsEditModal extends Component {
     };
 
     render() {
-        console.log(' vitals data ', this.props.vitalsData);
-        const { date, systolicBloodPressure, diastolicBloodPressure, oxygenSaturation, heartRate } =
-            this.props.vitalsData || {};
+        const { date, age, height, weight, bmi } = this.props.physicalData || {};
 
         return (
             <Dialog open={this.state.isOpen} onClose={() => this.toggleModal(false)}>
@@ -89,7 +102,7 @@ export default class VitalsEditModal extends Component {
                     <Box display="flex" alignItems="center">
                         <Box flexGrow={1}>
                             <Typography variant="h3">
-                                {t('ehr', this.props.vitalsData ? 'Update Vitals' : 'Add New Vitals')}
+                                {t('ehr', this.props.physicalData ? 'Update Physical Data' : 'Add New Physical Data')}
                             </Typography>
                         </Box>
                         <Box>
@@ -115,13 +128,13 @@ export default class VitalsEditModal extends Component {
                             <GridColumn className="left-column" item>
                                 <FormControl>
                                     <KailonaTextField
-                                        inputRef={this.systolicBloodPressureRef}
-                                        id="systolicBloodPressure"
+                                        inputRef={this.ageRef}
+                                        id="age"
                                         className="kailona-MuiTextField"
-                                        label={t('ehr', 'Systolic Blood Pressure')}
-                                        defaultValue={this.getValue(systolicBloodPressure)}
+                                        label={t('ehr', 'Age')}
+                                        defaultValue={age}
                                         InputProps={{
-                                            endAdornment: <InputAdornment>mmHg</InputAdornment>,
+                                            endAdornment: <InputAdornment>years</InputAdornment>,
                                         }}
                                     />
                                 </FormControl>
@@ -129,14 +142,14 @@ export default class VitalsEditModal extends Component {
                             <GridColumn className="right-column" item>
                                 <FormControl>
                                     <KailonaTextField
-                                        inputRef={this.diastolicBloodPressureRef}
+                                        inputRef={this.heightRef}
                                         type="number"
-                                        id="diastolicBloodPressure"
+                                        id="height"
                                         className="kailona-MuiTextField"
-                                        label={t('ehr', 'Diastolic Blood Pressure')}
-                                        defaultValue={this.getValue(diastolicBloodPressure)}
+                                        label={t('ehr', 'Height')}
+                                        defaultValue={this.getValue(height)}
                                         InputProps={{
-                                            endAdornment: <InputAdornment>mmHg</InputAdornment>,
+                                            endAdornment: <InputAdornment>cm</InputAdornment>,
                                         }}
                                     />
                                 </FormControl>
@@ -146,14 +159,14 @@ export default class VitalsEditModal extends Component {
                             <GridColumn className="left-column" item>
                                 <FormControl>
                                     <KailonaTextField
-                                        inputRef={this.heartRateRef}
+                                        inputRef={this.weightRef}
                                         type="number"
-                                        id="heartRate"
+                                        id="weight"
                                         className="kailona-MuiTextField"
-                                        label={t('ehr', 'Heart Rate')}
-                                        defaultValue={this.getValue(heartRate)}
+                                        label={t('ehr', 'Weight')}
+                                        defaultValue={this.getValue(weight)}
                                         InputProps={{
-                                            endAdornment: <InputAdornment>beats/minute</InputAdornment>,
+                                            endAdornment: <InputAdornment>kg</InputAdornment>,
                                         }}
                                     />
                                 </FormControl>
@@ -161,14 +174,14 @@ export default class VitalsEditModal extends Component {
                             <GridColumn className="right-column" item>
                                 <FormControl>
                                     <KailonaTextField
-                                        inputRef={this.oxygenSaturationRef}
+                                        inputRef={this.bmiRef}
                                         type="number"
-                                        id="oxygenSaturation"
+                                        id="bmi"
                                         className="kailona-MuiTextField"
-                                        label={t('ehr', 'Oxygen Saturation (SpO2)')}
-                                        defaultValue={this.getValue(oxygenSaturation)}
+                                        label={t('ehr', 'Body Mass Index')}
+                                        defaultValue={this.getValue(bmi)}
                                         InputProps={{
-                                            endAdornment: <InputAdornment>%</InputAdornment>,
+                                            endAdornment: <InputAdornment>bmi</InputAdornment>,
                                         }}
                                     />
                                 </FormControl>
@@ -180,15 +193,15 @@ export default class VitalsEditModal extends Component {
                     <KailonaButton
                         title={t('ehr', 'Cancel')}
                         class="default"
-                        disabled={this.props.savingVitals}
+                        disabled={this.props.savingPhysicalData}
                         onClick={() => this.toggleModal(false)}
                     />
                     <KailonaButton
                         title={t('ehr', 'Confirm')}
                         class="primary"
-                        disabled={this.props.savingVitals}
+                        disabled={this.props.savingPhysicalData}
                         onClick={this.onConfirm}
-                        loading={this.props.savingVitals}
+                        loading={this.props.savingPhysicalData}
                     />
                 </DialogActions>
             </Dialog>
