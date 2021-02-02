@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { ProfileManager } from '@kailona/core';
 
 function mapToFHIRBloodPressure(vitalsData) {
@@ -38,7 +39,9 @@ function mapToFHIRBloodPressure(vitalsData) {
         subject: {
             reference: `Patient/${fhirPatientId}`,
         },
-        effectiveDateTime: date.utc().toISOString(),
+        effectiveDateTime: moment(date)
+            .utc()
+            .toISOString(),
         component: [
             {
                 code: {
@@ -123,7 +126,9 @@ function mapToFHIRHeartRate(vitalsData) {
         subject: {
             reference: `Patient/${fhirPatientId}`,
         },
-        effectiveDateTime: date.utc().toISOString(),
+        effectiveDateTime: moment(date)
+            .utc()
+            .toISOString(),
         valueQuantity: {
             value: parseInt(heartRate, 10),
             unit: 'beats/minute',
@@ -178,7 +183,9 @@ function mapToFHIROxygenSaturation(vitalsData) {
         subject: {
             reference: `Patient/${fhirPatientId}`,
         },
-        effectiveDateTime: date.utc().toISOString(),
+        effectiveDateTime: moment(date)
+            .utc()
+            .toISOString(),
         valueQuantity: {
             value: parseInt(oxygenSaturation, 10),
             unit: '%',
@@ -188,8 +195,8 @@ function mapToFHIROxygenSaturation(vitalsData) {
     };
 
     const { idMap } = vitalsData;
-    if (idMap && idMap.heartRate) {
-        observation.id = idMap.heartRate;
+    if (idMap && idMap.oxygenSaturation) {
+        observation.id = idMap.oxygenSaturation;
     }
 
     return observation;
@@ -201,8 +208,8 @@ function mapToFHIRVitalsPanel(vitalsData, observationIds) {
         throw new Error('Invalid patient id');
     }
 
-    const { date, oxygenSaturation } = vitalsData;
-    if (!date || !oxygenSaturation) {
+    const { date } = vitalsData;
+    if (!date || !observationIds || !observationIds.length) {
         return null;
     }
 
@@ -233,7 +240,9 @@ function mapToFHIRVitalsPanel(vitalsData, observationIds) {
         subject: {
             reference: `Patient/${fhirPatientId}`,
         },
-        effectiveDateTime: date.utc().toISOString(),
+        effectiveDateTime: moment(date)
+            .utc()
+            .toISOString(),
         hasMember: observationIds.map(observationId => ({
             reference: `Observation/${observationId}`,
         })),

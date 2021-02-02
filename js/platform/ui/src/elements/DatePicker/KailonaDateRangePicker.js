@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
-import { MuiPickersUtilsProvider, KeyboardDatePicker as MuiKeyboardDatePicker } from '@material-ui/pickers';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import { withStyles } from '@material-ui/core';
+import DateRangePicker from './lib/DateRangePicker';
 
-const KeyboardDatePicker = withStyles({
-    root: {
+const CustomDateRangePicker = withStyles({
+    current: {
         '& input': {
             border: 'none !important',
         },
     },
-})(MuiKeyboardDatePicker);
+})(DateRangePicker);
 
 const DATE_FORMAT = 'MMM d, yyyy';
 
-export default class KailonaDatePicker extends Component {
+export default class KailonaDateRangePicker extends Component {
     constructor(props) {
         super(props);
 
@@ -44,7 +45,7 @@ export default class KailonaDatePicker extends Component {
     render() {
         return (
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <KeyboardDatePicker
+                <CustomDateRangePicker
                     variant="inline"
                     format={this.state.dateFormat}
                     id={this.props.id}
@@ -55,7 +56,6 @@ export default class KailonaDatePicker extends Component {
                         'aria-label': this.props.ariaLabel,
                     }}
                     autoOk={true}
-                    disableFuture={this.props.disableFuture}
                 />
             </MuiPickersUtilsProvider>
         );

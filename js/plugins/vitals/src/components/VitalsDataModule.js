@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import { Typography, Box, FormControl, Grid } from '@material-ui/core';
-import { KailonaButton, KailonaTable, KailonaDatePicker, Loader } from '@kailona/ui';
+import { KailonaButton, KailonaTable, KailonaDateRangePicker } from '@kailona/ui';
 import VitalsService from '../services/VitalsService';
 import { Logger } from '@kailona/core';
 import VitalsEditModal from './VitalsEditModal';
@@ -17,7 +17,14 @@ export default class VitalsDataModule extends Component {
 
         this.state = {
             loading: true,
-            filters: {},
+            filters: {
+                dateRange: {
+                    begin: moment()
+                        .clone()
+                        .subtract(1, 'month'),
+                    end: moment(),
+                },
+            },
             page: 0,
             rowsPerPage: 10,
             data: [],
@@ -65,36 +72,71 @@ export default class VitalsDataModule extends Component {
         this.vitalsEditModalRef = React.createRef();
     }
 
+    sortVitals(vitals) {
+        return vitals.sort((v1, v2) => (moment(v1.date).isSameOrAfter(moment(v2.date)) ? -1 : 1));
+    }
+
     fetchVitals = async () => {
         this.setState({
             loading: true,
         });
 
-        try {
-            // Filter by last month (FHIR date/time in UTC)
-            const endMoment = moment.utc();
-            const startMoment = endMoment.clone().subtract(1, 'month');
+        const { filters } = this.state;
 
+        try {
             const params = [
                 {
-                    date: `le${endMoment.format('YYYY-MM-DD')}`,
+                    date: `ge${moment(filters.dateRange.begin)
+                        .hour(0)
+                        .minute(0)
+                        .second(0)
+                        .utc()
+                        .toISOString()}`,
                 },
                 {
-                    date: `ge${startMoment.format('YYYY-MM-DD')}`,
+                    date: `le${moment(filters.dateRange.end)
+                        .hour(23)
+                        .minute(59)
+                        .second(59)
+                        .utc()
+                        .toISOString()}`,
                 },
                 {
-                    _sort: '-date',
+                    code: 'http://loinc.org|85353-1',
+                    _include: 'Observation:has-member',
+                    //_sort: '-date', // not supported with _include by ibm fhir server
                     _count: this.state.rowsPerPage,
                 },
             ];
-
-            // TODO: Apply filters and pagination
 
             const vitals = await this.vitalsService.fetchVitals(params);
 
             this.setState({
                 loading: false,
-                data: vitals,
+                data: this.sortVitals(vitals),
+            });
+        } catch (error) {
+            logger.error(error);
+        }
+    };
+
+    fetchNextVitals = async () => {
+        if (!this.vitalsService.hasNextVitals) {
+            return;
+        }
+
+        this.setState({
+            loading: true,
+        });
+
+        try {
+            const nextVitals = await this.vitalsService.fetchNextVitals(this.state.data);
+
+            const allVitals = [...this.state.data, ...nextVitals];
+
+            this.setState({
+                loading: false,
+                data: this.sortVitals(allVitals),
             });
         } catch (error) {
             logger.error(error);
@@ -105,11 +147,9 @@ export default class VitalsDataModule extends Component {
         this.fetchVitals();
     };
 
-    filterByDate = dateValue => {
-        const formattedDate = moment(dateValue).format('DD/MM/YYYY');
-
-        const filters = this.state.filters || {};
-        filters.date = formattedDate;
+    filterByDateRange = dateRangeValue => {
+        const { filters } = this.state;
+        filters.dateRange = dateRangeValue;
 
         this.setState(
             {
@@ -122,17 +162,12 @@ export default class VitalsDataModule extends Component {
     };
 
     handleSave = async vitalsData => {
-        const { idMap } = vitalsData;
         this.setState({
             savingVitals: true,
         });
 
         try {
-            if (idMap && Object.keys(idMap).length) {
-                await this.vitalsService.updateVitals(vitalsData);
-            } else {
-                await this.vitalsService.addVitals(vitalsData);
-            }
+            await this.vitalsService.upsertVitals(vitalsData);
 
             this.vitalsEditModalRef.current.toggleModal(false);
             this.fetchVitals();
@@ -218,7 +253,7 @@ export default class VitalsDataModule extends Component {
     };
 
     render() {
-        const { loading } = this.state;
+        const { loading, filters } = this.state;
 
         return (
             <div>
@@ -235,9 +270,10 @@ export default class VitalsDataModule extends Component {
                         </Grid>
                         <GridColumn className="right-column" item>
                             <FormControl>
-                                <KailonaDatePicker
+                                <KailonaDateRangePicker
                                     id="date"
-                                    onChange={this.filterByDate}
+                                    defaultValue={filters.dateRange}
+                                    onChange={this.filterByDateRange}
                                     ariaLabel={t('ehr', 'Filter by date')}
                                 />
                             </FormControl>
@@ -245,20 +281,17 @@ export default class VitalsDataModule extends Component {
                     </Grid>
                 </Box>
                 <Box className="content" mt={3} style={{ display: 'flex' }}>
-                    {loading ? (
-                        <Loader />
-                    ) : (
-                        <KailonaTable
-                            data={this.state.data}
-                            columns={this.state.columns}
-                            page={this.state.page}
-                            rowsPerPage={this.state.rowsPerPage}
-                            onChangePage={this.onChangePage}
-                            onChangeRowsPerPage={this.onChangeRowsPerPage}
-                            contextMenu={this.contextMenuOptions}
-                            onEdit={this.onEditVitals}
-                        />
-                    )}
+                    <KailonaTable
+                        data={this.state.data}
+                        columns={this.state.columns}
+                        page={this.state.page}
+                        rowsPerPage={this.state.rowsPerPage}
+                        onChangePage={this.onChangePage}
+                        onChangeRowsPerPage={this.onChangeRowsPerPage}
+                        contextMenu={this.contextMenuOptions}
+                        onEdit={this.onEditVitals}
+                        loading={loading}
+                    />
                 </Box>
                 <VitalsEditModal
                     ref={this.vitalsEditModalRef}

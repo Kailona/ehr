@@ -35,6 +35,22 @@ class FHIRService {
         $this->fhirPatientId = $this->config->getUserValue($this->userId, 'ehr', 'fhirPatientId', null);
     }
 
+    private function replaceQueryParam($queryParams, $key, $value) {
+        for ($i = 0; $i < count($queryParams); $i++) {
+            if ($queryParams[$i]['key'] == $key) {
+                $queryParams[$i]['value'] = $queryParams[$i]['value'] ?: $value;
+                return $queryParams;
+            }
+        }
+
+        array_push($queryParams, array(
+            'key' => $key,
+            'value' => $value
+        ));
+
+        return $queryParams;
+    }
+
     private function mapSearchQueryParams(string $resourceType, string $queryParamsStr) {
         if ($this->fhirPatientId == null) {
             return null;
@@ -47,19 +63,21 @@ class FHIRService {
             for ($i = 0; $i < count($queryParamsStrSplit); $i++) {
                 $queryParamKeyValueToMapSplit = explode('=', $queryParamsStrSplit[$i]);
                 if (count($queryParamKeyValueToMapSplit) == 2) {
-                    $queryParams[$queryParamKeyValueToMapSplit[0]] = $queryParamKeyValueToMapSplit[1];
+                    array_push($queryParams, array(
+                        'key' => $queryParamKeyValueToMapSplit[0],
+                        'value' => $queryParamKeyValueToMapSplit[1]
+                    ));
                 }
             }
         }
 
         // Map query params
-        $patientIdQueryParam = null;
         switch ($resourceType) {
             case 'Patient':
-                $queryParams['_id'] = $queryParams['_id'] ?: $this->fhirPatientId;
+                $queryParams = $this->replaceQueryParam($queryParams, '_id', $this->fhirPatientId);
                 break;
             default:
-                $queryParams['patient'] = $queryParams['patient'] ?: 'Patient/' . $this->fhirPatientId;
+                $queryParams = $this->replaceQueryParam($queryParams, 'patient', 'Patient/' . $this->fhirPatientId);
                 break;
         }
 
@@ -70,11 +88,11 @@ class FHIRService {
 
         // Convert array to query string
         $mappedQueryParams = '';
-        foreach ($queryParams as $key => $value) {
+        foreach ($queryParams as $queryParam) {
             if ($mappedQueryParams == '') {
-                $mappedQueryParams = $key . '=' . $value;
+                $mappedQueryParams = $queryParam['key'] . '=' . $queryParam['value'];
             } else {
-                $mappedQueryParams .= '&' . $key . '=' . $value;
+                $mappedQueryParams .= '&' . $queryParam['key'] . '=' . $queryParam['value'];
             }
         }
 
@@ -213,7 +231,7 @@ class FHIRService {
         if ($mappedQueryParams == null) {
             return new JSONResponse(array(), Http::STATUS_OK);
         }
-
+        
         return $this->fetch('GET', $url, $mappedQueryParams);
     }
 }

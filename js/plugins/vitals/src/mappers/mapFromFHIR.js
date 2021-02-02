@@ -135,22 +135,28 @@ export default function mapFromFHIR(observationBundleEntry) {
 
     // Find vitals panel and add its id into each vitals data
     Object.values(observationsByDateTime).forEach(observations => {
-        const vitalsPanelObservation = observations.find(obs => {
+        // Get vitals panels
+        const vitalsPanelObservations = observations.filter(obs => {
             const { coding } = (obs && obs.code) || {};
             const { code, system } = (coding && !!coding.length && coding[0]) || {};
             return system === 'http://loinc.org' && code === '85353-1';
         });
 
-        const vitalsObservations = observations.filter(
-            obs => !vitalsPanelObservation || obs.id !== vitalsPanelObservation.id
-        );
+        // Get individual vitals from vitals panel
+        vitalsPanelObservations.forEach(vitalsPanelObservation => {
+            const vitalsObservations = observations.filter(
+                obs =>
+                    !vitalsPanelObservation ||
+                    vitalsPanelObservation.hasMember.some(hm => hm.reference === `Observation/${obs.id}`)
+            );
 
-        const vitalsData = _mapObservations(vitalsObservations, vitalsPanelObservation);
-        if (!vitalsData) {
-            return;
-        }
+            const vitalsData = _mapObservations(vitalsObservations, vitalsPanelObservation);
+            if (!vitalsData) {
+                return;
+            }
 
-        vitalsDataList.push(vitalsData);
+            vitalsDataList.push(vitalsData);
+        });
     });
 
     return vitalsDataList;

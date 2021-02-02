@@ -7,6 +7,7 @@ import {
     TableHead,
     TableCell,
     TableRow,
+    TableFooter,
     TablePagination,
     Link,
     Menu as MuiMenu,
@@ -18,6 +19,7 @@ import {
     IconButton,
 } from '@material-ui/core';
 import { MoreHoriz } from '@material-ui/icons';
+import { Loader } from '@kailona/ui';
 
 const HeadCell = withStyles(theme => ({
     root: {
@@ -64,7 +66,7 @@ export default class KailonaTable extends Component {
     };
 
     render() {
-        if (!this.props.data || !this.props.data.length) {
+        if (!this.props.loading && (!this.props.data || !this.props.data.length)) {
             return (
                 <Paper style={{ width: '100%', textAlign: 'center', padding: '20px' }}>
                     <Typography variant="h5">No data available</Typography>
@@ -106,8 +108,16 @@ export default class KailonaTable extends Component {
                                 </TableRow>
                             ))}
                         </TableBody>
+                        <TableFooter>
+                            {this.props.loading && (
+                                <TableRow>
+                                    <Loader />
+                                </TableRow>
+                            )}
+                        </TableFooter>
                     </Table>
                 </TableContainer>
+
                 {this.props.pagination && (
                     <TablePagination
                         rowsPerPageOptions={[1, 5, 10, 25]}

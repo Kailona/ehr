@@ -59,7 +59,7 @@ export default class VitalsEditModal extends Component {
     };
 
     onConfirm = () => {
-        const vitalsData = {
+        const newVitalsData = {
             date: moment(this.dateRef.current.value),
             systolicBloodPressure: this.systolicBloodPressureRef.current.value,
             diastolicBloodPressure: this.diastolicBloodPressureRef.current.value,
@@ -67,7 +67,8 @@ export default class VitalsEditModal extends Component {
             oxygenSaturation: this.oxygenSaturationRef.current.value,
         };
 
-        this.props.handleSave(vitalsData);
+        const { vitalsData } = this.props;
+        this.props.handleSave(Object.assign({}, vitalsData || {}, newVitalsData));
     };
 
     getValue = text => {
@@ -80,7 +81,6 @@ export default class VitalsEditModal extends Component {
     };
 
     render() {
-        console.log(' vitals data ', this.props.vitalsData);
         const { date, systolicBloodPressure, diastolicBloodPressure, oxygenSaturation, heartRate } =
             this.props.vitalsData || {};
 
@@ -109,6 +109,7 @@ export default class VitalsEditModal extends Component {
                                     id="date"
                                     ariaLabel={t('ehr', 'Select Date/Time')}
                                     defaultValue={date ? moment(date) : null}
+                                    disableFuture={true}
                                 />
                             </FormControl>
                         </Grid>
