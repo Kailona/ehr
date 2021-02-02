@@ -29,6 +29,17 @@ class FHIRService {
         }
     }
 
+    private function replaceBaseFHIRURLs($resource) {
+        // Replace Base FHIR URL in bundle links
+        if ($resource != null && $resource['link'] != null) {
+            for ($i = 0; $i < count($resource['link']); $i++) {
+                $resource['link'][$i]['url'] = str_replace($this->fhirConfig['baseUrl'], '/apps/ehr/fhir/', $resource['link'][$i]['url']);
+            }
+        }
+        
+        return $resource;
+    }
+
     private function fetch(string $method, string $url, string $queryParams = null, string $body = null) {
         $client = $this->clientService->newClient();
 
@@ -70,7 +81,11 @@ class FHIRService {
                     break;
             }
 
-            $jsonResponseToSend = new JSONResponse(json_decode($response->getBody(), true) ?? '');
+            $responseResource = json_decode($response->getBody(), true) ?? '';
+
+            $responseResource = $this->replaceBaseFHIRURLs($responseResource);
+
+            $jsonResponseToSend = new JSONResponse($responseResource);
 
             foreach ($response->getHeaders() as $key => $value) {
                 if ($key == 'Location') {

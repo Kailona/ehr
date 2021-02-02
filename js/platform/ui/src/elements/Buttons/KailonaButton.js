@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
+import { CircularProgress } from '@material-ui/core';
 
 const styles = theme => ({
     'kailona-button': {
@@ -75,6 +76,7 @@ class KailonaButton extends Component {
                 disabled={this.props.disabled}
             >
                 {this.props.title}
+                {this.props.loading && <CircularProgress color="primary" size={20} style={{ marginLeft: '12px' }} />}
             </Button>
         );
     }

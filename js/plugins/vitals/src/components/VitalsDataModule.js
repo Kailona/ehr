@@ -1,202 +1,232 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import {
-    Typography,
-    Box,
-    Dialog,
-    DialogActions,
-    DialogContent as MuiDialogContent,
-    DialogTitle,
-    FormControl,
-    Grid,
-    withStyles,
-    IconButton,
-} from '@material-ui/core';
-import { KailonaButton, KailonaTable, KailonaTextField, KailonaDatePicker, KailonaSelect } from '@kailona/ui';
-import { Close as CloseIcon } from '@material-ui/icons';
+import { Typography, Box, FormControl, Grid } from '@material-ui/core';
+import { KailonaButton, KailonaTable, KailonaDatePicker, Loader } from '@kailona/ui';
+import VitalsService from '../services/VitalsService';
+import { Logger } from '@kailona/core';
+import VitalsEditModal from './VitalsEditModal';
+import GridColumn from '../lib/GridColumn';
 
-const DialogContent = withStyles({
-    root: {
-        height: '100%',
-        margin: '0 20px 20px 20px',
-        backgroundColor: '#FFFFFF',
-        border: '1px solid #EAEAEA',
-        borderRadius: '5px',
-        paddingBottom: '25px',
-    },
-})(MuiDialogContent);
+import { Edit, Delete } from '@material-ui/icons';
 
-const GridColumn = withStyles({
-    root: {
-        '&.left-column': {
-            margin: '10px 10px 10px 0',
-            width: '160px',
-        },
-        '&.right-column': {
-            margin: '10 0px 10px 10px',
-            width: '160px',
-        },
-        '& > .MuiFormControl-root': {
-            width: '100%',
-        },
-    },
-})(Grid);
+const logger = new Logger('VitalsDataModule');
 
 export default class VitalsDataModule extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
-            isAddVitalModalOpen: false,
+            loading: true,
             filters: {},
-            form: {},
             page: 0,
-            rowsPerPage: 1,
-            data: [
-                {
-                    date: '01/15/2021',
-                    source: 'ABC Lab',
-                    systolicBloodPressure: 110,
-                    diastolicBloodPressure: 70,
-                    pulseOx: 97,
-                    heartRate: 85,
-                },
-                {
-                    date: '01/14/2021',
-                    source: 'Nature Metrics',
-                    systolicBloodPressure: 130,
-                    diastolicBloodPressure: 80,
-                    pulseOx: 97,
-                    heartRate: 85,
-                },
-                {
-                    date: '01/13/2021',
-                    source: 'ABC Lab',
-                    systolicBloodPressure: 94,
-                    diastolicBloodPressure: 65,
-                    pulseOx: 97,
-                    heartRate: 70,
-                },
-            ],
+            rowsPerPage: 10,
+            data: [],
             columns: [
                 {
-                    label: 'Date',
+                    label: '',
                     key: 'date',
                 },
                 {
-                    label: 'Systolic Blood Pressure',
+                    label: t('ehr', 'Systolic Blood Pressure'),
                     key: 'systolicBloodPressure',
                 },
                 {
-                    label: 'Diastolic Blood Pressure',
+                    label: t('ehr', 'Diastolic Blood Pressure'),
                     key: 'diastolicBloodPressure',
                 },
                 {
-                    label: 'Pulse Ox (SpO2)',
-                    key: 'pulseOx',
-                },
-                {
-                    label: 'Heart Rate',
+                    label: t('ehr', 'Heart Rate'),
                     key: 'heartRate',
                 },
-            ],
-            sourceOptions: [
                 {
-                    value: 'ABC Lab',
-                    text: 'ABC Lab',
-                },
-                {
-                    value: 'Nature Metrics',
-                    text: 'Nature Metrics',
+                    label: t('ehr', 'Oxygen Saturation (SpO2)'),
+                    key: 'oxygenSaturation',
                 },
             ],
+            vitalsDataToUpdate: null,
+            savingVitals: false,
         };
-        this.handleClose = this.handleClose.bind(this);
-        this.changeValue = this.changeValue.bind(this);
-        this.handleSave = this.handleSave.bind(this);
-        this.filterDate = this.filterDate.bind(this);
-        this.onChangePage = this.onChangePage.bind(this);
-        this.onChangeRowsPerPage = this.onChangeRowsPerPage.bind(this);
-        this.handleSourceChange = this.handleSourceChange.bind(this);
+
+        this.contextMenuOptions = [
+            {
+                label: t('ehr', 'Edit'),
+                icon: <Edit fontSize="small" />,
+                onClick: this.onEditVitals,
+            },
+            {
+                label: t('ehr', 'Delete'),
+                icon: <Delete fontSize="small" />,
+                onClick: this.handleDelete,
+            },
+        ];
+
+        this.vitalsService = new VitalsService();
+
+        this.vitalsEditModalRef = React.createRef();
     }
 
-    handleClose() {
-        const { isAddVitalModalOpen } = this.state;
+    fetchVitals = async () => {
         this.setState({
-            isAddVitalModalOpen: !isAddVitalModalOpen,
+            loading: true,
         });
-    }
 
-    filterDate(dateValue) {
+        try {
+            // Filter by last month (FHIR date/time in UTC)
+            const endMoment = moment.utc();
+            const startMoment = endMoment.clone().subtract(1, 'month');
+
+            const params = [
+                {
+                    date: `le${endMoment.format('YYYY-MM-DD')}`,
+                },
+                {
+                    date: `ge${startMoment.format('YYYY-MM-DD')}`,
+                },
+                {
+                    _sort: '-date',
+                    _count: this.state.rowsPerPage,
+                },
+            ];
+
+            // TODO: Apply filters and pagination
+
+            const vitals = await this.vitalsService.fetchVitals(params);
+
+            this.setState({
+                loading: false,
+                data: vitals,
+            });
+        } catch (error) {
+            logger.error(error);
+        }
+    };
+
+    componentDidMount = () => {
+        this.fetchVitals();
+    };
+
+    filterByDate = dateValue => {
         const formattedDate = moment(dateValue).format('DD/MM/YYYY');
+
         const filters = this.state.filters || {};
         filters.date = formattedDate;
+
+        this.setState(
+            {
+                filters,
+            },
+            () => {
+                this.fetchVitals();
+            }
+        );
+    };
+
+    handleSave = async vitalsData => {
+        const { idMap } = vitalsData;
         this.setState({
-            filters,
+            savingVitals: true,
         });
 
-        this.updateTableData();
-    }
+        try {
+            if (idMap && Object.keys(idMap).length) {
+                await this.vitalsService.updateVitals(vitalsData);
+            } else {
+                await this.vitalsService.addVitals(vitalsData);
+            }
 
-    changeValue(e) {
-        const { id, value, name } = e.target;
-        const form = this.state.form || {};
-        if (id) {
-            form[id] = value;
-        } else {
-            form[name] = value;
+            this.vitalsEditModalRef.current.toggleModal(false);
+            this.fetchVitals();
+        } catch (error) {
+            logger.error(error);
+        }
+
+        this.setState({
+            savingVitals: false,
+        });
+    };
+
+    handleDelete = async vitalsData => {
+        const { idMap } = vitalsData;
+        this.setState({
+            savingVitals: true,
+        });
+
+        const promises = [];
+
+        Object.values(idMap).forEach(id => {
+            const promise = this.vitalsService.removeVitals(id);
+            promises.push(promise);
+        });
+
+        try {
+            await Promise.all(promises);
+
+            this.vitalsEditModalRef.current.toggleModal(false);
+            this.fetchVitals();
+        } catch (error) {
+            logger.error(error);
         }
         this.setState({
-            form,
+            savingVitals: false,
         });
-    }
+    };
 
-    handleSave() {
-        debugger;
-        const { form, data } = this.state;
-        form.date = moment(new Date()).format('DD/MM/YYYY');
-        data.push(form);
-        this.setState({ data });
-        // TODO: Save data or update data if id is available
-        this.handleClose();
-    }
+    onChangePage = (e, page) => {
+        this.setState(
+            {
+                page,
+            },
+            () => {
+                this.fetchVitals();
+            }
+        );
+    };
 
-    updateTableData() {
-        // TODO: Update data by the filters and pagination
-        const { filters, page, rowsPerPage } = this.state;
-        return this.state.data;
-    }
-
-    onChangePage(e, page) {
-        this.setState({
-            page,
-        });
-
-        this.updateTableData();
-    }
-
-    onChangeRowsPerPage(e) {
+    onChangeRowsPerPage = e => {
         const { value } = e.target;
-        this.setState({
-            rowsPerPage: value,
-        });
 
-        this.updateTableData();
-    }
+        this.setState(
+            {
+                rowsPerPage: value,
+            },
+            () => {
+                this.fetchVitals();
+            }
+        );
+    };
 
-    handleSourceChange(sourceVal) {
-        const { form } = this.state;
-        form.source = sourceVal;
-        this.setState({ form });
-    }
+    onAddNewVitals = () => {
+        this.setState(
+            {
+                vitalsDataToUpdate: null,
+            },
+            () => {
+                this.vitalsEditModalRef.current.toggleModal(true);
+            }
+        );
+    };
+
+    onEditVitals = vitalsData => {
+        this.setState(
+            {
+                vitalsDataToUpdate: vitalsData,
+            },
+            () => {
+                this.vitalsEditModalRef.current.toggleModal(true);
+            }
+        );
+    };
 
     render() {
+        const { loading } = this.state;
+
         return (
             <div>
                 <div className="title">
                     <Typography variant="h3">Vitals</Typography>
                 </div>
                 <Box className="add-new" mt={2}>
-                    <KailonaButton title="Add Vital" onClick={this.handleClose} />
+                    <KailonaButton title={t('ehr', 'Add New Vitals')} onClick={this.onAddNewVitals} />
                 </Box>
                 <Box className="filters" mt={2}>
                     <Grid container alignItems="center" justifyContent="center">
@@ -205,102 +235,37 @@ export default class VitalsDataModule extends Component {
                         </Grid>
                         <GridColumn className="right-column" item>
                             <FormControl>
-                                <KailonaDatePicker id="date" onDateChange={this.filterDate} ariaLabel="Change Date" />
+                                <KailonaDatePicker
+                                    id="date"
+                                    onChange={this.filterByDate}
+                                    ariaLabel={t('ehr', 'Filter by date')}
+                                />
                             </FormControl>
                         </GridColumn>
                     </Grid>
                 </Box>
                 <Box className="content" mt={3} style={{ display: 'flex' }}>
-                    <KailonaTable
-                        data={this.state.data}
-                        columns={this.state.columns}
-                        page={this.state.page}
-                        rowsPerPage={this.state.rowsPerPage}
-                        onChangePage={this.onChangePage}
-                        onChangeRowsPerPage={this.onChangeRowsPerPage}
-                    />
+                    {loading ? (
+                        <Loader />
+                    ) : (
+                        <KailonaTable
+                            data={this.state.data}
+                            columns={this.state.columns}
+                            page={this.state.page}
+                            rowsPerPage={this.state.rowsPerPage}
+                            onChangePage={this.onChangePage}
+                            onChangeRowsPerPage={this.onChangeRowsPerPage}
+                            contextMenu={this.contextMenuOptions}
+                            onEdit={this.onEditVitals}
+                        />
+                    )}
                 </Box>
-                <Dialog open={this.state.isAddVitalModalOpen} onClose={this.handleClose}>
-                    <DialogTitle>
-                        <Box display="flex" alignItems="center">
-                            <Box flexGrow={1}>
-                                <Typography variant="h3">{t('ehr', 'Add Vital')}</Typography>
-                            </Box>
-                            <Box>
-                                <IconButton onClick={this.handleClose}>
-                                    <CloseIcon />
-                                </IconButton>
-                            </Box>
-                        </Box>
-                    </DialogTitle>
-                    <DialogContent>
-                        <form>
-                            <Grid container alignItems="center">
-                                <GridColumn className="left-column" item>
-                                    <FormControl>
-                                        <KailonaTextField
-                                            type="number"
-                                            id="systolicBloodPressure"
-                                            className="kailona-MuiTextField"
-                                            label="Systolic Blood Pressure"
-                                            onChange={e => this.changeValue(e)}
-                                        />
-                                    </FormControl>
-                                </GridColumn>
-                                <GridColumn className="right-column" item>
-                                    <FormControl>
-                                        <KailonaTextField
-                                            type="number"
-                                            id="diastolicBloodPressure"
-                                            className="kailona-MuiTextField"
-                                            label="Diastolic Blood Pressure"
-                                            onChange={e => this.changeValue(e)}
-                                        />
-                                    </FormControl>
-                                </GridColumn>
-                            </Grid>
-                            <Grid container alignItems="center">
-                                <GridColumn className="left-column" item>
-                                    <FormControl>
-                                        <KailonaTextField
-                                            type="number"
-                                            id="pulseOx"
-                                            className="kailona-MuiTextField"
-                                            label="Pulse Ox (SpO2)"
-                                            onChange={e => this.changeValue(e)}
-                                        />
-                                    </FormControl>
-                                </GridColumn>
-                                <GridColumn className="right-column" item>
-                                    <FormControl>
-                                        <KailonaTextField
-                                            id="heartRate"
-                                            type="number"
-                                            className="kailona-MuiTextField"
-                                            label="Heart Rate"
-                                            onChange={e => this.changeValue(e)}
-                                        />
-                                    </FormControl>
-                                </GridColumn>
-                            </Grid>
-                            <Grid container>
-                                <GridColumn className="left-column" item>
-                                    <KailonaSelect
-                                        id="source"
-                                        name="source"
-                                        inputLabel="Source"
-                                        options={this.state.sourceOptions}
-                                        handleChange={this.handleSourceChange}
-                                    />
-                                </GridColumn>
-                            </Grid>
-                        </form>
-                    </DialogContent>
-                    <DialogActions>
-                        <KailonaButton title="Cancel" class="default" onClick={this.handleClose} />
-                        <KailonaButton title="Save" class="primary" onClick={this.handleSave} />
-                    </DialogActions>
-                </Dialog>
+                <VitalsEditModal
+                    ref={this.vitalsEditModalRef}
+                    vitalsData={this.state.vitalsDataToUpdate}
+                    handleSave={this.handleSave}
+                    savingVitals={this.state.savingVitals}
+                />
             </div>
         );
     }
