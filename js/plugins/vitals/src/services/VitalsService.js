@@ -22,8 +22,17 @@ export default class VitalsService {
         this.nextVitalsUrl = null;
     }
 
+    get hasNextVitals() {
+        return !!this.nextVitalsUrl;
+    }
+
     async _upsertObservation(observationToUpsert) {
-        const { data: existingObservation } = await this.fhirService.read(observationToUpsert.id);
+        if (!observationToUpsert) {
+            return null;
+        }
+
+        const { data: existingObservation } =
+            (!!observationToUpsert.id && (await this.fhirService.read(observationToUpsert.id))) || {};
 
         const newObservation = deepMerge(existingObservation || {}, observationToUpsert);
 
@@ -49,8 +58,8 @@ export default class VitalsService {
             return [];
         }
 
-        // Keep url to retrieve next records, if exists
-        const nextLink = bundle.link && !bundle.link.length && bundle.link.find(l => l && l.relation === 'next');
+        // Cache url to retrieve next records, if exists
+        const nextLink = bundle.link && bundle.link.length && bundle.link.find(l => l && l.relation === 'next');
         this.nextVitalsUrl = nextLink && nextLink.url;
 
         return mapFromFHIR(bundle.entry);
@@ -61,59 +70,41 @@ export default class VitalsService {
             return [];
         }
 
+        // Remove url to retrieve next records while retrieving
+        //this.nextVitalsUrl = null;
+
         const { data: bundle } = await axios.get(this.nextVitalsUrl);
 
         if (!bundle || !bundle.entry) {
             return [];
         }
 
+        // Cache url to retrieve next records, if exists
+        const nextLink = bundle.link && bundle.link.length && bundle.link.find(l => l && l.relation === 'next');
+        this.nextVitalsUrl = nextLink && nextLink.url;
+
         return mapFromFHIR(bundle.entry);
     }
 
-    async addVitals(vitalsData) {
-        const idMap = {};
-
-        // Blood Pressure
-        const bloodPressureObservationToAdd = mapToFHIRBloodPressure(vitalsData);
-        const { data: bloodPressureObservation } = await this.fhirService.create(bloodPressureObservationToAdd);
-        idMap.bloodPressure = bloodPressureObservation.id;
-
-        // Heart Rate
-        const heartRateObservationToAdd = mapToFHIRHeartRate(vitalsData);
-        const { data: heartRateObservation } = await this.fhirService.create(heartRateObservationToAdd);
-        idMap.heartRate = heartRateObservation.id;
-
-        // Oxygen Saturation
-        const oxygenSaturationObservationToAdd = mapToFHIROxygenSaturation(vitalsData);
-        const { data: oxygenSaturationObservation } = await this.fhirService.create(oxygenSaturationObservationToAdd);
-        idMap.oxygenSaturation = oxygenSaturationObservation.id;
-
-        // Vitals Panel
-        const vitalsPanelObservationToAdd = mapToFHIRVitalsPanel(vitalsData, Object.values(idMap));
-        const { data: vitalsPanelObservation } = await this.fhirService.create(vitalsPanelObservationToAdd);
-        idMap.panel = vitalsPanelObservation.id;
-
-        return idMap;
-    }
-
-    async updateVitals(vitalsData) {
+    async upsertVitals(vitalsData) {
         const idMap = {};
 
         // Blood Pressure
         const bloodPressureObservationToUpdate = mapToFHIRBloodPressure(vitalsData);
-        idMap.bloodPressure = this._upsertObservation(bloodPressureObservationToUpdate);
+        idMap.bloodPressure = await this._upsertObservation(bloodPressureObservationToUpdate);
 
         // Heart Rate
         const heartRateObservationToUpdate = mapToFHIRHeartRate(vitalsData);
-        idMap.heartRate = this._upsertObservation(heartRateObservationToUpdate);
+        idMap.heartRate = await this._upsertObservation(heartRateObservationToUpdate);
 
         // Oxygen Saturation
         const oxygenSaturationObservationToUpdate = mapToFHIROxygenSaturation(vitalsData);
-        idMap.oxygenSaturation = this._upsertObservation(oxygenSaturationObservationToUpdate);
+        idMap.oxygenSaturation = await this._upsertObservation(oxygenSaturationObservationToUpdate);
 
         // Vitals Panel
-        const vitalsPanelObservationToUpdate = mapToFHIRVitalsPanel(vitalsData, Object.values(idMap));
-        idMap.panel = this._upsertObservation(vitalsPanelObservationToUpdate);
+        const observationIds = Object.values(idMap).filter(v => !!v);
+        const vitalsPanelObservationToUpdate = mapToFHIRVitalsPanel(vitalsData, observationIds);
+        idMap.panel = await this._upsertObservation(vitalsPanelObservationToUpdate);
 
         return idMap;
     }

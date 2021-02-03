@@ -24,6 +24,14 @@ export default class KailonaDateTimePicker extends Component {
         this.handleChange = this.handleChange.bind(this);
     }
 
+    componentDidMount() {
+        if (this.props.defaultValue) {
+            this.setState({
+                date: this.props.defaultValue,
+            });
+        }
+    }
+
     handleChange(date) {
         this.setState({
             date,
@@ -33,6 +41,7 @@ export default class KailonaDateTimePicker extends Component {
             this.props.onChange(date);
         }
     }
+
     render() {
         return (
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
@@ -41,12 +50,14 @@ export default class KailonaDateTimePicker extends Component {
                     format={this.state.dateTimeFormat}
                     id={this.props.id}
                     value={this.state.date}
-                    placeholder="Date"
+                    placeholder={t('ehr', 'Select Date/Time')}
                     onChange={this.handleChange}
                     KeyboardButtonProps={{
                         'aria-label': this.props.ariaLabel,
                     }}
                     TextFieldComponent={props => <KailonaTextField {...props} inputRef={this.props.inputRef} />}
+                    autoOk={true}
+                    disableFuture={this.props.disableFuture}
                 />
             </MuiPickersUtilsProvider>
         );
