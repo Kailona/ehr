@@ -71,8 +71,8 @@ export default class VitalsEditModal extends Component {
     };
 
     getValue = text => {
-        if (!text) {
-            return '';
+        if (!text || !text.split) {
+            return text || '';
         }
 
         const [value] = text.split(' ');

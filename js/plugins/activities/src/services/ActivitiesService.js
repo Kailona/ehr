@@ -1,30 +1,30 @@
-import { ProfileManager, FHIRService } from '@kailona/core';
+import { BaseResourceService } from '@kailona/core';
+import mapFromFHIR from '../mappers/mapFromFHIR';
+import mapToFHIR from '../mappers/mapToFHIR';
 
-export default class ActivitiesService {
+export default class ActivitiesService extends BaseResourceService {
     constructor() {
-        const fhirPatientId = ProfileManager.activePatientId;
-        if (!fhirPatientId) {
-            throw new Error('Invalid patient id');
-        }
-
-        this.patientId = fhirPatientId;
+        super('Observation');
     }
 
-    async fetchActivities(params) {
-        const fhirService = new FHIRService('Observation');
-
-        const { data: bundle } = await fhirService.search([
+    async fetchData(params) {
+        const data = await super.fetchData([
             {
                 patient: `Patient/${this.patientId}`,
                 category: 'http://hl7.org/fhir/ValueSet/observation-category|activity',
             },
             ...params,
         ]);
+        return mapFromFHIR(data);
+    }
 
-        if (!bundle || !bundle.entry) {
-            return [];
-        }
+    async fetchNextData() {
+        const data = await super.fetchNextData();
+        return mapFromFHIR(data);
+    }
 
-        return bundle.entry.map(e => e.resource);
+    async upsertData(data) {
+        const bloodPressureObservationToUpsert = mapToFHIR(data);
+        return await super.upsertData(bloodPressureObservationToUpsert);
     }
 }

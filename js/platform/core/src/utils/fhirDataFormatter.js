@@ -1,3 +1,8 @@
+import moment from 'moment';
+
+const DATE_FORMAT = 'ddd, MMM D, YYYY';
+const TIME_FORMAT = 'HH:mm';
+
 const formatPatientName = name => {
     if (!name || !name.length) {
         return '';
@@ -53,8 +58,32 @@ const formatCodeableConcept = codeableConcept => {
     return formatCoding(coding);
 };
 
+const formatDatePeriod = datePeriod => {
+    const { start, end } = datePeriod || {};
+    if (!start || !end) {
+        return '';
+    }
+
+    const startMoment = moment(start).local();
+    const endMoment = moment(end).local();
+
+    if (startMoment.isSame(endMoment, 'day')) {
+        const day = startMoment.format(DATE_FORMAT);
+        const startTime = startMoment.format(TIME_FORMAT);
+        const endTime = endMoment.format(TIME_FORMAT);
+        return `${day}, ${startTime} - ${endTime}`;
+    } else {
+        const startDay = startMoment.format(DATE_FORMAT);
+        const endDay = endMoment.format(DATE_FORMAT);
+        const startTime = startMoment.format(TIME_FORMAT);
+        const endTime = endMoment.format(TIME_FORMAT);
+        return `${startDay}, ${startTime} - ${endDay}, ${endTime}`;
+    }
+};
+
 export default {
     formatPatientName,
     formatCoding,
     formatCodeableConcept,
+    formatDatePeriod,
 };
