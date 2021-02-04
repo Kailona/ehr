@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { ConfigManager, ModuleTypeEnum, PluginManager } from '@kailona/core';
+import { ConfigManager, ModuleTypeEnum, PluginManager, ProfileManager } from '@kailona/core';
 import { ThemeProvider, Loader } from '@kailona/ui';
 import { ModalProvider } from './context/ModalContext';
 import { NotificationProvider } from './context/NotificationContext';
@@ -21,7 +21,7 @@ export default class App extends Component {
     }
 
     componentDidMount = async () => {
-        await initFHIRPatients();
+        const firstTime = await initFHIRPatients();
 
         // Register available plugins
         ConfigManager.appConfig.plugins.forEach(plugin => {
@@ -30,6 +30,7 @@ export default class App extends Component {
 
         this.setState({
             loading: false,
+            firstTime,
         });
     };
 
@@ -72,7 +73,7 @@ export default class App extends Component {
                                         exact
                                         path="/"
                                         render={() => (
-                                            <MainLayout>
+                                            <MainLayout firstTime={this.state.firstTime}>
                                                 <Dashboard />
                                             </MainLayout>
                                         )}

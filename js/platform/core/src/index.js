@@ -4,6 +4,7 @@ import PluginManager from './managers/PluginManager';
 import ModuleTypeEnum from './enums/ModuleType.enum';
 import Logger from './services/Logger';
 import FHIRService from './services/FHIRService';
+import BaseResourceService from './services/BaseResourceService';
 import SettingsService from './services/SettingsService';
 import MailService from './services/MailService';
 import getIcon from './utils/getIcon';
@@ -17,6 +18,7 @@ export {
     PluginManager,
     ModuleTypeEnum,
     FHIRService,
+    BaseResourceService,
     SettingsService,
     MailService,
     getIcon,

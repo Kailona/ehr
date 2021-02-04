@@ -4,11 +4,11 @@ const DATE_FORMAT = 'ddd, MMM D, YYYY';
 const TIME_FORMAT = 'HH:mm';
 
 export default function getActivityTime(activity) {
-    const { effectiveDate, effectivePeriod } = activity;
+    const { effectiveDateTime, effectivePeriod } = activity;
 
     // Single Date/Time
-    if (effectiveDate) {
-        return moment(effectiveDate)
+    if (effectiveDateTime) {
+        return moment(effectiveDateTime)
             .local()
             .format(`${DATE_FORMAT}, ${TIME_FORMAT}`);
     }

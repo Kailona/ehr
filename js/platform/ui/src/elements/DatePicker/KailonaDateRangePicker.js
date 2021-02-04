@@ -1,20 +1,26 @@
 import React, { Component } from 'react';
-import { MuiPickersUtilsProvider, KeyboardDatePicker as MuiKeyboardDatePicker } from '@material-ui/pickers';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import { withStyles } from '@material-ui/core';
-import KailonaTextField from '../TextField/KailonaTextField';
+import DateRangePicker from './lib/DateRangePicker';
 
-const KeyboardDatePicker = withStyles({
+const CustomDateRangePicker = withStyles({
     root: {
-        '& input': {
+        border: '1px solid red',
+    },
+})(DateRangePicker);
+
+const styles = {
+    datepicker: {
+        '& input, & input:hover': {
             border: 'none !important',
         },
     },
-})(MuiKeyboardDatePicker);
+};
 
 const DATE_FORMAT = 'MMM d, yyyy';
 
-export default class KailonaDatePicker extends Component {
+class KailonaDateRangePicker extends Component {
     constructor(props) {
         super(props);
 
@@ -43,25 +49,26 @@ export default class KailonaDatePicker extends Component {
     }
 
     render() {
+        const { classes } = this.props;
         return (
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <KeyboardDatePicker
+                <CustomDateRangePicker
                     variant="inline"
+                    className={classes.datepicker}
                     format={this.state.dateFormat}
                     id={this.props.id}
-                    value={this.state.date || null}
-                    placeholder={this.props.ariaLabel}
+                    value={this.state.date}
+                    placeholder={t('ehr', 'Select Date')}
                     onChange={this.handleChange}
+                    maxDate={this.props.maxDate}
                     KeyboardButtonProps={{
                         'aria-label': this.props.ariaLabel,
                     }}
-                    TextFieldComponent={props => <KailonaTextField {...props} inputRef={this.props.inputRef} />}
                     autoOk={true}
-                    disableFuture={this.props.disableFuture}
-                    openTo={this.props.openTo}
-                    fullWidth={this.props.fullWidth}
                 />
             </MuiPickersUtilsProvider>
         );
     }
 }
+
+export default withStyles(styles)(KailonaDateRangePicker);

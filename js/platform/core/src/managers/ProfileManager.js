@@ -1,3 +1,4 @@
+import moment from 'moment';
 import Logger from '../services/Logger';
 import FHIRService from '../services/FHIRService';
 import fhirDataFormatter from '../utils/fhirDataFormatter';
@@ -43,19 +44,30 @@ class ProfileManager {
         return this._profiles.find(p => p.relationship === 'self');
     }
 
-    async addProfile(profileName, relationship = null) {
+    async addProfile(profile, relationship = null) {
+        const { patientFullName, patientDob } = profile;
+
         try {
-            // Create Patient for new profile
-            const patientFhirService = new FHIRService('Patient');
-            const { data: patient } = await patientFhirService.create({
+            const patientToAdd = {
                 resourceType: 'Patient',
                 active: true,
-                name: [
+            };
+
+            if (patientFullName) {
+                patientToAdd.name = [
                     {
-                        given: [profileName],
+                        given: [patientFullName],
                     },
-                ],
-            });
+                ];
+            }
+
+            if (patientDob) {
+                patientToAdd.birthDate = moment(patientDob).format('YYYY-MM-DD');
+            }
+
+            // Create Patient for new profile
+            const patientFhirService = new FHIRService('Patient');
+            const { data: patient } = await patientFhirService.create(patientToAdd);
 
             // Create RelatedPerson for new profile
             const relatedPersonToCreate = {
@@ -91,6 +103,7 @@ class ProfileManager {
             this._profiles.push({
                 patientId: patient.id,
                 patientFullName: fhirDataFormatter.formatPatientName(patient.name),
+                patientDob: patient.birthDate,
                 relationship,
             });
         } catch (error) {
@@ -106,12 +119,19 @@ class ProfileManager {
             const patientFhirService = new FHIRService('Patient');
             const { data: patientToUpdate } = await patientFhirService.read(patientIdToUpdate);
 
-            // Update patient name
-            patientToUpdate.name = [
-                {
-                    given: [profile.patientFullName],
-                },
-            ];
+            const { patientFullName, patientDob } = profile;
+
+            if (patientFullName) {
+                patientToUpdate.name = [
+                    {
+                        given: [patientFullName],
+                    },
+                ];
+            }
+
+            if (patientDob) {
+                patientToUpdate.birthDate = moment(patientDob).format('YYYY-MM-DD');
+            }
 
             // TODO: Update relationship in related person
 

@@ -54,15 +54,16 @@ export default async function initFHIRPatients() {
             ProfileManager.profiles = [patient, ...relatedPatients].map(p => ({
                 patientId: p.id,
                 patientFullName: fhirDataFormatter.formatPatientName(p.name),
+                patientDob: p.birthDate,
                 relationship:
                     p.id === patient.id ? t('ehr', 'self') : fhirDataFormatter.formatCodeableConcept(p.relationship),
             }));
 
-            return;
+            return false;
         }
 
         // Create patient in FHIR server
-        await patientFhirService.create({
+        const { data: patientResource } = await patientFhirService.create({
             resourceType: 'Patient',
             identifier: [
                 {
@@ -78,20 +79,15 @@ export default async function initFHIRPatients() {
             ],
         });
 
-        const { data: newPatientBundle } = await patientFhirService.search([
-            {
-                identifier: appUserId,
-            },
-        ]);
-
         // Set active fhir patient id and profiles
-        const { resource: newPatient } = newPatientBundle.entry[0];
-        ProfileManager.activePatientId = newPatient.id;
-        ProfileManager.profiles = [newPatient].map(p => ({
+        ProfileManager.activePatientId = patientResource.id;
+        ProfileManager.profiles = [patientResource].map(p => ({
             patientId: p.id,
             patientFullName: fhirDataFormatter.formatPatientName(p.name),
             relationship: t('ehr', 'self'),
         }));
+
+        return true;
     } catch (error) {
         logger.error('Failed to initialize FHIR Patients by user data', error);
     }

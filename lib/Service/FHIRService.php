@@ -4,19 +4,22 @@ namespace OCA\EHR\Service;
 
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\JSONResponse;
+use OCP\IUserSession;
+use OCP\IConfig;
 use OCP\Http\Client\IClientService;
 use OCP\ILogger;
 use Exception;
 
 class FHIRService {
-    public function __construct(ILogger $logger, string $appName, IClientService $clientService) {
+    public function __construct(ILogger $logger, string $appName, IUserSession $userSession, IConfig $config, IClientService $clientService) {
         $this->logger = $logger;
         $this->appName = $appName;
         $this->clientService = $clientService;
+        $this->config = $config;
 
-        $fhirBaseUrl = \OC::$server->getConfig()->getAppValue('ehr', 'fhirBaseUrl');
-        $fhirUsername = \OC::$server->getConfig()->getAppValue('ehr', 'fhirUsername');
-        $fhirPassword = \OC::$server->getConfig()->getAppValue('ehr', 'fhirPassword');
+        $fhirBaseUrl = $this->config->getAppValue('ehr', 'fhirBaseUrl');
+        $fhirUsername = $this->config->getAppValue('ehr', 'fhirUsername');
+        $fhirPassword = $this->config->getAppValue('ehr', 'fhirPassword');
 
         $this->fhirConfig = [
             'baseUrl' => $fhirBaseUrl,
@@ -27,6 +30,86 @@ class FHIRService {
         if (!$fhirBaseUrl || !$fhirUsername || !$fhirPassword) {
             $this->logger->error("FHIR Server credentials are invalid. Please configure FHIR Server in the admin settings.");
         }
+
+        $this->userId = $userSession->getUser()->getUID();
+        $this->fhirPatientId = $this->config->getUserValue($this->userId, 'ehr', 'fhirPatientId', null);
+    }
+
+    private function replaceQueryParam($queryParams, $key, $value) {
+        for ($i = 0; $i < count($queryParams); $i++) {
+            if ($queryParams[$i]['key'] == $key) {
+                $queryParams[$i]['value'] = $queryParams[$i]['value'] ?: $value;
+                return $queryParams;
+            }
+        }
+
+        array_push($queryParams, array(
+            'key' => $key,
+            'value' => $value
+        ));
+
+        return $queryParams;
+    }
+
+    private function mapSearchQueryParams(string $resourceType, string $queryParamsStr) {
+        if ($this->fhirPatientId == null) {
+            return null;
+        }
+
+        // Convert query string to array
+        $queryParams = array();
+        if ($queryParamsStr != null) {
+            $queryParamsStrSplit = explode('&', $queryParamsStr);
+            for ($i = 0; $i < count($queryParamsStrSplit); $i++) {
+                $queryParamKeyValueToMapSplit = explode('=', $queryParamsStrSplit[$i]);
+                if (count($queryParamKeyValueToMapSplit) == 2) {
+                    array_push($queryParams, array(
+                        'key' => $queryParamKeyValueToMapSplit[0],
+                        'value' => $queryParamKeyValueToMapSplit[1]
+                    ));
+                }
+            }
+        }
+
+        // Map query params
+        switch ($resourceType) {
+            case 'Patient':
+                $queryParams = $this->replaceQueryParam($queryParams, '_id', $this->fhirPatientId);
+                break;
+            default:
+                $queryParams = $this->replaceQueryParam($queryParams, 'patient', 'Patient/' . $this->fhirPatientId);
+                break;
+        }
+
+        // Skip if there is not query param
+        if (count($queryParams) < 1) {
+            return null;
+        }
+
+        // Convert array to query string
+        $mappedQueryParams = '';
+        foreach ($queryParams as $queryParam) {
+            if ($mappedQueryParams == '') {
+                $mappedQueryParams = $queryParam['key'] . '=' . $queryParam['value'];
+            } else {
+                $mappedQueryParams .= '&' . $queryParam['key'] . '=' . $queryParam['value'];
+            }
+        }
+
+        return $mappedQueryParams;
+    }
+
+    private function replaceBaseFHIRURLs($resource) {
+        // Replace Base FHIR URL in bundle links
+        if ($resource != null && $resource['link'] != null) {
+            for ($i = 0; $i < count($resource['link']); $i++) {
+                if (isset($resource['link'][$i]['url'])) {
+                    $resource['link'][$i]['url'] = str_replace($this->fhirConfig['baseUrl'], '/apps/ehr/fhir/', $resource['link'][$i]['url']);
+                }
+            }
+        }
+        
+        return $resource;
     }
 
     private function fetch(string $method, string $url, string $queryParams = null, string $body = null) {
@@ -47,8 +130,10 @@ class FHIRService {
         ];
 
         // Append body if exists
+        $bodyResource = null;
         if ($body != null) {
             $requestOptions['body'] = $body;
+            $bodyResource = json_decode($body, true) ?? '';
         }
 
 		try {
@@ -70,13 +155,26 @@ class FHIRService {
                     break;
             }
 
-            $jsonResponseToSend = new JSONResponse(json_decode($response->getBody(), true) ?? '');
+            $responseResource = json_decode($response->getBody(), true) ?? '';
+
+            $responseResource = $this->replaceBaseFHIRURLs($responseResource);
+
+            $jsonResponseToSend = new JSONResponse($responseResource);
 
             foreach ($response->getHeaders() as $key => $value) {
                 if ($key == 'Location') {
                     // Disable redirect on PUT
                     if ($method != 'PUT') {
                         $jsonResponseToSend->addHeader($key, str_replace($this->fhirConfig['baseUrl'], '/apps/ehr/fhir/', $value[0]));
+                    }
+
+                    // Store fhir patient id on create
+                    if ($method == 'POST' && $bodyResource != null && $bodyResource['resourceType'] == 'Patient' && $bodyResource['identifier'][0]['value'] == $this->userId) {
+                        $patientReadUrlSplit = explode('/', $value[0]);
+                        if (count($patientReadUrlSplit) > 3) {
+                            $fhirPatientId = $patientReadUrlSplit[count($patientReadUrlSplit) - 3];
+                            $this->config->setUserValue($this->userId, 'ehr', 'fhirPatientId', $fhirPatientId);
+                        }
                     }
                 } else {
                     $jsonResponseToSend->addHeader($key, $value[0]);
@@ -127,6 +225,15 @@ class FHIRService {
 
     public function search(string $type, string $queryParams = null) {
         $url = sprintf('%s', $type);
-        return $this->fetch('GET', $url, $queryParams);
+
+        // Replace patient id in search for security
+        $mappedQueryParams = $this->mapSearchQueryParams($type, $queryParams);
+
+        // Prevent access without query params for security
+        if ($mappedQueryParams == null) {
+            return new JSONResponse(array(), Http::STATUS_OK);
+        }
+        
+        return $this->fetch('GET', $url, $mappedQueryParams);
     }
 }
