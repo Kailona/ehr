@@ -103,7 +103,9 @@ class FHIRService {
         // Replace Base FHIR URL in bundle links
         if ($resource != null && $resource['link'] != null) {
             for ($i = 0; $i < count($resource['link']); $i++) {
-                $resource['link'][$i]['url'] = str_replace($this->fhirConfig['baseUrl'], '/apps/ehr/fhir/', $resource['link'][$i]['url']);
+                if (isset($resource['link'][$i]['url'])) {
+                    $resource['link'][$i]['url'] = str_replace($this->fhirConfig['baseUrl'], '/apps/ehr/fhir/', $resource['link'][$i]['url']);
+                }
             }
         }
         

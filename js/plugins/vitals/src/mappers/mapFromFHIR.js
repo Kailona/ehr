@@ -139,6 +139,7 @@ export default function mapFromFHIR(observationBundleEntry) {
         const vitalsPanelObservations = observations.filter(obs => {
             const { coding } = (obs && obs.code) || {};
             const { code, system } = (coding && !!coding.length && coding[0]) || {};
+            // Vital signs, weight, height, head circumference, oxygen saturation and BMI panel
             return system === 'http://loinc.org' && code === '85353-1';
         });
 

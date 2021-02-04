@@ -1,8 +1,18 @@
 import React from 'react';
-import { Box, CircularProgress, Dialog, DialogContent, DialogTitle, Grid, IconButton, Link } from '@material-ui/core';
+import {
+    Box,
+    CircularProgress,
+    Dialog,
+    DialogContent,
+    DialogTitle,
+    Typography,
+    IconButton,
+    Link,
+    Grid,
+} from '@material-ui/core';
 import { Close as CloseIcon } from '@material-ui/icons';
 import { ProfileManager } from '@kailona/core';
-import { KailonaButton, KailonaTextField } from '@kailona/ui';
+import { KailonaButton, KailonaDatePicker, KailonaTextField } from '@kailona/ui';
 
 const styles = {
     dialogActions: {
@@ -22,6 +32,7 @@ export default class ProfileEditModal extends React.Component {
         super(props);
 
         this.profileNameRef = React.createRef();
+        this.profileDobRef = React.createRef();
 
         this.state = {
             loading: false,
@@ -41,11 +52,16 @@ export default class ProfileEditModal extends React.Component {
         if (profile) {
             // Update
             profile.patientFullName = this.profileNameRef.current.value;
+            profile.patientDob = this.profileDobRef.current.value;
             await ProfileManager.updateProfile(profile);
         } else {
             // Create
-            const profileName = this.profileNameRef.current.value;
-            await ProfileManager.addProfile(profileName);
+            const patientFullName = this.profileNameRef.current.value;
+            const patientDob = this.profileDobRef.current.value;
+            await ProfileManager.addProfile({
+                patientFullName,
+                patientDob,
+            });
         }
 
         if (typeof this.props.onUpdate === 'function') {
@@ -84,16 +100,21 @@ export default class ProfileEditModal extends React.Component {
     };
 
     render() {
-        const { profile } = this.props;
+        const { profile, firstTime } = this.props;
         const { loading } = this.state;
+
+        let title = t('ehr', 'Patient Profile');
+        if (firstTime) {
+            title = t('ehr', 'Welcome');
+        } else if (!profile) {
+            title = t('ehr', 'New Patient Profile');
+        }
 
         return (
             <Dialog fullWidth={true} maxWidth="xs" open={this.props.isOpen}>
                 <DialogTitle>
                     <Box display="flex" alignItems="center">
-                        <Box flexGrow={1}>
-                            {profile ? t('ehr', 'Patient Profile') : t('ehr', 'New Patient Profile')}
-                        </Box>
+                        <Box flexGrow={1}>{title}</Box>
                         <Box>
                             <IconButton onClick={this.props.onClose}>
                                 <CloseIcon />
@@ -102,6 +123,22 @@ export default class ProfileEditModal extends React.Component {
                     </Box>
                 </DialogTitle>
                 <DialogContent>
+                    {firstTime && (
+                        <Box mb={3}>
+                            <Grid container spacing={1} justify="center">
+                                <Grid item>
+                                    <Typography variant="body1">
+                                        {t('ehr', 'Please update your health information for data accuracy.')}
+                                    </Typography>
+                                </Grid>
+                                <Grid item>
+                                    <Typography variant="body1">
+                                        {t('ehr', 'Enjoy your private health platform, Kailona!')}
+                                    </Typography>
+                                </Grid>
+                            </Grid>
+                        </Box>
+                    )}
                     <Box>
                         <KailonaTextField
                             id="profile-name"
@@ -110,6 +147,18 @@ export default class ProfileEditModal extends React.Component {
                             style={{ backgroundColor: 'transparent !important' }}
                             inputRef={this.profileNameRef}
                             defaultValue={profile ? profile.patientFullName : null}
+                            fullWidth
+                        />
+                    </Box>
+                    <Box mt={2}>
+                        <KailonaDatePicker
+                            inputRef={this.profileDobRef}
+                            id="date"
+                            ariaLabel={t('ehr', 'Birth Date')}
+                            defaultValue={profile ? profile.patientDob : null}
+                            disableFuture={true}
+                            openTo="year"
+                            fullWidth
                         />
                     </Box>
                     <Box mt={5} mr={2} mb={2}>

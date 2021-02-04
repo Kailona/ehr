@@ -15,7 +15,25 @@ import {
 } from '@material-ui/core';
 import { Close as CloseIcon } from '@material-ui/icons';
 import { KailonaButton, KailonaDateTimePicker, KailonaTextField } from '@kailona/ui';
-import GridColumn from '../lib/GridColumn';
+import { ProfileManager } from '@kailona/core';
+import calculateAge from '../lib/calculateAge';
+import calculateBMI from '../lib/calculateBMI';
+
+const GridColumn = withStyles({
+    root: {
+        '&.left-column': {
+            margin: '10px 10px 10px 0',
+            width: '180px',
+        },
+        '&.right-column': {
+            margin: '10 0px 10px 10px',
+            width: '180px',
+        },
+        '& > .MuiFormControl-root': {
+            width: '100%',
+        },
+    },
+})(Grid);
 
 const DialogContent = withStyles({
     root: {
@@ -36,7 +54,7 @@ const InputAdornment = withStyles({
     },
 })(MuiInputAdornment);
 
-export default class VitalsEditModal extends Component {
+export default class PhysicalDataEditModal extends Component {
     constructor(props) {
         super(props);
 
@@ -45,10 +63,15 @@ export default class VitalsEditModal extends Component {
         };
 
         this.dateRef = React.createRef();
-        this.systolicBloodPressureRef = React.createRef();
-        this.diastolicBloodPressureRef = React.createRef();
-        this.heartRateRef = React.createRef();
-        this.oxygenSaturationRef = React.createRef();
+        this.ageRef = React.createRef();
+        this.heightRef = React.createRef();
+        this.weightRef = React.createRef();
+        this.bmiRef = React.createRef();
+    }
+
+    componentDidMount() {
+        const { patientDob } = ProfileManager.activeProfile;
+        this.patientDob = patientDob;
     }
 
     toggleModal = isOpen => {
@@ -57,31 +80,80 @@ export default class VitalsEditModal extends Component {
         });
     };
 
+    onInputDataChanged = () => {
+        const age = this.getAge();
+        const bmi = this.getBMI(false);
+
+        this.setState({
+            age,
+            bmi,
+        });
+    };
+
     onConfirm = () => {
-        const newVitalsData = {
+        const newPhysicalData = {
             date: moment(this.dateRef.current.value),
-            systolicBloodPressure: this.systolicBloodPressureRef.current.value,
-            diastolicBloodPressure: this.diastolicBloodPressureRef.current.value,
-            heartRate: this.heartRateRef.current.value,
-            oxygenSaturation: this.oxygenSaturationRef.current.value,
+            age: this.ageRef.current.value,
+            bodyHeight: this.heightRef.current.value,
+            bodyWeight: this.weightRef.current.value,
+            bmi: this.bmiRef.current.value,
         };
 
-        const { vitalsData } = this.props;
-        this.props.handleSave(Object.assign({}, vitalsData || {}, newVitalsData));
+        const { physicalData } = this.props;
+        this.props.handleSave(Object.assign({}, physicalData || {}, newPhysicalData));
     };
 
     getValue = text => {
-        if (!text) {
-            return '';
+        if (!text || !text.split) {
+            return text || '';
         }
 
         const [value] = text.split(' ');
         return value;
     };
 
+    getBMI = (useStored = true) => {
+        const { bmi } = this.props.physicalData || {};
+        if (useStored && bmi) {
+            return bmi;
+        }
+
+        const age = this.getAge();
+        const weight = this.getBodyWeight(useStored);
+        const height = this.getBodyHeight(useStored);
+
+        const heightInM = height / 100;
+        return calculateBMI(age, weight, heightInM);
+    };
+
+    getBodyHeight = (useStored = true) => {
+        const { bodyHeight } = this.props.physicalData || {};
+        if (useStored && bodyHeight) {
+            return parseInt(this.getValue(bodyHeight));
+        }
+
+        return this.heightRef.current && this.heightRef.current.value;
+    };
+
+    getBodyWeight = (useStored = true) => {
+        const { bodyWeight } = this.props.physicalData || {};
+        if (useStored && bodyWeight) {
+            return parseInt(this.getValue(bodyWeight));
+        }
+
+        return this.weightRef.current && this.weightRef.current.value;
+    };
+
+    getAge = () => {
+        const { date } = this.props.physicalData || {};
+        const whenDate = (this.dateRef.current && this.dateRef.current.value) || date || moment();
+        return this.patientDob && calculateAge(this.patientDob, whenDate);
+    };
+
     render() {
-        const { date, systolicBloodPressure, diastolicBloodPressure, oxygenSaturation, heartRate } =
-            this.props.vitalsData || {};
+        const { date, bodyHeight, bodyWeight } = this.props.physicalData || {};
+        const age = this.state.age || this.getAge();
+        const bmi = this.state.bmi || this.getBMI();
 
         return (
             <Dialog open={this.state.isOpen} onClose={() => this.toggleModal(false)}>
@@ -89,7 +161,7 @@ export default class VitalsEditModal extends Component {
                     <Box display="flex" alignItems="center">
                         <Box flexGrow={1}>
                             <Typography variant="h3">
-                                {t('ehr', this.props.vitalsData ? 'Update Vitals' : 'Add New Vitals')}
+                                {t('ehr', this.props.physicalData ? 'Update Physical Data' : 'Add New Physical Data')}
                             </Typography>
                         </Box>
                         <Box>
@@ -108,7 +180,7 @@ export default class VitalsEditModal extends Component {
                                     id="date"
                                     ariaLabel={t('ehr', 'Select Date/Time')}
                                     defaultValue={date ? moment(date) : null}
-                                    disableFuture={true}
+                                    onChange={this.onInputDataChanged}
                                 />
                             </FormControl>
                         </Grid>
@@ -116,29 +188,28 @@ export default class VitalsEditModal extends Component {
                             <GridColumn className="left-column" item>
                                 <FormControl>
                                     <KailonaTextField
-                                        inputRef={this.systolicBloodPressureRef}
-                                        id="systolicBloodPressure"
+                                        inputRef={this.ageRef}
+                                        id="age"
                                         className="kailona-MuiTextField"
-                                        label={t('ehr', 'Systolic Blood Pressure')}
-                                        defaultValue={this.getValue(systolicBloodPressure)}
-                                        InputProps={{
-                                            endAdornment: <InputAdornment>mmHg</InputAdornment>,
-                                        }}
+                                        label={t('ehr', 'Age')}
+                                        value={age || ''}
+                                        disabled
                                     />
                                 </FormControl>
                             </GridColumn>
                             <GridColumn className="right-column" item>
                                 <FormControl>
                                     <KailonaTextField
-                                        inputRef={this.diastolicBloodPressureRef}
+                                        inputRef={this.heightRef}
                                         type="number"
-                                        id="diastolicBloodPressure"
+                                        id="height"
                                         className="kailona-MuiTextField"
-                                        label={t('ehr', 'Diastolic Blood Pressure')}
-                                        defaultValue={this.getValue(diastolicBloodPressure)}
+                                        label={t('ehr', 'Height')}
+                                        defaultValue={this.getValue(bodyHeight)}
                                         InputProps={{
-                                            endAdornment: <InputAdornment>mmHg</InputAdornment>,
+                                            endAdornment: <InputAdornment>cm</InputAdornment>,
                                         }}
+                                        onChange={this.onInputDataChanged}
                                     />
                                 </FormControl>
                             </GridColumn>
@@ -147,30 +218,32 @@ export default class VitalsEditModal extends Component {
                             <GridColumn className="left-column" item>
                                 <FormControl>
                                     <KailonaTextField
-                                        inputRef={this.heartRateRef}
+                                        inputRef={this.weightRef}
                                         type="number"
-                                        id="heartRate"
+                                        id="weight"
                                         className="kailona-MuiTextField"
-                                        label={t('ehr', 'Heart Rate')}
-                                        defaultValue={this.getValue(heartRate)}
+                                        label={t('ehr', 'Weight')}
+                                        defaultValue={this.getValue(bodyWeight)}
                                         InputProps={{
-                                            endAdornment: <InputAdornment>beats/minute</InputAdornment>,
+                                            endAdornment: <InputAdornment>kg</InputAdornment>,
                                         }}
+                                        onChange={this.onInputDataChanged}
                                     />
                                 </FormControl>
                             </GridColumn>
                             <GridColumn className="right-column" item>
                                 <FormControl>
                                     <KailonaTextField
-                                        inputRef={this.oxygenSaturationRef}
+                                        inputRef={this.bmiRef}
                                         type="number"
-                                        id="oxygenSaturation"
+                                        id="bmi"
                                         className="kailona-MuiTextField"
-                                        label={t('ehr', 'Oxygen Saturation (SpO2)')}
-                                        defaultValue={this.getValue(oxygenSaturation)}
+                                        label={t('ehr', 'Body Mass Index')}
+                                        value={this.getValue(bmi) || ''}
                                         InputProps={{
-                                            endAdornment: <InputAdornment>%</InputAdornment>,
+                                            endAdornment: <InputAdornment>kg/m2</InputAdornment>,
                                         }}
+                                        disabled
                                     />
                                 </FormControl>
                             </GridColumn>
@@ -181,15 +254,15 @@ export default class VitalsEditModal extends Component {
                     <KailonaButton
                         title={t('ehr', 'Cancel')}
                         class="default"
-                        disabled={this.props.savingVitals}
+                        disabled={this.props.savingPhysicalData}
                         onClick={() => this.toggleModal(false)}
                     />
                     <KailonaButton
                         title={t('ehr', 'Confirm')}
                         class="primary"
-                        disabled={this.props.savingVitals}
+                        disabled={this.props.savingPhysicalData}
                         onClick={this.onConfirm}
-                        loading={this.props.savingVitals}
+                        loading={this.props.savingPhysicalData}
                     />
                 </DialogActions>
             </Dialog>

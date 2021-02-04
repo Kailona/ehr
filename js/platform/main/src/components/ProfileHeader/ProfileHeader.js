@@ -28,6 +28,17 @@ class ProfileHeader extends Component {
         };
     }
 
+    componentDidMount() {
+        if (this.props.firstTime) {
+            // Show profile update modal to let user update patient information first time
+            this.props.toggleProfileEditModal(true, {
+                profile: ProfileManager.activeProfile,
+                firstTime: true,
+                onUpdate: this.refreshUsers,
+            });
+        }
+    }
+
     getUsers = () => {
         return ProfileManager.profiles.map(profile => ({
             id: profile.patientId,

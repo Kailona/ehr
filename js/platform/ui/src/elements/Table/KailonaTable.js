@@ -74,6 +74,9 @@ export default class KailonaTable extends Component {
     };
 
     render() {
+        const columnsLength = this.props.columns.length;
+        const noDataColSpan = this.props.contextMenu ? columnsLength + 1 : columnsLength;
+
         return (
             <Paper style={{ height: '100%', width: '100%', position: 'relative' }}>
                 <TableContainer style={{ position: 'absolute', top: 0, bottom: 0 }}>
@@ -119,7 +122,7 @@ export default class KailonaTable extends Component {
                             )}
                             {!this.props.loading && (!this.props.data || !this.props.data.length) && (
                                 <TableRow>
-                                    <TableCell colSpan={this.props.columns.length} align="center">
+                                    <TableCell colSpan={noDataColSpan} align="center">
                                         <Typography variant="h5">No data available</Typography>
                                     </TableCell>
                                 </TableRow>

@@ -54,11 +54,12 @@ export default async function initFHIRPatients() {
             ProfileManager.profiles = [patient, ...relatedPatients].map(p => ({
                 patientId: p.id,
                 patientFullName: fhirDataFormatter.formatPatientName(p.name),
+                patientDob: p.birthDate,
                 relationship:
                     p.id === patient.id ? t('ehr', 'self') : fhirDataFormatter.formatCodeableConcept(p.relationship),
             }));
 
-            return;
+            return false;
         }
 
         // Create patient in FHIR server
@@ -85,6 +86,8 @@ export default async function initFHIRPatients() {
             patientFullName: fhirDataFormatter.formatPatientName(p.name),
             relationship: t('ehr', 'self'),
         }));
+
+        return true;
     } catch (error) {
         logger.error('Failed to initialize FHIR Patients by user data', error);
     }
