@@ -270,34 +270,36 @@ export default class PhysicalDataModule extends Component {
         const { loading, filters } = this.state;
 
         return (
-            <div>
-                <div className="title">
-                    <Typography variant="h3">Physical Data</Typography>
+            <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+                <div>
+                    <div className="title">
+                        <Typography variant="h3">Physical Data</Typography>
+                    </div>
+                    <Box className="add-new" mt={2}>
+                        <KailonaButton title={t('ehr', 'Add Physical Data')} onClick={this.onAddNewPhysicalData} />
+                    </Box>
+                    <Box className="filters" mt={2}>
+                        <Grid container alignItems="center" justifyContent="center">
+                            <Grid item>
+                                <Typography variant="body1" style={{ marginRight: '6px' }}>
+                                    Filter by:{' '}
+                                </Typography>
+                            </Grid>
+                            <Grid className="right-column" item>
+                                <FormControl>
+                                    <KailonaDateRangePicker
+                                        id="date"
+                                        defaultValue={filters.dateRange}
+                                        onChange={this.filterByDateRange}
+                                        ariaLabel={t('ehr', 'Filter by date')}
+                                        maxDate={new Date()}
+                                    />
+                                </FormControl>
+                            </Grid>
+                        </Grid>
+                    </Box>
                 </div>
-                <Box className="add-new" mt={2}>
-                    <KailonaButton title={t('ehr', 'Add Physical Data')} onClick={this.onAddNewPhysicalData} />
-                </Box>
-                <Box className="filters" mt={2}>
-                    <Grid container alignItems="center" justifyContent="center">
-                        <Grid item>
-                            <Typography variant="body1" style={{ marginRight: '6px' }}>
-                                Filter by:{' '}
-                            </Typography>
-                        </Grid>
-                        <Grid className="right-column" item>
-                            <FormControl>
-                                <KailonaDateRangePicker
-                                    id="date"
-                                    defaultValue={filters.dateRange}
-                                    onChange={this.filterByDateRange}
-                                    ariaLabel={t('ehr', 'Filter by date')}
-                                    maxDate={new Date()}
-                                />
-                            </FormControl>
-                        </Grid>
-                    </Grid>
-                </Box>
-                <Box className="content" mt={3} style={{ display: 'flex' }}>
+                <Box className="content" mt={3} style={{ display: 'flex', flex: 1 }}>
                     <KailonaTable
                         data={this.state.data}
                         columns={this.state.columns}
@@ -308,6 +310,7 @@ export default class PhysicalDataModule extends Component {
                         contextMenu={this.contextMenuOptions}
                         onEdit={this.onEditPhysicalData}
                         loading={loading}
+                        fetchNewData={this.fetchNextPhysicalData}
                     />
                 </Box>
                 <PhysicalDataEditModal
