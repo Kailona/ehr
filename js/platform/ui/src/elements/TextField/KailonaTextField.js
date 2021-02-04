@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { TextField as MuiTextField, withStyles } from '@material-ui/core';
+import { TextField as MuiTextField, Grid, withStyles } from '@material-ui/core';
 
 const TextField = withStyles(theme => ({
     root: {
         backgroundColor: 'transparent !important',
+        flex: 1,
         '& input': {
             backgroundColor: 'transparent !important',
             border: 'none !important',

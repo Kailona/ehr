@@ -1,24 +1,25 @@
 import React, { Component } from 'react';
-import { MuiPickersUtilsProvider, KeyboardDatePicker as MuiKeyboardDatePicker } from '@material-ui/pickers';
+import { MuiPickersUtilsProvider, KeyboardDateTimePicker as MuiKeyboardDateTimePicker } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import { withStyles } from '@material-ui/core';
+import KailonaTextField from '../TextField/KailonaTextField';
 
-const KeyboardDatePicker = withStyles({
+const KeyboardDateTimePicker = withStyles({
     root: {
         '& input': {
             border: 'none !important',
         },
     },
-})(MuiKeyboardDatePicker);
+})(MuiKeyboardDateTimePicker);
 
-const DATE_FORMAT = 'MMM d, yyyy';
+const DATE_TIME_FORMAT = 'MMM d, yyyy, HH:mm';
 
-export default class KailonaDatePicker extends Component {
+export default class KailonaDateTimePicker extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            dateFormat: this.props.dateFormat || DATE_FORMAT,
+            dateTimeFormat: this.props.dateTimeFormat || DATE_TIME_FORMAT,
         };
         this.handleChange = this.handleChange.bind(this);
     }
@@ -44,16 +45,17 @@ export default class KailonaDatePicker extends Component {
     render() {
         return (
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                <KeyboardDatePicker
+                <KeyboardDateTimePicker
                     variant="inline"
-                    format={this.state.dateFormat}
+                    format={this.state.dateTimeFormat}
                     id={this.props.id}
                     value={this.state.date}
-                    placeholder={t('ehr', 'Select Date')}
+                    placeholder={t('ehr', 'Select Date/Time')}
                     onChange={this.handleChange}
                     KeyboardButtonProps={{
                         'aria-label': this.props.ariaLabel,
                     }}
+                    TextFieldComponent={props => <KailonaTextField {...props} inputRef={this.props.inputRef} />}
                     autoOk={true}
                     disableFuture={this.props.disableFuture}
                 />
