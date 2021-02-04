@@ -254,36 +254,43 @@ export default class VitalsDataModule extends Component {
 
     render() {
         const { loading, filters } = this.state;
+        const defaultVal = {
+            begin: moment()._d,
+            end: moment()._d,
+        };
+        console.log(' def', defaultVal);
 
         return (
-            <div>
-                <div className="title">
-                    <Typography variant="h3">Vitals</Typography>
-                </div>
-                <Box className="add-new" mt={2}>
-                    <KailonaButton title={t('ehr', 'Add New Vitals')} onClick={this.onAddNewVitals} />
-                </Box>
-                <Box className="filters" mt={2}>
-                    <Grid container alignItems="center" justifyContent="center">
-                        <Grid item>
-                            <Typography variant="body1" style={{ marginRight: '6px' }}>
-                                Filter by:{' '}
-                            </Typography>
+            <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+                <div>
+                    <div className="title">
+                        <Typography variant="h3">Vitals</Typography>
+                    </div>
+                    <Box className="add-new" mt={2}>
+                        <KailonaButton title={t('ehr', 'Add New Vitals')} onClick={this.onAddNewVitals} />
+                    </Box>
+                    <Box className="filters" mt={2}>
+                        <Grid container alignItems="center" justifyContent="center">
+                            <Grid item>
+                                <Typography variant="body1" style={{ marginRight: '6px' }}>
+                                    Filter by:{' '}
+                                </Typography>
+                            </Grid>
+                            <GridColumn className="right-column" item>
+                                <FormControl>
+                                    <KailonaDateRangePicker
+                                        id="date"
+                                        onChange={this.filterByDateRange}
+                                        ariaLabel={t('ehr', 'Filter by date')}
+                                        maxDate={new Date()}
+                                    />
+                                </FormControl>
+                            </GridColumn>
                         </Grid>
-                        <GridColumn className="right-column" item>
-                            <FormControl>
-                                <KailonaDateRangePicker
-                                    id="date"
-                                    defaultValue={filters.dateRange}
-                                    onChange={this.filterByDateRange}
-                                    ariaLabel={t('ehr', 'Filter by date')}
-                                    maxDate={new Date()}
-                                />
-                            </FormControl>
-                        </GridColumn>
-                    </Grid>
-                </Box>
-                <Box className="content" mt={3} style={{ display: 'flex' }}>
+                    </Box>
+                </div>
+
+                <Box className="content" mt={3} style={{ display: 'flex', flex: 1 }}>
                     <KailonaTable
                         data={this.state.data}
                         columns={this.state.columns}
@@ -294,6 +301,7 @@ export default class VitalsDataModule extends Component {
                         contextMenu={this.contextMenuOptions}
                         onEdit={this.onEditVitals}
                         loading={loading}
+                        fetchNewData={this.fetchNextVitals}
                     />
                 </Box>
                 <VitalsEditModal

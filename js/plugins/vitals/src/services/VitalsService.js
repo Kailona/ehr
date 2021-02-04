@@ -70,10 +70,12 @@ export default class VitalsService {
             return [];
         }
 
-        // Remove url to retrieve next records while retrieving
-        //this.nextVitalsUrl = null;
+        const url = this.nextVitalsUrl;
 
-        const { data: bundle } = await axios.get(this.nextVitalsUrl);
+        // Remove url to retrieve next records while retrieving
+        this.nextVitalsUrl = null;
+
+        const { data: bundle } = await axios.get(url);
 
         if (!bundle || !bundle.entry) {
             return [];

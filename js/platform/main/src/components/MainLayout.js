@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Box } from '@material-ui/core';
+import { Box, withStyles } from '@material-ui/core';
 import ProfileHeader from './ProfileHeader/ProfileHeader';
 
 export default class MainLayout extends Component {
@@ -7,9 +7,9 @@ export default class MainLayout extends Component {
         const { children } = this.props;
 
         return (
-            <div>
+            <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
                 <ProfileHeader />
-                <Box mt={2} p={2}>
+                <Box mt={2} p={2} style={{ flex: 1 }}>
                     {children}
                 </Box>
             </div>

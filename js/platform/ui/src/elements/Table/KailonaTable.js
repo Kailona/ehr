@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Waypoint } from 'react-waypoint';
 import {
     Paper,
     Table,
@@ -65,10 +66,17 @@ export default class KailonaTable extends Component {
         }
     };
 
+    handleScroll = () => {
+        const { fetchNewData } = this.props;
+        if (fetchNewData && typeof fetchNewData === 'function') {
+            fetchNewData();
+        }
+    };
+
     render() {
         return (
-            <Paper style={{ width: '100%' }}>
-                <TableContainer>
+            <Paper style={{ height: '100%', width: '100%', position: 'relative' }}>
+                <TableContainer style={{ position: 'absolute', top: 0, bottom: 0 }}>
                     <Table>
                         <TableHead>
                             <TableRow>
@@ -79,7 +87,7 @@ export default class KailonaTable extends Component {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {this.props.data.map(record => (
+                            {this.props.data.map((record, rowIndex) => (
                                 <TableRow>
                                     {this.props.columns.map((col, index) => (
                                         <TableCell>
@@ -118,6 +126,9 @@ export default class KailonaTable extends Component {
                             )}
                         </TableFooter>
                     </Table>
+                    <div>
+                        <Waypoint onEnter={this.handleScroll} />
+                    </div>
                 </TableContainer>
 
                 {this.props.pagination && (

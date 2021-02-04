@@ -27,18 +27,28 @@ class KailonaDateRangePicker extends Component {
         this.state = {
             dateFormat: this.props.dateFormat || DATE_FORMAT,
         };
+
+        this.datePickerRef = React.createRef();
         this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidMount() {
         if (this.props.defaultValue) {
             this.setState({
-                date: this.props.defaultValue,
+                date: new Date(),
             });
         }
+        const today = new Date();
+        const end = today.setDate(today.getDate() + 10);
+
+        this.handleChange({
+            begin: new Date().getDate(),
+            end,
+        });
     }
 
     handleChange(date) {
+        console.log(' DATE ', date);
         this.setState({
             date,
         });
@@ -53,12 +63,12 @@ class KailonaDateRangePicker extends Component {
         return (
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <CustomDateRangePicker
+                    ref={this.datePickerRef}
                     variant="inline"
                     className={classes.datepicker}
                     format={this.state.dateFormat}
                     id={this.props.id}
                     value={this.state.date}
-                    placeholder={t('ehr', 'Select Date')}
                     onChange={this.handleChange}
                     maxDate={this.props.maxDate}
                     KeyboardButtonProps={{
