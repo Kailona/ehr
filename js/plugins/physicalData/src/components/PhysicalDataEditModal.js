@@ -15,6 +15,9 @@ import {
 } from '@material-ui/core';
 import { Close as CloseIcon } from '@material-ui/icons';
 import { KailonaButton, KailonaDateTimePicker, KailonaTextField } from '@kailona/ui';
+import { ProfileManager } from '@kailona/core';
+import calculateAge from '../lib/calculateAge';
+import calculateBMI from '../lib/calculateBMI';
 
 const GridColumn = withStyles({
     root: {
@@ -66,35 +69,91 @@ export default class PhysicalDataEditModal extends Component {
         this.bmiRef = React.createRef();
     }
 
+    componentDidMount() {
+        const { patientDob } = ProfileManager.activeProfile;
+        this.patientDob = patientDob;
+    }
+
     toggleModal = isOpen => {
         this.setState({
             isOpen,
         });
     };
 
+    onInputDataChanged = () => {
+        const age = this.getAge();
+        const bmi = this.getBMI(false);
+
+        this.setState({
+            age,
+            bmi,
+        });
+    };
+
     onConfirm = () => {
-        const physicalData = {
+        const newPhysicalData = {
             date: moment(this.dateRef.current.value),
             age: this.ageRef.current.value,
-            height: this.heightRef.current.value,
-            weight: this.weightRef.current.value,
+            bodyHeight: this.heightRef.current.value,
+            bodyWeight: this.weightRef.current.value,
             bmi: this.bmiRef.current.value,
         };
 
-        this.props.handleSave(physicalData);
+        const { physicalData } = this.props;
+        this.props.handleSave(Object.assign({}, physicalData || {}, newPhysicalData));
     };
 
     getValue = text => {
-        if (!text || !text.length) {
-            return '';
+        if (!text || !text.split) {
+            return text || '';
         }
 
         const [value] = text.split(' ');
         return value;
     };
 
+    getBMI = (useStored = true) => {
+        const { bmi } = this.props.physicalData || {};
+        if (useStored && bmi) {
+            return bmi;
+        }
+
+        const age = this.getAge();
+        const weight = this.getBodyWeight(useStored);
+        const height = this.getBodyHeight(useStored);
+
+        const heightInM = height / 100;
+        return calculateBMI(age, weight, heightInM);
+    };
+
+    getBodyHeight = (useStored = true) => {
+        const { bodyHeight } = this.props.physicalData || {};
+        if (useStored && bodyHeight) {
+            return parseInt(this.getValue(bodyHeight));
+        }
+
+        return this.heightRef.current && this.heightRef.current.value;
+    };
+
+    getBodyWeight = (useStored = true) => {
+        const { bodyWeight } = this.props.physicalData || {};
+        if (useStored && bodyWeight) {
+            return parseInt(this.getValue(bodyWeight));
+        }
+
+        return this.weightRef.current && this.weightRef.current.value;
+    };
+
+    getAge = () => {
+        const { date } = this.props.physicalData || {};
+        const whenDate = (this.dateRef.current && this.dateRef.current.value) || date || moment();
+        return this.patientDob && calculateAge(this.patientDob, whenDate);
+    };
+
     render() {
-        const { date, age, height, weight, bmi } = this.props.physicalData || {};
+        const { date, bodyHeight, bodyWeight } = this.props.physicalData || {};
+        const age = this.state.age || this.getAge();
+        const bmi = this.state.bmi || this.getBMI();
 
         return (
             <Dialog open={this.state.isOpen} onClose={() => this.toggleModal(false)}>
@@ -121,6 +180,7 @@ export default class PhysicalDataEditModal extends Component {
                                     id="date"
                                     ariaLabel={t('ehr', 'Select Date/Time')}
                                     defaultValue={date ? moment(date) : null}
+                                    onChange={this.onInputDataChanged}
                                 />
                             </FormControl>
                         </Grid>
@@ -132,10 +192,8 @@ export default class PhysicalDataEditModal extends Component {
                                         id="age"
                                         className="kailona-MuiTextField"
                                         label={t('ehr', 'Age')}
-                                        defaultValue={age}
-                                        InputProps={{
-                                            endAdornment: <InputAdornment>years</InputAdornment>,
-                                        }}
+                                        value={age || ''}
+                                        disabled
                                     />
                                 </FormControl>
                             </GridColumn>
@@ -147,10 +205,11 @@ export default class PhysicalDataEditModal extends Component {
                                         id="height"
                                         className="kailona-MuiTextField"
                                         label={t('ehr', 'Height')}
-                                        defaultValue={this.getValue(height)}
+                                        defaultValue={this.getValue(bodyHeight)}
                                         InputProps={{
                                             endAdornment: <InputAdornment>cm</InputAdornment>,
                                         }}
+                                        onChange={this.onInputDataChanged}
                                     />
                                 </FormControl>
                             </GridColumn>
@@ -164,10 +223,11 @@ export default class PhysicalDataEditModal extends Component {
                                         id="weight"
                                         className="kailona-MuiTextField"
                                         label={t('ehr', 'Weight')}
-                                        defaultValue={this.getValue(weight)}
+                                        defaultValue={this.getValue(bodyWeight)}
                                         InputProps={{
                                             endAdornment: <InputAdornment>kg</InputAdornment>,
                                         }}
+                                        onChange={this.onInputDataChanged}
                                     />
                                 </FormControl>
                             </GridColumn>
@@ -179,10 +239,11 @@ export default class PhysicalDataEditModal extends Component {
                                         id="bmi"
                                         className="kailona-MuiTextField"
                                         label={t('ehr', 'Body Mass Index')}
-                                        defaultValue={this.getValue(bmi)}
+                                        value={this.getValue(bmi) || ''}
                                         InputProps={{
-                                            endAdornment: <InputAdornment>bmi</InputAdornment>,
+                                            endAdornment: <InputAdornment>kg/m2</InputAdornment>,
                                         }}
+                                        disabled
                                     />
                                 </FormControl>
                             </GridColumn>

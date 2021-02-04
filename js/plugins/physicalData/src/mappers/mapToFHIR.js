@@ -1,14 +1,14 @@
 import moment from 'moment';
 import { ProfileManager } from '@kailona/core';
 
-function mapToFHIRBloodPressure(vitalsData) {
+function mapToFHIRBodyWeight(physicalData) {
     const fhirPatientId = ProfileManager.activePatientId;
     if (!fhirPatientId) {
         throw new Error('Invalid patient id');
     }
 
-    const { date, systolicBloodPressure, diastolicBloodPressure } = vitalsData;
-    if (!date || !systolicBloodPressure || !diastolicBloodPressure) {
+    const { date, bodyWeight } = physicalData;
+    if (!date || !bodyWeight) {
         return null;
     }
 
@@ -30,98 +30,11 @@ function mapToFHIRBloodPressure(vitalsData) {
             coding: [
                 {
                     system: 'http://loinc.org',
-                    code: '85354-9',
-                    display: 'Blood pressure panel with all children optional',
+                    code: '29463-7',
+                    display: 'Body Weight',
                 },
             ],
-            text: 'Blood pressure systolic & diastolic',
-        },
-        subject: {
-            reference: `Patient/${fhirPatientId}`,
-        },
-        effectiveDateTime: moment(date)
-            .utc()
-            .toISOString(),
-        component: [
-            {
-                code: {
-                    coding: [
-                        {
-                            system: 'http://loinc.org',
-                            code: '8480-6',
-                            display: 'Systolic blood pressure',
-                        },
-                    ],
-                },
-                valueQuantity: {
-                    value: parseInt(systolicBloodPressure, 10),
-                    unit: 'mmHg',
-                    system: 'http://unitsofmeasure.org',
-                    code: 'mm[Hg]',
-                },
-            },
-            {
-                code: {
-                    coding: [
-                        {
-                            system: 'http://loinc.org',
-                            code: '8462-4',
-                            display: 'Diastolic blood pressure',
-                        },
-                    ],
-                },
-                valueQuantity: {
-                    value: parseInt(diastolicBloodPressure, 10),
-                    unit: 'mmHg',
-                    system: 'http://unitsofmeasure.org',
-                    code: 'mm[Hg]',
-                },
-            },
-        ],
-    };
-
-    const { idMap } = vitalsData;
-    if (idMap && idMap.bloodPressure) {
-        observation.id = idMap.bloodPressure;
-    }
-
-    return observation;
-}
-
-function mapToFHIRHeartRate(vitalsData) {
-    const fhirPatientId = ProfileManager.activePatientId;
-    if (!fhirPatientId) {
-        throw new Error('Invalid patient id');
-    }
-
-    const { date, heartRate } = vitalsData;
-    if (!date || !heartRate) {
-        return null;
-    }
-
-    const observation = {
-        resourceType: 'Observation',
-        status: 'final',
-        category: [
-            {
-                coding: [
-                    {
-                        system: 'http://hl7.org/fhir/ValueSet/observation-category',
-                        code: 'vital-signs',
-                        display: 'Vital Signs',
-                    },
-                ],
-            },
-        ],
-        code: {
-            coding: [
-                {
-                    system: 'http://loinc.org',
-                    code: '8867-4',
-                    display: 'Heart rate',
-                },
-            ],
-            text: 'Heart rate',
+            text: 'Body Weight',
         },
         subject: {
             reference: `Patient/${fhirPatientId}`,
@@ -130,29 +43,29 @@ function mapToFHIRHeartRate(vitalsData) {
             .utc()
             .toISOString(),
         valueQuantity: {
-            value: parseInt(heartRate, 10),
-            unit: 'beats/minute',
+            value: parseInt(bodyWeight, 10),
+            unit: 'kg',
             system: 'http://unitsofmeasure.org',
-            code: '/min',
+            code: 'kg',
         },
     };
 
-    const { idMap } = vitalsData;
-    if (idMap && idMap.heartRate) {
-        observation.id = idMap.heartRate;
+    const { idMap } = physicalData;
+    if (idMap && idMap.bodyWeight) {
+        observation.id = idMap.bodyWeight;
     }
 
     return observation;
 }
 
-function mapToFHIROxygenSaturation(vitalsData) {
+function mapToFHIRBodyHeight(physicalData) {
     const fhirPatientId = ProfileManager.activePatientId;
     if (!fhirPatientId) {
         throw new Error('Invalid patient id');
     }
 
-    const { date, oxygenSaturation } = vitalsData;
-    if (!date || !oxygenSaturation) {
+    const { date, bodyHeight } = physicalData;
+    if (!date || !bodyHeight) {
         return null;
     }
 
@@ -174,11 +87,11 @@ function mapToFHIROxygenSaturation(vitalsData) {
             coding: [
                 {
                     system: 'http://loinc.org',
-                    code: '2708-6',
-                    display: 'Oxygen saturation in Arterial blood',
+                    code: '8302-2',
+                    display: 'Body height',
                 },
             ],
-            text: 'Oxygen saturation (SpO2)',
+            text: 'Body height',
         },
         subject: {
             reference: `Patient/${fhirPatientId}`,
@@ -187,28 +100,91 @@ function mapToFHIROxygenSaturation(vitalsData) {
             .utc()
             .toISOString(),
         valueQuantity: {
-            value: parseInt(oxygenSaturation, 10),
-            unit: '%',
+            value: parseInt(bodyHeight, 10),
+            unit: 'cm',
             system: 'http://unitsofmeasure.org',
-            code: '%',
+            code: 'cm',
         },
     };
 
-    const { idMap } = vitalsData;
-    if (idMap && idMap.oxygenSaturation) {
-        observation.id = idMap.oxygenSaturation;
+    const { idMap } = physicalData;
+    if (idMap && idMap.bodyHeight) {
+        observation.id = idMap.bodyHeight;
     }
 
     return observation;
 }
 
-function mapToFHIRVitalsPanel(vitalsData, observationIds) {
+function mapToFHIRBMI(physicalData, observationIds) {
     const fhirPatientId = ProfileManager.activePatientId;
     if (!fhirPatientId) {
         throw new Error('Invalid patient id');
     }
 
-    const { date } = vitalsData;
+    const { date, bmi } = physicalData;
+    if (!date || !bmi) {
+        return null;
+    }
+
+    const observation = {
+        resourceType: 'Observation',
+        status: 'final',
+        category: [
+            {
+                coding: [
+                    {
+                        system: 'http://hl7.org/fhir/ValueSet/observation-category',
+                        code: 'vital-signs',
+                        display: 'Vital Signs',
+                    },
+                ],
+            },
+        ],
+        code: {
+            coding: [
+                {
+                    system: 'http://loinc.org',
+                    code: '39156-5',
+                    display: 'Body mass index (BMI) [Ratio]',
+                },
+            ],
+            text: 'Body mass index (BMI)',
+        },
+        subject: {
+            reference: `Patient/${fhirPatientId}`,
+        },
+        effectiveDateTime: moment(date)
+            .utc()
+            .toISOString(),
+        valueQuantity: {
+            value: parseFloat(bmi),
+            unit: 'kg/m2',
+            system: 'http://unitsofmeasure.org',
+            code: 'kg/m2',
+        },
+    };
+
+    if (observationIds && observationIds.length) {
+        observation.derivedFrom = observationIds.map(observationId => ({
+            reference: `Observation/${observationId}`,
+        }));
+    }
+
+    const { idMap } = physicalData;
+    if (idMap && idMap.bmi) {
+        observation.id = idMap.bmi;
+    }
+
+    return observation;
+}
+
+function mapToFHIRPhysicalDataPanel(physicalData, observationIds) {
+    const fhirPatientId = ProfileManager.activePatientId;
+    if (!fhirPatientId) {
+        throw new Error('Invalid patient id');
+    }
+
+    const { date } = physicalData;
     if (!date || !observationIds || !observationIds.length) {
         return null;
     }
@@ -231,11 +207,11 @@ function mapToFHIRVitalsPanel(vitalsData, observationIds) {
             coding: [
                 {
                     system: 'http://loinc.org',
-                    code: '85353-1',
-                    display: 'Vital signs, weight, height, head circumference, oxygen saturation and BMI panel',
+                    code: '34565-2',
+                    display: 'Vital signs, weight and height panel',
                 },
             ],
-            text: 'Vital signs panel including blood pressure, heart rate and oxygen saturation',
+            text: 'Vital signs panel including weight, height and BMI',
         },
         subject: {
             reference: `Patient/${fhirPatientId}`,
@@ -248,7 +224,7 @@ function mapToFHIRVitalsPanel(vitalsData, observationIds) {
         })),
     };
 
-    const { idMap } = vitalsData;
+    const { idMap } = physicalData;
     if (idMap && idMap.panel) {
         observation.id = idMap.panel;
     }
@@ -256,4 +232,4 @@ function mapToFHIRVitalsPanel(vitalsData, observationIds) {
     return observation;
 }
 
-export { mapToFHIRBloodPressure, mapToFHIRHeartRate, mapToFHIROxygenSaturation, mapToFHIRVitalsPanel };
+export { mapToFHIRBodyWeight, mapToFHIRBodyHeight, mapToFHIRBMI, mapToFHIRPhysicalDataPanel };

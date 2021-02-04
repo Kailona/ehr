@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import { Typography, Box, FormControl, Grid } from '@material-ui/core';
 import { KailonaButton, KailonaTable, KailonaDateRangePicker } from '@kailona/ui';
+import { Edit, Delete } from '@material-ui/icons';
 import VitalsService from '../services/VitalsService';
 import { Logger } from '@kailona/core';
 import VitalsEditModal from './VitalsEditModal';
 import GridColumn from '../lib/GridColumn';
-
-import { Edit, Delete } from '@material-ui/icons';
 
 const logger = new Logger('VitalsDataModule');
 
@@ -109,7 +108,7 @@ export default class VitalsDataModule extends Component {
                 },
             ];
 
-            const vitals = await this.vitalsService.fetchVitals(params);
+            const vitals = await this.vitalsService.fetchData(params);
 
             this.setState({
                 loading: false,
@@ -121,7 +120,7 @@ export default class VitalsDataModule extends Component {
     };
 
     fetchNextVitals = async () => {
-        if (!this.vitalsService.hasNextVitals) {
+        if (!this.vitalsService.hasNextData) {
             return;
         }
 
@@ -130,7 +129,7 @@ export default class VitalsDataModule extends Component {
         });
 
         try {
-            const nextVitals = await this.vitalsService.fetchNextVitals(this.state.data);
+            const nextVitals = await this.vitalsService.fetchNextData(this.state.data);
 
             const allVitals = [...this.state.data, ...nextVitals];
 
@@ -167,7 +166,7 @@ export default class VitalsDataModule extends Component {
         });
 
         try {
-            await this.vitalsService.upsertVitals(vitalsData);
+            await this.vitalsService.upsertData(vitalsData);
 
             this.vitalsEditModalRef.current.toggleModal(false);
             this.fetchVitals();
@@ -189,7 +188,7 @@ export default class VitalsDataModule extends Component {
         const promises = [];
 
         Object.values(idMap).forEach(id => {
-            const promise = this.vitalsService.removeVitals(id);
+            const promise = this.vitalsService.removeData(id);
             promises.push(promise);
         });
 

@@ -4,11 +4,11 @@ import ProfileHeader from './ProfileHeader/ProfileHeader';
 
 export default class MainLayout extends Component {
     render() {
-        const { children } = this.props;
+        const { children, firstTime } = this.props;
 
         return (
             <div>
-                <ProfileHeader />
+                <ProfileHeader firstTime={firstTime} />
                 <Box mt={2} p={2}>
                     {children}
                 </Box>
