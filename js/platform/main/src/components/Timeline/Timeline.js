@@ -126,6 +126,11 @@ export default class Timeline extends Component {
                 legend: {
                     display: false,
                 },
+                layout: {
+                    padding: {
+                        top: 5,
+                    },
+                },
                 tooltips: {
                     callbacks: {
                         title: function(tooltipItems, data) {
@@ -160,9 +165,9 @@ export default class Timeline extends Component {
             id: `yAxis${name.replace(/\s/g, '')}`,
             display: false,
             ticks: {
-                min: min - stepSize, // add a gap below
-                max: max + stepSize, // add a gap above
+                beginAtZero: true,
                 stepSize,
+                max,
             },
             gridLines: {
                 drawOnArea: false,
