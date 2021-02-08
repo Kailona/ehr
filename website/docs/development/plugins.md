@@ -66,7 +66,11 @@ Widget modules show plugins in profile menus displayed in the header, using the 
     data in dashboard.
 -   `priority`: Menu item priority in profile menus, higher numbers in the left of the list
 
-:::caution Define only one of "Component" or "icon" properties in the widget module! :::
+:::caution
+
+Define only one of "Component" or "icon" properties in the widget module!
+
+:::
 
 ### Timeline Module
 
@@ -83,7 +87,11 @@ following properties:
 The timeline displayed in dashboard is very important component to visualize and compare different plugin data in one
 place.
 
-:::important Plugins should group timeline data on daily basis! :::
+:::important
+
+Plugins should group timeline data on daily basis!
+
+:::
 
 ### Data Module
 

@@ -33,14 +33,22 @@ defined in FHIR standard:
 -   `history`: Retrieve the change history for a particular resource in the FHIR server
 -   `search`: Search the resource type based on some filter criteria in the FHIR server
 
-:::danger FHIR API Gateway automatically sets patient id parameter in all search queries to prevent unauthorized access
+:::danger
+
+FHIR API Gateway automatically sets patient id parameter in all search queries to prevent unauthorized access
 in a shared FHIR server! You can setup FHIR server in a tenant infrastructure and use individual tenant for each
 Nextcloud user to completely isolate health data.
 
-We would like to accept any contributions and security checks in this area. :::
+We would like to accept any contributions and security checks in this area.
 
-:::caution FHIR API Gateway automatically replaces URLs in the FHIR responses to allow client components call them
-directly. :::
+:::
+
+:::caution
+
+FHIR API Gateway automatically replaces URLs in the FHIR responses to allow client components call them
+directly.
+
+:::
 
 ## Base Resource Service
 

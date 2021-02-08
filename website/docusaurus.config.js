@@ -69,7 +69,7 @@ module.exports = {
                         },
                         {
                             label: 'Twitter',
-                            href: 'https://twitter.com/kailonahealth',
+                            href: 'https://twitter.com/kailona_health',
                         },
                     ],
                 },
@@ -85,12 +85,24 @@ module.exports = {
                             href: 'https://medken.com',
                         },
                         {
-                            label: 'Acanio',
+                            label: 'ACANIO',
                             href: 'https://acanio.com',
                         },
                         {
                             label: 'TOCA',
                             href: 'https://toca.com',
+                        },
+                        {
+                            html: `
+                                <div style="padding: 20px 0;">
+                                    <a href="https://www.netlify.com" target="_blank">
+                                      <img
+                                        src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg"
+                                        alt="Deployed by Netlify"
+                                      />
+                                    </a>                                
+                                </div>
+                            `,
                         },
                     ],
                 },
@@ -119,7 +131,7 @@ module.exports = {
                             <img src="/img/medken.svg" height="50px" />
                         </a>
                         <a href="https://acanio.com" target="_blank" style="padding: 0 30px">
-                            <img src="/img/acanio.svg" height="50px" />
+                            <img src="/img/acanio.svg" height="40px" />
                         </a>
                         <a href="https://toca.com" target="_blank" style="padding: 0 30px">
                             <img src="/img/toca.svg" height="30px" />

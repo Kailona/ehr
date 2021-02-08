@@ -34,21 +34,23 @@ cd kailona-fhir-server/
 docker-compose up -d --build
 ```
 
-3. Set `INITIALIZE_DB` environment variable to **false** in the docker compose file
+3. Wait for a few minutes for database initialization and FHIR server startup
 
-4. Restart FHIR server, if needed
+4. Set `INITIALIZE_DB` environment variable to **false** in the docker compose file
+
+5. FHIR server should be running on `http://localhost:9080`
+
+6. Restart FHIR server, if needed
 
 ```bash
 docker-compose down
 docker-compose up -d
 ```
 
-5. FHIR server should be running on `http://localhost:9080`
-
 For more detailed instructions, refer to
 [IBM FHIR Server User's Guide](https://ibm.github.io/FHIR/guides/FHIRServerUsersGuide)
 
-## Install NGINX Reverse Proxy
+## Setup NGINX Reverse Proxy
 
 1. Get a domain name and add SSL registration for your domain with [Let's Encrypt](https://letsencrypt.org) to be
    terminated at NGINX. This is critical for security!
