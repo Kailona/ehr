@@ -42,7 +42,85 @@ export default class Timeline extends Component {
             activeDataNames: [],
             selectedDateRange: DateRangeEnum.ONE_MONTH,
         };
+
+        Chart.pluginService.register({
+            beforeDatasetsDraw: chart => {
+                if (!chart || !chart.config) {
+                    return;
+                }
+
+                if (!chart.config.data || !chart.config.data.datasets || !chart.config.data.datasets.length) {
+                    return;
+                }
+
+                if (
+                    !chart.config.data.datasets[0] ||
+                    !chart.config.data.datasets[0]._meta ||
+                    chart.config.data.datasets[0]._meta.length < 3
+                ) {
+                    return;
+                }
+
+                if (!chart.config.data.datasets[0]._meta[2]) {
+                    return;
+                }
+
+                this.repositionPointsOnTheSameLabel(chart);
+            },
+        });
     }
+
+    repositionPointsOnTheSameLabel = chart => {
+        const slotWidth = this.getSlotWidth();
+        chart.config.data.datasets.forEach((dataset, datasetIndex) => {
+            const { data } = dataset;
+            const metaKey = Object.keys(dataset._meta)[0];
+
+            // Set index of data points
+            data.forEach((dt, index) => (dt.index = index));
+
+            // Group data by x value
+            const result = data.reduce(function(r, a) {
+                r[a.x] = r[a.x] || [];
+                r[a.x].push(a);
+                return r;
+            }, Object.create(null));
+
+            Object.keys(result).forEach(key => {
+                let positionOfLatest;
+                if (result[key].length <= 1) {
+                    return;
+                }
+
+                // Sort group data as descending
+                const pointSpace = slotWidth / 2 / result[key].length;
+                result[key].sort((a, b) => (a.y < b.y ? -1 : 1)).reverse();
+                result[key].forEach((dt, index) => {
+                    const dtIndex = dt.index;
+                    // Skip repositioning the latest point
+                    if (index === 0) {
+                        positionOfLatest =
+                            chart.config.data.datasets[datasetIndex]._meta[metaKey].data[dtIndex]._model.x;
+                        return;
+                    }
+
+                    chart.config.data.datasets[datasetIndex]._meta[metaKey].data[dtIndex]._model.x =
+                        positionOfLatest - index * pointSpace;
+                });
+            });
+        });
+    };
+
+    getSlotWidth = () => {
+        const { chart } = this.state;
+        if (!chart || !chart.chartArea) {
+            return 50;
+        }
+
+        const chartAreaWidth = chart.chartArea.right - chart.chartArea.left;
+        const labelsCount = chart.config.data.labels.length;
+        return chartAreaWidth / labelsCount;
+    };
 
     getDataButtonColor = timelineDataName => {
         if (!this.state.activeDataNames.includes(timelineDataName)) {
@@ -65,7 +143,6 @@ export default class Timeline extends Component {
 
     getChartData = (existingChartData, xLabels, name, color, mappedData) => {
         // Do not get this.state here since it is a lazy loading function
-
         // Keep the existing datasets
         const chartData = Object.assign(
             {},
@@ -79,7 +156,9 @@ export default class Timeline extends Component {
         chartData.labels = xLabels;
 
         // Resize data points dynamically
-        const dynamicPointRadius = Math.max(Math.round((50 * 10) / xLabels.length), 2);
+        const slotWidth = this.getSlotWidth();
+        const maxPointsOnSameLAbel = 6;
+        const dynamicPointRadius = Math.max(slotWidth / 2 / maxPointsOnSameLAbel);
 
         const dataSet = {
             label: name,
