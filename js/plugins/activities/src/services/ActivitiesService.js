@@ -24,7 +24,7 @@ export default class ActivitiesService extends BaseResourceService {
     }
 
     async upsertData(data) {
-        const bloodPressureObservationToUpsert = mapToFHIR(data);
-        return await super.upsertData(bloodPressureObservationToUpsert);
+        const observationToUpsert = mapToFHIR(data);
+        return await super.upsertData(observationToUpsert);
     }
 }
