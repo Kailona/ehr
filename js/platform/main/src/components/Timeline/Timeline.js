@@ -37,10 +37,12 @@ export default class Timeline extends Component {
         this.timelineModules = [];
 
         this.chartRef = React.createRef();
+        this.chartBoxRef = React.createRef();
 
         this.state = {
             activeDataNames: [],
             selectedDateRange: DateRangeEnum.ONE_MONTH,
+            slotWidth: 30,
         };
 
         Chart.pluginService.register({
@@ -53,15 +55,7 @@ export default class Timeline extends Component {
                     return;
                 }
 
-                if (
-                    !chart.config.data.datasets[0] ||
-                    !chart.config.data.datasets[0]._meta ||
-                    chart.config.data.datasets[0]._meta.length < 3
-                ) {
-                    return;
-                }
-
-                if (!chart.config.data.datasets[0]._meta[2]) {
+                if (!chart.config.data.datasets[0]._meta) {
                     return;
                 }
 
@@ -71,7 +65,6 @@ export default class Timeline extends Component {
     }
 
     repositionPointsOnTheSameLabel = chart => {
-        const slotWidth = this.getSlotWidth();
         chart.config.data.datasets.forEach((dataset, datasetIndex) => {
             const { data } = dataset;
             const metaKey = Object.keys(dataset._meta)[0];
@@ -93,7 +86,8 @@ export default class Timeline extends Component {
                 }
 
                 // Sort group data as descending
-                const pointSpace = slotWidth / 2 / result[key].length;
+                const slotHalfWidth = this.state.slotWidth / 2;
+                const pointSpace = slotHalfWidth / result[key].length;
                 result[key].sort((a, b) => (a.y < b.y ? -1 : 1)).reverse();
                 result[key].forEach((dt, index) => {
                     const dtIndex = dt.index;
@@ -109,17 +103,6 @@ export default class Timeline extends Component {
                 });
             });
         });
-    };
-
-    getSlotWidth = () => {
-        const { chart } = this.state;
-        if (!chart || !chart.chartArea) {
-            return 50;
-        }
-
-        const chartAreaWidth = chart.chartArea.right - chart.chartArea.left;
-        const labelsCount = chart.config.data.labels.length;
-        return chartAreaWidth / labelsCount;
     };
 
     getDataButtonColor = timelineDataName => {
@@ -156,9 +139,10 @@ export default class Timeline extends Component {
         chartData.labels = xLabels;
 
         // Resize data points dynamically
-        const slotWidth = this.getSlotWidth();
-        const maxPointsOnSameLAbel = 6;
-        const dynamicPointRadius = Math.max(slotWidth / 2 / maxPointsOnSameLAbel);
+        const slotWidth = this.state.slotWidth;
+        const slotHalfWidth = slotWidth / 2;
+        const maxPointsOnSameLabel = 4;
+        const dynamicPointRadius = Math.max(slotHalfWidth / maxPointsOnSameLabel);
 
         const dataSet = {
             label: name,
@@ -380,6 +364,7 @@ export default class Timeline extends Component {
         const isYearDifferent = dateStart.year() !== dateEnd.year();
 
         const xLabels = this.getXLabels(dateStart, dateEnd, isYearDifferent);
+        this.setSlotWidth(xLabels.length);
 
         this.timelineModules.forEach(async timelineModule => {
             const { name, color, getData } = timelineModule;
@@ -417,6 +402,13 @@ export default class Timeline extends Component {
                 };
             });
         });
+    };
+
+    setSlotWidth = labelsCount => {
+        const margin = 70;
+        const chartBoxWidth = this.chartBoxRef.current.clientWidth - margin;
+        const slotWidth = chartBoxWidth / labelsCount;
+        this.setState({ slotWidth });
     };
 
     componentDidMount() {
@@ -491,7 +483,7 @@ export default class Timeline extends Component {
             <React.Fragment>
                 <Typography variant="h5">{t('ehr', 'Chart')}</Typography>
                 <Box mt={1} border={1}>
-                    <Box m={4}>
+                    <Box ref={this.chartBoxRef} m={4}>
                         <canvas ref={this.chartRef} />
                     </Box>
                 </Box>
