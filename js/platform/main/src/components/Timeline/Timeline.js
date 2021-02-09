@@ -92,7 +92,6 @@ export default class Timeline extends Component {
                 // Sort group data as descending
                 const pointRadius = this.state.dynamicPointRadius || 0;
                 dataByKey.forEach((dt, index) => {
-                    debugger;
                     const dtIndex = dt.index;
                     // Skip repositioning the latest point
                     if (index === centerIndex) {
