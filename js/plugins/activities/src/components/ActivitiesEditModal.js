@@ -35,6 +35,22 @@ const InputAdornment = withStyles({
     },
 })(MuiInputAdornment);
 
+const GridColumn = withStyles({
+    root: {
+        '&.left-column': {
+            margin: '10px 10px 10px 0',
+            width: '180px',
+        },
+        '&.right-column': {
+            margin: '10 0px 10px 10px',
+            width: '180px',
+        },
+        '& > .MuiFormControl-root': {
+            width: '100%',
+        },
+    },
+})(Grid);
+
 export default class ActivitiesEditModal extends Component {
     constructor(props) {
         super(props);
@@ -102,8 +118,8 @@ export default class ActivitiesEditModal extends Component {
                 </DialogTitle>
                 <DialogContent>
                     <form>
-                        <Grid container>
-                            <Grid item xs={6}>
+                        <Grid container alignItems="center">
+                            <GridColumn item className="left-column">
                                 <FormControl>
                                     <KailonaDateTimePicker
                                         inputRef={this.dateStartRef}
@@ -113,8 +129,8 @@ export default class ActivitiesEditModal extends Component {
                                         disableFuture={true}
                                     />
                                 </FormControl>
-                            </Grid>
-                            <Grid item xs={6}>
+                            </GridColumn>
+                            <GridColumn item className="right-column">
                                 <FormControl>
                                     <KailonaDateTimePicker
                                         inputRef={this.dateEndRef}
@@ -124,10 +140,10 @@ export default class ActivitiesEditModal extends Component {
                                         disableFuture={true}
                                     />
                                 </FormControl>
-                            </Grid>
+                            </GridColumn>
                         </Grid>
                         <Grid container alignItems="center">
-                            <Grid className="left-column" item>
+                            <GridColumn className="left-column" item>
                                 <FormControl>
                                     <KailonaTextField
                                         inputRef={this.stepsRef}
@@ -137,8 +153,8 @@ export default class ActivitiesEditModal extends Component {
                                         defaultValue={this.getValue(steps)}
                                     />
                                 </FormControl>
-                            </Grid>
-                            <Grid className="right-column" item>
+                            </GridColumn>
+                            <GridColumn className="right-column" item>
                                 <FormControl>
                                     <KailonaTextField
                                         inputRef={this.distanceRef}
@@ -152,10 +168,10 @@ export default class ActivitiesEditModal extends Component {
                                         }}
                                     />
                                 </FormControl>
-                            </Grid>
+                            </GridColumn>
                         </Grid>
                         <Grid container alignItems="center">
-                            <Grid className="left-column" item>
+                            <GridColumn className="left-column" item>
                                 <FormControl>
                                     <KailonaTextField
                                         inputRef={this.caloriesRef}
@@ -169,7 +185,7 @@ export default class ActivitiesEditModal extends Component {
                                         }}
                                     />
                                 </FormControl>
-                            </Grid>
+                            </GridColumn>
                         </Grid>
                     </form>
                 </DialogContent>
