@@ -333,7 +333,7 @@ export default class Timeline extends Component {
             };
         }
 
-        // MAX (Lifetime)
+        // MAX (All Lifetime)
         const { patientDob } = ProfileManager.activeProfile;
         if (patientDob) {
             return {

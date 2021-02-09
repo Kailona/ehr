@@ -5,7 +5,7 @@ const DateRangeEnum = {
     NINE_MONTH: '9M',
     ONE_YEAR: '1Y',
     TWO_YEAR: '2Y',
-    MAX: 'MAX',
+    MAX: 'All',
 };
 
 export default DateRangeEnum;
