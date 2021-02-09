@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Chart from 'chart.js';
 import moment from 'moment';
-import { Grid, Box, Typography, Link as MuiLink, withStyles } from '@material-ui/core';
+import { Card, Grid, Box, Typography, Link as MuiLink, withStyles } from '@material-ui/core';
 import { ModuleTypeEnum, PluginManager, Logger, getIcon, ProfileManager } from '@kailona/core';
 import TimeRangeFilter from './TimeRangeFilter';
 import DateRangeEnum from '@kailona/core/src/enums/DateRange.enum';
@@ -80,26 +80,32 @@ export default class Timeline extends Component {
             }, Object.create(null));
 
             Object.keys(result).forEach(key => {
-                let positionOfLatest;
-                if (result[key].length <= 1) {
+                const dataByKey = result[key];
+                const centerIndex = dataByKey.length >= 3 ? Math.ceil(dataByKey.length / 3) : 0;
+                const centerData = dataByKey[centerIndex];
+                let positionOfLatest =
+                    chart.config.data.datasets[datasetIndex]._meta[metaKey].data[centerData.index]._model.x;
+                if (dataByKey.length <= 1) {
                     return;
                 }
 
                 // Sort group data as descending
-                const slotHalfWidth = this.state.slotWidth / 2;
-                const pointSpace = slotHalfWidth / result[key].length;
-                result[key].sort((a, b) => (a.y < b.y ? -1 : 1)).reverse();
-                result[key].forEach((dt, index) => {
+                const pointRadius = this.state.dynamicPointRadius || 0;
+                dataByKey.forEach((dt, index) => {
+                    debugger;
                     const dtIndex = dt.index;
                     // Skip repositioning the latest point
-                    if (index === 0) {
-                        positionOfLatest =
-                            chart.config.data.datasets[datasetIndex]._meta[metaKey].data[dtIndex]._model.x;
+                    if (index === centerIndex) {
+                        // positionOfLatest =
+                        //     chart.config.data.datasets[datasetIndex]._meta[metaKey].data[dtIndex]._model.x;
                         return;
+                    } else if (index < centerIndex) {
+                        chart.config.data.datasets[datasetIndex]._meta[metaKey].data[dtIndex]._model.x =
+                            positionOfLatest - pointRadius;
+                    } else {
+                        chart.config.data.datasets[datasetIndex]._meta[metaKey].data[dtIndex]._model.x =
+                            positionOfLatest + pointRadius;
                     }
-
-                    chart.config.data.datasets[datasetIndex]._meta[metaKey].data[dtIndex]._model.x =
-                        positionOfLatest - index * pointSpace;
                 });
             });
         });
@@ -143,6 +149,9 @@ export default class Timeline extends Component {
         const slotHalfWidth = slotWidth / 2;
         const maxPointsOnSameLabel = 4;
         const dynamicPointRadius = Math.max(slotHalfWidth / maxPointsOnSameLabel);
+        this.setState({
+            dynamicPointRadius,
+        });
 
         const dataSet = {
             label: name,
@@ -463,14 +472,18 @@ export default class Timeline extends Component {
 
     getDataButtons() {
         return this.timelineModules.map((module, index) => (
-            <Grid key={index} item>
+            <Grid key={index} item style={{ maxWidth: '100px', margin: '0 10px' }}>
                 <Link
                     id={module.name}
                     onClick={e => this.changeTimelineModule(e)}
                     className={this.state.activeDataNames.includes(module.name) ? 'active' : ''}
                 >
                     {getIcon(module.icon, 32, this.getDataButtonColor(module.name))}
-                    <Typography className="plugin-name" style={{ color: this.getDataButtonColor(module.name) }}>
+                    <Typography
+                        className="plugin-name"
+                        align="center"
+                        style={{ color: this.getDataButtonColor(module.name) }}
+                    >
                         {module.name}
                     </Typography>
                 </Link>
@@ -480,14 +493,16 @@ export default class Timeline extends Component {
 
     render() {
         return (
-            <React.Fragment>
-                <Typography variant="h5">{t('ehr', 'Chart')}</Typography>
-                <Box mt={1} border={1}>
+            <Card>
+                <Typography variant="h3" color="primary" style={{ margin: '5px 15px 0 30px' }}>
+                    {t('ehr', 'Chart')}
+                </Typography>
+                <Box mt={1}>
                     <Box ref={this.chartBoxRef} m={4}>
                         <canvas ref={this.chartRef} />
                     </Box>
                 </Box>
-                <Box border={1}>
+                <Box>
                     <Box ml={4} mr={4} mt={2} mb={2}>
                         <Grid container direction="row" spacing={2} alignItems="center">
                             <Grid item xs={8}>
@@ -501,7 +516,7 @@ export default class Timeline extends Component {
                         </Grid>
                     </Box>
                 </Box>
-            </React.Fragment>
+            </Card>
         );
     }
 }

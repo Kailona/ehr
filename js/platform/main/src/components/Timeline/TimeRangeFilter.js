@@ -16,11 +16,24 @@ const Link = withStyles(theme => ({
             textDecoration: 'none',
             color: theme.palette.primary.main,
         },
+        '&.active': {
+            color: theme.palette.primary.main,
+        },
     },
 }))(MuiLink);
 
 export default class TimeRangeFilter extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            dateRange: '1M',
+        };
+    }
     handleDateRangeChange(dateRange) {
+        this.setState({
+            dateRange,
+        });
         if (typeof this.props.handleDateRangeChange === 'function') {
             return this.props.handleDateRangeChange(dateRange);
         }
@@ -36,7 +49,11 @@ export default class TimeRangeFilter extends Component {
             <Grid container style={{ justifyContent: 'flex-end' }}>
                 {dateRanges.map((dateRange, index) => (
                     <Grid key={index} item>
-                        <Link href="#" onClick={() => this.handleDateRangeChange(dateRange)}>
+                        <Link
+                            href="#"
+                            className={this.state.dateRange === dateRange ? 'active' : ''}
+                            onClick={() => this.handleDateRangeChange(dateRange)}
+                        >
                             {dateRange}
                         </Link>
                     </Grid>

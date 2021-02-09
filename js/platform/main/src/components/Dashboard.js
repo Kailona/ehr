@@ -62,8 +62,10 @@ class Dashboard extends Component {
                     <Timeline />
                 </Grid>
                 <Grid item>
-                    <Box mt={2}>
-                        <Typography variant="h3">{t('ehr', 'Shortcuts')}</Typography>
+                    <Box mt={2} ml={4}>
+                        <Typography variant="h3" color="primary">
+                            {t('ehr', 'Shortcuts')}
+                        </Typography>
                         <Box mt={1} pl={2}>
                             <Grid container direction="row" spacing={2}>
                                 <Grid item>
