@@ -37,7 +37,12 @@ class RequestDataModal extends React.Component {
         this.toEmailRef = React.createRef();
         this.emailBodyRef = React.createRef();
 
-        this.defaultEmailBody = t('ehr', 'I hereby request my health data.');
+        this.defaultEmailBody = t(
+            'ehr',
+            'I hereby request all data from my last exam to be uploaded to my personal ' +
+                'health data archive on the Kailona platform. Please comply within the 30 day period as required by the ' +
+                'Berufsordnung der Ärztekammern, §630g Abs. 2  BGB and Art. 15  Abs. 3 DSGVO.'
+        );
     }
 
     sendRequest = async () => {
@@ -92,7 +97,7 @@ class RequestDataModal extends React.Component {
                     <Grid container direction="column">
                         <Grid item xs={6}>
                             <KailonaTextField
-                                ref={this.toEmailRef}
+                                inputRef={this.toEmailRef}
                                 id="providerEmail"
                                 type="text"
                                 label="Email"
@@ -108,7 +113,7 @@ class RequestDataModal extends React.Component {
                                     <TextareaAutosize
                                         ref={this.emailBodyRef}
                                         rowsMin={5}
-                                        placeholder={this.defaultEmailBody}
+                                        defaultValue={this.defaultEmailBody}
                                         style={{ width: '100%', resize: 'vertical' }}
                                     />
                                 </Grid>
