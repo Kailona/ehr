@@ -47,60 +47,68 @@ export default function mapToFHIR(activitiesData) {
                 .utc()
                 .toISOString(),
         },
-        component: [
-            {
-                code: {
-                    coding: [
-                        {
-                            system: 'http://loinc.org',
-                            code: '55423-8',
-                            display: 'Number of steps in unspecified time Pedometer',
-                        },
-                    ],
-                    text: 'Steps',
-                },
-                valueQuantity: {
-                    value: parseInt(steps, 10),
-                },
-            },
-            {
-                code: {
-                    coding: [
-                        {
-                            system: 'http://loinc.org',
-                            code: '55430-3',
-                            display: 'Walking distance',
-                        },
-                    ],
-                    text: 'Distance',
-                },
-                valueQuantity: {
-                    value: parseFloat(distance),
-                    unit: 'm',
-                    system: 'http://unitsofmeasure.org',
-                    code: 'm',
-                },
-            },
-            {
-                code: {
-                    coding: [
-                        {
-                            system: 'http://loinc.org',
-                            code: '55421-2',
-                            display: 'Calories burned',
-                        },
-                    ],
-                    text: 'Calories',
-                },
-                valueQuantity: {
-                    value: parseFloat(calories),
-                    unit: 'cal',
-                    system: 'http://unitsofmeasure.org',
-                    code: 'cal',
-                },
-            },
-        ],
+        component: [],
     };
+
+    if (steps) {
+        observation.component.push({
+            code: {
+                coding: [
+                    {
+                        system: 'http://loinc.org',
+                        code: '55423-8',
+                        display: 'Number of steps in unspecified time Pedometer',
+                    },
+                ],
+                text: 'Steps',
+            },
+            valueQuantity: {
+                value: parseInt(steps, 10),
+            },
+        });
+    }
+
+    if (distance) {
+        observation.component.push({
+            code: {
+                coding: [
+                    {
+                        system: 'http://loinc.org',
+                        code: '55430-3',
+                        display: 'Walking distance',
+                    },
+                ],
+                text: 'Distance',
+            },
+            valueQuantity: {
+                value: parseFloat(distance),
+                unit: 'm',
+                system: 'http://unitsofmeasure.org',
+                code: 'm',
+            },
+        });
+    }
+
+    if (calories) {
+        observation.component.push({
+            code: {
+                coding: [
+                    {
+                        system: 'http://loinc.org',
+                        code: '55421-2',
+                        display: 'Calories burned',
+                    },
+                ],
+                text: 'Calories',
+            },
+            valueQuantity: {
+                value: parseFloat(calories),
+                unit: 'cal',
+                system: 'http://unitsofmeasure.org',
+                code: 'cal',
+            },
+        });
+    }
 
     if (activitiesData.id) {
         observation.id = activitiesData.id;

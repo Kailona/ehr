@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { ConfigManager, ModuleTypeEnum, PluginManager, ProfileManager } from '@kailona/core';
+import { ConfigManager, ModuleTypeEnum, PluginManager } from '@kailona/core';
 import { ThemeProvider, Loader } from '@kailona/ui';
 import { ModalProvider } from './context/ModalContext';
 import { NotificationProvider } from './context/NotificationContext';

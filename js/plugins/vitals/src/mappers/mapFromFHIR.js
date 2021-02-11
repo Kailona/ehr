@@ -143,21 +143,31 @@ export default function mapFromFHIR(observationBundleEntry) {
             return system === 'http://loinc.org' && code === '85353-1';
         });
 
-        // Get individual vitals from vitals panel
-        vitalsPanelObservations.forEach(vitalsPanelObservation => {
-            const vitalsObservations = observations.filter(
-                obs =>
-                    !vitalsPanelObservation ||
-                    vitalsPanelObservation.hasMember.some(hm => hm.reference === `Observation/${obs.id}`)
-            );
+        if (vitalsPanelObservations && vitalsPanelObservations.length) {
+            // Get individual vitals from vitals panel
+            vitalsPanelObservations.forEach(vitalsPanelObservation => {
+                const vitalsObservations = observations.filter(
+                    obs =>
+                        !vitalsPanelObservation ||
+                        vitalsPanelObservation.hasMember.some(hm => hm.reference === `Observation/${obs.id}`)
+                );
 
-            const vitalsData = _mapObservations(vitalsObservations, vitalsPanelObservation);
+                const vitalsData = _mapObservations(vitalsObservations, vitalsPanelObservation);
+                if (!vitalsData) {
+                    return;
+                }
+
+                vitalsDataList.push(vitalsData);
+            });
+        } else {
+            // Get individual vitals directly since there is no panel
+            const vitalsData = _mapObservations(observations, null);
             if (!vitalsData) {
                 return;
             }
 
             vitalsDataList.push(vitalsData);
-        });
+        }
     });
 
     return vitalsDataList;
