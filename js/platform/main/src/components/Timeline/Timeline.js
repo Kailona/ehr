@@ -238,7 +238,7 @@ export default class Timeline extends Component {
             ticks: {
                 beginAtZero: true,
                 stepSize,
-                max,
+                max: max + stepSize, // add some space on top
             },
             gridLines: {
                 drawOnArea: false,
@@ -367,6 +367,27 @@ export default class Timeline extends Component {
         return xLabels;
     };
 
+    loadChart = (currentState, xLabels, dataSetList) => {
+        let existingChartData = currentState.chartData && Object.assign({}, currentState.chartData);
+        let existingChartOptions = currentState.chartOptions && Object.assign({}, currentState.chartOptions);
+
+        let allMappedDataInGroup = [];
+        dataSetList.forEach(({ name, color, mappedData }) => {
+            allMappedDataInGroup.push(...mappedData);
+
+            const chartData = this.getChartData(existingChartData, xLabels, name, color, mappedData);
+            const chartOptions = this.getChartOptions(existingChartOptions, name, allMappedDataInGroup);
+
+            existingChartData = chartData && Object.assign({}, chartData);
+            existingChartOptions = chartOptions && Object.assign({}, chartOptions);
+        });
+
+        return {
+            chartData: existingChartData,
+            chartOptions: existingChartOptions,
+        };
+    };
+
     fetchChartData = async () => {
         const { dateStart, dateEnd } = this.getDateRangeValues();
         const isYearDifferent = dateStart.year() !== dateEnd.year();
@@ -375,18 +396,47 @@ export default class Timeline extends Component {
         this.setSlotWidth(xLabels.length);
 
         this.timelineModules.forEach(async timelineModule => {
-            const { name, color, getData } = timelineModule;
+            const { name, color, getData, children } = timelineModule;
 
-            const data = await getData(dateStart, dateEnd);
+            // Fetch data using timeline data function(s)
+            const dataSetList = [];
+            if (typeof getData === 'function') {
+                const data = await getData(dateStart, dateEnd);
+                const mappedData = this.mapTimelineData(data, isYearDifferent);
 
-            const mappedData = this.mapTimelineData(data, isYearDifferent);
+                dataSetList.push({
+                    name,
+                    color,
+                    mappedData,
+                });
+            } else if (children) {
+                const promises = [];
+
+                children.forEach(child => {
+                    const promise = new Promise(resolve => {
+                        child.getData(dateStart, dateEnd).then(data => {
+                            const mappedData = this.mapTimelineData(data, isYearDifferent);
+
+                            resolve({
+                                name: child.name,
+                                color: child.color || color,
+                                mappedData,
+                            });
+                        });
+                    });
+
+                    promises.push(promise);
+                });
+
+                const promiseResults = await Promise.all(promises);
+                dataSetList.push(...promiseResults);
+            } else {
+                return;
+            }
 
             // Prevent race condition with react state since this is lazy loading for multiple timeline data
             this.setState(currentState => {
-                const { chartData: existingChartData, chartOptions: existingChartOptions } = currentState;
-
-                const chartData = this.getChartData(existingChartData, xLabels, name, color, mappedData);
-                const chartOptions = this.getChartOptions(existingChartOptions, name, mappedData);
+                const { chartData, chartOptions } = this.loadChart(currentState, xLabels, dataSetList);
 
                 // Destroy the previous chart
                 if (currentState.chart) {
@@ -400,7 +450,7 @@ export default class Timeline extends Component {
                 });
 
                 // Show only active ones after date range change
-                chart.data.datasets = chartData.datasets.filter(ds => currentState.activeDataNames.includes(ds.label));
+                chart.data.datasets = this.filterVisibleDatasets(chartData);
                 chart.update();
 
                 return {
@@ -427,7 +477,11 @@ export default class Timeline extends Component {
             }
 
             if (Array.isArray(timelineModule) && timelineModule.length) {
-                const validModules = timelineModule.filter(m => typeof m.getData === 'function');
+                const validModules = timelineModule.filter(
+                    m =>
+                        typeof m.getData === 'function' ||
+                        (Array.isArray(m.children) && m.children.every(c => c.name && typeof c.getData === 'function'))
+                );
                 return this.timelineModules.push(...validModules);
             }
 
@@ -444,6 +498,18 @@ export default class Timeline extends Component {
             () => {
                 this.fetchChartData();
             }
+        );
+    }
+
+    filterVisibleDatasets(chartData) {
+        const { activeDataNames } = this.state;
+
+        const activeTimelineModules = this.timelineModules.filter(m => activeDataNames.includes(m.name));
+
+        return chartData.datasets.filter(
+            ds =>
+                activeDataNames.includes(ds.label) ||
+                activeTimelineModules.some(m => m.children && m.children.some(c => c.name === ds.label))
         );
     }
 
@@ -465,13 +531,14 @@ export default class Timeline extends Component {
             activeDataNames,
         });
 
-        chart.data.datasets = chartData.datasets.filter(ds => activeDataNames.includes(ds.label));
+        chart.data.datasets = this.filterVisibleDatasets(chartData);
+
         chart.update();
     }
 
     getDataButtons() {
         return this.timelineModules.map((module, index) => (
-            <Grid key={index} item style={{ maxWidth: '100px', margin: '0 10px' }}>
+            <Grid key={index} item style={{ maxWidth: '110px', margin: '0 10px' }}>
                 <Link
                     id={module.name}
                     onClick={e => this.changeTimelineModule(e)}
@@ -492,30 +559,34 @@ export default class Timeline extends Component {
 
     render() {
         return (
-            <Card>
-                <Typography variant="h3" color="primary" style={{ margin: '5px 15px 0 30px' }}>
-                    {t('ehr', 'Chart')}
-                </Typography>
-                <Box mt={1}>
-                    <Box ref={this.chartBoxRef} m={4}>
-                        <canvas ref={this.chartRef} />
-                    </Box>
-                </Box>
+            <React.Fragment>
                 <Box>
-                    <Box ml={4} mr={4} mt={2} mb={2}>
-                        <Grid container direction="row" spacing={2} alignItems="center">
-                            <Grid item xs={8}>
-                                <Grid container alignItems="center">
-                                    {this.getDataButtons()}
+                    <Typography variant="h3" color="primary" style={{ margin: '5px 15px 0 30px' }}>
+                        {t('ehr', 'Timeline')}
+                    </Typography>
+                </Box>
+                <Card>
+                    <Box mt={1}>
+                        <Box ref={this.chartBoxRef} m={4}>
+                            <canvas ref={this.chartRef} />
+                        </Box>
+                    </Box>
+                    <Box>
+                        <Box ml={4} mr={4} mt={2} mb={2}>
+                            <Grid container direction="row" spacing={2} alignItems="center">
+                                <Grid item xs={8}>
+                                    <Grid container alignItems="center">
+                                        {this.getDataButtons()}
+                                    </Grid>
+                                </Grid>
+                                <Grid item xs={4} style={{ textAlign: 'right' }}>
+                                    <TimeRangeFilter handleDateRangeChange={this.handleDateRangeChange} />
                                 </Grid>
                             </Grid>
-                            <Grid item xs={4} style={{ textAlign: 'right' }}>
-                                <TimeRangeFilter handleDateRangeChange={this.handleDateRangeChange} />
-                            </Grid>
-                        </Grid>
+                        </Box>
                     </Box>
-                </Box>
-            </Card>
+                </Card>
+            </React.Fragment>
         );
     }
 }

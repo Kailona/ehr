@@ -21,16 +21,20 @@ export default {
     },
     TimelineModule: [
         {
-            name: 'Systolic Blood Pressure',
+            name: 'Blood Pressure',
             color: '#36a3eb',
             icon: 'FavoriteBorder',
-            getData: getTimelineBloodPressureSystolic,
-        },
-        {
-            name: 'Diastolic Blood Pressure',
-            color: '#41b3a3',
-            icon: 'FavoriteBorder',
-            getData: getTimelineBloodPressureDiastolic,
+            children: [
+                {
+                    name: 'Systolic',
+                    getData: getTimelineBloodPressureSystolic,
+                },
+
+                {
+                    name: 'Diastolic',
+                    getData: getTimelineBloodPressureDiastolic,
+                },
+            ],
         },
     ],
 };
