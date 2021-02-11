@@ -1,42 +1,34 @@
-[monorepo]: https://en.wikipedia.org/wiki/Monorepo
-
-
-# Nextcloud Electronic Health Records (EHR)
+# Kailona: Nextcloud Electronic Health Records (EHR)
 
 Private Electronic Health Records (EHR) in Nextcloud
 
+**Refer to our detailed documentation [here](https://docs.kailona.org)**
+
 ### Install the latest stable release manually
 
- - Download the last pre-build [release](https://github.com/kailona/ehr/releases)
- - Extract the `tar.gz` into the apps folder
- 
+-   Download the last pre-build [release](https://github.com/kailona/ehr/releases)
+-   Extract the `tar.gz` into the apps folder
+
 ### Install from source
 
- - Clone the repo in the apps folder
- - Run `make` in the `ehr` folder
+-   Clone the repo in the apps folder
+-   Run `make` in the `ehr` folder
 
-## Developing
+### Build the source
 
-For building the app `node` and `npm` are required
+For building, `node` and `npm` are required.
 
-### Building
-
-Building the app can be done using the `Makefile`
-
-```
-make
-```
+The app can be built using `Makefile`
 
 ### Automatic rebuilding during development
 
-During development the webpack dev server can be used to automatically build the code
-for every change.
+During development the webpack dev server can be used to automatically build the code for every change.
 
-Since the compiled source from the webpack dev server need to be injected in the regular Nextcloud
-sources a proxy setup is needed to combine things.
+Since the compiled source from the webpack dev server need to be injected in the regular Nextcloud sources a proxy setup
+is needed to combine things.
 
-If your local Nextcloud setup runs at http://localhost:8080, an nginx configuration for the proxy
-would look like the following:
+If your local Nextcloud setup runs at http://localhost:8080, an nginx configuration for the proxy would look like the
+following:
 
 ```
 server {
@@ -72,56 +64,22 @@ server {
 
 ```
 
-This will run the proxy at http://localhost:3001/
+This will run the proxy at `http://localhost:3001/`
 
-With the proxy configured you can start the webpack dev server and specify where the
-Nextcloud proxy is.
+With the proxy configured you can start the webpack dev server and specify where the Nextcloud proxy is.
 
 ```
 PROXY_URL=http://localhost:3001/ make watch
 ```
 
-Alternativately, Nextcloud and proxy server can be run in Docker for development 
-using the following steps:
+Alternativately, Nextcloud and proxy server can be run in Docker for development using the following steps:
 
-- Create `$HOME/NextcloudWorkspace`, `$HOME/NextcloudWorkspace/db` and `$HOME/NextcloudWorkspace/nextcloud` folder
-- Copy the content of `.development` folder in this repo into the `$HOME/NextcloudWorkspace` folder
-- Run `docker-compose up -d` in the `$HOME/NextcloudWorkspace` folder
-- Wait a bit for Nextcloud initialization
-- Update `$HOME/NextcloudWorkspace/nextcloud/config/config.php` to use `http://localhost:3001` url and enable debug mode
-- Clone the repo in the `$HOME/NextcloudWorkspace/nextcloud/apps` folder
-- Run `PROXY_URL=http://localhost:3001/ make watch`
-- Go to `http://localhost:3001` and enable `Electronic Health Records (EHR)` application in Nextcloud
-
-### Project Structure
-
-The JavaScript packages are maintained as [monorepo][monorepo] containing many repositories.
-
-```
-.
-├── appinfo                     # Nextcloud App metadata and configuration
-│
-├── img                         # Icons and images
-│
-├── js                          # JavaScript files
-│   ├── platform                # Platform modules
-│   │   ├── core                # Business logic
-│   │   ├── ui                  # Generic UI elements
-│   │   └── main                # Main app components
-│   │
-│   └── plugins                 # Custom plugins
-│
-├── i10n                        # Translation files
-│
-├── lib                         # PHP classes
-│
-├── templates                   # PHP templates
-│
-├── tests                       # PHP unit tests
-│
-├── ...                         # Misc. configuration files
-│
-├── lerna.json                  # MonoRepo (Lerna) settings for client-side packages
-├── package.json                # Client-side package configuration
-└── README.md                   # This file
-```
+-   Create `$HOME/NextcloudWorkspace`, `$HOME/NextcloudWorkspace/db` and `$HOME/NextcloudWorkspace/nextcloud` folder
+-   Copy the content of `.development` folder in this repo into the `$HOME/NextcloudWorkspace` folder
+-   Run `docker-compose up -d` in the `$HOME/NextcloudWorkspace` folder
+-   Wait a bit for Nextcloud initialization
+-   Update `$HOME/NextcloudWorkspace/nextcloud/config/config.php` to use `http://localhost:3001` url and enable debug
+    mode
+-   Clone the repo in the `$HOME/NextcloudWorkspace/nextcloud/apps` folder
+-   Run `PROXY_URL=http://localhost:3001/ make watch`
+-   Go to `http://localhost:3001` and enable `Electronic Health Records (EHR)` application in Nextcloud
