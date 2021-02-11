@@ -1,14 +1,15 @@
 import React from 'react';
 import {
     Box,
-    CircularProgress,
     Dialog,
-    DialogContent,
     DialogTitle,
     Typography,
     IconButton,
     Link,
+    DialogActions,
     Grid,
+    withStyles,
+    DialogContent as MuiDialogContent,
 } from '@material-ui/core';
 import { Close as CloseIcon } from '@material-ui/icons';
 import { ProfileManager } from '@kailona/core';
@@ -26,6 +27,17 @@ const styles = {
         alignItems: 'center',
     },
 };
+
+const DialogContent = withStyles({
+    root: {
+        height: '100%',
+        margin: '0 20px 20px 20px',
+        backgroundColor: '#FFFFFF',
+        border: '1px solid #EAEAEA',
+        borderRadius: '5px',
+        paddingBottom: '25px',
+    },
+})(MuiDialogContent);
 
 export default class ProfileEditModal extends React.Component {
     constructor(props) {
@@ -161,43 +173,36 @@ export default class ProfileEditModal extends React.Component {
                             fullWidth
                         />
                     </Box>
-                    <Box mt={5} mr={2} mb={2}>
-                        <div style={styles.dialogActions}>
-                            <div>
-                                {!!profile && profile.relationship !== 'self' && (
-                                    <Link href="#" onClick={this.onDelete}>
-                                        {t('ehr', 'Delete')}
-                                    </Link>
-                                )}
-                            </div>
-                            <div style={styles.dialogActionsRight}>
-                                <Box mr={2}>
-                                    <KailonaButton
-                                        variant="outlined"
-                                        class="default"
-                                        disabled={loading}
-                                        onClick={this.onCancel}
-                                        title={t('ehr', 'Cancel')}
-                                    />
-                                </Box>
-                                <Box>
-                                    <KailonaButton
-                                        variant="outlined"
-                                        class="primary"
-                                        disabled={loading}
-                                        onClick={this.onConfirm}
-                                        title={t('ehr', 'Confirm')}
-                                    />
-                                </Box>
-                                {loading && (
-                                    <Box ml={2}>
-                                        <CircularProgress color="primary" size={20} />
-                                    </Box>
-                                )}
-                            </div>
-                        </div>
-                    </Box>
                 </DialogContent>
+                <DialogActions>
+                    <Grid container>
+                        <Grid item xs={4} style={{ paddingLeft: '15px' }}>
+                            {!!profile && profile.relationship !== 'self' && (
+                                <Link href="#" onClick={this.onDelete}>
+                                    {t('ehr', 'Delete')}
+                                </Link>
+                            )}
+                        </Grid>
+                        <Grid item xs={8} align="right">
+                            <KailonaButton
+                                variant="outlined"
+                                class="default"
+                                disabled={loading}
+                                onClick={this.onCancel}
+                                title={t('ehr', 'Cancel')}
+                            />
+                            <KailonaButton
+                                variant="outlined"
+                                class="primary"
+                                disabled={loading}
+                                onClick={this.onConfirm}
+                                title={t('ehr', 'Confirm')}
+                                loading={loading}
+                                style={{ marginLeft: '8px' }}
+                            />
+                        </Grid>
+                    </Grid>
+                </DialogActions>
             </Dialog>
         );
     }
