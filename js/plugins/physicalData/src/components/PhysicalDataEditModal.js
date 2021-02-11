@@ -54,6 +54,24 @@ const InputAdornment = withStyles({
     },
 })(MuiInputAdornment);
 
+const styles = {
+    uneditable: {
+        container: {
+            display: 'flex',
+            alignItems: 'center',
+        },
+        value: {
+            margin: '0 10px',
+            borderBottom: '1px dashed #3F51B5',
+            minWidth: '15px',
+        },
+        unit: {
+            fontSize: '10px',
+            color: '#999999',
+        },
+    },
+};
+
 export default class PhysicalDataEditModal extends Component {
     constructor(props) {
         super(props);
@@ -173,7 +191,27 @@ export default class PhysicalDataEditModal extends Component {
                 </DialogTitle>
                 <DialogContent>
                     <form>
-                        <Grid container>
+                        <Grid container alignItems="center">
+                            <GridColumn className="left-column" item style={styles.uneditable.container}>
+                                <Typography variant="body2" color="primary">
+                                    {t('ehr', 'Age')}
+                                </Typography>
+                                <Typography variant="body2" style={styles.uneditable.value}>
+                                    {age}
+                                </Typography>
+                                <Typography style={styles.uneditable.unit}>kg</Typography>
+                            </GridColumn>
+                            <GridColumn className="right-column" item style={styles.uneditable.container}>
+                                <Typography variant="body2" color="primary">
+                                    {t('ehr', 'Body Mass Index')}
+                                </Typography>
+                                <Typography variant="body2" style={styles.uneditable.value}>
+                                    {this.getValue(bmi) || ''}
+                                </Typography>
+                                <Typography style={styles.uneditable.unit}>kg/m2</Typography>
+                            </GridColumn>
+                        </Grid>
+                        <Grid container style={{ marginTop: '20px' }}>
                             <FormControl>
                                 <KailonaDateTimePicker
                                     inputRef={this.dateRef}
@@ -186,18 +224,6 @@ export default class PhysicalDataEditModal extends Component {
                         </Grid>
                         <Grid container alignItems="center">
                             <GridColumn className="left-column" item>
-                                <FormControl>
-                                    <KailonaTextField
-                                        inputRef={this.ageRef}
-                                        id="age"
-                                        className="kailona-MuiTextField"
-                                        label={t('ehr', 'Age')}
-                                        value={age || ''}
-                                        disabled
-                                    />
-                                </FormControl>
-                            </GridColumn>
-                            <GridColumn className="right-column" item>
                                 <FormControl>
                                     <KailonaTextField
                                         inputRef={this.heightRef}
@@ -213,9 +239,7 @@ export default class PhysicalDataEditModal extends Component {
                                     />
                                 </FormControl>
                             </GridColumn>
-                        </Grid>
-                        <Grid container alignItems="center">
-                            <GridColumn className="left-column" item>
+                            <GridColumn className="right-column" item>
                                 <FormControl>
                                     <KailonaTextField
                                         inputRef={this.weightRef}
@@ -228,22 +252,6 @@ export default class PhysicalDataEditModal extends Component {
                                             endAdornment: <InputAdornment>kg</InputAdornment>,
                                         }}
                                         onChange={this.onInputDataChanged}
-                                    />
-                                </FormControl>
-                            </GridColumn>
-                            <GridColumn className="right-column" item>
-                                <FormControl>
-                                    <KailonaTextField
-                                        inputRef={this.bmiRef}
-                                        type="number"
-                                        id="bmi"
-                                        className="kailona-MuiTextField"
-                                        label={t('ehr', 'Body Mass Index')}
-                                        value={this.getValue(bmi) || ''}
-                                        InputProps={{
-                                            endAdornment: <InputAdornment>kg/m2</InputAdornment>,
-                                        }}
-                                        disabled
                                     />
                                 </FormControl>
                             </GridColumn>
