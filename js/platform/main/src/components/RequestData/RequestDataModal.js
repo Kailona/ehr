@@ -43,10 +43,17 @@ class RequestDataModal extends React.Component {
                 'health data archive on the Kailona platform. Please comply within the 30 day period as required by the ' +
                 'Berufsordnung der Ärztekammern, §630g Abs. 2  BGB and Art. 15  Abs. 3 DSGVO.'
         );
+
+        this.state = {
+            loading: false,
+        };
     }
 
     sendRequest = async () => {
         try {
+            this.setState({
+                loading: true,
+            });
             const to = this.toEmailRef.current.value;
             if (!to) {
                 // Warn user missing email
@@ -76,6 +83,10 @@ class RequestDataModal extends React.Component {
             this.props.showNotification({
                 severity: 'error',
                 message: t('ehr', 'Unable to send health data request. Please contact your administrator!'),
+            });
+        } finally {
+            this.setState({
+                loading: false,
             });
         }
     };
@@ -122,8 +133,19 @@ class RequestDataModal extends React.Component {
                     </Grid>
                 </DialogContent>
                 <DialogActions>
-                    <KailonaButton class="default" title="Cancel" onClick={this.props.onClose} />
-                    <KailonaButton class="primary" title="Send Request" onClick={this.sendRequest} />
+                    <KailonaButton
+                        class="default"
+                        title="Cancel"
+                        onClick={this.props.onClose}
+                        disabled={this.state.loading}
+                    />
+                    <KailonaButton
+                        class="primary"
+                        title="Send Request"
+                        onClick={this.sendRequest}
+                        loading={this.state.loading}
+                        disabled={this.state.loading}
+                    />
                 </DialogActions>
             </Dialog>
         );
