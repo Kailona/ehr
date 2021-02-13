@@ -159,7 +159,9 @@ export default class Timeline extends Component {
         const slotWidth = this.state.slotWidth;
         const slotHalfWidth = slotWidth / 2;
         const maxPointsOnSameLabel = 4;
-        const dynamicPointRadius = Math.max(slotHalfWidth / maxPointsOnSameLabel);
+        const minSize = 2;
+        const size = Math.max(slotHalfWidth / maxPointsOnSameLabel);
+        const dynamicPointRadius = size < minSize ? minSize : size;
         this.setState({
             dynamicPointRadius,
         });
