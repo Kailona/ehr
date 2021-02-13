@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Chart from 'chart.js';
 import moment from 'moment';
-import { Card, Grid, Box, Typography, Link as MuiLink, withStyles } from '@material-ui/core';
+import { Card, Grid, Box, Typography, Link as MuiLink, withStyles, CircularProgress } from '@material-ui/core';
 import { ModuleTypeEnum, PluginManager, Logger, getIcon, ProfileManager } from '@kailona/core';
 import TimeRangeFilter from './TimeRangeFilter';
 import DateRangeEnum from '@kailona/core/src/enums/DateRange.enum';
@@ -27,6 +27,14 @@ const Link = withStyles(theme => ({
         '& > .plugin-name, & > .plugin-icon': {
             color: theme.palette.gray40.main,
         },
+        '&.disabled': {
+            pointerEvents: 'none',
+            color: theme.palette.gray30.main,
+
+            '& .plugin-name': {
+                color: theme.palette.gray30.main,
+            },
+        },
     },
 }))(MuiLink);
 
@@ -43,6 +51,7 @@ export default class Timeline extends Component {
             activeDataNames: [],
             selectedDateRange: DateRangeEnum.ONE_MONTH,
             slotWidth: 30,
+            completedPlugins: [],
         };
 
         Chart.pluginService.register({
@@ -111,7 +120,10 @@ export default class Timeline extends Component {
     };
 
     getDataButtonColor = timelineDataName => {
-        if (!this.state.activeDataNames.includes(timelineDataName)) {
+        if (
+            !this.state.activeDataNames.includes(timelineDataName) ||
+            !this.state.completedPlugins.includes(timelineDataName)
+        ) {
             return '#999999';
         }
 
@@ -391,6 +403,7 @@ export default class Timeline extends Component {
     fetchChartData = async () => {
         const { dateStart, dateEnd } = this.getDateRangeValues();
         const isYearDifferent = dateStart.year() !== dateEnd.year();
+        const completedPlugins = this.state.completedPlugins;
 
         const xLabels = this.getXLabels(dateStart, dateEnd, isYearDifferent);
         this.setSlotWidth(xLabels.length);
@@ -435,6 +448,7 @@ export default class Timeline extends Component {
             }
 
             // Prevent race condition with react state since this is lazy loading for multiple timeline data
+            completedPlugins.push(name);
             this.setState(currentState => {
                 const { chartData, chartOptions } = this.loadChart(currentState, xLabels, dataSetList);
 
@@ -457,6 +471,7 @@ export default class Timeline extends Component {
                     chartData,
                     chartOptions,
                     chart,
+                    completedPlugins,
                 };
             });
         });
@@ -536,25 +551,46 @@ export default class Timeline extends Component {
         chart.update();
     }
 
+    getButtonStyle(name) {
+        if (this.state.completedPlugins.includes(name) < 0) {
+            return 'disabled';
+        }
+
+        if (this.state.activeDataNames.includes(name)) {
+            return 'active';
+        }
+    }
+
     getDataButtons() {
-        return this.timelineModules.map((module, index) => (
-            <Grid key={index} item style={{ maxWidth: '110px', margin: '0 10px' }}>
-                <Link
-                    id={module.name}
-                    onClick={e => this.changeTimelineModule(e)}
-                    className={this.state.activeDataNames.includes(module.name) ? 'active' : ''}
-                >
-                    {getIcon(module.icon, 32, this.getDataButtonColor(module.name))}
-                    <Typography
-                        className="plugin-name"
-                        align="center"
-                        style={{ color: this.getDataButtonColor(module.name) }}
+        return this.timelineModules.map((module, index) => {
+            const completed = this.state.completedPlugins.includes(module.name);
+
+            return (
+                <Grid key={index} item style={{ maxWidth: '110px', margin: '0 10px' }}>
+                    <Link
+                        id={module.name}
+                        onClick={e => this.changeTimelineModule(e)}
+                        className={this.getButtonStyle(module.name)}
                     >
-                        {module.name}
-                    </Typography>
-                </Link>
-            </Grid>
-        ));
+                        <div style={{ width: '32px', height: '32px' }}>
+                            {completed ? (
+                                getIcon(module.icon, 32, this.getDataButtonColor(module.name))
+                            ) : (
+                                <CircularProgress color="primary" size={15} />
+                            )}
+                        </div>
+
+                        <Typography
+                            className="plugin-name"
+                            align="center"
+                            style={{ color: this.getDataButtonColor(module.name) }}
+                        >
+                            {module.name}
+                        </Typography>
+                    </Link>
+                </Grid>
+            );
+        });
     }
 
     render() {

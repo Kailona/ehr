@@ -40,7 +40,7 @@ export default class TimeRangeFilter extends Component {
     }
 
     render() {
-        const { patientDob } = ProfileManager.activeProfile;
+        const patientDob = ProfileManager && ProfileManager.activeProfile && ProfileManager.activeProfile.patientDob;
 
         // Hide MAX if birth date was not entered
         const dateRanges = Object.values(DateRangeEnum).filter(r => r !== DateRangeEnum.MAX || !!patientDob);
