@@ -24,7 +24,7 @@ class ProfileHeader extends Component {
         const users = this.getUsers();
         this.state = {
             users,
-            selectedTab: ProfileManager.activePatientId,
+            selectedTab: ProfileManager.activePatientId || 0,
         };
     }
 
