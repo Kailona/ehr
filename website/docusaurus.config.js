@@ -8,6 +8,7 @@ module.exports = {
     favicon: 'img/favicon.ico',
     organizationName: 'Kailona',
     projectName: 'KailonaEHR',
+    scripts: ['/js/matomo-tracking.js'],
     themeConfig: {
         colorMode: {
             disableSwitch: false,
