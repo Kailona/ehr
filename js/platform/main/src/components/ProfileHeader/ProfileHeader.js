@@ -77,7 +77,6 @@ class ProfileHeader extends Component {
 
     render() {
         const { selectedTab } = this.state;
-        console.log(' HEADER >>> ', this);
         return (
             <StyledTabs
                 value={selectedTab}

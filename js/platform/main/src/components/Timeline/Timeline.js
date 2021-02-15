@@ -88,7 +88,6 @@ class Timeline extends Component {
         // Destroy and reinitialize the chart with new profile info
         this.setState({
             selectedDateRange: DateRangeEnum.ONE_MONTH,
-            completedPlugins: [],
             userId: nextProps.userId,
             chart,
             chartData: [],
@@ -429,7 +428,8 @@ class Timeline extends Component {
     fetchChartData = async () => {
         const { dateStart, dateEnd } = this.getDateRangeValues();
         const isYearDifferent = dateStart.year() !== dateEnd.year();
-        const { completedPlugins } = this.state;
+        const completedPlugins = [];
+        this.setState({ completedPlugins });
 
         const xLabels = this.getXLabels(dateStart, dateEnd, isYearDifferent);
         this.setSlotWidth(xLabels.length);
@@ -627,6 +627,13 @@ class Timeline extends Component {
                         <Box ref={this.chartBoxRef} m={4}>
                             <canvas ref={this.chartRef} />
                         </Box>
+                        {!this.state.completedPlugins.length && (
+                            <div style={{ position: 'absolute', top: '30px', left: 'calc(50% - 10px)' }}>
+                                <Typography variant="h3" color="primary">
+                                    Loading Chart ... <CircularProgress size={14} color="primary" />
+                                </Typography>
+                            </div>
+                        )}
                     </Box>
                     <Box>
                         <Box ml={4} mr={4} mt={2} mb={2}>
