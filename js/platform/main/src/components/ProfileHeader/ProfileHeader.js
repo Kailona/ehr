@@ -7,6 +7,7 @@ import HeaderTab from './HeaderTab';
 import { Box, IconButton } from '@material-ui/core';
 import { Add as AddIcon } from '@material-ui/icons';
 import { withModal } from '../../context/ModalContext';
+import { withMain } from '../../context/MainContext';
 
 const StyledTabs = styled(withTheme(Tabs))(props => ({
     backgroundColor: props.theme.palette.whiteSmoke.main,
@@ -26,6 +27,8 @@ class ProfileHeader extends Component {
             users,
             selectedTab: ProfileManager.activePatientId || 0,
         };
+
+        this.props.setUserId(ProfileManager.activePatientId);
     }
 
     componentDidMount() {
@@ -36,6 +39,8 @@ class ProfileHeader extends Component {
                 firstTime: true,
                 onUpdate: this.refreshUsers,
             });
+
+            this.props.setUserId(ProfileManager.activeProfile);
         }
     }
 
@@ -49,6 +54,7 @@ class ProfileHeader extends Component {
 
     handleClick = newValue => {
         ProfileManager.activePatientId = newValue;
+        this.props.setUserId(newValue);
 
         this.setState({
             selectedTab: newValue,
@@ -98,4 +104,4 @@ class ProfileHeader extends Component {
     }
 }
 
-export default withRouter(withModal(ProfileHeader));
+export default withRouter(withMain(withModal(ProfileHeader)));
