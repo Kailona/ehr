@@ -199,7 +199,6 @@ export default class PhysicalDataEditModal extends Component {
                                 <Typography variant="body2" style={styles.uneditable.value}>
                                     {age}
                                 </Typography>
-                                <Typography style={styles.uneditable.unit}>kg</Typography>
                             </GridColumn>
                             <GridColumn className="right-column" item style={styles.uneditable.container}>
                                 <Typography variant="body2" color="primary">
