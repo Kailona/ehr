@@ -4,6 +4,7 @@ import { ConfigManager, ModuleTypeEnum, PluginManager } from '@kailona/core';
 import { ThemeProvider, Loader } from '@kailona/ui';
 import { ModalProvider } from './context/ModalContext';
 import { NotificationProvider } from './context/NotificationContext';
+import { MainContextProvider } from './context/MainContext';
 import Dashboard from './components/Dashboard';
 import MainLayout from './components/MainLayout';
 import initFHIRPatients from './lib/initFHIRPatients';
@@ -62,28 +63,30 @@ export default class App extends Component {
 
         return (
             <ThemeProvider>
-                <NotificationProvider>
-                    <ModalProvider>
-                        {this.state.loading ? (
-                            <Loader />
-                        ) : (
-                            <Router basename={this.basename}>
-                                <Switch>
-                                    <Route
-                                        exact
-                                        path="/"
-                                        render={() => (
-                                            <MainLayout firstTime={this.state.firstTime}>
-                                                <Dashboard />
-                                            </MainLayout>
-                                        )}
-                                    />
-                                    {pluginRoutes}
-                                </Switch>
-                            </Router>
-                        )}
-                    </ModalProvider>
-                </NotificationProvider>
+                <MainContextProvider>
+                    <NotificationProvider>
+                        <ModalProvider>
+                            {this.state.loading ? (
+                                <Loader />
+                            ) : (
+                                <Router basename={this.basename}>
+                                    <Switch>
+                                        <Route
+                                            exact
+                                            path="/"
+                                            render={() => (
+                                                <MainLayout firstTime={this.state.firstTime}>
+                                                    <Dashboard />
+                                                </MainLayout>
+                                            )}
+                                        />
+                                        {pluginRoutes}
+                                    </Switch>
+                                </Router>
+                            )}
+                        </ModalProvider>
+                    </NotificationProvider>
+                </MainContextProvider>
             </ThemeProvider>
         );
     }
