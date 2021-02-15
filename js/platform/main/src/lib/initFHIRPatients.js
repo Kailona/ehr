@@ -1,6 +1,4 @@
-import { Logger, ConfigManager, FHIRService, ProfileManager, fhirDataFormatter } from '@kailona/core';
-
-const logger = new Logger('main.initFHIRPatients');
+import { ConfigManager, FHIRService, ProfileManager, fhirDataFormatter } from '@kailona/core';
 
 const getRelatedPatients = async (patientFhirService, relatedPersons) => {
     if (!relatedPersons || !relatedPersons.length) {
@@ -24,71 +22,67 @@ const getRelatedPatients = async (patientFhirService, relatedPersons) => {
 };
 
 export default async function initFHIRPatients() {
-    try {
-        const { id: appUserId, name: appUserName } = ConfigManager.appConfig.currentUser;
-        const patientFhirService = new FHIRService('Patient');
+    const { id: appUserId, name: appUserName } = ConfigManager.appConfig.currentUser;
+    const patientFhirService = new FHIRService('Patient');
 
-        // Set app user id
-        ProfileManager.userId = appUserId;
+    // Set app user id
+    ProfileManager.userId = appUserId;
 
-        const { data: patientBundle } = await patientFhirService.search([
-            {
-                identifier: appUserId,
-                _include: 'Patient:link',
-            },
-        ]);
+    const { data: patientBundle } = await patientFhirService.search([
+        {
+            identifier: appUserId,
+            _include: 'Patient:link',
+        },
+    ]);
 
-        // Skip if patient exists in FHIR server
-        if (patientBundle && patientBundle.entry && patientBundle.entry.length) {
-            // Set active fhir patient id
-            const { resource: patient } = patientBundle.entry.find(e => e.resource.resourceType === 'Patient');
-            ProfileManager.activePatientId = patient.id;
+    // Skip if patient exists in FHIR server
+    if (patientBundle && patientBundle.entry && patientBundle.entry.length) {
+        // Set active fhir patient id
+        const { resource: patient } = patientBundle.entry.find(e => e.resource.resourceType === 'Patient');
+        ProfileManager.activePatientId = patient.id;
 
-            // Get fhir patient profiles
-            const relatedPersons = patientBundle.entry
-                .filter(e => e.resource.resourceType === 'RelatedPerson')
-                .map(p => p.resource);
+        // Get fhir patient profiles
+        const relatedPersons = patientBundle.entry
+            .filter(e => e.resource.resourceType === 'RelatedPerson')
+            .map(p => p.resource);
 
-            const relatedPatients = await getRelatedPatients(patientFhirService, relatedPersons);
+        const relatedPatients = await getRelatedPatients(patientFhirService, relatedPersons);
 
-            ProfileManager.profiles = [patient, ...relatedPatients].map(p => ({
-                patientId: p.id,
-                patientFullName: fhirDataFormatter.formatPatientName(p.name),
-                patientDob: p.birthDate,
-                relationship:
-                    p.id === patient.id ? t('ehr', 'self') : fhirDataFormatter.formatCodeableConcept(p.relationship),
-            }));
-
-            return false;
-        }
-
-        // Create patient in FHIR server
-        const { data: patientResource } = await patientFhirService.create({
-            resourceType: 'Patient',
-            identifier: [
-                {
-                    use: 'usual',
-                    value: appUserId,
-                },
-            ],
-            active: true,
-            name: [
-                {
-                    given: [appUserName],
-                },
-            ],
-        });
-
-        // Set active fhir patient id and profiles
-        ProfileManager.activePatientId = patientResource.id;
-        ProfileManager.profiles = [patientResource].map(p => ({
+        ProfileManager.profiles = [patient, ...relatedPatients].map(p => ({
             patientId: p.id,
             patientFullName: fhirDataFormatter.formatPatientName(p.name),
-            relationship: t('ehr', 'self'),
+            patientDob: p.birthDate,
+            relationship:
+                p.id === patient.id ? t('ehr', 'self') : fhirDataFormatter.formatCodeableConcept(p.relationship),
         }));
 
-        return true;
-    } catch (error) {
-        logger.error('Failed to initialize FHIR Patients by user data', error);
+        return false;
     }
+
+    // Create patient in FHIR server
+    const { data: patientResource } = await patientFhirService.create({
+        resourceType: 'Patient',
+        identifier: [
+            {
+                use: 'usual',
+                value: appUserId,
+            },
+        ],
+        active: true,
+        name: [
+            {
+                given: [appUserName],
+            },
+        ],
+    });
+
+    // Set active fhir patient id and profiles
+    ProfileManager.activePatientId = patientResource.id;
+    ProfileManager.profiles = [patientResource].map(p => ({
+        patientId: p.id,
+        patientFullName: fhirDataFormatter.formatPatientName(p.name),
+        relationship: t('ehr', 'self'),
+    }));
+
+    return true;
 }
