@@ -5,6 +5,7 @@ import { Card, Grid, Box, Typography, Link as MuiLink, withStyles, CircularProgr
 import { ModuleTypeEnum, PluginManager, Logger, getIcon, ProfileManager } from '@kailona/core';
 import TimeRangeFilter from './TimeRangeFilter';
 import DateRangeEnum from '@kailona/core/src/enums/DateRange.enum';
+import { withMain } from '../../context/MainContext';
 
 const logger = new Logger('Timeline');
 
@@ -38,7 +39,7 @@ const Link = withStyles(theme => ({
     },
 }))(MuiLink);
 
-export default class Timeline extends Component {
+class Timeline extends Component {
     constructor(props) {
         super(props);
 
@@ -52,6 +53,7 @@ export default class Timeline extends Component {
             selectedDateRange: DateRangeEnum.ONE_MONTH,
             slotWidth: 30,
             completedPlugins: [],
+            userId: this.props.userId,
         };
 
         Chart.pluginService.register({
@@ -71,6 +73,28 @@ export default class Timeline extends Component {
                 this.repositionPointsOnTheSameLabel(chart);
             },
         });
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.userId === nextProps.userId) {
+            return;
+        }
+
+        const chart = this.state.chart;
+        if (chart) {
+            chart.destroy();
+        }
+
+        // Destroy and reinitialize the chart with new profile info
+        this.setState({
+            selectedDateRange: DateRangeEnum.ONE_MONTH,
+            completedPlugins: [],
+            userId: nextProps.userId,
+            chart,
+            chartData: [],
+        });
+
+        this.fetchChartData();
     }
 
     repositionPointsOnTheSameLabel = chart => {
@@ -405,7 +429,7 @@ export default class Timeline extends Component {
     fetchChartData = async () => {
         const { dateStart, dateEnd } = this.getDateRangeValues();
         const isYearDifferent = dateStart.year() !== dateEnd.year();
-        const completedPlugins = this.state.completedPlugins;
+        const { completedPlugins } = this.state;
 
         const xLabels = this.getXLabels(dateStart, dateEnd, isYearDifferent);
         this.setSlotWidth(xLabels.length);
@@ -508,14 +532,9 @@ export default class Timeline extends Component {
         });
 
         // Activate all on load
-        this.setState(
-            {
-                activeDataNames: this.timelineModules.map(m => m.name),
-            },
-            () => {
-                this.fetchChartData();
-            }
-        );
+        this.setState({
+            activeDataNames: this.timelineModules.map(m => m.name),
+        });
     }
 
     filterVisibleDatasets(chartData) {
@@ -604,7 +623,7 @@ export default class Timeline extends Component {
                     </Typography>
                 </Box>
                 <Card>
-                    <Box mt={1}>
+                    <Box mt={1} style={{ position: 'relative' }}>
                         <Box ref={this.chartBoxRef} m={4}>
                             <canvas ref={this.chartRef} />
                         </Box>
@@ -628,3 +647,5 @@ export default class Timeline extends Component {
         );
     }
 }
+
+export default withMain(Timeline);
