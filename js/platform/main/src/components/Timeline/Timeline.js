@@ -597,14 +597,14 @@ class Timeline extends Component {
                             {completed ? (
                                 getIcon(module.icon, 32, this.getDataButtonColor(module.name))
                             ) : (
-                                <CircularProgress color="primary" size={15} />
+                                <CircularProgress color="primary" size={32} />
                             )}
                         </div>
 
                         <Typography
                             className="plugin-name"
                             align="center"
-                            style={{ color: this.getDataButtonColor(module.name) }}
+                            style={{ color: this.getDataButtonColor(module.name), marginTop: '5px' }}
                         >
                             {module.name}
                         </Typography>
@@ -630,7 +630,7 @@ class Timeline extends Component {
                         {!this.state.completedPlugins.length && (
                             <div style={{ position: 'absolute', top: '30px', left: 'calc(50% - 10px)' }}>
                                 <Typography variant="h3" color="primary">
-                                    Loading Chart ... <CircularProgress size={14} color="primary" />
+                                    <CircularProgress size={48} color="primary" />
                                 </Typography>
                             </div>
                         )}
