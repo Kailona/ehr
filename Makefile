@@ -43,6 +43,7 @@ build/appstore/$(package_name).tar.gz: build/main.js $(othersources)
 	--exclude=$(project_dir)/contribute \
 	--exclude=$(project_dir)/node_modules \
 	--exclude=$(project_dir)/screenshots \
+	--exclude=$(project_dir)/website \
 	--exclude=$(project_dir)/.gitignore \
 	--exclude=$(project_dir)/.travis.yml \
 	--exclude=$(project_dir)/CODE_OF_CONDUCT.md \

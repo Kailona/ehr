@@ -37,7 +37,7 @@ class FHIRService {
 
     private function replaceQueryParam($queryParams, $key, $value) {
         for ($i = 0; $i < count($queryParams); $i++) {
-            if ($queryParams[$i]['key'] == $key) {
+            if ($queryParams[$i]['key'] === $key) {
                 $queryParams[$i]['value'] = $queryParams[$i]['value'] ?: $value;
                 return $queryParams;
             }
@@ -52,17 +52,17 @@ class FHIRService {
     }
 
     private function mapSearchQueryParams(string $resourceType, string $queryParamsStr) {
-        if ($this->fhirPatientId == null) {
+        if ($this->fhirPatientId === null) {
             return null;
         }
 
         // Convert query string to array
         $queryParams = array();
-        if ($queryParamsStr != null) {
+        if ($queryParamsStr !== null) {
             $queryParamsStrSplit = explode('&', $queryParamsStr);
             for ($i = 0; $i < count($queryParamsStrSplit); $i++) {
                 $queryParamKeyValueToMapSplit = explode('=', $queryParamsStrSplit[$i]);
-                if (count($queryParamKeyValueToMapSplit) == 2) {
+                if (count($queryParamKeyValueToMapSplit) === 2) {
                     array_push($queryParams, array(
                         'key' => $queryParamKeyValueToMapSplit[0],
                         'value' => $queryParamKeyValueToMapSplit[1]
@@ -89,7 +89,7 @@ class FHIRService {
         // Convert array to query string
         $mappedQueryParams = '';
         foreach ($queryParams as $queryParam) {
-            if ($mappedQueryParams == '') {
+            if ($mappedQueryParams === '') {
                 $mappedQueryParams = $queryParam['key'] . '=' . $queryParam['value'];
             } else {
                 $mappedQueryParams .= '&' . $queryParam['key'] . '=' . $queryParam['value'];
@@ -101,7 +101,7 @@ class FHIRService {
 
     private function replaceBaseFHIRURLs($resource) {
         // Replace Base FHIR URL in bundle links
-        if ($resource != null && $resource['link'] != null) {
+        if ($resource !== null && $resource['link'] !== null) {
             for ($i = 0; $i < count($resource['link']); $i++) {
                 if (isset($resource['link'][$i]['url'])) {
                     $resource['link'][$i]['url'] = str_replace($this->fhirConfig['baseUrl'], '/apps/ehr/fhir/', $resource['link'][$i]['url']);
@@ -118,7 +118,7 @@ class FHIRService {
         $fhirUrl = sprintf("%s%s", $this->fhirConfig['baseUrl'], $url);
 
         // Append query string parameters if exists
-        if ($queryParams != null) {
+        if ($queryParams !== null) {
             $fhirUrl = sprintf("%s?%s", $fhirUrl, $queryParams);
         }
 
@@ -131,7 +131,7 @@ class FHIRService {
 
         // Append body if exists
         $bodyResource = null;
-        if ($body != null) {
+        if ($body !== null) {
             $requestOptions['body'] = $body;
             $bodyResource = json_decode($body, true) ?? '';
         }
@@ -162,14 +162,14 @@ class FHIRService {
             $jsonResponseToSend = new JSONResponse($responseResource);
 
             foreach ($response->getHeaders() as $key => $value) {
-                if ($key == 'Location') {
+                if ($key === 'Location') {
                     // Disable redirect on PUT
-                    if ($method != 'PUT') {
+                    if ($method !== 'PUT') {
                         $jsonResponseToSend->addHeader($key, str_replace($this->fhirConfig['baseUrl'], '/apps/ehr/fhir/', $value[0]));
                     }
 
                     // Store fhir patient id on create
-                    if ($method == 'POST' && $bodyResource != null && $bodyResource['resourceType'] == 'Patient' && $bodyResource['identifier'][0]['value'] == $this->userId) {
+                    if ($method === 'POST' && $bodyResource !== null && $bodyResource['resourceType'] === 'Patient' && $bodyResource['identifier'][0]['value'] === $this->userId) {
                         $patientReadUrlSplit = explode('/', $value[0]);
                         if (count($patientReadUrlSplit) > 3) {
                             $fhirPatientId = $patientReadUrlSplit[count($patientReadUrlSplit) - 3];
@@ -230,7 +230,7 @@ class FHIRService {
         $mappedQueryParams = $this->mapSearchQueryParams($type, $queryParams);
 
         // Prevent access without query params for security
-        if ($mappedQueryParams == null) {
+        if ($mappedQueryParams === null) {
             return new JSONResponse(array(), Http::STATUS_OK);
         }
         

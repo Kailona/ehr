@@ -28,7 +28,7 @@ class SettingsService {
             }
 
             // Do not update fhir password when hidden mask was sent
-            if ($name == 'fhirPassword' && $value == '*****') {
+            if ($name === 'fhirPassword' && $value === '*****') {
                 continue;
             }
 
