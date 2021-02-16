@@ -27,15 +27,15 @@ It helps you to organize, manage and visualize your behavioral and health data s
 		<nextcloud min-version="19" max-version="21" />
 	</dependencies>
 
+	<settings>
+		<admin>OCA\EHR\Settings\Admin</admin>
+		<admin-section>OCA\EHR\Settings\Section</admin-section>
+	</settings>
+
 	<navigations>
 		<navigation>
 			<name>EHR</name>
 			<route>ehr.page.index</route>
 		</navigation>
 	</navigations>
-
-	<settings>
-		<admin>OCA\EHR\Settings\Admin</admin>
-		<admin-section>OCA\EHR\Settings\Section</admin-section>
-	</settings>
 </info>
