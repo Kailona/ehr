@@ -40,8 +40,8 @@ class RequestDataModal extends React.Component {
         this.defaultEmailBody = t(
             'ehr',
             'I hereby request all data from my last exam to be uploaded to my personal ' +
-                'health data archive on the Kailona platform. Please comply within the 30 day period as required by the ' +
-                'Berufsordnung der Ärztekammern, §630g Abs. 2  BGB and Art. 15  Abs. 3 DSGVO.'
+                'health data archive on the Kailona platform. Please comply within the 30 day period as ' +
+                'required by the Berufsordnung der Ärztekammern, §630g Abs. 2  BGB and Art. 15  Abs. 3 DSGVO.'
         );
 
         this.state = {
