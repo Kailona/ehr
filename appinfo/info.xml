@@ -3,17 +3,25 @@
 	  xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
 	<id>ehr</id>
 	<name>EHR (Electronic Health Records)</name>
-	<summary>Private Electronic Health Records in Nextcloud</summary>
-	<description>Private Electronic Health Records in Nextcloud</description>
+	<summary>Kailona: Private Electronic Health Records</summary>
+	<description><![CDATA[Kailona is an extensible, customizable and secure platform for your private electronic health records (EHR).
+
+It helps you to organize, manage and visualize your behavioral and health data such as activities, vital signs, blood pressure, etc.
+	]]></description>
 	<version>0.1.0</version>
 	<licence>agpl</licence>
 	<author>Kailona</author>
 	<namespace>EHR</namespace>
 
 	<category>tools</category>
-	<website>https://kailona.org</website>
+	<website>https://docs.kailona.org</website>
 	<bugs>https://github.com/Kailona/ehr/issues</bugs>
 	<repository type="git">https://github.com/Kailona/ehr</repository>
+
+	<screenshot>https://raw.githubusercontent.com/Kailona/ehr/master/screenshots/screenshot1.png</screenshot>
+	<screenshot>https://raw.githubusercontent.com/Kailona/ehr/master/screenshots/screenshot2.png</screenshot>
+	<screenshot>https://raw.githubusercontent.com/Kailona/ehr/master/screenshots/screenshot3.png</screenshot>
+	<screenshot>https://raw.githubusercontent.com/Kailona/ehr/master/screenshots/screenshot4.png</screenshot>
 
 	<dependencies>
 		<nextcloud min-version="19" max-version="21" />

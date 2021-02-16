@@ -1,8 +1,20 @@
 import React, { Component } from 'react';
-import { Box, withStyles } from '@material-ui/core';
+import { Box } from '@material-ui/core';
 import ProfileHeader from './ProfileHeader/ProfileHeader';
+import { withNotification } from '../context/NotificationContext';
 
-export default class MainLayout extends Component {
+class MainLayout extends Component {
+    componentDidMount() {
+        const { error, showNotification } = this.props;
+
+        if (error) {
+            showNotification({
+                severity: 'error',
+                message: error,
+            });
+        }
+    }
+
     render() {
         const { children, firstTime } = this.props;
 
@@ -16,3 +28,5 @@ export default class MainLayout extends Component {
         );
     }
 }
+
+export default withNotification(MainLayout);

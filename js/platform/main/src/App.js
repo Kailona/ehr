@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { ConfigManager, ModuleTypeEnum, PluginManager } from '@kailona/core';
+import { Logger, ConfigManager, ModuleTypeEnum, PluginManager } from '@kailona/core';
 import { ThemeProvider, Loader } from '@kailona/ui';
 import { ModalProvider } from './context/ModalContext';
 import { NotificationProvider } from './context/NotificationContext';
@@ -11,6 +11,8 @@ import initFHIRPatients from './lib/initFHIRPatients';
 
 import './App.styl';
 
+const logger = new Logger('main.App');
+
 export default class App extends Component {
     constructor(props) {
         super(props);
@@ -18,21 +20,31 @@ export default class App extends Component {
         this.basename = ConfigManager.appConfig.basename;
         this.state = {
             loading: true,
+            error: null,
         };
     }
 
     componentDidMount = async () => {
-        const firstTime = await initFHIRPatients();
+        try {
+            const firstTime = await initFHIRPatients();
 
-        // Register available plugins
-        ConfigManager.appConfig.plugins.forEach(plugin => {
-            PluginManager.registerPlugin(plugin);
-        });
+            // Register available plugins
+            ConfigManager.appConfig.plugins.forEach(plugin => {
+                PluginManager.registerPlugin(plugin);
+            });
 
-        this.setState({
-            loading: false,
-            firstTime,
-        });
+            this.setState({
+                loading: false,
+                firstTime,
+            });
+        } catch (error) {
+            logger.error('Failed to initialize', error);
+
+            this.setState({
+                loading: false,
+                error: t('ehr', 'Failed to initialize! Please contact your administrator!'),
+            });
+        }
     };
 
     getPluginRoutes = () => {
@@ -47,7 +59,7 @@ export default class App extends Component {
                     key={index}
                     path={path}
                     render={() => (
-                        <MainLayout>
+                        <MainLayout error={this.state.error}>
                             <DataModule />
                         </MainLayout>
                     )}
@@ -75,7 +87,7 @@ export default class App extends Component {
                                             exact
                                             path="/"
                                             render={() => (
-                                                <MainLayout firstTime={this.state.firstTime}>
+                                                <MainLayout firstTime={this.state.firstTime} error={this.state.error}>
                                                     <Dashboard />
                                                 </MainLayout>
                                             )}
