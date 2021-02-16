@@ -34,21 +34,24 @@ appstore: clean build/main.js package
 package: build/appstore/$(package_name).tar.gz
 build/appstore/$(package_name).tar.gz: build/main.js $(othersources)
 	mkdir -p $(appstore_dir)
-	tar --exclude=$(project_dir)/.git \
-	--exclude=$(appstore_dir) \
-	--exclude=$(project_dir)/.development \
-	--exclude=$(project_dir)/.github \
-	--exclude=$(project_dir)/.tx \
-	--exclude=$(project_dir)/.webpack \
-	--exclude=$(project_dir)/contribute \
-	--exclude=$(project_dir)/node_modules \
-	--exclude=$(project_dir)/screenshots \
-	--exclude=$(project_dir)/website \
-	--exclude=$(project_dir)/.gitignore \
-	--exclude=$(project_dir)/.travis.yml \
-	--exclude=$(project_dir)/CODE_OF_CONDUCT.md \
-	--exclude=$(project_dir)/lerna.json \
-	--exclude=$(project_dir)/Makefile \
-	--exclude=$(project_dir)/package.json \
-	-cvzf $(appstore_dir)/$(package_name).tar.gz $(project_dir)
+	tar -C $(project_dir)/.. \
+	--exclude=$(app_name)/.git \
+	--exclude=$(app_name)/.idea \
+	--exclude=$(app_name)/build/appstore \
+	--exclude=$(app_name)/.development \
+	--exclude=$(app_name)/.github \
+	--exclude=$(app_name)/.tx \
+	--exclude=$(app_name)/.webpack \
+	--exclude=$(app_name)/contribute \
+	--exclude=$(app_name)/node_modules \
+	--exclude=$(app_name)/screenshots \
+	--exclude=$(app_name)/website \
+	--exclude=$(app_name)/.gitignore \
+	--exclude=$(app_name)/.travis.yml \
+	--exclude=$(app_name)/CODE_OF_CONDUCT.md \
+	--exclude=$(app_name)/lerna.json \
+	--exclude=$(app_name)/Makefile \
+	--exclude=$(app_name)/netlify.toml \
+	--exclude=$(app_name)/package.json \
+	-cvzf $(appstore_dir)/$(package_name).tar.gz $(app_name)
 	openssl dgst -sha512 -sign $(cert_dir)/$(app_name).key $(appstore_dir)/$(app_name).tar.gz | openssl base64
