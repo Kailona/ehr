@@ -21,6 +21,9 @@ class FHIRService {
         $fhirUsername = $this->config->getAppValue('ehr', 'fhirUsername');
         $fhirPassword = $this->config->getAppValue('ehr', 'fhirPassword');
 
+        // Add trailing slash into fhir base url
+        $fhirBaseUrl = rtrim($fhirBaseUrl, '/') . '/';
+
         $this->fhirConfig = [
             'baseUrl' => $fhirBaseUrl,
             'auth' => [$fhirUsername, $fhirPassword]
