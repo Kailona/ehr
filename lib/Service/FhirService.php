@@ -10,7 +10,7 @@ use OCP\Http\Client\IClientService;
 use OCP\ILogger;
 use Exception;
 
-class FHIRService {
+class FhirService {
     public function __construct(ILogger $logger, string $appName, IUserSession $userSession, IConfig $config, IClientService $clientService) {
         $this->logger = $logger;
         $this->appName = $appName;
