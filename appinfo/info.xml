@@ -20,10 +20,10 @@ It helps you aggregate, manage, securely share and visualize your health data in
 	<bugs>https://github.com/Kailona/ehr/issues</bugs>
 	<repository type="git">https://github.com/Kailona/ehr</repository>
 
-	<screenshot>https://raw.githubusercontent.com/Kailona/ehr/master/screenshots/screenshot1.png</screenshot>
-	<screenshot>https://raw.githubusercontent.com/Kailona/ehr/master/screenshots/screenshot2.png</screenshot>
-	<screenshot>https://raw.githubusercontent.com/Kailona/ehr/master/screenshots/screenshot3.png</screenshot>
-	<screenshot>https://raw.githubusercontent.com/Kailona/ehr/master/screenshots/screenshot4.png</screenshot>
+	<screenshot small-thumbnail="https://raw.githubusercontent.com/Kailona/ehr/master/screenshots/screenshot1-small.png">https://raw.githubusercontent.com/Kailona/ehr/master/screenshots/screenshot1.png</screenshot>
+	<screenshot small-thumbnail="https://raw.githubusercontent.com/Kailona/ehr/master/screenshots/screenshot2-small.png">https://raw.githubusercontent.com/Kailona/ehr/master/screenshots/screenshot2.png</screenshot>
+	<screenshot small-thumbnail="https://raw.githubusercontent.com/Kailona/ehr/master/screenshots/screenshot3-small.png">https://raw.githubusercontent.com/Kailona/ehr/master/screenshots/screenshot3.png</screenshot>
+	<screenshot small-thumbnail="https://raw.githubusercontent.com/Kailona/ehr/master/screenshots/screenshot4-small.png">https://raw.githubusercontent.com/Kailona/ehr/master/screenshots/screenshot4.png</screenshot>
 
 	<dependencies>
 		<nextcloud min-version="19" max-version="21" />
