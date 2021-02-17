@@ -10,7 +10,7 @@ use OCP\Http\Client\IClientService;
 use OCP\ILogger;
 use Exception;
 
-class FHIRService {
+class FhirService {
     public function __construct(ILogger $logger, string $appName, IUserSession $userSession, IConfig $config, IClientService $clientService) {
         $this->logger = $logger;
         $this->appName = $appName;
@@ -104,7 +104,7 @@ class FHIRService {
 
     private function replaceBaseFHIRURLs($resource) {
         // Replace Base FHIR URL in bundle links
-        if ($resource !== null && $resource['link'] !== null) {
+        if (is_array($resource) && isset($resource['link'])) {
             for ($i = 0; $i < count($resource['link']); $i++) {
                 if (isset($resource['link'][$i]['url'])) {
                     $resource['link'][$i]['url'] = str_replace($this->fhirConfig['baseUrl'], '/apps/ehr/fhir/', $resource['link'][$i]['url']);

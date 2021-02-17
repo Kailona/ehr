@@ -6,15 +6,15 @@ use OCP\AppFramework\Controller;
 use OCP\IRequest;
 use OCP\ILogger;
 
-use OCA\EHR\Service\FHIRService;
+use OCA\EHR\Service\FhirService;
 
 /**
- * Class FHIRController
+ * Class FhirController
  *
  * @package OCA\EHR\Controller
  */
-class FHIRController extends Controller {
-    public function __construct(ILogger $logger, string $AppName, IRequest $request, FHIRService $service) {
+class FhirController extends Controller {
+    public function __construct(ILogger $logger, string $AppName, IRequest $request, FhirService $service) {
         parent::__construct($AppName, $request);
         $this->service = $service;
         $this->logger = $logger;
