@@ -10,7 +10,7 @@ It helps you aggregate, manage, securely share and visualize your health data in
 
 **Note that this app is under alpha development!**
 	]]></description>
-	<version>0.1.1</version>
+	<version>0.1.2</version>
 	<licence>agpl</licence>
 	<author>Kailona</author>
 	<namespace>EHR</namespace>
