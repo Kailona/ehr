@@ -3,10 +3,12 @@
 	  xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
 	<id>ehr</id>
 	<name>EHR (Electronic Health Records)</name>
-	<summary>Kailona: Private Electronic Health Records</summary>
-	<description><![CDATA[Kailona is an extensible, customizable and secure platform for your private electronic health records (EHR).
+	<summary>Kailona: Personal Health Records</summary>
+	<description><![CDATA[The Kailona Personal Health Record allows you to regain control over your health data. We provide an open source platform that allows everyone to add plugins and make improvements.
 
-It helps you to organize, manage and visualize your behavioral and health data such as activities, vital signs, blood pressure, etc.
+It helps you aggregate, manage, securely share and visualize your health data including lab data, medical images, FHIR data from hospitals, vital signs, nutritional and activity data.
+
+**Note that this app is under alpha development!**
 	]]></description>
 	<version>0.1.0</version>
 	<licence>agpl</licence>
