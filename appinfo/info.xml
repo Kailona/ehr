@@ -19,6 +19,10 @@ It helps you aggregate, manage, securely share and visualize your health data in
 	<website>https://docs.kailona.org</website>
 	<bugs>https://github.com/Kailona/ehr/issues</bugs>
 	<repository type="git">https://github.com/Kailona/ehr</repository>
+	<documentation>
+		<user>https://docs.kailona.org/</user>
+	</documentation>
+	<discussion>https://help.kailona.org/</discussion>
 
 	<screenshot small-thumbnail="https://raw.githubusercontent.com/Kailona/ehr/master/screenshots/screenshot1-small.png">https://raw.githubusercontent.com/Kailona/ehr/master/screenshots/screenshot1.png</screenshot>
 	<screenshot small-thumbnail="https://raw.githubusercontent.com/Kailona/ehr/master/screenshots/screenshot2-small.png">https://raw.githubusercontent.com/Kailona/ehr/master/screenshots/screenshot2.png</screenshot>
