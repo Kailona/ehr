@@ -1,6 +1,6 @@
 module.exports = {
     title: 'Kailona',
-    tagline: `Private Electronic Health Records`,
+    tagline: `Personal Health Record`,
     url: 'https://docs.kailona.org',
     baseUrl: '/',
     onBrokenLinks: 'throw',
@@ -70,7 +70,7 @@ module.exports = {
                         },
                         {
                             label: 'Twitter',
-                            href: 'https://twitter.com/kailona_health',
+                            href: 'https://twitter.com/kailonahealth',
                         },
                     ],
                 },
@@ -140,7 +140,7 @@ module.exports = {
                     </div>
                 </div>
                 <div style="margin-top: 10px;">
-                    © ${new Date().getFullYear()} Kailona
+                    Copyright © Kailona™ ${new Date().getFullYear()} | Protect, Control and Keep Track of Your Health Data
                 </div>
                 <div style="margin-top: 10px; font-size: 12px;">
                     <div>
