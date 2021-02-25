@@ -95,11 +95,25 @@ module.exports = {
                         },
                         {
                             html: `
+                                <div style="padding-top: 15px">
+                                    <a href="https://amberpro.net" target="_blank" title="LatticeWork">
+                                      <img
+                                        src="/img/AmberPRObyLatticeWork.svg"
+                                        alt="LatticeWork"
+                                        width="100px"
+                                      />
+                                    </a>                                
+                                </div>
+                            `,
+                        },
+                        {
+                            html: `
                                 <div style="padding: 20px 0;">
                                     <a href="https://www.netlify.com" target="_blank">
                                       <img
                                         src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg"
                                         alt="Deployed by Netlify"
+                                        width="100px"
                                       />
                                     </a>                                
                                 </div>
