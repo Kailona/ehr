@@ -62,28 +62,32 @@
 
     .sponsors-section .complimentary-sponsors a.sponsor-acanio,
     .sponsors-section .complimentary-sponsors a.sponsor-amberPRO {
-        width: 33%;
+        width: 36%;
     }
 }
 @media only screen and (min-width: 601px) {
     .sponsors-section .complimentary-sponsors a {
-        width: 22%;
+        width: 24%;
     }
 
-    .sponsors-section .complimentary-sponsors a.sponsor-acanio,
-    .sponsors-section .complimentary-sponsors a.sponsor-amberPRO {
+    .sponsors-section .complimentary-sponsors a.sponsor-acanio {
         width: 25%;
+    }
+    .sponsors-section .complimentary-sponsors a.sponsor-amberPRO {
+        width: 28%;
     }
 }
 @media only screen and (min-width: 800px) {
     .sponsors-section .complimentary-sponsors a {
-        width: 17%;
+        width: 14%;
     }
 
-    .sponsors-section .complimentary-sponsors a.sponsor-acanio,
-    .sponsors-section .complimentary-sponsors a.sponsor-amberPRO {
-        width: 20%;
+    .sponsors-section .complimentary-sponsors a.sponsor-acanio {
+        width: 17%;
         margin-left: 0;
         margin-right: 0;
+    }
+    .sponsors-section .complimentary-sponsors a.sponsor-amberPRO {
+        width: 16%;
     }
 }
