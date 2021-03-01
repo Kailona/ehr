@@ -34,3 +34,56 @@
 .hero__subtitle {
     color: #ffffff;
 }
+
+.sponsors-section .complimentary-sponsors {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.sponsors-section .complimentary-sponsors a {
+    padding: 0 30px;
+    width: 15%;
+    margin: 10px;
+}
+
+.sponsors-section .complimentary-sponsors a img {
+    width: 100%;
+}
+
+/* Responsive sponsor logos */
+@media only screen and (max-width: 600px) {
+    .sponsors-section .complimentary-sponsors a {
+        width: 29%;
+    }
+
+    .sponsors-section .complimentary-sponsors a.sponsor-acanio,
+    .sponsors-section .complimentary-sponsors a.sponsor-amberPRO {
+        width: 33%;
+    }
+}
+@media only screen and (min-width: 601px) {
+    .sponsors-section .complimentary-sponsors a {
+        width: 22%;
+    }
+
+    .sponsors-section .complimentary-sponsors a.sponsor-acanio,
+    .sponsors-section .complimentary-sponsors a.sponsor-amberPRO {
+        width: 25%;
+    }
+}
+@media only screen and (min-width: 800px) {
+    .sponsors-section .complimentary-sponsors a {
+        width: 17%;
+    }
+
+    .sponsors-section .complimentary-sponsors a.sponsor-acanio,
+    .sponsors-section .complimentary-sponsors a.sponsor-amberPRO {
+        width: 20%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
