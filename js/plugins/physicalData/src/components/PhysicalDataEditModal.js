@@ -81,10 +81,8 @@ export default class PhysicalDataEditModal extends Component {
         };
 
         this.dateRef = React.createRef();
-        this.ageRef = React.createRef();
         this.heightRef = React.createRef();
         this.weightRef = React.createRef();
-        this.bmiRef = React.createRef();
     }
 
     componentDidMount() {
@@ -111,10 +109,10 @@ export default class PhysicalDataEditModal extends Component {
     onConfirm = () => {
         const newPhysicalData = {
             date: moment(this.dateRef.current.value),
-            age: this.ageRef.current.value,
+            age: this.state.age,
             bodyHeight: this.heightRef.current.value,
             bodyWeight: this.weightRef.current.value,
-            bmi: this.bmiRef.current.value,
+            bmi: this.state.bmi,
         };
 
         const { physicalData } = this.props;
