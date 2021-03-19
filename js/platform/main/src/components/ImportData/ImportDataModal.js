@@ -19,6 +19,8 @@ import { withNotification } from '../../context/NotificationContext';
 
 import './ImportDataModal.styl';
 
+const DEFAULT_PLUGINS = ['plugin-documents'];
+
 const Dialog = withStyles({
     paper: {
         position: 'absolute',
@@ -62,7 +64,7 @@ class ImportDataModal extends Component {
 
             files.push({
                 file: newFile,
-                pluginIds: [],
+                pluginIds: DEFAULT_PLUGINS,
             });
         });
 

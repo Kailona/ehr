@@ -16,4 +16,6 @@ return ['routes' => [
     ['name' => 'fhir#delete', 'url' => '/fhir/{type}/{id}', 'verb' => 'DELETE'],
     ['name' => 'fhir#history', 'url' => '/fhir/{type}/{id}/_history', 'verb' => 'GET'],
     ['name' => 'fhir#search', 'url' => '/fhir/{type}', 'verb' => 'GET'],
+    ['name' => 'documents#import', 'url' => '/documents/import', 'verb' => 'POST'],
+    ['name' => 'documents#fetch', 'url' => '/documents/fetch', 'verb' => 'POST'],
 ]];

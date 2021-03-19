@@ -79,7 +79,7 @@ export default class KailonaTable extends Component {
 
         return (
             <Paper style={{ height: '100%', width: '100%', position: 'relative' }}>
-                <TableContainer style={{ position: 'absolute', top: 0, bottom: 0 }}>
+                <TableContainer>
                     <Table>
                         <TableHead>
                             <TableRow>
@@ -92,16 +92,24 @@ export default class KailonaTable extends Component {
                         <TableBody>
                             {this.props.data.map((record, rowIndex) => (
                                 <TableRow>
-                                    {this.props.columns.map((col, index) => (
-                                        <TableCell>
-                                            <div>{record[col.key]}</div>
-                                            {index === 0 && (
-                                                <div>
-                                                    <Link color="primary">{record.source}</Link>
-                                                </div>
-                                            )}
-                                        </TableCell>
-                                    ))}
+                                    {this.props.columns.map((col, index) => {
+                                        let displayText = record[col.key];
+
+                                        if (col.display && typeof col.display === 'function') {
+                                            displayText = col.display(record, record[col.key]);
+                                        }
+
+                                        return (
+                                            <TableCell>
+                                                <div>{displayText}</div>
+                                                {index === 0 && (
+                                                    <div>
+                                                        <Link color="primary">{record.source}</Link>
+                                                    </div>
+                                                )}
+                                            </TableCell>
+                                        );
+                                    })}
                                     {this.props.contextMenu && (
                                         <TableCell>
                                             <IconButton onClick={e => this.toggleContextMenu(e, record)}>
