@@ -49,6 +49,7 @@ export default class VitalsEditModal extends Component {
         this.diastolicBloodPressureRef = React.createRef();
         this.heartRateRef = React.createRef();
         this.oxygenSaturationRef = React.createRef();
+        this.bodyTemperatureRef = React.createRef();
     }
 
     toggleModal = isOpen => {
@@ -64,6 +65,7 @@ export default class VitalsEditModal extends Component {
             diastolicBloodPressure: this.diastolicBloodPressureRef.current.value,
             heartRate: this.heartRateRef.current.value,
             oxygenSaturation: this.oxygenSaturationRef.current.value,
+            bodyTemperature: this.bodyTemperatureRef.current.value,
         };
 
         const { vitalsData } = this.props;
@@ -80,7 +82,7 @@ export default class VitalsEditModal extends Component {
     };
 
     render() {
-        const { date, systolicBloodPressure, diastolicBloodPressure, oxygenSaturation, heartRate } =
+        const { date, systolicBloodPressure, diastolicBloodPressure, oxygenSaturation, heartRate, bodyTemperature } =
             this.props.vitalsData || {};
 
         return (
@@ -160,6 +162,23 @@ export default class VitalsEditModal extends Component {
                                 </FormControl>
                             </GridColumn>
                             <GridColumn className="right-column" item>
+                                <FormControl>
+                                    <KailonaTextField
+                                        inputRef={this.bodyTemperatureRef}
+                                        type="number"
+                                        id="bodyTemperature"
+                                        className="kailona-MuiTextField"
+                                        label={t('ehr', 'Body Temperature')}
+                                        defaultValue={this.getValue(bodyTemperature)}
+                                        InputProps={{
+                                            endAdornment: <InputAdornment>&deg;C</InputAdornment>,
+                                        }}
+                                    />
+                                </FormControl>
+                            </GridColumn>
+                        </Grid>
+                        <Grid container alignItems="center">
+                            <GridColumn className="left-column" item>
                                 <FormControl>
                                     <KailonaTextField
                                         inputRef={this.oxygenSaturationRef}

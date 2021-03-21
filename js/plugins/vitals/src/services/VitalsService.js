@@ -4,6 +4,7 @@ import {
     mapToFHIRBloodPressure,
     mapToFHIRHeartRate,
     mapToFHIROxygenSaturation,
+    mapToFHIRBodyTemperature,
     mapToFHIRVitalsPanel,
 } from '../mappers/mapToFHIR';
 
@@ -42,6 +43,10 @@ export default class VitalsService extends BaseResourceService {
         // Oxygen Saturation
         const oxygenSaturationObservationToUpsert = mapToFHIROxygenSaturation(data);
         idMap.oxygenSaturation = await super.upsertData(oxygenSaturationObservationToUpsert);
+
+        // Body Temperature
+        const bodyTemperatureObservationToUpsert = mapToFHIRBodyTemperature(data);
+        idMap.bodyTemperature = await super.upsertData(bodyTemperatureObservationToUpsert);
 
         // Vitals Panel
         const observationIds = Object.values(idMap).filter(v => !!v);
