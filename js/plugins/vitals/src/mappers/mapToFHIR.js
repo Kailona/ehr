@@ -202,6 +202,63 @@ function mapToFHIROxygenSaturation(vitalsData) {
     return observation;
 }
 
+function mapToFHIRBodyTemperature(vitalsData) {
+    const fhirPatientId = ProfileManager.activePatientId;
+    if (!fhirPatientId) {
+        throw new Error('Invalid patient id');
+    }
+
+    const { date, bodyTemperature } = vitalsData;
+    if (!date || !bodyTemperature) {
+        return null;
+    }
+
+    const observation = {
+        resourceType: 'Observation',
+        status: 'final',
+        category: [
+            {
+                coding: [
+                    {
+                        system: 'http://hl7.org/fhir/ValueSet/observation-category',
+                        code: 'vital-signs',
+                        display: 'Vital Signs',
+                    },
+                ],
+            },
+        ],
+        code: {
+            coding: [
+                {
+                    system: 'http://loinc.org',
+                    code: '8310-5',
+                    display: 'Body temperature',
+                },
+            ],
+            text: 'Body temperature',
+        },
+        subject: {
+            reference: `Patient/${fhirPatientId}`,
+        },
+        effectiveDateTime: moment(date)
+            .utc()
+            .toISOString(),
+        valueQuantity: {
+            value: parseFloat(bodyTemperature),
+            unit: '°C',
+            system: 'http://unitsofmeasure.org',
+            code: 'Cel',
+        },
+    };
+
+    const { idMap } = vitalsData;
+    if (idMap && idMap.bodyTemperature) {
+        observation.id = idMap.bodyTemperature;
+    }
+
+    return observation;
+}
+
 function mapToFHIRVitalsPanel(vitalsData, observationIds) {
     const fhirPatientId = ProfileManager.activePatientId;
     if (!fhirPatientId) {
@@ -256,4 +313,10 @@ function mapToFHIRVitalsPanel(vitalsData, observationIds) {
     return observation;
 }
 
-export { mapToFHIRBloodPressure, mapToFHIRHeartRate, mapToFHIROxygenSaturation, mapToFHIRVitalsPanel };
+export {
+    mapToFHIRBloodPressure,
+    mapToFHIRHeartRate,
+    mapToFHIROxygenSaturation,
+    mapToFHIRVitalsPanel,
+    mapToFHIRBodyTemperature,
+};

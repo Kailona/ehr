@@ -1,6 +1,7 @@
 import VitalsDataModule from './components/VitalsDataModule';
 import getTimelineBloodPressureSystolic from './timelineData/getTimelineBloodPressureSystolic';
 import getTimelineBloodPressureDiastolic from './timelineData/getTimelineBloodPressureDiastolic';
+import getTimelineBodyTemperature from './timelineData/getTimelineBodyTemperature';
 
 export default {
     id: 'plugin-vitals',
@@ -35,6 +36,12 @@ export default {
                     getData: getTimelineBloodPressureDiastolic,
                 },
             ],
+        },
+        {
+            name: 'Body Temperature',
+            color: '#ff6384',
+            icon: 'WhatshotOutlined',
+            getData: getTimelineBodyTemperature,
         },
     ],
 };

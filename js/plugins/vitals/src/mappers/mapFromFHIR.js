@@ -60,6 +60,19 @@ function _mapOxygenSaturation(observation) {
     };
 }
 
+function _mapBodyTemperature(observation) {
+    const { valueQuantity } = observation;
+    const { value, unit } = valueQuantity || {};
+
+    if (!value || !unit) {
+        return {};
+    }
+
+    return {
+        bodyTemperature: `${value} ${unit}`,
+    };
+}
+
 function _mapObservations(observations, panelObservation) {
     let vitalsData = {};
 
@@ -98,6 +111,12 @@ function _mapObservations(observations, panelObservation) {
         if (system === 'http://loinc.org' && code === '2708-6') {
             vitalsData.idMap.oxygenSaturation = observation.id;
             vitalsData = Object.assign({}, vitalsData, _mapOxygenSaturation(observation));
+        }
+
+        // Body Temperature
+        if (system === 'http://loinc.org' && code === '8310-5') {
+            vitalsData.idMap.bodyTemperature = observation.id;
+            vitalsData = Object.assign({}, vitalsData, _mapBodyTemperature(observation));
         }
 
         // Set Vitals Panel id if it belongs to one
