@@ -584,7 +584,7 @@ class Timeline extends Component {
             const completed = this.state.completedPlugins.includes(module.name);
 
             return (
-                <Grid key={index} item style={{ maxWidth: '110px', margin: '0 10px' }}>
+                <Grid key={index} item style={{ width: '80px' }}>
                     <Link
                         id={module.name}
                         onClick={e => this.changeTimelineModule(e)}
@@ -636,9 +636,7 @@ class Timeline extends Component {
                         <Box ml={4} mr={4} mt={2} mb={2}>
                             <Grid container direction="row" spacing={2} alignItems="center">
                                 <Grid item xs={8}>
-                                    <Grid container alignItems="center">
-                                        {this.getDataButtons()}
-                                    </Grid>
+                                    <Grid container>{this.getDataButtons()}</Grid>
                                 </Grid>
                                 <Grid item xs={4} style={{ textAlign: 'right' }}>
                                     <TimeRangeFilter handleDateRangeChange={this.handleDateRangeChange} />
