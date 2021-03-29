@@ -252,8 +252,8 @@ function mapToFHIRBodyTemperature(vitalsData) {
     };
 
     const { idMap } = vitalsData;
-    if (idMap && idMap.oxygenSaturation) {
-        observation.id = idMap.oxygenSaturation;
+    if (idMap && idMap.bodyTemperature) {
+        observation.id = idMap.bodyTemperature;
     }
 
     return observation;

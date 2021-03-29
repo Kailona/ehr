@@ -45,7 +45,7 @@ export default class VitalsDataModule extends Component {
                     key: 'heartRate',
                 },
                 {
-                    label: t('ehr', 'Body Temperature (°C)'),
+                    label: t('ehr', 'Body Temperature'),
                     key: 'bodyTemperature',
                 },
                 {

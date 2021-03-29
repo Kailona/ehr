@@ -23,7 +23,7 @@ export default {
     TimelineModule: [
         {
             name: 'Steps',
-            color: '#ff6384',
+            color: '#58d68d',
             icon: 'DirectionsRun',
             getData: getTimelineSteps,
         },
