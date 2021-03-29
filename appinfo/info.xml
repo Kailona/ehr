@@ -8,6 +8,8 @@
 
 It helps you aggregate, manage, securely share and visualize your health data including lab data, medical images, FHIR data from hospitals, vital signs, nutritional and activity data.
 
+This app works with a FHIR server. Please read the [documentation](https://docs.kailona.org/docs/#installation) to learn more about that.
+
 **Note that this app is under alpha development!**
 	]]></description>
 	<version>0.1.2</version>
@@ -15,8 +17,13 @@ It helps you aggregate, manage, securely share and visualize your health data in
 	<author>Kailona</author>
 	<namespace>EHR</namespace>
 
+	<documentation>
+		<admin>https://docs.kailona.org/docs/#installation</admin>
+		<developer>https://docs.kailona.org/docs/development/architecture</developer>
+	</documentation>
 	<category>tools</category>
 	<website>https://docs.kailona.org</website>
+	<discussion>https://help.kailona.org/</discussion>
 	<bugs>https://github.com/Kailona/ehr/issues</bugs>
 	<repository type="git">https://github.com/Kailona/ehr</repository>
 
