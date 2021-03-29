@@ -94,12 +94,17 @@ module.exports = {
                             href: 'https://toca.com',
                         },
                         {
+                            label: 'amberPRO',
+                            href: 'https://amberpro.net',
+                        },
+                        {
                             html: `
                                 <div style="padding: 20px 0;">
                                     <a href="https://www.netlify.com" target="_blank">
                                       <img
                                         src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg"
                                         alt="Deployed by Netlify"
+                                        width="100px"
                                       />
                                     </a>                                
                                 </div>
@@ -109,10 +114,10 @@ module.exports = {
                 },
             ],
             copyright: `
-                <div style="margin-top: 30px; padding: 
-                            10px; background-color: #f5f6f7; display: flex; 
+                <div class="sponsors-section" style="margin-top: 30px; padding: 
+                            30px 10px 10px 10px; background-color: #f5f6f7; display: flex; 
                             align-items: center; flex-direction: column;">
-                    <div style="display:flex; align-items: center">
+                    <div class="major-sponsors">
                         <a href="https://www.bmbf.de/en/" target="_blank">
                             <img src="/img/Logo_BMBF.svg" height="80px" />
                         </a>
@@ -124,19 +129,22 @@ module.exports = {
                             <img src="/img/PrototypeFund-P-Logo.svg" height="80px" />
                         </a>
                     </div>
-                    <div style="display:flex; align-items: center; margin-top: 10px;">
-                        <a href="https://nextcloud.com" target="_blank" style="padding: 0 30px">
-                            <img src="/img/nextcloud.svg" height="80px" />
+                    <div class="complimentary-sponsors">
+                        <a class="sponsor-nextcloud" href="https://nextcloud.com" target="_blank">
+                            <img src="/img/nextcloud.svg" />
                         </a>
-                        <a href="https://medken.com" target="_blank" style="padding: 0 30px">
-                            <img src="/img/medken.svg" height="50px" />
+                        <a class="sponsor-medken" href="https://medken.com" target="_blank">
+                            <img src="/img/medken.svg" />
                         </a>
-                        <a href="https://acanio.com" target="_blank" style="padding: 0 30px">
-                            <img src="/img/acanio.svg" height="40px" />
+                        <a class="sponsor-acanio" href="https://acanio.com" target="_blank">
+                            <img src="/img/acanio.svg" />
                         </a>
-                        <a href="https://toca.com" target="_blank" style="padding: 0 30px">
-                            <img src="/img/toca.svg" height="30px" />
+                        <a class="sponsor-toca" href="https://toca.com" target="_blank">
+                            <img src="/img/toca.svg" />
                         </a>
+                        <a class="sponsor-amberPRO" href="https://amberpro.net" target="_blank">
+                              <img src="/img/AmberPRObyLatticeWork.svg"/>
+                        </a>   
                     </div>
                 </div>
                 <div style="margin-top: 10px;">

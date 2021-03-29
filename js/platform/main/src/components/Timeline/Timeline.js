@@ -77,6 +77,7 @@ class Timeline extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (this.props.userId === nextProps.userId) {
+            this.fetchChartData();
             return;
         }
 
@@ -126,14 +127,10 @@ class Timeline extends Component {
                 dataByKey.forEach((dt, index) => {
                     const dtIndex = dt.index;
                     // Skip repositioning the latest point
-                    if (index === centerIndex) {
-                        // positionOfLatest =
-                        //     chart.config.data.datasets[datasetIndex]._meta[metaKey].data[dtIndex]._model.x;
-                        return;
-                    } else if (index < centerIndex) {
+                    if (index < centerIndex) {
                         chart.config.data.datasets[datasetIndex]._meta[metaKey].data[dtIndex]._model.x =
                             positionOfLatest - pointRadius;
-                    } else {
+                    } else if (index > centerIndex) {
                         chart.config.data.datasets[datasetIndex]._meta[metaKey].data[dtIndex]._model.x =
                             positionOfLatest + pointRadius;
                     }
