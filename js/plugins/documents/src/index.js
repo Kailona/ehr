@@ -8,12 +8,12 @@ export default {
     name: 'Documents',
     MenuModule: {
         name: 'Documents',
-        icon: 'FileCopy',
+        icon: 'DescriptionOutlined',
         priority: 90,
     },
     WidgetModule: {
         name: 'Documents',
-        icon: 'FileCopy',
+        icon: 'DescriptionOutlined',
         priority: 90,
     },
     DataModule: {

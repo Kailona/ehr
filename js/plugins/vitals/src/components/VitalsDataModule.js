@@ -8,7 +8,7 @@ import { Logger } from '@kailona/core';
 import VitalsEditModal from './VitalsEditModal';
 import GridColumn from '../lib/GridColumn';
 
-const logger = new Logger('VitalsDataModule');
+const logger = new Logger('Vitals.VitalsDataModule');
 
 export default class VitalsDataModule extends Component {
     constructor(props) {

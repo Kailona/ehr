@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios/index';
+import moment from 'moment';
 import { Typography, Box, Link } from '@material-ui/core';
 import { KailonaTable } from '@kailona/ui';
 import { ProfileManager } from '@kailona/core';
@@ -15,6 +16,13 @@ export default class DocumentsDataModule extends Component {
             data: [],
             columns: [
                 {
+                    label: '',
+                    key: 'modifiedDate',
+                    display: (row, value) => {
+                        return moment(value).format('ddd, MMM D, YYYY, HH:mm');
+                    },
+                },
+                {
                     label: t('ehr', 'Name'),
                     key: 'name',
                     display: (row, value) => {
@@ -27,29 +35,51 @@ export default class DocumentsDataModule extends Component {
                         );
                     },
                 },
-                {
-                    label: t('ehr', 'Modified Date'),
-                    key: 'modifiedDate',
-                },
             ],
         };
     }
 
-    async componentDidMount() {
-        const response = await this.fetchFiles();
+    componentDidMount() {
+        this.fetchFiles();
+    }
+
+    async fetchFiles() {
         this.setState({
-            data: response.data,
+            loading: true,
+        });
+
+        const url = `/apps/ehr/documents/fetch`;
+        const parent = ProfileManager.activePatientId;
+        const { data } = await axios.post(url, {
+            parent,
+            offset: this.state.page,
+            limit: this.state.rowsPerPage,
+        });
+
+        const { data: existingData } = this.state;
+        existingData.push(...data);
+
+        this.setState({
+            data: existingData,
             loading: false,
         });
     }
 
-    async fetchFiles() {
-        const url = `/apps/ehr/documents/fetch`;
-        const parent = ProfileManager.activePatientId;
-        return await axios.post(url, {
-            parent,
-        });
-    }
+    fetchNextFiles = async () => {
+        // Wait for the previous request
+        if (this.state.loading) {
+            return;
+        }
+
+        this.setState(
+            {
+                page: (this.state.page + 1) * this.state.rowsPerPage,
+            },
+            () => {
+                this.fetchFiles();
+            }
+        );
+    };
 
     render() {
         return (
@@ -67,10 +97,9 @@ export default class DocumentsDataModule extends Component {
                             columns={this.state.columns}
                             page={this.state.page}
                             rowsPerPage={this.state.rowsPerPage}
-                            onChangePage={this.onChangePage}
-                            onChangeRowsPerPage={this.onChangeRowsPerPage}
                             contextMenu={this.contextMenuOptions}
                             loading={this.state.loading}
+                            fetchNewData={this.fetchNextFiles}
                         />
                     </Box>
                 </div>

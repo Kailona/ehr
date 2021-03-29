@@ -31,7 +31,7 @@ class DocumentsController extends Controller
      * @NoAdminRequired
      * @NoCSRFRequired
      */
-    public function fetch($parent) {
-        return $this->service->fetch($parent);
+    public function fetch($parent, $offset, $limit) {
+        return $this->service->fetch($parent, $offset, $limit);
     }
 }

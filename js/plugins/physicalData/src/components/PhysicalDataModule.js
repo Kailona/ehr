@@ -8,7 +8,7 @@ import PhysicalDataService from '../services/PhysicalDataService';
 import { Logger, ProfileManager } from '@kailona/core';
 import calculateAge from '../lib/calculateAge';
 
-const logger = new Logger('PhysicalDataModule');
+const logger = new Logger('PhysicalData.PhysicalDataModule');
 
 export default class PhysicalDataModule extends Component {
     constructor(props) {

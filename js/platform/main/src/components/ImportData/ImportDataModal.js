@@ -12,12 +12,14 @@ import {
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Close as CloseIcon } from '@material-ui/icons';
-import { ModuleTypeEnum, PluginManager, getIcon } from '@kailona/core';
+import { Logger, ModuleTypeEnum, PluginManager, getIcon } from '@kailona/core';
 import { KailonaButton } from '@kailona/ui';
 import ImportDataBrowser from './ImportDataBrowser';
 import { withNotification } from '../../context/NotificationContext';
 
 import './ImportDataModal.styl';
+
+const logger = new Logger('main.ImportDataModal');
 
 const DEFAULT_PLUGINS = ['plugin-documents'];
 
@@ -108,52 +110,66 @@ class ImportDataModal extends Component {
     };
 
     importFiles = async () => {
-        const { files } = this.state;
+        try {
+            const { files } = this.state;
 
-        this.setState({
-            importing: true,
-        });
-
-        const promises = [];
-
-        // Import files to selected plugins
-        files.forEach(fileData => {
-            const { file, pluginIds } = fileData;
-
-            PluginManager.plugins.forEach(plugin => {
-                const { id, modules } = plugin;
-
-                // Skip if plugin is not selected
-                if (!pluginIds.includes(id)) {
-                    return;
-                }
-
-                // Skip if plugin does not support data import
-                const dataModule = modules[ModuleTypeEnum.DataModule];
-                if (!dataModule || typeof dataModule.importData !== 'function') {
-                    return;
-                }
-
-                const promise = dataModule.importData(file);
-                promises.push(promise);
+            this.setState({
+                importing: true,
             });
-        });
 
-        // Wait for all files to be imported
-        await Promise.all(promises);
+            const promises = [];
 
-        this.setState({
-            importing: false,
-            files: [],
-        });
+            // Import files to selected plugins
+            files.forEach(fileData => {
+                const { file, pluginIds } = fileData;
 
-        this.props.onClose();
+                PluginManager.plugins.forEach(plugin => {
+                    const { id, modules } = plugin;
 
-        // Give notification
-        this.props.showNotification({
-            severity: 'success',
-            message: 'All files imported!',
-        });
+                    // Skip if plugin is not selected
+                    if (!pluginIds.includes(id)) {
+                        return;
+                    }
+
+                    // Skip if plugin does not support data import
+                    const dataModule = modules[ModuleTypeEnum.DataModule];
+                    if (!dataModule || typeof dataModule.importData !== 'function') {
+                        return;
+                    }
+
+                    const promise = dataModule.importData(file);
+                    promises.push(promise);
+                });
+            });
+
+            // Wait for all files to be imported
+            await Promise.all(promises);
+
+            this.setState({
+                importing: false,
+                files: [],
+            });
+
+            this.props.onClose();
+
+            // Give notification
+            this.props.showNotification({
+                severity: 'success',
+                message: 'Data has been successfully imported',
+            });
+        } catch (error) {
+            logger.error('Failed to import data', error);
+
+            this.setState({
+                importing: false,
+            });
+
+            // Give notification
+            this.props.showNotification({
+                severity: 'error',
+                message: 'An error occurred while importing data. Please contact your administrator.',
+            });
+        }
     };
 
     render() {
