@@ -9,7 +9,18 @@ export default class DocumentsDataModule extends Component {
         super(props);
 
         this.state = {
+            loading: true,
+            filters: {
+                dateRange: {
+                    begin: moment()
+                        .clone()
+                        .subtract(1, 'month'),
+                    end: moment(),
+                },
+            },
+            page: -1,
             rowsPerPage: 10,
+            data: [],
             columns: [
                 {
                     label: '',
@@ -37,9 +48,29 @@ export default class DocumentsDataModule extends Component {
         this.documentService = new DocumentService();
     }
 
-    fetchFiles = async (page, rowsPerPage) => {
-        const { data: data } = await this.documentService.fetch(page, rowsPerPage);
-        return data;
+    componentDidMount = () => {
+        this.fetchFiles();
+    };
+
+    fetchFiles = async () => {
+        this.setState({
+            loading: true,
+        });
+
+        try {
+            const page = this.state.page + 1;
+            const { data: data } = await this.documentService.fetch(page, this.state.rowsPerPage);
+            this.setState({
+                loading: false,
+                data,
+                page,
+            });
+        } catch (error) {
+            logger.error(error);
+            this.setState({
+                loading: false,
+            });
+        }
     };
 
     render() {
@@ -54,9 +85,11 @@ export default class DocumentsDataModule extends Component {
 
                     <Box className="content" mt={3} style={{ display: 'flex', flex: 1 }}>
                         <KailonaTable
+                            data={this.state.data}
                             columns={this.state.columns}
+                            page={this.state.page}
                             rowsPerPage={this.state.rowsPerPage}
-                            contextMenu={this.contextMenuOptions}
+                            loading={this.state.loading}
                             fetchNewData={this.fetchFiles}
                         />
                     </Box>
