@@ -1,6 +1,5 @@
-import { ProfileManager } from '@kailona/core';
+import { DocumentService } from '@kailona/core';
 import DocumentsDataModule from './components/DocumentsDataModule';
-import axios from 'axios/index';
 
 export default {
     id: 'plugin-documents',
@@ -19,17 +18,8 @@ export default {
     DataModule: {
         Component: DocumentsDataModule,
         importData: async file => {
-            const parent = ProfileManager.activePatientId;
-            const formData = new FormData();
-            formData.append('file', file);
-            formData.append('parent', parent);
-            const url = `/apps/ehr/documents/import`;
-
-            await axios({
-                method: 'POST',
-                url,
-                data: formData,
-            });
+            const documentService = new DocumentService();
+            await documentService.import(file);
         },
     },
 };

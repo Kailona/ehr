@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import axios from 'axios/index';
 import moment from 'moment';
 import { Typography, Box, Link } from '@material-ui/core';
 import { KailonaTable } from '@kailona/ui';
-import { ProfileManager } from '@kailona/core';
+import { DocumentService } from '@kailona/core';
 
 export default class DocumentsDataModule extends Component {
     constructor(props) {
@@ -37,6 +36,8 @@ export default class DocumentsDataModule extends Component {
                 },
             ],
         };
+
+        this.documentService = new DocumentService();
     }
 
     componentDidMount() {
@@ -48,14 +49,7 @@ export default class DocumentsDataModule extends Component {
             loading: true,
         });
 
-        const url = `/apps/ehr/documents/fetch`;
-        const parent = ProfileManager.activePatientId;
-        const { data } = await axios.post(url, {
-            parent,
-            offset: this.state.page,
-            limit: this.state.rowsPerPage,
-        });
-
+        const { data } = await this.documentService.fetch(this.state.page, this.state.rowsPerPage);
         const { data: existingData } = this.state;
         existingData.push(...data);
 

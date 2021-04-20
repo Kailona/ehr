@@ -67,10 +67,11 @@ class RequestDataModal extends React.Component {
                 });
             }
 
+            const patientId = ProfileManager.activePatientId;
             const { patientFullName: fromName } = ProfileManager.activeProfile;
             const body = this.emailBodyRef.current.value || this.defaultEmailBody;
 
-            await this.mailService.sendRequestData(fromName, to, body);
+            await this.mailService.sendRequestData(patientId, fromName, to, body);
 
             this.props.onClose();
 

@@ -10,6 +10,7 @@ export default {
         fhirBaseUrl: OC.generateUrl('/apps/ehr/fhir'),
         adminSettingsUrl: OC.generateUrl('/apps/ehr/settings/admin'),
         mailBaseUrl: OC.generateUrl('/apps/ehr/mail'),
+        documentBaseUrl: OC.generateUrl('/apps/ehr/documents'),
     },
     currentUser: {
         id: OC.getCurrentUser().uid,

@@ -2,28 +2,60 @@
 
 namespace OCA\EHR\Service;
 
+use OCP\Files\IRootFolder;
 use OCP\Files\Folder;
 use OCP\Files\Node;
+use OCP\Files\FileInfo;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IDateTimeFormatter;
 use OCP\ILogger;
 
 class DocumentsService {
-    public function __construct(Folder $rootFolder, IDateTimeFormatter $dateTimeFormatter, ILogger $logger) {
+    public function __construct(
+        IRootFolder $rootFolder,
+        IDateTimeFormatter $dateTimeFormatter,
+        ILogger $logger,
+        string $userId = null
+    ) {
         $this->rootFolder = $rootFolder;
         $this->dateTimeFormatter = $dateTimeFormatter;
         $this->logger = $logger;
-        $this->folderName = "Kailona/Documents";
+        $this->currentUser = $userId;
 
-        if (!$this->rootFolder->nodeExists($this->folderName)) {
-            $this->rootFolder->newFolder($this->folderName);
+        $this->folderName = 'Kailona/Documents';
+
+        $this->userFolder = $this->rootFolder->getUserFolder($this->currentUser);
+
+        if (!$this->userFolder->nodeExists($this->folderName)) {
+            $this->userFolder->newFolder($this->folderName);
         }
     }
 
+    private function getFileNodesRecursively($folderName) {
+        if (!$this->userFolder->nodeExists($folderName)) {
+            return [];
+        }
+
+        $folder = $this->userFolder->get($folderName);
+        $nodes = $folder->getDirectoryListing();
+
+        $fileNodes = [];
+
+        foreach($nodes as $node) {
+            if ($node->getType() === FileInfo::TYPE_FOLDER) {
+                $fileNodes = array_merge($fileNodes, $this->getFileNodesRecursively($this->userFolder->getRelativePath($node->getPath())));
+            } else {
+                array_push($fileNodes, $node);
+            }
+        }
+
+        return $fileNodes;
+    }
+
     public function import($file, $parent) {
-        $parentFolder =  $this->folderName . "/" .$parent;
-        $fileName = $parentFolder . "/" . $file['name'];
+        $parentFolder =  $this->folderName . '/' .$parent;
+        $fileName = $parentFolder . '/' . $file['name'];
 
         $content = fopen($file['tmp_name'], 'rb');
         if ($content === false) {
@@ -31,18 +63,14 @@ class DocumentsService {
             return new JSONResponse(array(), Http::STATUS_BAD_REQUEST);
         }
 
-        if (!$this->rootFolder->nodeExists($this->folderName)) {
-            $this->rootFolder->newFolder($this->folderName);
+        if (!$this->userFolder->nodeExists($parentFolder)) {
+            $this->userFolder->newFolder($parentFolder);
         }
 
-        if (!$this->rootFolder->nodeExists($parentFolder)) {
-            $this->rootFolder->newFolder($parentFolder);
-        }
-
-        if ($this->rootFolder->nodeExists($fileName)) {
-            $target = $this->rootFolder->get($fileName);
+        if ($this->userFolder->nodeExists($fileName)) {
+            $target = $this->userFolder->get($fileName);
         } else {
-            $target = $this->rootFolder->newFile($fileName);
+            $target = $this->userFolder->newFile($fileName);
         }
 
         $target->fopen('w');
@@ -51,17 +79,11 @@ class DocumentsService {
 
     public function fetch($parentFolder, $offset = 0, $limit = 10) {
         $files = [];
-        $folderName = $this->folderName . "/" . $parentFolder;
 
-        if (!$this->rootFolder->nodeExists($folderName)) {
-            return $files;
-        }
-
-        $absolutePath = $this->rootFolder->getFullPath($folderName);
-        $relativePath = $this->rootFolder->getRelativePath($absolutePath);
-
-        $folder = $this->rootFolder->get($relativePath);
-        $nodes = $folder->getDirectoryListing();
+        // Get all files from documents and data requests recursively
+        $documentFileNodes = $this->getFileNodesRecursively($this->folderName . '/' . $parentFolder);
+        $dataRequestFileNodes = $this->getFileNodesRecursively('Kailona/Data Requests/' . $parentFolder);
+        $nodes = array_merge($documentFileNodes, $dataRequestFileNodes);
 
         // Sort files by timestamp desc
         usort($nodes, function($node1, $node2) {
@@ -73,12 +95,12 @@ class DocumentsService {
 
         foreach($nodes as $node) {
             $id = $node->getId();
-            $path = "/apps/files/?dir=/" . $folderName . "&openfile=" . $id;
+            $path = '/apps/files/?dir=' . $this->userFolder->getRelativePath($node->getParent()->getPath()) . '&openfile=' . $id;
             $name = $node->getName();
             $timestamp = $node -> getMTime();
-            $modifiedDate = $this->dateTimeFormatter->formatDateTime($timestamp, "medium");
+            $modifiedDate = $this->dateTimeFormatter->formatDateTime($timestamp, 'medium');
 
-            $fileInfo = array("path" => $path, "name"=> $name, "modifiedDate" => $modifiedDate);
+            $fileInfo = array('path' => $path, 'name'=> $name, 'modifiedDate' => $modifiedDate);
 
             array_push($files, $fileInfo);
         }
