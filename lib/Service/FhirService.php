@@ -8,13 +8,15 @@ use OCP\IUserSession;
 use OCP\IConfig;
 use OCP\Http\Client\IClientService;
 use OCP\ILogger;
+use OCP\IURLGenerator;
 use Exception;
 
 class FhirService {
-    public function __construct(ILogger $logger, string $appName, IUserSession $userSession, IConfig $config, IClientService $clientService) {
+    public function __construct(ILogger $logger, string $appName, IUserSession $userSession, IConfig $config, IClientService $clientService, IURLGenerator $urlGenerator) {
         $this->logger = $logger;
         $this->appName = $appName;
         $this->clientService = $clientService;
+        $this->urlGenerator = $urlGenerator;
         $this->config = $config;
 
         $fhirBaseUrl = $this->config->getAppValue('ehr', 'fhirBaseUrl');
@@ -107,7 +109,7 @@ class FhirService {
         if (is_array($resource) && isset($resource['link'])) {
             for ($i = 0; $i < count($resource['link']); $i++) {
                 if (isset($resource['link'][$i]['url'])) {
-                    $resource['link'][$i]['url'] = str_replace($this->fhirConfig['baseUrl'], '/apps/ehr/fhir/', $resource['link'][$i]['url']);
+                    $resource['link'][$i]['url'] = str_replace($this->fhirConfig['baseUrl'], $this->urlGenerator->getAbsoluteURL('/apps/ehr/fhir/'), $resource['link'][$i]['url']);
                 }
             }
         }
@@ -168,7 +170,7 @@ class FhirService {
                 if ($key === 'Location') {
                     // Disable redirect on PUT
                     if ($method !== 'PUT') {
-                        $jsonResponseToSend->addHeader($key, str_replace($this->fhirConfig['baseUrl'], '/apps/ehr/fhir/', $value[0]));
+                        $jsonResponseToSend->addHeader($key, str_replace($this->fhirConfig['baseUrl'], $this->urlGenerator->getAbsoluteURL('/apps/ehr/fhir/'), $value[0]));
                     }
 
                     // Store fhir patient id on create
