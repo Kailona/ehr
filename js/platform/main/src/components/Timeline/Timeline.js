@@ -7,7 +7,7 @@ import TimeRangeFilter from './TimeRangeFilter';
 import DateRangeEnum from '@kailona/core/src/enums/DateRange.enum';
 import { withMain } from '../../context/MainContext';
 
-const logger = new Logger('Timeline');
+const logger = new Logger('main.Timeline');
 
 const Link = withStyles(theme => ({
     root: {

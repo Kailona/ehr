@@ -7,7 +7,7 @@ import ActivitiesService from '../services/ActivitiesService';
 import { Logger, fhirDataFormatter } from '@kailona/core';
 import ActivitiesEditModal from './ActivitiesEditModal';
 
-const logger = new Logger('ActivitiesDataModule');
+const logger = new Logger('Activities.ActivitiesDataModule');
 
 export default class ActivitiesDataModule extends Component {
     constructor(props) {

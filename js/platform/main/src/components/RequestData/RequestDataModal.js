@@ -15,7 +15,8 @@ import { Close as CloseIcon } from '@material-ui/icons';
 import { ProfileManager, MailService, Logger } from '@kailona/core';
 import { KailonaTextField, KailonaButton } from '@kailona/ui';
 import { withNotification } from '../../context/NotificationContext';
-const logger = new Logger('RequestDataModal');
+
+const logger = new Logger('main.RequestDataModal');
 
 const DialogContent = withStyles({
     root: {
@@ -66,10 +67,11 @@ class RequestDataModal extends React.Component {
                 });
             }
 
+            const patientId = ProfileManager.activePatientId;
             const { patientFullName: fromName } = ProfileManager.activeProfile;
             const body = this.emailBodyRef.current.value || this.defaultEmailBody;
 
-            await this.mailService.sendRequestData(fromName, to, body);
+            await this.mailService.sendRequestData(patientId, fromName, to, body);
 
             this.props.onClose();
 

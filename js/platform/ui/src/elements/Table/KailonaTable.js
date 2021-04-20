@@ -42,6 +42,7 @@ export default class KailonaTable extends Component {
         this.state = {
             anchorEl: null,
             rowData: null,
+            previousDataLength: 0,
         };
     }
 
@@ -67,8 +68,17 @@ export default class KailonaTable extends Component {
     };
 
     handleScroll = () => {
+        if (this.props.loading) {
+            return;
+        }
+
         const { fetchNewData } = this.props;
         if (fetchNewData && typeof fetchNewData === 'function') {
+            const previousDataLength = this.props.data.length;
+
+            this.setState({
+                previousDataLength,
+            });
             fetchNewData();
         }
     };
@@ -76,10 +86,13 @@ export default class KailonaTable extends Component {
     render() {
         const columnsLength = this.props.columns.length;
         const noDataColSpan = this.props.contextMenu ? columnsLength + 1 : columnsLength;
+        const rowHeight = 50;
+        const isWayPointAvailable = !this.state.loading && this.state.previousDataLength !== this.props.data.length;
+        const tableHeight = (this.props.rowsPerPage + 1) * rowHeight;
 
         return (
-            <Paper style={{ height: '100%', width: '100%', position: 'relative' }}>
-                <TableContainer style={{ position: 'absolute', top: 0, bottom: 0 }}>
+            <Paper style={{ height: `${tableHeight}px`, width: '100%', position: 'relative', overflowY: 'auto' }}>
+                <TableContainer>
                     <Table>
                         <TableHead>
                             <TableRow>
@@ -90,18 +103,26 @@ export default class KailonaTable extends Component {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {this.props.data.map((record, rowIndex) => (
+                            {this.props.data.map(record => (
                                 <TableRow>
-                                    {this.props.columns.map((col, index) => (
-                                        <TableCell>
-                                            <div>{record[col.key]}</div>
-                                            {index === 0 && (
-                                                <div>
-                                                    <Link color="primary">{record.source}</Link>
-                                                </div>
-                                            )}
-                                        </TableCell>
-                                    ))}
+                                    {this.props.columns.map((col, index) => {
+                                        let displayText = record[col.key];
+
+                                        if (col.display && typeof col.display === 'function') {
+                                            displayText = col.display(record, record[col.key]);
+                                        }
+
+                                        return (
+                                            <TableCell>
+                                                <div>{displayText}</div>
+                                                {index === 0 && (
+                                                    <div>
+                                                        <Link color="primary">{record.source}</Link>
+                                                    </div>
+                                                )}
+                                            </TableCell>
+                                        );
+                                    })}
                                     {this.props.contextMenu && (
                                         <TableCell>
                                             <IconButton onClick={e => this.toggleContextMenu(e, record)}>
@@ -129,10 +150,12 @@ export default class KailonaTable extends Component {
                             )}
                         </TableFooter>
                     </Table>
-                    <div>
-                        <Waypoint onEnter={this.handleScroll} />
-                    </div>
                 </TableContainer>
+                {isWayPointAvailable && (
+                    <div style={{ marginTop: `10px`, height: '20px' }}>
+                        <Waypoint onEnter={this.handleScroll}></Waypoint>
+                    </div>
+                )}
 
                 {this.props.pagination && (
                     <TablePagination
@@ -140,7 +163,7 @@ export default class KailonaTable extends Component {
                         component="div"
                         count={this.props.data.length}
                         rowsPerPage={this.props.rowsPerPage}
-                        page={this.props.page}
+                        page={this.state.page}
                         onChangePage={(e, page) => this.props.onChangePage(e, page)}
                         onChangeRowsPerPage={e => this.props.onChangeRowsPerPage(e)}
                     />

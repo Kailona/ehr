@@ -6,10 +6,11 @@ export default class MailService {
         this.baseUrl = ConfigManager.appConfig.settings.mailBaseUrl;
     }
 
-    async sendRequestData(fromName, to, body) {
+    async sendRequestData(patientId, fromName, to, body) {
         const url = `${this.baseUrl}/requestdata`;
 
         const data = {
+            patientId,
             fromName,
             to,
             body,

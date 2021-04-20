@@ -7,6 +7,7 @@ import FHIRService from './services/FHIRService';
 import BaseResourceService from './services/BaseResourceService';
 import SettingsService from './services/SettingsService';
 import MailService from './services/MailService';
+import DocumentService from './services/DocumentService';
 import getIcon from './utils/getIcon';
 import readFileAsText from './utils/readFileAsText';
 import fhirDataFormatter from './utils/fhirDataFormatter';
@@ -21,6 +22,7 @@ export {
     BaseResourceService,
     SettingsService,
     MailService,
+    DocumentService,
     getIcon,
     readFileAsText,
     fhirDataFormatter,
