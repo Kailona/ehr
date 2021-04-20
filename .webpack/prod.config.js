@@ -23,7 +23,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(jpe?g|png|gif|svg)$/,
+                test: /\.(jpe?g|png|gif|svg|woff|woff2)$/,
                 loader: 'url-loader',
                 options: { limit: 10240 },
             },

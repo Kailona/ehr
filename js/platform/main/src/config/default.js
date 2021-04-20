@@ -4,7 +4,7 @@ import VitalsPlugin from '@kailona/plugin-vitals';
 import DocumentsPlugin from '@kailona/plugin-documents';
 
 export default {
-    basename: '/apps/ehr',
+    basename: OC.generateUrl('/apps/ehr'),
     plugins: [PhysicalDataPlugin, ActivitiesPlugin, VitalsPlugin, DocumentsPlugin],
     settings: {
         fhirBaseUrl: OC.generateUrl('/apps/ehr/fhir'),
