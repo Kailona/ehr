@@ -59,7 +59,11 @@ export default class DocumentsDataModule extends Component {
 
         try {
             const page = this.state.page + 1;
-            const { data: data } = await this.documentService.fetch(page, this.state.rowsPerPage);
+            const offset = page * this.state.rowsPerPage;
+            const { data: nextData } = await this.documentService.fetch(offset, this.state.rowsPerPage);
+
+            const data = [...this.state.data, ...nextData];
+
             this.setState({
                 loading: false,
                 data,
@@ -67,6 +71,7 @@ export default class DocumentsDataModule extends Component {
             });
         } catch (error) {
             logger.error(error);
+
             this.setState({
                 loading: false,
             });
