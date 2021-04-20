@@ -9,10 +9,7 @@ export default class DocumentsDataModule extends Component {
         super(props);
 
         this.state = {
-            loading: true,
-            page: 0,
             rowsPerPage: 10,
-            data: [],
             columns: [
                 {
                     label: '',
@@ -40,39 +37,9 @@ export default class DocumentsDataModule extends Component {
         this.documentService = new DocumentService();
     }
 
-    componentDidMount() {
-        this.fetchFiles();
-    }
-
-    async fetchFiles() {
-        this.setState({
-            loading: true,
-        });
-
-        const { data } = await this.documentService.fetch(this.state.page, this.state.rowsPerPage);
-        const { data: existingData } = this.state;
-        existingData.push(...data);
-
-        this.setState({
-            data: existingData,
-            loading: false,
-        });
-    }
-
-    fetchNextFiles = async () => {
-        // Wait for the previous request
-        if (this.state.loading) {
-            return;
-        }
-
-        this.setState(
-            {
-                page: (this.state.page + 1) * this.state.rowsPerPage,
-            },
-            () => {
-                this.fetchFiles();
-            }
-        );
+    fetchFiles = async (page, rowsPerPage) => {
+        const { data: data } = await this.documentService.fetch(page, rowsPerPage);
+        return data;
     };
 
     render() {
@@ -87,13 +54,10 @@ export default class DocumentsDataModule extends Component {
 
                     <Box className="content" mt={3} style={{ display: 'flex', flex: 1 }}>
                         <KailonaTable
-                            data={this.state.data}
                             columns={this.state.columns}
-                            page={this.state.page}
                             rowsPerPage={this.state.rowsPerPage}
                             contextMenu={this.contextMenuOptions}
-                            loading={this.state.loading}
-                            fetchNewData={this.fetchNextFiles}
+                            fetchNewData={this.fetchFiles}
                         />
                     </Box>
                 </div>

@@ -40,9 +40,22 @@ export default class KailonaTable extends Component {
         super(props);
 
         this.state = {
+            loading: true,
             anchorEl: null,
             rowData: null,
+            data: [],
+            page: 0,
         };
+
+        this.previousDataLength = 0;
+    }
+
+    async componentDidMount() {
+        const data = await this.props.fetchNewData(0, this.props.rowsPerPage);
+        this.setState({
+            data,
+            loading: false,
+        });
     }
 
     toggleContextMenu = (e, rowData) => {
@@ -67,18 +80,41 @@ export default class KailonaTable extends Component {
     };
 
     handleScroll = () => {
+        if (this.state.loading) {
+            return;
+        }
+
+        const page = this.state.page + 1;
+        this.setState({
+            loading: true,
+        });
         const { fetchNewData } = this.props;
         if (fetchNewData && typeof fetchNewData === 'function') {
-            fetchNewData();
+            fetchNewData(page, this.props.rowsPerPage).then(data => {
+                const { data: existingData } = this.state;
+                const previousDataLength = existingData.length;
+                existingData.push(...data);
+
+                this.setState({
+                    data: existingData,
+                    loading: false,
+                    page,
+                });
+
+                this.previousDataLength = previousDataLength;
+            });
         }
     };
 
     render() {
         const columnsLength = this.props.columns.length;
         const noDataColSpan = this.props.contextMenu ? columnsLength + 1 : columnsLength;
+        const rowHeight = 50;
+        const isWayPointAvailable = !this.state.loading && this.previousDataLength !== this.state.data.length;
+        const tableHeight = (this.props.rowsPerPage + 1) * rowHeight;
 
         return (
-            <Paper style={{ height: '100%', width: '100%', position: 'relative' }}>
+            <Paper style={{ height: `${tableHeight}px`, width: '100%', position: 'relative', overflowY: 'auto' }}>
                 <TableContainer>
                     <Table>
                         <TableHead>
@@ -90,7 +126,7 @@ export default class KailonaTable extends Component {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {this.props.data.map((record, rowIndex) => (
+                            {this.state.data.map(record => (
                                 <TableRow>
                                     {this.props.columns.map((col, index) => {
                                         let displayText = record[col.key];
@@ -121,14 +157,14 @@ export default class KailonaTable extends Component {
                             ))}
                         </TableBody>
                         <TableFooter>
-                            {this.props.loading && (
+                            {this.state.loading && (
                                 <TableRow>
                                     <TableCell colSpan={this.props.columns.length} align="center">
                                         <Loader />
                                     </TableCell>
                                 </TableRow>
                             )}
-                            {!this.props.loading && (!this.props.data || !this.props.data.length) && (
+                            {!this.state.loading && (!this.state.data || !this.state.data.length) && (
                                 <TableRow>
                                     <TableCell colSpan={noDataColSpan} align="center">
                                         <Typography variant="h5">No data available</Typography>
@@ -137,18 +173,20 @@ export default class KailonaTable extends Component {
                             )}
                         </TableFooter>
                     </Table>
-                    <div>
-                        <Waypoint onEnter={this.handleScroll} />
-                    </div>
                 </TableContainer>
+                {isWayPointAvailable && (
+                    <div style={{ marginTop: `${rowHeight}px`, height: '20px' }}>
+                        <Waypoint onEnter={this.handleScroll}></Waypoint>
+                    </div>
+                )}
 
                 {this.props.pagination && (
                     <TablePagination
                         rowsPerPageOptions={[1, 5, 10, 25]}
                         component="div"
-                        count={this.props.data.length}
+                        count={this.state.data.length}
                         rowsPerPage={this.props.rowsPerPage}
-                        page={this.props.page}
+                        page={this.state.page}
                         onChangePage={(e, page) => this.props.onChangePage(e, page)}
                         onChangeRowsPerPage={e => this.props.onChangeRowsPerPage(e)}
                     />
