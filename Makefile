@@ -1,7 +1,7 @@
 # Makefile for building the project
 
 app_name=ehr
-project_dir=$(CURDIR)/../$(app_name)
+project_dir=$(CURDIR)
 build_dir=$(project_dir)/build
 appstore_dir=$(build_dir)/appstore
 package_name=$(app_name)
