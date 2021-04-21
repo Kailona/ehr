@@ -19,7 +19,7 @@ export default class DocumentsDataModule extends Component {
                 },
             },
             page: -1,
-            rowsPerPage: 10,
+            rowsPerPage: 25,
             data: [],
             columns: [
                 {

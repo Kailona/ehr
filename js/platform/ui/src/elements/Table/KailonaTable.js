@@ -86,7 +86,7 @@ export default class KailonaTable extends Component {
     render() {
         const columnsLength = this.props.columns.length;
         const noDataColSpan = this.props.contextMenu ? columnsLength + 1 : columnsLength;
-        const rowHeight = 50;
+        const rowHeight = 80;
         const isWayPointAvailable = !this.state.loading && this.state.previousDataLength !== this.props.data.length;
         const tableHeight = (this.props.rowsPerPage + 1) * rowHeight;
 
