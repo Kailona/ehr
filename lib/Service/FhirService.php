@@ -181,6 +181,8 @@ class FhirService {
                             $this->config->setUserValue($this->userId, 'ehr', 'fhirPatientId', $fhirPatientId);
                         }
                     }
+                } else if ($key === 'Transfer-Encoding') {
+                    // Do not set original transfer encoding from FHIR server since it might be chunked
                 } else {
                     $jsonResponseToSend->addHeader($key, $value[0]);
                 }
