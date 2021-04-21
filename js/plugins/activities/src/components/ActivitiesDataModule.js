@@ -24,7 +24,7 @@ export default class ActivitiesDataModule extends Component {
                 },
             },
             page: 0,
-            rowsPerPage: 10,
+            rowsPerPage: 25,
             data: [],
             columns: [
                 {

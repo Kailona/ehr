@@ -25,7 +25,7 @@ export default class VitalsDataModule extends Component {
                 },
             },
             page: 0,
-            rowsPerPage: 10,
+            rowsPerPage: 25,
             data: [],
             columns: [
                 {
