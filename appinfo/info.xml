@@ -12,7 +12,7 @@ This app works with a FHIR server. Please read the [documentation](https://docs.
 
 **Note that this app is under alpha development!**
 	]]></description>
-	<version>0.1.3</version>
+	<version>0.1.4</version>
 	<licence>agpl</licence>
 	<author>Kailona</author>
 	<namespace>EHR</namespace>
