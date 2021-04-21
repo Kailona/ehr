@@ -1,0 +1,10 @@
+{ "translations": {
+    "Username" : "Nom d'utilizaire",
+    "Password" : "Senhal",
+    "Welcome" : "La benvenguda",
+    "Cancel" : "Anullar",
+    "Distance" : "Distància",
+    "Calories" : "Calorias",
+    "Edit" : "Modificar"
+},"pluralForm" :"nplurals=2; plural=(n > 1);"
+}
