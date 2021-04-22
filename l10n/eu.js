@@ -34,6 +34,8 @@ OC.L10N.register(
     "Update Activity" : "Eguneratu jarduera",
     "Start Date/Time" : "Hasiera data/ordua",
     "End Date/Time" : "Amaiera data/ordua",
+    "Name" : "Izena",
+    "Documents" : "Dokumentuak",
     "Update Physical Data" : "Eguneratu datu fisikoak",
     "Age" : "Adina",
     "Body Mass Index" : "Gorputz-masaren indizea",
