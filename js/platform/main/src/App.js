@@ -8,8 +8,9 @@ import { MainContextProvider } from './context/MainContext';
 import Dashboard from './components/Dashboard';
 import MainLayout from './components/MainLayout';
 import initFHIRPatients from './lib/initFHIRPatients';
+import importLocalFonts from './lib/importLocalFonts';
 
-import './App.styl';
+import './App.css';
 
 const logger = new Logger('main.App');
 
@@ -25,6 +26,9 @@ export default class App extends Component {
     }
 
     componentDidMount = async () => {
+        // Load local fonts
+        importLocalFonts(ConfigManager.appConfig.fontsPath);
+
         try {
             const firstTime = await initFHIRPatients();
 

@@ -10,9 +10,6 @@ import AppAdminSettings from './AppAdminSettings';
 
 import config from './config/default';
 
-// Use local font instead of CDN
-import '@fontsource/nunito';
-
 // Set App Config
 ConfigManager.appConfig = config;
 

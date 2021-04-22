@@ -11,7 +11,7 @@ const styles = theme => ({
         backgroundColor: '#fff !important',
         border: '1px solid #9FA8DA !important',
         textAlign: 'center',
-        fontFamily: 'Nunito',
+        fontFamily: 'Nunito Sans',
         fontStyle: 'normal',
         fontWeight: '800',
         fontSize: '15px',

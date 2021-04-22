@@ -47,7 +47,7 @@ const theme = createMuiTheme({
     },
     spacing: 8,
     typography: {
-        fontFamily: 'Nunito',
+        fontFamily: 'Nunito Sans',
         h1: {
             fontSize: '36px',
             letterSpacing: '0px',
@@ -101,7 +101,7 @@ const theme = createMuiTheme({
             borderRadius: '4px',
             borderColor: '#9FA8DA',
             textAlign: 'center',
-            fontFamily: 'Nunito',
+            fontFamily: 'Nunito Sans',
             fontSize: '15px',
             letterSpacing: '0.5px',
             color: '#3F51B5',

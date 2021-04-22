@@ -5,6 +5,9 @@ import DocumentsPlugin from '@kailona/plugin-documents';
 
 export default {
     basename: OC.generateUrl('/apps/ehr'),
+    fontsPath: {
+        nunitosans: OC.filePath('ehr', 'fonts', 'nunitosans'),
+    },
     plugins: [PhysicalDataPlugin, ActivitiesPlugin, VitalsPlugin, DocumentsPlugin],
     settings: {
         fhirBaseUrl: OC.generateUrl('/apps/ehr/fhir'),
