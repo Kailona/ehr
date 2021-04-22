@@ -57,7 +57,7 @@ class Dashboard extends Component {
         const widgets = this.getWidgets();
 
         return (
-            <Grid container direction="column">
+            <Grid container direction="column" spacing={2}>
                 <Grid item>
                     <Timeline />
                 </Grid>
