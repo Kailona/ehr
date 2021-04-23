@@ -46,7 +46,6 @@ OC.L10N.register(
     "Add Physical Data" : "Gehitu datu fisikoak",
     "Unknown" : "Ezezaguna",
     "Underweight" : "Gutxiegizko pisua",
-    "Normal / Healthy" : "Normala / osasuntsua",
     "Overweight" : "Gehiegizko pisua",
     "Obese" : "Obesitatea",
     "Systolic Blood Pressure" : "Odol-presio sistolikoa",

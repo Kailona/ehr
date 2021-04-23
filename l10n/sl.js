@@ -46,7 +46,6 @@ OC.L10N.register(
     "Add Physical Data" : "Dodaj telesne podatke",
     "Unknown" : "Neznano",
     "Underweight" : "Podmerna telesna masa",
-    "Normal / Healthy" : "Normalna / Zdrava telesna teža",
     "Overweight" : "Prekomerna telesna teža",
     "Obese" : "Debelost",
     "Systolic Blood Pressure" : "Sistolični krvni tlak",

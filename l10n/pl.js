@@ -49,7 +49,6 @@ OC.L10N.register(
     "Add Physical Data" : "Dodaj dane fizyczne",
     "Unknown" : "Nieznany",
     "Underweight" : "Niedowaga",
-    "Normal / Healthy" : "Normalne/zdrowe",
     "Overweight" : "Nadwaga",
     "Obese" : "Otyły",
     "Systolic Blood Pressure" : "Skurczowe ciśnienie krwi",

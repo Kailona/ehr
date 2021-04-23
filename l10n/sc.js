@@ -45,7 +45,6 @@ OC.L10N.register(
     "Add Physical Data" : "Agiunghe datos fìsicos",
     "Unknown" : "Disconnotu",
     "Underweight" : "Sutapesu",
-    "Normal / Healthy" : "Normale / in salude",
     "Overweight" : "Subrapesu",
     "Obese" : "Obesidade",
     "Systolic Blood Pressure" : "Pressione de is artèrias sistòlica",

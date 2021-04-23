@@ -47,7 +47,6 @@ OC.L10N.register(
     "Add Physical Data" : "Toevoegen fysieke gegevens",
     "Unknown" : "Onbekend",
     "Underweight" : "Ondergewicht",
-    "Normal / Healthy" : "Normaal / Gezond",
     "Overweight" : "Overgewicht",
     "Obese" : "Zwaarlijvig",
     "Systolic Blood Pressure" : "Systolische bloeddruk",

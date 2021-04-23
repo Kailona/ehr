@@ -41,7 +41,6 @@ OC.L10N.register(
     "Add Physical Data" : "Ajouter des données physiques",
     "Unknown" : "Inconnu",
     "Underweight" : "Maigreur",
-    "Normal / Healthy" : "Corpulence normale",
     "Overweight" : "Surpoids",
     "Obese" : "Obésité",
     "Heart Rate" : "Rythme cardiaque",

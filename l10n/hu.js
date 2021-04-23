@@ -46,7 +46,6 @@ OC.L10N.register(
     "Add Physical Data" : "Fizikai adatok hozzáadása",
     "Unknown" : "Ismeretlen",
     "Underweight" : "Sovány",
-    "Normal / Healthy" : "Normál / Egészséges",
     "Overweight" : "Túlsúlyos",
     "Obese" : "Elhízott",
     "Systolic Blood Pressure" : "Szisztolés vérnyomás",

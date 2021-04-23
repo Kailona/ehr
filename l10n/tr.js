@@ -47,7 +47,6 @@ OC.L10N.register(
     "Add Physical Data" : "Fiziksel Veri Ekle",
     "Unknown" : "Bilinmiyor",
     "Underweight" : "Zayıf",
-    "Normal / Healthy" : "Normal / Sağlıklı",
     "Overweight" : "Kilolu",
     "Obese" : "Obez",
     "Systolic Blood Pressure" : "Büyük Tansiyon",

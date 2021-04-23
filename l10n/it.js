@@ -47,7 +47,6 @@ OC.L10N.register(
     "Add Physical Data" : "Aggiungi dati fisici",
     "Unknown" : "Sconosciuto",
     "Underweight" : "Sottopeso",
-    "Normal / Healthy" : "Normale / Sano",
     "Overweight" : "Sovrappeso",
     "Obese" : "Obeso",
     "Systolic Blood Pressure" : "Pressione sanguigna sistolica",
