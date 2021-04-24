@@ -49,6 +49,7 @@ OC.L10N.register(
     "Add Physical Data" : "Přidat tělesný údaj",
     "Unknown" : "Neznámé",
     "Underweight" : "Podváha",
+    "Normal/Healthy" : "Normální/Zdravý",
     "Overweight" : "Nadváha",
     "Obese" : "Obezita",
     "Systolic Blood Pressure" : "Systolický krevní tlak",
