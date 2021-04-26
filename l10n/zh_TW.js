@@ -49,6 +49,7 @@ OC.L10N.register(
     "Add Physical Data" : "新增生理資料",
     "Unknown" : "未知",
     "Underweight" : "過輕",
+    "Normal/Healthy" : "正常／健康",
     "Overweight" : "過重",
     "Obese" : "肥胖",
     "Systolic Blood Pressure" : "收縮壓",
