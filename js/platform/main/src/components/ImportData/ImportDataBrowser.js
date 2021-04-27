@@ -98,6 +98,7 @@ class ImportDataBrowser extends Component {
 
     getDataTypeMenuItems = pluginIds => {
         const menuItems = [];
+        const importOptions = [];
         const { classes } = this.props;
 
         PluginManager.plugins.forEach((plugin, index) => {
@@ -109,6 +110,13 @@ class ImportDataBrowser extends Component {
                 return;
             }
 
+            importOptions.push({ id, name });
+        });
+
+        importOptions.push({ id: 'FHIR', name: 'FHIR' });
+
+        importOptions.map((item, index) => {
+            const { id, name } = item;
             menuItems.push(
                 <MenuItem key={index} value={id} disableRipple={true}>
                     <Checkbox checked={pluginIds.includes(id)} className={classes.destinationCheckbox} />
@@ -116,24 +124,27 @@ class ImportDataBrowser extends Component {
                 </MenuItem>
             );
         });
-
         return menuItems;
     };
 
-    getPluginNames = selectedPluginIds => {
-        const pluginNames = [];
+    getOptionNames = selectedOptionIds => {
+        const optionNames = [];
 
         PluginManager.plugins.forEach(plugin => {
             const { id, name } = plugin;
 
-            if (!selectedPluginIds.includes(id)) {
+            if (!selectedOptionIds.includes(id)) {
                 return;
             }
 
-            pluginNames.push(name);
+            optionNames.push(name);
         });
 
-        return pluginNames.join(', ');
+        if (selectedOptionIds.includes('FHIR')) {
+            optionNames.push('FHIR');
+        }
+
+        return optionNames.join(', ');
     };
 
     getFileItems = () => {
@@ -152,12 +163,15 @@ class ImportDataBrowser extends Component {
                             <InputLabel className={classes.selectLabel}>Select</InputLabel>
                             <Select
                                 className={classes.selectBox}
+                                MenuProps={{
+                                    getContentAnchorEl: () => null,
+                                }}
                                 multiple
                                 placeholder="Select options"
                                 value={pluginIds}
                                 onChange={event => this.props.onDataTypesChanged(file, event.target.value)}
                                 input={<Input style={{ margin: '0' }} />}
-                                renderValue={selected => this.getPluginNames(selected)}
+                                renderValue={selected => this.getOptionNames(selected)}
                                 inputProps={{
                                     classes: {
                                         icon: classes.icon,

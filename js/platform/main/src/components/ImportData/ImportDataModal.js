@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Close as CloseIcon } from '@material-ui/icons';
-import { Logger, ModuleTypeEnum, PluginManager, getIcon } from '@kailona/core';
+import { Logger, ModuleTypeEnum, PluginManager, getIcon, readFileAsText, FHIRService } from '@kailona/core';
 import { KailonaButton } from '@kailona/ui';
 import ImportDataBrowser from './ImportDataBrowser';
 import { withNotification } from '../../context/NotificationContext';
@@ -140,6 +140,11 @@ class ImportDataModal extends Component {
                     const promise = dataModule.importData(file);
                     promises.push(promise);
                 });
+
+                if (pluginIds.includes('FHIR') && file.type === 'application/json') {
+                    const promise = this.importJSON(file);
+                    promises.push(promise);
+                }
             });
 
             // Wait for all files to be imported
@@ -170,6 +175,45 @@ class ImportDataModal extends Component {
                 message: 'An error occurred while importing data. Please contact your administrator.',
             });
         }
+    };
+
+    importJSON = async file => {
+        const fileAsText = await readFileAsText(file);
+        const fileAsJSON = JSON.parse(fileAsText);
+        const { resourceType, type } = fileAsJSON;
+
+        try {
+            if (!resourceType) {
+                throw 'File must have a resourceType value';
+            }
+
+            let transactionFile;
+
+            if (resourceType === 'Bundle' && type && type === 'transaction') {
+                transactionFile = fileAsJSON;
+            } else {
+                transactionFile = {
+                    resourceType: 'Bundle',
+                    type: 'transaction',
+                    entry: [
+                        {
+                            resource: { ...fileAsJSON },
+                            request: {
+                                method: 'POST',
+                                url: resourceType, // resourceType
+                            },
+                        },
+                    ],
+                };
+            }
+
+            const fhirService = new FHIRService();
+            await fhirService.transaction(transactionFile);
+            return true;
+        } catch (error) {
+            console.error('Failed to import data', error);
+        }
+        return false;
     };
 
     render() {
