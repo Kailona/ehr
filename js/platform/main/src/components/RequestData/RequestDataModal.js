@@ -113,14 +113,14 @@ class RequestDataModal extends React.Component {
                                 inputRef={this.toEmailRef}
                                 id="providerEmail"
                                 type="text"
-                                label="Email"
+                                label={t('ehr', 'Email')}
                                 style={{ width: '100%' }}
                             />
                         </Grid>
                         <Grid item xs={12} style={{ marginTop: '20px' }}>
                             <Grid container direction="column">
                                 <Grid item>
-                                    <Typography variant="body2">Message to Provider:</Typography>
+                                    <Typography variant="body2">t('ehr', 'Message to Provider:')</Typography>
                                 </Grid>
                                 <Grid item>
                                     <TextareaAutosize
@@ -137,13 +137,13 @@ class RequestDataModal extends React.Component {
                 <DialogActions>
                     <KailonaButton
                         class="default"
-                        title="Cancel"
+                        title={t('ehr', 'Cancel')}
                         onClick={this.props.onClose}
                         disabled={this.state.loading}
                     />
                     <KailonaButton
                         class="primary"
-                        title="Send Request"
+                        title={t('ehr', 'Send Request')}
                         onClick={this.sendRequest}
                         loading={this.state.loading}
                         disabled={this.state.loading}
