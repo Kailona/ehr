@@ -175,7 +175,7 @@ class ImportDataModal extends Component {
     render() {
         const { importing, files } = this.state;
         const importIcon = getIcon('CloudUploadOutlined');
-        const browseFilesButtonTitle = files && files.length ? 'Add More Files' : 'Browse Files';
+        const browseFilesButtonTitle = files && files.length ? {t('ehr', 'Add More Files')} : {t('ehr', 'Browse Files')};
         return (
             <Dialog maxWidth="sm" fullWidth={true} open={this.props.isOpen}>
                 <DialogTitle>
@@ -204,7 +204,7 @@ class ImportDataModal extends Component {
                                         <div className="subtitle">
                                             <div>
                                                 <Typography variant="h2" style={{ fontWeight: 'normal' }}>
-                                                    Drag and Drop Files
+                                                    {t('ehr', 'Drag and Drop Files')}
                                                 </Typography>
                                             </div>
                                             <div className={this.props.classes.importIcon}>{importIcon}</div>
