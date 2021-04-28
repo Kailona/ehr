@@ -273,7 +273,7 @@ export default class PhysicalDataModule extends Component {
             <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
                 <div>
                     <div className="title">
-                        <Typography variant="h3">Physical Data</Typography>
+                        <Typography variant="h3">{t('ehr', 'Physical Data)}</Typography>
                     </div>
                     <Box className="add-new" mt={2}>
                         <KailonaButton title={t('ehr', 'Add Physical Data')} onClick={this.onAddNewPhysicalData} />
