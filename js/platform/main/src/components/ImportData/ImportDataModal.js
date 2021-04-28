@@ -155,7 +155,7 @@ class ImportDataModal extends Component {
             // Give notification
             this.props.showNotification({
                 severity: 'success',
-                message: 'Data has been successfully imported',
+                message: {t('ehr', 'Data has been successfully imported')},
             });
         } catch (error) {
             logger.error('Failed to import data', error);
@@ -167,7 +167,7 @@ class ImportDataModal extends Component {
             // Give notification
             this.props.showNotification({
                 severity: 'error',
-                message: 'An error occurred while importing data. Please contact your administrator.',
+                message: {t('ehr', 'An error occurred while importing data. Please contact your administrator.')},
             });
         }
     };
@@ -175,7 +175,7 @@ class ImportDataModal extends Component {
     render() {
         const { importing, files } = this.state;
         const importIcon = getIcon('CloudUploadOutlined');
-        const browseFilesButtonTitle = files && files.length ? {t('ehr', 'Add More Files')} : {t('ehr', 'Browse Files')};
+        const browseFilesButtonTitle = {t('ehr', files && files.length ? 'Add More Files' : 'Browse Files')};
         return (
             <Dialog maxWidth="sm" fullWidth={true} open={this.props.isOpen}>
                 <DialogTitle>
