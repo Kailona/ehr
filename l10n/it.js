@@ -37,6 +37,8 @@ OC.L10N.register(
     "Update Activity" : "Aggiorna attività",
     "Start Date/Time" : "Data/Ora di inizio",
     "End Date/Time" : "Data/Ora di fine",
+    "Name" : "Nome",
+    "Documents" : "Documenti",
     "Update Physical Data" : "Aggiorna dati fisici",
     "Age" : "Età",
     "Body Mass Index" : "Indice di massa corporea",
