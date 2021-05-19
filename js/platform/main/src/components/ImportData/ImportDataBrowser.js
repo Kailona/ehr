@@ -84,6 +84,8 @@ const styles = theme => ({
     },
 });
 
+const FHIR = { id: 'FHIR', name: 'FHIR' };
+
 class ImportDataBrowser extends Component {
     static propTypes = {
         files: PropTypes.arrayOf(
@@ -113,7 +115,7 @@ class ImportDataBrowser extends Component {
             importOptions.push({ id, name });
         });
 
-        importOptions.push({ id: 'FHIR', name: 'FHIR' });
+        importOptions.push(FHIR);
 
         importOptions.map((item, index) => {
             const { id, name } = item;
