@@ -16,6 +16,7 @@ import { Logger, ModuleTypeEnum, PluginManager, getIcon } from '@kailona/core';
 import { KailonaButton } from '@kailona/ui';
 import ImportDataBrowser from './ImportDataBrowser';
 import { withNotification } from '../../context/NotificationContext';
+import { importJSON } from '../../lib/importFHIRData';
 
 import './ImportDataModal.styl';
 
@@ -140,6 +141,11 @@ class ImportDataModal extends Component {
                     const promise = dataModule.importData(file);
                     promises.push(promise);
                 });
+
+                if (pluginIds.includes('FHIR') && file.type === 'application/json') {
+                    const promise = importJSON(file);
+                    promises.push(promise);
+                }
             });
 
             // Wait for all files to be imported
