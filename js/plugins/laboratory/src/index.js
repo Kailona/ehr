@@ -61,19 +61,19 @@ export default {
         {
             name: 'Leukocytes',
             color: '#ff6384',
-            icon: 'WhatshotOutlined',
+            icon: 'Opacity',
             getData: getTimelineLeukocytes,
         },
         {
             name: 'Hemoglobin',
             color: '#ff6374',
-            icon: 'WhatshotOutlined',
+            icon: 'Opacity',
             getData: getTimelineHemoglobin,
         },
         {
             name: 'Platelets',
             color: '#ff6364',
-            icon: 'WhatshotOutlined',
+            icon: 'Opacity',
             getData: getTimelinePlatelets,
         },
     ],
