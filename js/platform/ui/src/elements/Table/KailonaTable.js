@@ -144,7 +144,7 @@ export default class KailonaTable extends Component {
                             {!this.props.loading && (!this.props.data || !this.props.data.length) && (
                                 <TableRow>
                                     <TableCell colSpan={noDataColSpan} align="center">
-                                        <Typography variant="h5">No data available</Typography>
+                                        <Typography variant="h5">{t('ehr', 'No data available')}</Typography>
                                     </TableCell>
                                 </TableRow>
                             )}

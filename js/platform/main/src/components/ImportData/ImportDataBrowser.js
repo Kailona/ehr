@@ -122,7 +122,7 @@ class ImportDataBrowser extends Component {
             menuItems.push(
                 <MenuItem key={index} value={id} disableRipple={true}>
                     <Checkbox checked={pluginIds.includes(id)} className={classes.destinationCheckbox} />
-                    <ListItemText primary={name} />
+                    <ListItemText primary={t('ehr', name)} />
                 </MenuItem>
             );
         });
@@ -139,7 +139,7 @@ class ImportDataBrowser extends Component {
                 return;
             }
 
-            optionNames.push(name);
+            optionNames.push(t('ehr', name));
         });
 
         if (selectedOptionIds.includes('FHIR')) {
@@ -169,7 +169,7 @@ class ImportDataBrowser extends Component {
                                     getContentAnchorEl: () => null,
                                 }}
                                 multiple
-                                placeholder="Select options"
+                                placeholder={t('ehr', 'Select options')}
                                 value={pluginIds}
                                 onChange={event => this.props.onDataTypesChanged(file, event.target.value)}
                                 input={<Input style={{ margin: '0' }} />}
@@ -200,10 +200,10 @@ class ImportDataBrowser extends Component {
             <div className={classes.importDataBrowser} style={{ padding: '10px 20px' }}>
                 <div key="header" className={classes.fileItem}>
                     <div className={classes.fileName}>
-                        <Typography variant="body1">File Name</Typography>
+                        <Typography variant="body1">{t('ehr', 'File Name')}</Typography>
                     </div>
                     <div className={classes.destination}>
-                        <Typography variant="body1">Destination</Typography>
+                        <Typography variant="body1">{t('ehr', 'Destination')}</Typography>
                     </div>
                 </div>
                 {this.getFileItems()}

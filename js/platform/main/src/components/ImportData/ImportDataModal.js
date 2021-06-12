@@ -161,10 +161,10 @@ class ImportDataModal extends Component {
             // Give notification
             this.props.showNotification({
                 severity: 'success',
-                message: 'Data has been successfully imported',
+                message: t('ehr', 'Data has been successfully imported'),
             });
         } catch (error) {
-            logger.error('Failed to import data', error);
+            logger.error(t('ehr', 'Failed to import data'), error);
 
             this.setState({
                 importing: false,
@@ -173,7 +173,7 @@ class ImportDataModal extends Component {
             // Give notification
             this.props.showNotification({
                 severity: 'error',
-                message: 'An error occurred while importing data. Please contact your administrator.',
+                message: t('ehr', 'An error occurred while importing data. Please contact your administrator.'),
             });
         }
     };
@@ -181,7 +181,7 @@ class ImportDataModal extends Component {
     render() {
         const { importing, files } = this.state;
         const importIcon = getIcon('CloudUploadOutlined');
-        const browseFilesButtonTitle = files && files.length ? 'Add More Files' : 'Browse Files';
+        const browseFilesButtonTitle = files && files.length ? t('ehr', 'Add More Files') : t('ehr', 'Browse Files');
         return (
             <Dialog maxWidth="sm" fullWidth={true} open={this.props.isOpen}>
                 <DialogTitle>
@@ -210,7 +210,7 @@ class ImportDataModal extends Component {
                                         <div className="subtitle">
                                             <div>
                                                 <Typography variant="h2" style={{ fontWeight: 'normal' }}>
-                                                    Drag and Drop Files
+                                                    {t('ehr', 'Drag and Drop Files')}
                                                 </Typography>
                                             </div>
                                             <div className={this.props.classes.importIcon}>{importIcon}</div>
@@ -243,7 +243,7 @@ class ImportDataModal extends Component {
                                     <KailonaButton
                                         variant="outlined"
                                         class="primary"
-                                        title="Import"
+                                        title={t('ehr', 'Import')}
                                         disabled={importing}
                                         onClick={this.importFiles}
                                     />

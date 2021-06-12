@@ -262,7 +262,7 @@ export default class VitalsDataModule extends Component {
             <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
                 <div>
                     <div className="title">
-                        <Typography variant="h3">Vitals</Typography>
+                        <Typography variant="h3">{t('ehr', 'Vitals')}</Typography>
                     </div>
                     <Box className="add-new" mt={2}>
                         <KailonaButton title={t('ehr', 'Add New Vitals')} onClick={this.onAddNewVitals} />
@@ -271,7 +271,7 @@ export default class VitalsDataModule extends Component {
                         <Grid container alignItems="center" justifyContent="center">
                             <Grid item>
                                 <Typography variant="body1" style={{ marginRight: '6px' }}>
-                                    Filter by:{' '}
+                                    {t('ehr', 'Filter by')}:{' '}
                                 </Typography>
                             </Grid>
                             <GridColumn className="right-column" item>

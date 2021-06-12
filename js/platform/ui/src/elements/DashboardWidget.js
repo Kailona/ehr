@@ -67,7 +67,7 @@ class DashboardWidget extends Component {
                     <CardContent>{widgetIcon}</CardContent>
                 </Card>
                 <Typography variant="caption" onClick={this.props.onClick}>
-                    {name}
+                    {t('ehr', name)}
                 </Typography>
             </div>
         );

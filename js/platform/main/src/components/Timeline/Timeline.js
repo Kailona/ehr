@@ -603,7 +603,7 @@ class Timeline extends Component {
                             align="center"
                             style={{ color: this.getDataButtonColor(module.name), marginTop: '5px' }}
                         >
-                            {module.name}
+                            {t('ehr', module.name)}
                         </Typography>
                     </Link>
                 </Grid>
