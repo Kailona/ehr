@@ -3,7 +3,7 @@ OC.L10N.register(
     {
     "Failed to initialize! Please contact your administrator!" : "初始化失敗！請聯絡您的管理員！",
     "FHIR Server" : "FHIR 伺服器",
-    "FHIR is required to store health data. Basic HTTP Authentication is currently supported." : "需要FHIR來存儲健康數據。 當前支持基本HTTP身分驗證。",
+    "FHIR is required to store health data. Basic HTTP Authentication is currently supported." : "需要FHIR來存儲健康數據。當前支持基本HTTP身分驗證。",
     "Base URL" : "基本 URL",
     "Username" : "用戶名",
     "Password" : "密碼",
@@ -19,8 +19,8 @@ OC.L10N.register(
     "Delete" : "刪除",
     "Cancel" : "取消",
     "Confirm" : "確認",
-    "I hereby request all data from my last exam to be uploaded to my personal health data archive on the Kailona platform. Please comply within the 30 day period as required by the Berufsordnung der Ärztekammern, §630g Abs. 2  BGB and Art. 15  Abs. 3 DSGVO." : "我特此要求將上次檢查的所有數據上載到Kailona平台上的個人健康數據檔案中。 請在B erufsordnung der Ärztekammern， §630g Abs。2 BGB 和 Art。15 Abs。3 DSGVO 要求的30天內遵守。",
-    "Unable to send health data request. Please set your email address in user profile settings!" : "無法發送健康數據請求。 請在用戶個人資料設置中設置您的電子郵件地址！",
+    "I hereby request all data from my last exam to be uploaded to my personal health data archive on the Kailona platform. Please comply within the 30 day period as required by the Berufsordnung der Ärztekammern, §630g Abs. 2  BGB and Art. 15  Abs. 3 DSGVO." : "我特此要求將上次檢查的所有數據上載到Kailona平台上的個人健康數據檔案中。請在B erufsordnung der Ärztekammern， §630g Abs. 2 BGB  和 Art. 15 Abs. 3 DSGVO 要求的30天內遵守。",
+    "Unable to send health data request. Please set your email address in user profile settings!" : "無法發送健康數據請求。請在用戶個人資料設置中設置您的電子郵件地址！",
     "Health data request was successfully sent" : "健康數據請求已成功發送",
     "Unable to send health data request. Please contact your administrator!" : "無法發送健康數據請求。請聯絡您的管理員！",
     "Request Data" : "請求數據",
@@ -69,6 +69,6 @@ OC.L10N.register(
     "EHR (Electronic Health Records)" : "EHR（電子健康記錄）",
     "EHR" : "EHR",
     "Kailona: Personal Health Records" : "Kailona：個人健康記錄",
-    "The Kailona Personal Health Record allows you to regain control over your health data. We provide an open source platform that allows everyone to add plugins and make improvements.\n\nIt helps you aggregate, manage, securely share and visualize your health data including lab data, medical images, FHIR data from hospitals, vital signs, nutritional and activity data.\n\nThis app works with a FHIR server. Please read the [documentation](https://docs.kailona.org/docs/#installation) to learn more about that.\n\n**Note that this app is under alpha development!**" : "通過“ Kailona個人健康記錄”，您可以重新控制自己的健康數據。 我們提供了一個開放源代碼平台，每個人都可以添加插件並進行改進。\n\n它可以幫助您匯總，管理，安全地共享和可視化您的健康數據，包括實驗室數據，醫學圖像，醫院的 FHIR 數據，生命體徵，營養和活動數據。\n\n該應用程序可與 FHIR 伺服器一起使用。 請參閱 [documentation]（https://docs.kailona.org/docs/#installation），以了解有關此內容的更多信息。\n\n**請注意，此應用程式正在Alpha開發中！**"
+    "The Kailona Personal Health Record allows you to regain control over your health data. We provide an open source platform that allows everyone to add plugins and make improvements.\n\nIt helps you aggregate, manage, securely share and visualize your health data including lab data, medical images, FHIR data from hospitals, vital signs, nutritional and activity data.\n\nThis app works with a FHIR server. Please read the [documentation](https://docs.kailona.org/docs/#installation) to learn more about that.\n\n**Note that this app is under alpha development!**" : "通過“ Kailona個人健康記錄”，您可以重新控制自己的健康數據。我們提供了一個開放源代碼平台，每個人都可以添加插件並進行改進。\n\n它可以幫助您匯總，管理，安全地共享和可視化您的健康數據，包括實驗室數據，醫學圖像，醫院的 FHIR 數據，生命體徵，營養和活動數據。\n\n該應用程序可與 FHIR 伺服器一起使用。請參閱 [documentation]（https://docs.kailona.org/docs/#installation），以了解有關此內容的更多信息。\n\n**請注意，此應用程式正在Alpha開發中！**"
 },
 "nplurals=1; plural=0;");

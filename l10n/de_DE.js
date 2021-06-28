@@ -7,7 +7,7 @@ OC.L10N.register(
     "Base URL" : "Basis-URL",
     "Username" : "Benutzername",
     "Password" : "Passwort",
-    "Shortcuts" : "Tastaturkürzel",
+    "Shortcuts" : "Schnellzugriffe",
     "Request Data from Provider" : "Daten vom Provider anfordern",
     "Import Data" : "Daten importieren",
     "Patient Profile" : "Patientenprofil",
