@@ -23,6 +23,7 @@
     "Health data request was successfully sent" : "Osasun datuen eskaera ondo bidali da",
     "Unable to send health data request. Please contact your administrator!" : "Ezin izan da osasun datuen eskaera bidali. Jakinarazi zure administratzaileari!",
     "Request Data" : "Eskatu datuak",
+    "Email" : "E-posta",
     "Timeline" : "Denbora-lerroa",
     "self" : "norbera(k)",
     "Select Date" : "Hautatu data",

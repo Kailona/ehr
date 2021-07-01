@@ -55,7 +55,6 @@ OC.L10N.register(
     "Body Height" : "Körpergröße",
     "Body Weight" : "Körpergewicht",
     "Add Physical Data" : "Körperdaten hinzufügen",
-    "Physical Data)}</Typography>" : "Physische Daten)}</Typography>",
     "Unknown" : "Unbekannt",
     "Underweight" : "Untergewichtig",
     "Normal/Healthy" : "Normal/Gesund",

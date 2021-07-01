@@ -55,7 +55,6 @@ OC.L10N.register(
     "Body Height" : "身高",
     "Body Weight" : "體重",
     "Add Physical Data" : "新增生理資料",
-    "Physical Data)}</Typography>" : "健康資料)}</Typography>",
     "Unknown" : "未知",
     "Underweight" : "過輕",
     "Normal/Healthy" : "正常／健康",
