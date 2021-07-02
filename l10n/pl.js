@@ -54,6 +54,7 @@ OC.L10N.register(
     "Weight" : "Waga",
     "Body Height" : "Wysokość",
     "Body Weight" : "Waga",
+    "Physical Data" : "Dane fizyczne",
     "Add Physical Data" : "Dodaj dane fizyczne",
     "Unknown" : "Nieznany",
     "Underweight" : "Niedowaga",

@@ -54,6 +54,7 @@ OC.L10N.register(
     "Weight" : "Hmotnost",
     "Body Height" : "Výška postavy",
     "Body Weight" : "Tělesná hmotnost",
+    "Physical Data" : "Tělesné údaje",
     "Add Physical Data" : "Přidat tělesný údaj",
     "Unknown" : "Neznámé",
     "Underweight" : "Podváha",

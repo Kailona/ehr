@@ -54,6 +54,7 @@ OC.L10N.register(
     "Weight" : "重量",
     "Body Height" : "身高",
     "Body Weight" : "体重",
+    "Physical Data" : "生理数据",
     "Add Physical Data" : "添加生理数据",
     "Unknown" : "未知",
     "Underweight" : "体重不足",
