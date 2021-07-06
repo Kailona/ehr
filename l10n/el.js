@@ -1,0 +1,21 @@
+OC.L10N.register(
+    "ehr",
+    {
+    "Username" : "Όνομα χρήστη",
+    "Password" : "Συνθηματικό",
+    "Patient Profile" : "Προφίλ ασθενούς",
+    "Birth Date" : "Ημερομηνία γένησης",
+    "Delete" : "Διαγραφή",
+    "Cancel" : "Ακύρωση",
+    "Confirm" : "Επιβεβαίωση",
+    "Select Date" : "Επιλογή ημερομηνίας",
+    "Steps" : "Βήματα",
+    "Distance" : "Απόσταση",
+    "Calories" : "Θερμίδες",
+    "Edit" : "Επεξεργασία",
+    "Age" : "Ηλικία",
+    "Weight" : "Βάρος",
+    "Overweight" : "Υπέρβαρος",
+    "Patient Name: %s" : "Όνομα ασθενούς: %s"
+},
+"nplurals=2; plural=(n != 1);");
