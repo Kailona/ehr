@@ -25,6 +25,7 @@ OC.L10N.register(
     "Health data request was successfully sent" : "Aanvraag gezondheidsgegevens succesvol verstuurd",
     "Unable to send health data request. Please contact your administrator!" : "Kan verzoek om gezondheidsgegevens niet verzenden. Neem contact op met je beheerder!",
     "Request Data" : "Gegevensaanvraag",
+    "Email" : "E-mailadres",
     "Timeline" : "Tijdlijn",
     "self" : "zelf",
     "Select Date" : "Selecteer datum",
