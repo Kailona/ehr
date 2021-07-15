@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Failed to initialize! Please contact your administrator!" : "Nepodarilo sa inicializovať! Prosím kontaktujte svojho správcu!",
     "FHIR Server" : "FHIR Server",
+    "FHIR is required to store health data. Basic HTTP Authentication is currently supported." : "FHIR je potrebné pre uloženie základných zdravotníckych údajov. V súčasnosti je podporovaná základná HTTP autentikácia.",
     "Base URL" : "Základná URL",
     "Username" : "Užívateľské meno",
     "Password" : "Heslo",
@@ -29,6 +30,7 @@ OC.L10N.register(
     "Message to Provider:" : "Správa Poskytovateľovi:",
     "Send Request" : "Poslať Žiadosť",
     "Timeline" : "Časová os",
+    "self" : "ja",
     "Select Date" : "Vybrať dátum",
     "Select Date/Time" : "Vybrať Dátum/Čas",
     "No data available" : "Žiadne dáta nie sú k dispozícii",
@@ -39,6 +41,7 @@ OC.L10N.register(
     "Add New Activity" : "Pridať novú aktivitu",
     "Filter by date" : "Filtrovať podľa dátumu",
     "Update Activity" : "Aktivita aktualizácie",
+    "Start Date/Time" : "Dáturm začiatku/Čas",
     "Documents" : "Dokumenty",
     "Update Physical Data" : "Upraviť fyzické údaje",
     "Age" : "Vek",
