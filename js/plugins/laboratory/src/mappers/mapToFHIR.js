@@ -44,9 +44,9 @@ function mapToFHIRLeukocytes(labsData) {
             .toISOString(),
         valueQuantity: {
             value: parseFloat(leukocytes),
-            unit: '10*9/L',
+            unit: '10^3/μl',
             system: 'http://unitsofmeasure.org',
-            code: '10*9/L',
+            code: '10^3/μl',
         },
     };
 
@@ -158,15 +158,300 @@ function mapToFHIRPlatelets(labsData) {
             .toISOString(),
         valueQuantity: {
             value: parseFloat(platelets),
-            unit: 'mg/dl',
+            unit: '10^3/μl',
             system: 'http://unitsofmeasure.org',
-            code: 'mg/dL',
+            code: '10^3/μl',
         },
     };
 
     const { idMap } = labsData;
     if (idMap && idMap.platelets) {
         observation.id = idMap.platelets;
+    }
+
+    return observation;
+}
+
+function mapToFHIRLymphocytes(labsData) {
+    const fhirPatientId = ProfileManager.activePatientId;
+    if (!fhirPatientId) {
+        throw new Error('Invalid patient id');
+    }
+
+    const { date, lymphocytes } = labsData;
+    if (!date || !lymphocytes) {
+        return null;
+    }
+
+    const observation = {
+        resourceType: 'Observation',
+        status: 'final',
+        category: [
+            {
+                coding: [
+                    {
+                        system: 'http://hl7.org/fhir/ValueSet/observation-category',
+                        code: 'laboratory',
+                        display: 'Laboratory',
+                    },
+                ],
+            },
+        ],
+        code: {
+            coding: [
+                {
+                    system: 'http://loinc.org',
+                    code: '26474-7',
+                    display: 'Lymphocytes mean volume [Entitic volume] in Blood by Automated count',
+                },
+            ],
+            text: 'Lymphocytes mean volume [Entitic volume] in Blood by Automated count',
+        },
+        subject: {
+            reference: `Patient/${fhirPatientId}`,
+        },
+        effectiveDateTime: moment(date)
+            .utc()
+            .toISOString(),
+        valueQuantity: {
+            value: parseFloat(lymphocytes),
+            unit: '10^3/μl',
+            system: 'http://unitsofmeasure.org',
+            code: '10^3/μl',
+        },
+    };
+
+    const { idMap } = labsData;
+    if (idMap && idMap.lymphocytes) {
+        observation.id = idMap.lymphocytes;
+    }
+
+    return observation;
+}
+
+function mapToFHIRNeutrophils(labsData) {
+    const fhirPatientId = ProfileManager.activePatientId;
+    if (!fhirPatientId) {
+        throw new Error('Invalid patient id');
+    }
+
+    const { date, neutrophils } = labsData;
+    if (!date || !neutrophils) {
+        return null;
+    }
+
+    const observation = {
+        resourceType: 'Observation',
+        status: 'final',
+        category: [
+            {
+                coding: [
+                    {
+                        system: 'http://hl7.org/fhir/ValueSet/observation-category',
+                        code: 'laboratory',
+                        display: 'Laboratory',
+                    },
+                ],
+            },
+        ],
+        code: {
+            coding: [
+                {
+                    system: 'http://loinc.org',
+                    code: '26499-4',
+                    display: 'Neutrophil mean volume [Entitic volume] in Blood by Automated count',
+                },
+            ],
+            text: 'Neutrophil mean volume [Entitic volume] in Blood by Automated count',
+        },
+        subject: {
+            reference: `Patient/${fhirPatientId}`,
+        },
+        effectiveDateTime: moment(date)
+            .utc()
+            .toISOString(),
+        valueQuantity: {
+            value: parseFloat(neutrophils),
+            unit: '10^3/μl',
+            system: 'http://unitsofmeasure.org',
+            code: '10^3/μl',
+        },
+    };
+
+    const { idMap } = labsData;
+    if (idMap && idMap.neutrophils) {
+        observation.id = idMap.neutrophils;
+    }
+
+    return observation;
+}
+
+function mapToFHIREosinophils(labsData) {
+    const fhirPatientId = ProfileManager.activePatientId;
+    if (!fhirPatientId) {
+        throw new Error('Invalid patient id');
+    }
+
+    const { date, eosinophils } = labsData;
+    if (!date || !eosinophils) {
+        return null;
+    }
+
+    const observation = {
+        resourceType: 'Observation',
+        status: 'final',
+        category: [
+            {
+                coding: [
+                    {
+                        system: 'http://hl7.org/fhir/ValueSet/observation-category',
+                        code: 'laboratory',
+                        display: 'Laboratory',
+                    },
+                ],
+            },
+        ],
+        code: {
+            coding: [
+                {
+                    system: 'http://loinc.org',
+                    code: '26449-9',
+                    display: 'Eosinophil mean volume [Entitic volume] in Blood by Automated count',
+                },
+            ],
+            text: 'Eosinophil mean volume [Entitic volume] in Blood by Automated count',
+        },
+        subject: {
+            reference: `Patient/${fhirPatientId}`,
+        },
+        effectiveDateTime: moment(date)
+            .utc()
+            .toISOString(),
+        valueQuantity: {
+            value: parseFloat(eosinophils),
+            unit: '10^3/μl',
+            system: 'http://unitsofmeasure.org',
+            code: '10^3/μl',
+        },
+    };
+
+    const { idMap } = labsData;
+    if (idMap && idMap.eosinophils) {
+        observation.id = idMap.eosinophils;
+    }
+
+    return observation;
+}
+
+function mapToFHIRBasophils(labsData) {
+    const fhirPatientId = ProfileManager.activePatientId;
+    if (!fhirPatientId) {
+        throw new Error('Invalid patient id');
+    }
+
+    const { date, basophils } = labsData;
+    if (!date || !basophils) {
+        return null;
+    }
+
+    const observation = {
+        resourceType: 'Observation',
+        status: 'final',
+        category: [
+            {
+                coding: [
+                    {
+                        system: 'http://hl7.org/fhir/ValueSet/observation-category',
+                        code: 'laboratory',
+                        display: 'Laboratory',
+                    },
+                ],
+            },
+        ],
+        code: {
+            coding: [
+                {
+                    system: 'http://loinc.org',
+                    code: '26444-0',
+                    display: 'Basophil mean volume [Entitic volume] in Blood by Automated count',
+                },
+            ],
+            text: 'Basophil mean volume [Entitic volume] in Blood by Automated count',
+        },
+        subject: {
+            reference: `Patient/${fhirPatientId}`,
+        },
+        effectiveDateTime: moment(date)
+            .utc()
+            .toISOString(),
+        valueQuantity: {
+            value: parseFloat(basophils),
+            unit: '10^3/μl',
+            system: 'http://unitsofmeasure.org',
+            code: '10^3/μl',
+        },
+    };
+
+    const { idMap } = labsData;
+    if (idMap && idMap.basophils) {
+        observation.id = idMap.basophils;
+    }
+
+    return observation;
+}
+
+function mapToFHIRMonocytes(labsData) {
+    const fhirPatientId = ProfileManager.activePatientId;
+    if (!fhirPatientId) {
+        throw new Error('Invalid patient id');
+    }
+
+    const { date, monocytes } = labsData;
+    if (!date || !monocytes) {
+        return null;
+    }
+
+    const observation = {
+        resourceType: 'Observation',
+        status: 'final',
+        category: [
+            {
+                coding: [
+                    {
+                        system: 'http://hl7.org/fhir/ValueSet/observation-category',
+                        code: 'laboratory',
+                        display: 'Laboratory',
+                    },
+                ],
+            },
+        ],
+        code: {
+            coding: [
+                {
+                    system: 'http://loinc.org',
+                    code: '26484-6',
+                    display: 'Monocyte mean volume [Entitic volume] in Blood by Automated count',
+                },
+            ],
+            text: 'Monocyte mean volume [Entitic volume] in Blood by Automated count',
+        },
+        subject: {
+            reference: `Patient/${fhirPatientId}`,
+        },
+        effectiveDateTime: moment(date)
+            .utc()
+            .toISOString(),
+        valueQuantity: {
+            value: parseFloat(monocytes),
+            unit: '10^3/μl',
+            system: 'http://unitsofmeasure.org',
+            code: '10^3/μl',
+        },
+    };
+
+    const { idMap } = labsData;
+    if (idMap && idMap.monocytes) {
+        observation.id = idMap.monocytes;
     }
 
     return observation;
@@ -226,4 +511,14 @@ function mapToFHIRSBCPanel(labsData, observationIds) {
     return observation;
 }
 
-export { mapToFHIRLeukocytes, mapToFHIRHemoglobin, mapToFHIRPlatelets, mapToFHIRSBCPanel };
+export {
+    mapToFHIRLeukocytes,
+    mapToFHIRHemoglobin,
+    mapToFHIRPlatelets,
+    mapToFHIRLymphocytes,
+    mapToFHIRNeutrophils,
+    mapToFHIREosinophils,
+    mapToFHIRBasophils,
+    mapToFHIRMonocytes,
+    mapToFHIRSBCPanel,
+};

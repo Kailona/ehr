@@ -2,12 +2,11 @@ import LabsDataModule from './components/LabsDataModule';
 import getTimelineLeukocytes from './timelineData/getTimelineLeukocytes';
 import getTimelineHemoglobin from './timelineData/getTimelineHemoglobin';
 import getTimelinePlatelets from './timelineData/getTimelinePlatelets';
-//import getTimelineLeucocytes from './timelineData/getTimelineLeucocytes';
-//import getTimelineLymphocytes from './timelineData/getTimelineLymphocytes';
-// import getTimelineNeutrophil from './timelineData/getTimelineNeutrophil';
-// import getTimelineEosinophil from './timelineData/getTimelineEosinophil';
-// import getTimelineBasophil from './timelineData/getTimelineBasophil';
-// import getTimelineMonocyte from './timelineData/getTimelineMonocyte';
+import getTimelineLymphocytes from './timelineData/getTimelineLymphocytes';
+import getTimelineNeutrophils from './timelineData/getTimelineNeutrophils';
+import getTimelineEosinophils from './timelineData/getTimelineEosinophils';
+import getTimelineBasophils from './timelineData/getTimelineBasophils';
+import getTimelineMonocytes from './timelineData/getTimelineMonocytes';
 
 export default {
     id: 'plugin-labs',
@@ -27,38 +26,6 @@ export default {
         Component: LabsDataModule,
     },
     TimelineModule: [
-        // TODO
-        // {
-        //     name: 'Leucocytes',
-        //     color: '#36a3eb',
-        //     icon: 'FavoriteBorder',
-        //     getData: getTimelineLeucocytes,
-        //     children: [
-        //         {
-        //             name: 'Lymphocytes',
-        //             getData: getTimelineLymphocytes,
-        //         },
-
-        //         {
-        //             name: 'Neutrophil',
-        //             getData: getTimelineNeutrophil,
-        //         },
-        //         {
-        //             name: 'Eosinophil',
-        //             getData: getTimelineEosinophil,
-        //         },
-
-        //         {
-        //             name: 'Basophil',
-        //             getData: getTimelineBasophil,
-        //         },
-
-        //         {
-        //             name: 'Monocyte',
-        //             getData: getTimelineMonocyte,
-        //         },
-        //     ],
-        // },
         {
             name: 'Blood Test',
             color: '#ff9063',
@@ -77,6 +44,29 @@ export default {
                 {
                     name: 'Platelets',
                     getData: getTimelinePlatelets,
+                },
+                {
+                    name: 'Lymphocytes',
+                    getData: getTimelineLymphocytes,
+                },
+
+                {
+                    name: 'Neutrophils',
+                    getData: getTimelineNeutrophils,
+                },
+                {
+                    name: 'Eosinophils',
+                    getData: getTimelineEosinophils,
+                },
+
+                {
+                    name: 'Basophils',
+                    getData: getTimelineBasophils,
+                },
+
+                {
+                    name: 'Monocytes',
+                    getData: getTimelineMonocytes,
                 },
             ],
         },

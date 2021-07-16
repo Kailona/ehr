@@ -48,6 +48,11 @@ export default class LabsEditModal extends Component {
         this.leukocytesRef = React.createRef();
         this.hemoglobinRef = React.createRef();
         this.plateletsRef = React.createRef();
+        this.lymphocytesRef = React.createRef();
+        this.neutrophilsRef = React.createRef();
+        this.eosinophilsRef = React.createRef();
+        this.basophilsRef = React.createRef();
+        this.monocytesRef = React.createRef();
     }
 
     toggleModal = isOpen => {
@@ -62,6 +67,11 @@ export default class LabsEditModal extends Component {
             leukocytes: this.leukocytesRef.current.value,
             hemoglobin: this.hemoglobinRef.current.value,
             platelets: this.plateletsRef.current.value,
+            lymphocytes: this.lymphocytesRef.current.value,
+            neutrophils: this.neutrophilsRef.current.value,
+            eosinophils: this.eosinophilsRef.current.value,
+            basophils: this.basophilsRef.current.value,
+            monocytes: this.monocytesRef.current.value,
         };
 
         const { labsData } = this.props;
@@ -78,7 +88,8 @@ export default class LabsEditModal extends Component {
     };
 
     render() {
-        const { date, leukocytes, hemoglobin, platelets } = this.props.labsData || {};
+        const { date, leukocytes, hemoglobin, platelets, lymphocytes, neutrophils, eosinophils, basophils, monocytes } =
+            this.props.labsData || {};
 
         return (
             <Dialog open={this.state.isOpen} onClose={() => this.toggleModal(false)}>
@@ -119,7 +130,7 @@ export default class LabsEditModal extends Component {
                                         label={t('ehr', 'Leukocytes')}
                                         defaultValue={this.getValue(leukocytes)}
                                         InputProps={{
-                                            endAdornment: <InputAdornment>10*9/L</InputAdornment>,
+                                            endAdornment: <InputAdornment>10&#94;3/&micro;l</InputAdornment>,
                                         }}
                                     />
                                 </FormControl>
@@ -151,7 +162,86 @@ export default class LabsEditModal extends Component {
                                         label={t('ehr', 'Platelets')}
                                         defaultValue={this.getValue(platelets)}
                                         InputProps={{
-                                            endAdornment: <InputAdornment>mg/dL</InputAdornment>,
+                                            endAdornment: <InputAdornment>10&#94;3/&micro;l</InputAdornment>,
+                                        }}
+                                    />
+                                </FormControl>
+                            </GridColumn>
+                            <GridColumn className="right-column" item>
+                                <FormControl>
+                                    <KailonaTextField
+                                        inputRef={this.lymphocytesRef}
+                                        type="number"
+                                        id="lymphocytes"
+                                        className="kailona-MuiTextField"
+                                        label={t('ehr', 'Lymphocytes')}
+                                        defaultValue={this.getValue(lymphocytes)}
+                                        InputProps={{
+                                            endAdornment: <InputAdornment>10&#94;3/&micro;l</InputAdornment>,
+                                        }}
+                                    />
+                                </FormControl>
+                            </GridColumn>
+                        </Grid>
+                        <Grid container alignItems="center">
+                            <GridColumn className="left-column" item>
+                                <FormControl>
+                                    <KailonaTextField
+                                        inputRef={this.neutrophilsRef}
+                                        type="number"
+                                        id="neutrophils"
+                                        className="kailona-MuiTextField"
+                                        label={t('ehr', 'Neutrophils')}
+                                        defaultValue={this.getValue(neutrophils)}
+                                        InputProps={{
+                                            endAdornment: <InputAdornment>10&#94;3/&micro;l</InputAdornment>,
+                                        }}
+                                    />
+                                </FormControl>
+                            </GridColumn>
+                            <GridColumn className="right-column" item>
+                                <FormControl>
+                                    <KailonaTextField
+                                        inputRef={this.eosinophilsRef}
+                                        type="number"
+                                        id="eosinophils"
+                                        className="kailona-MuiTextField"
+                                        label={t('ehr', 'Eosinophils')}
+                                        defaultValue={this.getValue(eosinophils)}
+                                        InputProps={{
+                                            endAdornment: <InputAdornment>10&#94;3/&micro;l</InputAdornment>,
+                                        }}
+                                    />
+                                </FormControl>
+                            </GridColumn>
+                        </Grid>
+                        <Grid container alignItems="center">
+                            <GridColumn className="left-column" item>
+                                <FormControl>
+                                    <KailonaTextField
+                                        inputRef={this.basophilsRef}
+                                        type="number"
+                                        id="basophils"
+                                        className="kailona-MuiTextField"
+                                        label={t('ehr', 'Basophils')}
+                                        defaultValue={this.getValue(basophils)}
+                                        InputProps={{
+                                            endAdornment: <InputAdornment>10&#94;3/&micro;l</InputAdornment>,
+                                        }}
+                                    />
+                                </FormControl>
+                            </GridColumn>
+                            <GridColumn className="right-column" item>
+                                <FormControl>
+                                    <KailonaTextField
+                                        inputRef={this.monocytesRef}
+                                        type="number"
+                                        id="Monocytes"
+                                        className="kailona-MuiTextField"
+                                        label={t('ehr', 'Monocytes')}
+                                        defaultValue={this.getValue(monocytes)}
+                                        InputProps={{
+                                            endAdornment: <InputAdornment>10&#94;3/&micro;l</InputAdornment>,
                                         }}
                                     />
                                 </FormControl>

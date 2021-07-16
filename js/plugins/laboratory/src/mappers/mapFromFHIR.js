@@ -39,6 +39,71 @@ function _mapPlatelets(observation) {
     };
 }
 
+function _mapLymphocytes(observation) {
+    const { valueQuantity } = observation;
+    const { value, unit } = valueQuantity || {};
+
+    if (!value || !unit) {
+        return {};
+    }
+
+    return {
+        lymphocytes: `${value} ${unit}`,
+    };
+}
+
+function _mapNeutrophils(observation) {
+    const { valueQuantity } = observation;
+    const { value, unit } = valueQuantity || {};
+
+    if (!value || !unit) {
+        return {};
+    }
+
+    return {
+        neutrophils: `${value} ${unit}`,
+    };
+}
+
+function _mapEosinophils(observation) {
+    const { valueQuantity } = observation;
+    const { value, unit } = valueQuantity || {};
+
+    if (!value || !unit) {
+        return {};
+    }
+
+    return {
+        eosinophils: `${value} ${unit}`,
+    };
+}
+
+function _mapBasophils(observation) {
+    const { valueQuantity } = observation;
+    const { value, unit } = valueQuantity || {};
+
+    if (!value || !unit) {
+        return {};
+    }
+
+    return {
+        basophils: `${value} ${unit}`,
+    };
+}
+
+function _mapMonocytes(observation) {
+    const { valueQuantity } = observation;
+    const { value, unit } = valueQuantity || {};
+
+    if (!value || !unit) {
+        return {};
+    }
+
+    return {
+        monocytes: `${value} ${unit}`,
+    };
+}
+
 function _mapObservations(observations, panelObservation) {
     let labsData = {};
 
@@ -77,6 +142,36 @@ function _mapObservations(observations, panelObservation) {
         if (system === 'http://loinc.org' && code === '32623-1') {
             labsData.idMap.platelets = observation.id;
             labsData = Object.assign({}, labsData, _mapPlatelets(observation));
+        }
+
+        // Lymphocytes
+        if (system === 'http://loinc.org' && code === '26474-7') {
+            labsData.idMap.lymphocytes = observation.id;
+            labsData = Object.assign({}, labsData, _mapLymphocytes(observation));
+        }
+
+        // Neutrophils
+        if (system === 'http://loinc.org' && code === '26499-4') {
+            labsData.idMap.neutrophils = observation.id;
+            labsData = Object.assign({}, labsData, _mapNeutrophils(observation));
+        }
+
+        // Eosinophils
+        if (system === 'http://loinc.org' && code === '26449-9') {
+            labsData.idMap.eosinophils = observation.id;
+            labsData = Object.assign({}, labsData, _mapEosinophils(observation));
+        }
+
+        // Basophils
+        if (system === 'http://loinc.org' && code === '26444-0') {
+            labsData.idMap.basophils = observation.id;
+            labsData = Object.assign({}, labsData, _mapBasophils(observation));
+        }
+
+        // Monocytes
+        if (system === 'http://loinc.org' && code === '26484-6') {
+            labsData.idMap.monocytes = observation.id;
+            labsData = Object.assign({}, labsData, _mapMonocytes(observation));
         }
 
         // Set Short Blood Count Panel id if it belongs to one

@@ -44,6 +44,26 @@ export default class LabsDataModule extends Component {
                     label: t('ehr', 'Platelets'),
                     key: 'platelets',
                 },
+                {
+                    label: t('ehr', 'Lymphocytes'),
+                    key: 'lymphocytes',
+                },
+                {
+                    label: t('ehr', 'Neutrophils'),
+                    key: 'neutrophils',
+                },
+                {
+                    label: t('ehr', 'Eosinophils'),
+                    key: 'eosinophils',
+                },
+                {
+                    label: t('ehr', 'Basophils'),
+                    key: 'basophils',
+                },
+                {
+                    label: t('ehr', 'Monocytes'),
+                    key: 'monocytes',
+                },
             ],
             labsDataToUpdate: null,
             savingLabs: false,
