@@ -27,7 +27,7 @@ export default async function getTimelineHemoglobin(startDate, endDate) {
         {
             _sort: '-date',
             _count: 100000, // TODO: any way to unlimit in fhir?
-            _elements: 'effectiveDateTime,component',
+            _elements: 'effectiveDateTime,valueQuantity',
         },
     ];
 

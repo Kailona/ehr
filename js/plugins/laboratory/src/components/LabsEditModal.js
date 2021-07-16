@@ -119,7 +119,7 @@ export default class LabsEditModal extends Component {
                                         label={t('ehr', 'Leukocytes')}
                                         defaultValue={this.getValue(leukocytes)}
                                         InputProps={{
-                                            endAdornment: <InputAdornment>mmHg</InputAdornment>,
+                                            endAdornment: <InputAdornment>10*9/L</InputAdornment>,
                                         }}
                                     />
                                 </FormControl>
@@ -134,7 +134,7 @@ export default class LabsEditModal extends Component {
                                         label={t('ehr', 'Hemoglobin')}
                                         defaultValue={this.getValue(hemoglobin)}
                                         InputProps={{
-                                            endAdornment: <InputAdornment>mmHg</InputAdornment>,
+                                            endAdornment: <InputAdornment>g/dL</InputAdornment>,
                                         }}
                                     />
                                 </FormControl>
@@ -151,7 +151,7 @@ export default class LabsEditModal extends Component {
                                         label={t('ehr', 'Platelets')}
                                         defaultValue={this.getValue(platelets)}
                                         InputProps={{
-                                            endAdornment: <InputAdornment>%</InputAdornment>,
+                                            endAdornment: <InputAdornment>mg/dL</InputAdornment>,
                                         }}
                                     />
                                 </FormControl>

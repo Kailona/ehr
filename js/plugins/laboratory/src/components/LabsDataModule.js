@@ -295,7 +295,7 @@ export default class LabsDataModule extends Component {
                         fetchNewData={this.fetchNextLabs}
                     />
                 </Box>
-                <labsEditModal
+                <LabsEditModal
                     ref={this.labsEditModalRef}
                     labsData={this.state.labsDataToUpdate}
                     handleSave={this.handleSave}

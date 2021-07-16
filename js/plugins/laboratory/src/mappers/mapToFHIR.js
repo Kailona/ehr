@@ -43,7 +43,7 @@ function mapToFHIRLeukocytes(labsData) {
             .utc()
             .toISOString(),
         valueQuantity: {
-            value: parseInt(leukocytes, 10),
+            value: parseFloat(leukocytes),
             unit: '10*9/L',
             system: 'http://unitsofmeasure.org',
             code: '10*9/L',
@@ -100,7 +100,7 @@ function mapToFHIRHemoglobin(labsData) {
             .utc()
             .toISOString(),
         valueQuantity: {
-            value: parseInt(hemoglobin, 10),
+            value: parseFloat(hemoglobin),
             unit: 'g/dl',
             system: 'http://unitsofmeasure.org',
             code: 'g/dL',
@@ -157,7 +157,7 @@ function mapToFHIRPlatelets(labsData) {
             .utc()
             .toISOString(),
         valueQuantity: {
-            value: parseInt(platelets, 10),
+            value: parseFloat(platelets),
             unit: 'mg/dl',
             system: 'http://unitsofmeasure.org',
             code: 'mg/dL',

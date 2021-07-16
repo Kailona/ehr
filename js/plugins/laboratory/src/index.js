@@ -27,6 +27,7 @@ export default {
         Component: LabsDataModule,
     },
     TimelineModule: [
+        // TODO
         // {
         //     name: 'Leucocytes',
         //     color: '#36a3eb',
@@ -59,22 +60,25 @@ export default {
         //     ],
         // },
         {
-            name: 'Leukocytes',
-            color: '#ff6384',
+            name: 'Blood Test',
+            color: '#ff9063',
             icon: 'Opacity',
-            getData: getTimelineLeukocytes,
-        },
-        {
-            name: 'Hemoglobin',
-            color: '#ff6374',
-            icon: 'Opacity',
-            getData: getTimelineHemoglobin,
-        },
-        {
-            name: 'Platelets',
-            color: '#ff6364',
-            icon: 'Opacity',
-            getData: getTimelinePlatelets,
+            children: [
+                {
+                    name: 'Leukocytes',
+                    getData: getTimelineLeukocytes,
+                },
+
+                {
+                    name: 'Hemoglobin',
+                    getData: getTimelineHemoglobin,
+                },
+
+                {
+                    name: 'Platelets',
+                    getData: getTimelinePlatelets,
+                },
+            ],
         },
     ],
 };
