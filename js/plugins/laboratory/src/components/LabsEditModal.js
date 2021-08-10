@@ -32,6 +32,7 @@ const InputAdornment = withStyles({
     root: {
         '& p': {
             fontSize: '10px',
+            color: 'grey',
         },
     },
 })(MuiInputAdornment);
