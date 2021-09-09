@@ -155,7 +155,7 @@ export default class ProfileEditModal extends React.Component {
                         <KailonaTextField
                             id="profile-name"
                             className="kailona-MuiTextField"
-                            label="Name"
+                            label={t('ehr', 'Name')}
                             style={{ backgroundColor: 'transparent !important' }}
                             inputRef={this.profileNameRef}
                             defaultValue={profile ? profile.patientFullName : null}
