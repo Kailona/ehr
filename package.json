@@ -3,7 +3,8 @@
     "private": true,
     "workspaces": [
         "js/platform/*",
-        "js/plugins/*"
+        "js/plugins/*",
+        "js/providers/*"
     ],
     "scripts": {
         "lint": "eslint ./js",
@@ -60,6 +61,7 @@
         "chart.js": "^2.9.4",
         "lodash.merge": "^4.6.2",
         "moment": "^2.29.1",
+        "moment-timezone": "^0.5.33",
         "oc-react-components": "^0.2.0",
         "prop-types": "^15.7.2",
         "react": "16.13.1",
