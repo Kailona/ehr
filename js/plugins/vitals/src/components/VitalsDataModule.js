@@ -271,7 +271,7 @@ export default class VitalsDataModule extends Component {
                         <Grid container alignItems="center" justifyContent="center">
                             <Grid item>
                                 <Typography variant="body1" style={{ marginRight: '6px' }}>
-                                    Filter by:{' '}
+                                    {t('ehr', 'Filter by')}:{' '}
                                 </Typography>
                             </Grid>
                             <GridColumn className="right-column" item>

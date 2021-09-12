@@ -98,7 +98,7 @@ export default class LabsEditModal extends Component {
                     <Box display="flex" alignItems="center">
                         <Box flexGrow={1}>
                             <Typography variant="h3">
-                                {t('ehr', this.props.labsData ? 'Update Labs Results' : 'Add New Lab Results')}
+                                {t('ehr', this.props.labsData ? 'Update Lab Results' : 'Add Lab Results')}
                             </Typography>
                         </Box>
                         <Box>

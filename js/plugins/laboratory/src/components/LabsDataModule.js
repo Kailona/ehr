@@ -274,16 +274,16 @@ export default class LabsDataModule extends Component {
             <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
                 <div>
                     <div className="title">
-                        <Typography variant="h3">Laboratory Results</Typography>
+                        <Typography variant="h3">{t('ehr', 'Laboratory Results')}</Typography>
                     </div>
                     <Box className="add-new" mt={2}>
-                        <KailonaButton title={t('ehr', 'Add New Lab Results')} onClick={this.onAddNewLabs} />
+                        <KailonaButton title={t('ehr', 'Add Lab Results')} onClick={this.onAddNewLabs} />
                     </Box>
                     <Box className="filters" mt={2}>
                         <Grid container alignItems="center" justifyContent="center">
                             <Grid item>
                                 <Typography variant="body1" style={{ marginRight: '6px' }}>
-                                    Filter by:{' '}
+                                    {t('ehr', 'Filter by')}:{' '}
                                 </Typography>
                             </Grid>
                             <GridColumn className="right-column" item>
