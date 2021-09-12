@@ -11,14 +11,14 @@ import getTimelineMonocytes from './timelineData/getTimelineMonocytes';
 export default {
     id: 'plugin-labs',
     path: '/labs',
-    name: 'Labs',
+    name: t('ehr', 'Labs'),
     MenuModule: {
-        name: 'Labs',
+        name: t('ehr', 'Labs'),
         icon: 'Opacity',
         priority: 90,
     },
     WidgetModule: {
-        name: 'Labs',
+        name: t('ehr', 'Labs'),
         icon: 'Opacity',
         priority: 90,
     },
@@ -27,7 +27,7 @@ export default {
     },
     TimelineModule: [
         {
-            name: 'Blood Test',
+            name: t('ehr', 'Blood Test'),
             color: '#ff9063',
             icon: 'Opacity',
             children: [

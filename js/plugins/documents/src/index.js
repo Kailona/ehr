@@ -4,14 +4,14 @@ import DocumentsDataModule from './components/DocumentsDataModule';
 export default {
     id: 'plugin-documents',
     path: '/documents',
-    name: 'Documents',
+    name: t('ehr', 'Documents'),
     MenuModule: {
-        name: 'Documents',
+        name: t('ehr', 'Documents'),
         icon: 'DescriptionOutlined',
         priority: 90,
     },
     WidgetModule: {
-        name: 'Documents',
+        name: t('ehr', 'Documents'),
         icon: 'DescriptionOutlined',
         priority: 90,
     },

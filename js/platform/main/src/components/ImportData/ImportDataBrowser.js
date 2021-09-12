@@ -122,7 +122,7 @@ class ImportDataBrowser extends Component {
             menuItems.push(
                 <MenuItem key={index} value={id} disableRipple={true}>
                     <Checkbox checked={pluginIds.includes(id)} className={classes.destinationCheckbox} />
-                    <ListItemText primary={t('ehr', name)} />
+                    <ListItemText primary={name} />
                 </MenuItem>
             );
         });
@@ -139,7 +139,7 @@ class ImportDataBrowser extends Component {
                 return;
             }
 
-            optionNames.push(t('ehr', name));
+            optionNames.push(name);
         });
 
         if (selectedOptionIds.includes('FHIR')) {

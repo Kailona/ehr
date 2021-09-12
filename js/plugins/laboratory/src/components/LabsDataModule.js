@@ -277,7 +277,7 @@ export default class LabsDataModule extends Component {
                         <Typography variant="h3">Laboratory Results</Typography>
                     </div>
                     <Box className="add-new" mt={2}>
-                        <KailonaButton title={t('ehr', 'Add New Lab Results')} onClick={this.onAddNewLabs} />
+                        <KailonaButton title={t('ehr', 'Add Lab Results')} onClick={this.onAddNewLabs} />
                     </Box>
                     <Box className="filters" mt={2}>
                         <Grid container alignItems="center" justifyContent="center">

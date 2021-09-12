@@ -5,14 +5,14 @@ import getTimelineSteps from './timelineData/getTimelineSteps';
 export default {
     id: 'plugin-activities',
     path: '/activities',
-    name: 'Activities',
+    name: t('ehr', 'Activities'),
     MenuModule: {
-        name: 'Activities',
+        name: t('ehr', 'Activities'),
         icon: 'DirectionsRun',
         priority: 90,
     },
     WidgetModule: {
-        name: 'Activities',
+        name: t('ehr', 'Activities'),
         icon: 'DirectionsRun',
         priority: 90,
     },
@@ -22,7 +22,7 @@ export default {
     },
     TimelineModule: [
         {
-            name: 'Steps',
+            name: t('ehr', 'Steps'),
             color: '#58d68d',
             icon: 'DirectionsRun',
             getData: getTimelineSteps,
