@@ -120,7 +120,7 @@ class RequestDataModal extends React.Component {
                         <Grid item xs={12} style={{ marginTop: '20px' }}>
                             <Grid container direction="column">
                                 <Grid item>
-                                    <Typography variant="body2">{t('ehr', 'Message to Provider')}:</Typography>
+                                    <Typography variant="body2">{t('ehr', 'Message to Provider:')}</Typography>
                                 </Grid>
                                 <Grid item>
                                     <TextareaAutosize

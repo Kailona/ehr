@@ -164,7 +164,7 @@ class ImportDataModal extends Component {
                 message: t('ehr', 'Data has been successfully imported'),
             });
         } catch (error) {
-            logger.error(t('ehr', 'Failed to import data'), error);
+            logger.error('Failed to import data', error);
 
             this.setState({
                 importing: false,
@@ -181,7 +181,7 @@ class ImportDataModal extends Component {
     render() {
         const { importing, files } = this.state;
         const importIcon = getIcon('CloudUploadOutlined');
-        const browseFilesButtonTitle = files && files.length ? t('ehr', 'Add More Files') : t('ehr', 'Browse Files');
+        const browseFilesButtonTitle = t('ehr', files && files.length ? 'Add More Files' : 'Browse Files');
         return (
             <Dialog maxWidth="sm" fullWidth={true} open={this.props.isOpen}>
                 <DialogTitle>
@@ -243,7 +243,7 @@ class ImportDataModal extends Component {
                                     <KailonaButton
                                         variant="outlined"
                                         class="primary"
-                                        title={t('ehr', 'Import')}
+                                        title="Import"
                                         disabled={importing}
                                         onClick={this.importFiles}
                                     />
