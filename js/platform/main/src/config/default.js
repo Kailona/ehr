@@ -2,13 +2,14 @@ import PhysicalDataPlugin from '@kailona/plugin-physical-data';
 import ActivitiesPlugin from '@kailona/plugin-activities';
 import VitalsPlugin from '@kailona/plugin-vitals';
 import DocumentsPlugin from '@kailona/plugin-documents';
+import LaboratoryPlugin from '@kailona/plugin-laboratory';
 
 export default {
     basename: OC.generateUrl('/apps/ehr'),
     fontsPath: {
         nunitosans: OC.filePath('ehr', 'fonts', 'nunitosans'),
     },
-    plugins: [PhysicalDataPlugin, ActivitiesPlugin, VitalsPlugin, DocumentsPlugin],
+    plugins: [PhysicalDataPlugin, ActivitiesPlugin, VitalsPlugin, DocumentsPlugin, LaboratoryPlugin],
     settings: {
         fhirBaseUrl: OC.generateUrl('/apps/ehr/fhir'),
         adminSettingsUrl: OC.generateUrl('/apps/ehr/settings/admin'),

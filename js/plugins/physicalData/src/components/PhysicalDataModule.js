@@ -282,7 +282,7 @@ export default class PhysicalDataModule extends Component {
                         <Grid container alignItems="center" justifyContent="center">
                             <Grid item>
                                 <Typography variant="body1" style={{ marginRight: '6px' }}>
-                                    Filter by:{' '}
+                                    {t('ehr', 'Filter by')}:{' '}
                                 </Typography>
                             </Grid>
                             <Grid className="right-column" item>
