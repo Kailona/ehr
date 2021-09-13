@@ -15,12 +15,12 @@ export default {
     MenuModule: {
         name: t('ehr', 'Labs'),
         icon: 'Opacity',
-        priority: 90,
+        priority: 70,
     },
     WidgetModule: {
         name: t('ehr', 'Labs'),
         icon: 'Opacity',
-        priority: 90,
+        priority: 70,
     },
     DataModule: {
         Component: LabsDataModule,

@@ -8,12 +8,12 @@ export default {
     MenuModule: {
         name: t('ehr', 'Documents'),
         icon: 'DescriptionOutlined',
-        priority: 90,
+        priority: 50,
     },
     WidgetModule: {
         name: t('ehr', 'Documents'),
         icon: 'DescriptionOutlined',
-        priority: 90,
+        priority: 50,
     },
     DataModule: {
         Component: DocumentsDataModule,

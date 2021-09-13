@@ -10,12 +10,12 @@ export default {
     MenuModule: {
         name: t('ehr', 'Vitals'),
         icon: 'FavoriteBorder',
-        priority: 90,
+        priority: 80,
     },
     WidgetModule: {
         name: t('ehr', 'Vitals'),
         icon: 'FavoriteBorder',
-        priority: 90,
+        priority: 80,
     },
     DataModule: {
         Component: VitalsDataModule,
