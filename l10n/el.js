@@ -1,9 +1,16 @@
 OC.L10N.register(
     "ehr",
     {
+    "FHIR Server" : "Διακομιστής FHIR",
     "Username" : "Όνομα χρήστη",
     "Password" : "Συνθηματικό",
+    "Shortcuts" : "Συντομεύσεις",
+    "Import Data" : "Εισαγωγή δεδομένων",
+    "Data has been successfully imported" : "Τα δεδομένα εισήχθησαν με επιτυχία",
+    "Add More Files" : "Προσθήκη περισσότερων αρχείων",
     "Patient Profile" : "Προφίλ ασθενούς",
+    "Welcome" : "Καλώς ήλθατε",
+    "Name" : "Όνομα",
     "Birth Date" : "Ημερομηνία γένησης",
     "Delete" : "Διαγραφή",
     "Cancel" : "Ακύρωση",
