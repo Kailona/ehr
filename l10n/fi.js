@@ -1,8 +1,10 @@
 OC.L10N.register(
     "ehr",
     {
+    "FHIR Server" : "FHIR-palvelin",
     "Username" : "Käyttäjätunnus",
     "Password" : "Salasana",
+    "File Name" : "Tiedoston nimi",
     "Welcome" : "Tervetuloa",
     "Name" : "Nimi",
     "Birth Date" : "Syntämäaika",
