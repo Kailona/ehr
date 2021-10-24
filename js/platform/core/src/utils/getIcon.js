@@ -16,5 +16,11 @@ export default function(icon, fontSize = 80, color = null) {
         return <MuiIcon style={style} />;
     }
 
+    // Use custom icon
+    if (typeof icon === 'object') {
+        const { component: CustomIcon, props } = icon;
+        return <CustomIcon style={props} />;
+    }
+
     return icon;
 }
