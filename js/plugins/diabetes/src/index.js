@@ -1,6 +1,6 @@
 import DiabetesDataModule from './components/DiabetesDataModule';
 import getTimelineGlucose from './timelineData/getTimelineGlucose';
-import DiabetesIconGenerater from '../../../platform/ui/src/utils/DiabetesIconGenerater';
+import DiabetesIcon from '../../../platform/ui/src/utils/DiabetesIcon';
 
 export default {
     id: 'plugin-diabetes',
@@ -9,7 +9,7 @@ export default {
     MenuModule: {
         name: t('ehr', 'Diabetes'),
         icon: {
-            component: DiabetesIconGenerater,
+            component: DiabetesIcon,
             props: {
                 fill: 'currentColor',
                 stroke: 'currentColor',
@@ -20,7 +20,7 @@ export default {
     WidgetModule: {
         name: t('ehr', 'Diabetes'),
         icon: {
-            component: DiabetesIconGenerater,
+            component: DiabetesIcon,
             props: {
                 fill: 'currentColor',
                 stroke: 'currentColor',
@@ -36,7 +36,7 @@ export default {
             name: t('ehr', 'Glucose'),
             color: '#7d3c98',
             icon: {
-                component: DiabetesIconGenerater,
+                component: DiabetesIcon,
                 props: {
                     fill: 'currentColor',
                     stroke: 'currentColor',
