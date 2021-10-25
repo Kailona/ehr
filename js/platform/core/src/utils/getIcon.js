@@ -18,7 +18,10 @@ export default function(icon, fontSize = 80, color = null) {
 
     // Use custom icon
     if (typeof icon === 'object') {
-        const { component: CustomIcon, props } = icon;
+        const { component: CustomIcon, color = 'currentColor' } = icon;
+
+        const props = { fill: color, stroke: color };
+
         return <CustomIcon style={props} />;
     }
 

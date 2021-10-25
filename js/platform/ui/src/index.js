@@ -8,6 +8,7 @@ import KailonaDatePicker from './elements/DatePicker/KailonaDatePicker';
 import KailonaDateTimePicker from './elements/DatePicker/KailonaDateTimePicker';
 import KailonaDateRangePicker from './elements/DatePicker/KailonaDateRangePicker';
 import KailonaSelect from './elements/Select/KailonaSelect';
+import Icons from './icons';
 
 export {
     ThemeProvider,
@@ -20,4 +21,5 @@ export {
     KailonaDateTimePicker,
     KailonaDateRangePicker,
     KailonaSelect,
+    Icons,
 };
