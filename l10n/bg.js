@@ -9,7 +9,7 @@ OC.L10N.register(
     "Password" : "Парола",
     "Shortcuts" : "Преки пътища",
     "Request Data from Provider" : "Изискване на данни от доставчика",
-    "Import Data" : "Импортиране на данни",
+    "Import Data" : "Внасяне на данни",
     "Select options" : "Избор на опции",
     "File Name" : "Име на файл",
     "Destination" : "Дестинация",
