@@ -61,6 +61,8 @@ OC.L10N.register(
     "Basophils" : "Basofielen",
     "Monocytes" : "Monocyten",
     "Laboratory Results" : "Laboratoriumresultaten",
+    "Add Lab Results" : "Voeg Lab Resultaten Toe",
+    "Update Lab Results" : "Update Lab Resultaten",
     "Labs" : "Labs",
     "Blood Test" : "Bloedtest",
     "Update Physical Data" : "Bijwerken fysieke gegevens",
