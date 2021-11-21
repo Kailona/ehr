@@ -170,7 +170,7 @@ class FhirService {
                 if ($key === 'Location') {
                     // Disable redirect on PUT
                     if ($method !== 'PUT') {
-                        $jsonResponseToSend->addHeader($key, str_replace($this->fhirConfig['baseUrl'], $this->urlGenerator->getAbsoluteURL('/apps/ehr/fhir/'), $value[0]));
+                        $jsonResponseToSend->addHeader($key, str_replace($this->fhirConfig['baseUrl'], $this->urlGenerator->linkToRoute('fhir#transaction'), $value[0]));
                     }
 
                     // Store fhir patient id on create
