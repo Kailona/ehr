@@ -109,7 +109,7 @@ class FhirService {
         if (is_array($resource) && isset($resource['link'])) {
             for ($i = 0; $i < count($resource['link']); $i++) {
                 if (isset($resource['link'][$i]['url'])) {
-                    $resource['link'][$i]['url'] = str_replace($this->fhirConfig['baseUrl'], $this->urlGenerator->getAbsoluteURL('/apps/ehr/fhir/'), $resource['link'][$i]['url']);
+                    $resource['link'][$i]['url'] = str_replace($this->fhirConfig['baseUrl'], $this->urlGenerator->linkToRoute('fhir#transaction'), $resource['link'][$i]['url']);
                 }
             }
         }
@@ -170,7 +170,7 @@ class FhirService {
                 if ($key === 'Location') {
                     // Disable redirect on PUT
                     if ($method !== 'PUT') {
-                        $jsonResponseToSend->addHeader($key, str_replace($this->fhirConfig['baseUrl'], $this->urlGenerator->getAbsoluteURL('/apps/ehr/fhir/'), $value[0]));
+                        $jsonResponseToSend->addHeader($key, str_replace($this->fhirConfig['baseUrl'], $this->urlGenerator->linkToRoute('fhir#transaction'), $value[0]));
                     }
 
                     // Store fhir patient id on create
