@@ -3,8 +3,8 @@
 app_name=ehr
 project_dir=$(CURDIR)
 build_dir=$(project_dir)/build
-appstore_dir=$(build_dir)/appstore
-package_name=$(app_name)
+appstore_build_dir=/tmp/build
+appstore_sign_dir=/tmp/sign
 cert_dir=$(HOME)/.nextcloud/certificates
 webpack=node_modules/.bin/webpack
 
@@ -31,27 +31,46 @@ watch: node_modules
 
 appstore: clean build/main.js package
 
-package: build/appstore/$(package_name).tar.gz
-build/appstore/$(package_name).tar.gz: build/main.js $(othersources)
-	mkdir -p $(appstore_dir)
-	tar -C $(project_dir)/.. \
-	--exclude=$(app_name)/.git \
-	--exclude=$(app_name)/.idea \
-	--exclude=$(app_name)/build/appstore \
-	--exclude=$(app_name)/.development \
-	--exclude=$(app_name)/.github \
-	--exclude=$(app_name)/.tx \
-	--exclude=$(app_name)/.webpack \
-	--exclude=$(app_name)/contribute \
-	--exclude=$(app_name)/node_modules \
-	--exclude=$(app_name)/screenshots \
-	--exclude=$(app_name)/website \
-	--exclude=$(app_name)/.gitignore \
-	--exclude=$(app_name)/.travis.yml \
-	--exclude=$(app_name)/CODE_OF_CONDUCT.md \
-	--exclude=$(app_name)/lerna.json \
-	--exclude=$(app_name)/Makefile \
-	--exclude=$(app_name)/netlify.toml \
-	--exclude=$(app_name)/package.json \
-	-cvzf $(appstore_dir)/$(package_name).tar.gz $(app_name)
-	openssl dgst -sha512 -sign $(cert_dir)/$(app_name).key $(appstore_dir)/$(app_name).tar.gz | openssl base64
+package: build/appstore
+build/appstore: build/main.js $(othersources)
+	rm -rf $(appstore_build_dir)
+	mkdir -p $(appstore_build_dir)
+	rm -rf $(appstore_sign_dir)
+	mkdir -p $(appstore_sign_dir)
+	rsync -a \
+	--exclude=.git \
+	--exclude=.idea \
+	--exclude=.development \
+	--exclude=.github \
+	--exclude=.tx \
+	--exclude=.webpack \
+	--exclude=contribute \
+	--exclude=node_modules \
+	--exclude=screenshots \
+	--exclude=tests \
+	--exclude=website \
+	--exclude=.eslintrc \
+	--exclude=.gitignore \
+	--exclude=.prettierrc \
+	--exclude=.travis.yml \
+	--exclude=CODE_OF_CONDUCT.md \
+	--exclude=lerna.json \
+	--exclude=Makefile \
+	--exclude=composer.* \
+	--exclude=babel.config.js \
+	--exclude=netlify.toml \
+	--exclude=package.json \
+	--exclude=postcss.config.js \
+	--exclude=yarn.lock \
+	../$(app_name) $(appstore_sign_dir)
+	@if [ -f $(cert_dir)/$(app_name).key ]; then \
+		sudo chown $(webserveruser) $(appstore_sign_dir)/$(app_name)/appinfo ;\
+		sudo -u $(webserveruser) php $(occ_dir)/occ integrity:sign-app --privateKey=$(cert_dir)/$(app_name).key --certificate=$(cert_dir)/$(app_name).crt --path=$(appstore_sign_dir)/$(app_name)/ ;\
+		sudo chown -R $(USER) $(appstore_sign_dir)/$(app_name)/appinfo ;\
+	else \
+		echo "!!! WARNING signature key not found" ;\
+	fi
+	tar -czf $(appstore_build_dir)/$(app_name)-$(version).tar.gz -C $(appstore_sign_dir) $(app_name)
+	@if [ -f $(cert_dir)/$(app_name).key ]; then \
+		openssl dgst -sha512 -sign $(cert_dir)/$(app_name).key $(appstore_build_dir)/$(app_name)-$(version).tar.gz | openssl base64 | tee $(appstore_sign_dir)/sign.txt ;\
+	fi
