@@ -27,7 +27,7 @@ build/main.js: node_modules $(jssources)
 
 .PHONY: watch
 watch: node_modules
-	node node_modules/.bin/webpack-dev-server --public localhost:3000 --inline --hot --port 3000 --config .webpack/dev.config.js
+	node node_modules/.bin/webpack-dev-server --public localhost:3000 --inline --hot --port 3000 --host=0.0.0.0 --disable-host-check --useLocalIp --config .webpack/dev.config.js
 
 appstore: clean build/main.js package
 
