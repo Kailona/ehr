@@ -200,7 +200,7 @@ class ImportDataBrowser extends Component {
             <div className={classes.importDataBrowser} style={{ padding: '10px 20px' }}>
                 <div key="header" className={classes.fileItem}>
                     <div className={classes.fileName}>
-                        <Typography variant="body1">{t('ehr', 'File Name')}</Typography>
+                        <Typography variant="body1">{t('ehr', 'File name')}</Typography>
                     </div>
                     <div className={classes.destination}>
                         <Typography variant="body1">{t('ehr', 'Destination')}</Typography>
