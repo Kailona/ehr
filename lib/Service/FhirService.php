@@ -109,7 +109,7 @@ class FhirService {
         if (is_array($resource) && isset($resource['link'])) {
             for ($i = 0; $i < count($resource['link']); $i++) {
                 if (isset($resource['link'][$i]['url'])) {
-                    $resource['link'][$i]['url'] = str_replace($this->fhirConfig['baseUrl'], $this->urlGenerator->getAbsoluteURL('/apps/ehr/fhir/'), $resource['link'][$i]['url']);
+                    $resource['link'][$i]['url'] = str_replace($this->fhirConfig['baseUrl'], $this->urlGenerator->linkToRoute('fhir#transaction'), $resource['link'][$i]['url']);
                 }
             }
         }
