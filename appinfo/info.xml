@@ -33,7 +33,7 @@ This app works with a FHIR server. Please read the [documentation](https://docs.
 	<screenshot small-thumbnail="https://raw.githubusercontent.com/Kailona/ehr/master/screenshots/screenshot4-small.png">https://raw.githubusercontent.com/Kailona/ehr/master/screenshots/screenshot4.png</screenshot>
 
 	<dependencies>
-		<nextcloud min-version="19" max-version="21" />
+		<nextcloud min-version="19" max-version="23" />
 	</dependencies>
 
 	<settings>
