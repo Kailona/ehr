@@ -9,7 +9,6 @@
     "Request Data from Provider" : "Poproś o dane od dostawcy",
     "Import Data" : "Importuj dane",
     "Select options" : "Wybierz opcje",
-    "File Name" : "Nazwa pliku",
     "Destination" : "Cel",
     "Data has been successfully imported" : "Dane zostały pomyślnie zaimportowane",
     "An error occurred while importing data. Please contact your administrator." : "Wystąpił błąd podczas importowania danych. Skontaktuj się z administratorem.",
@@ -49,6 +48,7 @@
     "Update Activity" : "Zaktualizuj aktywność",
     "Start Date/Time" : "Data/godzina rozpoczęcia",
     "End Date/Time" : "Data/godzina zakończenia",
+    "Unknown" : "Nieznany",
     "Documents" : "Dokumenty",
     "Leukocytes" : "Leukocyty",
     "Hemoglobin" : "Hemoglobina",
@@ -72,7 +72,6 @@
     "Body Weight" : "Waga",
     "Physical Data" : "Dane fizyczne",
     "Add Physical Data" : "Dodaj dane fizyczne",
-    "Unknown" : "Nieznany",
     "Underweight" : "Niedowaga",
     "Normal/Healthy" : "Normalne/zdrowe",
     "Overweight" : "Nadwaga",
@@ -98,6 +97,6 @@
     "EHR (Electronic Health Records)" : "EHR (Elektroniczny Monitor Zdrowia)",
     "EHR" : "EHR",
     "Kailona: Personal Health Records" : "Kailona: osobisty monitor zdrowia",
-    "The Kailona Personal Health Record allows you to regain control over your health data. We provide an open source platform that allows everyone to add plugins and make improvements.\n\nIt helps you aggregate, manage, securely share and visualize your health data including lab data, medical images, FHIR data from hospitals, vital signs, nutritional and activity data.\n\nThis app works with a FHIR server. Please read the [documentation](https://docs.kailona.org/docs/#installation) to learn more about that.\n\n**Note that this app is under alpha development!**" : "Osobisty monitor zdrowia Kailona umożliwia odzyskanie kontroli nad danymi dotyczącymi zdrowia. Zapewniamy platformę open source, która umożliwia każdemu dodawanie wtyczek i wprowadzanie ulepszeń.\n\nPomaga w agregowaniu, zarządzaniu, bezpiecznym udostępnianiu i wizualizacji danych zdrowotnych, w tym danych laboratoryjnych, obrazów medycznych, danych FHIR ze szpitali, parametrów życiowych, danych żywieniowych i danych dotyczących aktywności.\n\nAplikacja ta współpracuje z serwerem FHIR. Przeczytaj [dokumentację](https://docs.kailona.org/docs/#installation), aby dowiedzieć się więcej na ten temat.\n\n**Pamiętaj, że aplikacja jest w fazie rozwoju alfa!**"
+    "The Kailona Personal Health Record allows you to regain control over your health data. We provide an open source platform that allows everyone to add plugins and make improvements.\n\nIt helps you aggregate, manage, securely share and visualize your health data including lab data, medical images, FHIR data from hospitals, vital signs, nutritional and activity data.\n\nThis app works with a FHIR server. Please read the [documentation](https://docs.kailona.org/docs/#installation) to learn more about that.\n\n**Note that this app is under alpha development!**" : "Osobisty monitor zdrowia Kailona umożliwia odzyskanie kontroli nad danymi dotyczącymi zdrowia. Zapewniamy platformę Open Source, która umożliwia każdemu dodawanie wtyczek i wprowadzanie ulepszeń.\n\nPomaga w agregowaniu, zarządzaniu, bezpiecznym udostępnianiu i wizualizacji danych zdrowotnych, w tym danych laboratoryjnych, obrazów medycznych, danych FHIR ze szpitali, parametrów życiowych, danych żywieniowych i danych dotyczących aktywności.\n\nAplikacja ta współpracuje z serwerem FHIR. Przeczytaj [dokumentację](https://docs.kailona.org/docs/#installation), aby dowiedzieć się więcej na ten temat.\n\n**Pamiętaj, że aplikacja jest w fazie rozwoju alfa!**"
 },"pluralForm" :"nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);"
 }
