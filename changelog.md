@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## [0.1.6] - 2021-11-22
+### Added
+- Diabetes Plugin (#131)
+- Laboratory Plugin (#107) - thanks to @mahdsip
+- Import FHIR json files (#80)
+### Fixed
+- Fix FHIR base url replacement in the response location header (#132) - thanks to @davidoe
+- Fix some translation issues - thanks to @Valdnet
+
 ## [0.1.5] - 2021-04-23
 ### Fixed
 - Fix loading large FHIR data
@@ -12,7 +21,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [0.1.4] - 2021-04-21
 ### Added
 - Add translations
-
 ### Fixed
 - Fix package error in app store
 
@@ -21,7 +29,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add body temperature
 - Add documents plugin
 - Automate upload link generation in data requests
-
 ### Fixed
 - Fix blank screen on nextcloud with sub path
 - Fix infinite scrolling
