@@ -59,7 +59,7 @@ OC.L10N.register(
     "Glucose" : "Glukóza",
     "Laboratory" : "Laboratoř",
     "Glucometer" : "Glukometr",
-    "CGM (Continuous Glucose Monitoring) Device" : "CGM (Kontinuální monitorování glukózy) zařízení",
+    "CGM (Continuous Glucose Monitoring) Device" : "CGM (průběžné monitorování glukózy) zařízení",
     "Unknown" : "Neznámé",
     "Documents" : "Dokumenty",
     "Leukocytes" : "Leukocyty",
