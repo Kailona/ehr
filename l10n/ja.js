@@ -28,6 +28,7 @@ OC.L10N.register(
     "Blood Test" : "血液検査",
     "Age" : "年齢",
     "Height" : "身長",
+    "Heart Rate" : "心拍数",
     "Body Temperature" : "体温",
     "Blood Pressure" : "血圧",
     "Systolic" : "収縮期",
