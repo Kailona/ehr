@@ -12,7 +12,7 @@
     "File name" : "Dateiname",
     "Destination" : "Ziel",
     "Data has been successfully imported" : "Daten wurden erfolgreich importiert",
-    "An error occurred while importing data. Please contact your administrator." : "Beim Importieren der Daten ist ein Fehler aufgetreten. Bitte kontaktiere Deinen Administrator.",
+    "An error occurred while importing data. Please contact your administrator." : "Es ist ein Fehler beim Importieren der Daten aufgetreten. Bitte kontaktiere Deinen Administrator.",
     "Add More Files" : "Weitere Dateien hinzufügen",
     "Drag and Drop Files" : "Dateien ziehen und ablegen",
     "Patient Profile" : "Patientenprofil",
