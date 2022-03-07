@@ -13,8 +13,7 @@ import {
     Typography,
     withStyles,
 } from '@material-ui/core';
-import { Close as CloseIcon } from '@material-ui/icons';
-import { KailonaButton, KailonaDateTimePicker, KailonaTextField, KailonaSelect } from '@kailona/ui';
+import { KailonaButton, KailonaDateTimePicker, KailonaTextField, KailonaSelect, KailonaCloseButton } from '@kailona/ui';
 import { getGlucoseMeasurer, GlucoseSystemCodes } from '../lib/GlucoseSystemCodes';
 
 const GridColumn = withStyles({
@@ -136,9 +135,7 @@ export default class DiabetesEditModal extends Component {
                             </Typography>
                         </Box>
                         <Box>
-                            <IconButton onClick={() => this.toggleModal(false)}>
-                                <CloseIcon />
-                            </IconButton>
+                            <KailonaCloseButton onClose={() => this.toggleModal(false)} />
                         </Box>
                     </Box>
                 </DialogTitle>

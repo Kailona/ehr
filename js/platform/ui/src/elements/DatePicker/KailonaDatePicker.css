@@ -1,0 +1,5 @@
+.MuiPickersBasePicker-container button,
+.MuiInputAdornment-positionEnd > .MuiIconButton-root {
+    border: none !important;
+    background-color: transparent !important;
+}

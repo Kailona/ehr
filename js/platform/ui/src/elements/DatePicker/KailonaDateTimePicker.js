@@ -3,6 +3,7 @@ import { MuiPickersUtilsProvider, KeyboardDateTimePicker as MuiKeyboardDateTimeP
 import DateFnsUtils from '@date-io/date-fns';
 import { withStyles } from '@material-ui/core';
 import KailonaTextField from '../TextField/KailonaTextField';
+import './KailonaDatePicker.css';
 
 const KeyboardDateTimePicker = withStyles({
     root: {

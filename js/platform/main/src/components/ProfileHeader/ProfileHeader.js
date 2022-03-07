@@ -18,6 +18,11 @@ const StyledTabs = styled(withTheme(Tabs))(props => ({
     },
 }));
 
+const NewUserButton = styled(withTheme(IconButton))(props => ({
+    backgroundColor: 'transparent !important',
+    border: 'none !important',
+}));
+
 class ProfileHeader extends Component {
     constructor(props) {
         super(props);
@@ -95,9 +100,9 @@ class ProfileHeader extends Component {
                     />
                 ))}
                 <Box>
-                    <IconButton onClick={this.handleNewClick}>
+                    <NewUserButton onClick={this.handleNewClick} disableRipple={true}>
                         <AddIcon />
-                    </IconButton>
+                    </NewUserButton>
                 </Box>
             </StyledTabs>
         );
