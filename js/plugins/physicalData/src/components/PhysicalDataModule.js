@@ -276,7 +276,11 @@ export default class PhysicalDataModule extends Component {
                         <Typography variant="h3">{t('ehr', 'Physical Data')}</Typography>
                     </div>
                     <Box className="add-new" mt={2}>
-                        <KailonaButton title={t('ehr', 'Add Physical Data')} onClick={this.onAddNewPhysicalData} />
+                        <KailonaButton
+                            class="primary"
+                            title={t('ehr', 'Add Physical Data')}
+                            onClick={this.onAddNewPhysicalData}
+                        />
                     </Box>
                     <Box className="filters" mt={2}>
                         <Grid container alignItems="center" justifyContent="center">

@@ -3,3 +3,18 @@
     border: none !important;
     background-color: transparent !important;
 }
+
+.MuiPickersBasePicker-container .MuiPickerDTTabs-tabs button {
+    color: #fff;
+}
+
+.MuiPickerDTToolbar-toolbar > .MuiGrid-container {
+    justify-content: space-between !important;
+}
+
+.MuiPickerDTToolbar-toolbar .MuiGrid-container .MuiGrid-item {
+    width: auto !important;
+    max-width: none !important;
+    flex-basis: auto !important;
+    align-items: center;
+}
