@@ -8,6 +8,7 @@
     "Shortcuts" : "Raccourcis",
     "Request Data from Provider" : "Demander vos données à un fournisseur",
     "Import Data" : "Importer des données",
+    "File name" : "Nom du fichier",
     "Destination" : "Destination",
     "Data has been successfully imported" : "Les données ont bien été importées",
     "An error occurred while importing data. Please contact your administrator." : "Une erreur a eu lieu pendant l'importation des données. Veuillez contacter votre administrateur.",

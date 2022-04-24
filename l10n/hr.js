@@ -11,6 +11,7 @@ OC.L10N.register(
     "Request Data from Provider" : "Zatraži podatke od davatelja usluge",
     "Import Data" : "Uvezi podatke",
     "Select options" : "Odaberi opcije",
+    "File name" : "Naziv datoteke",
     "Destination" : "Odredište",
     "Data has been successfully imported" : "Podaci su uspješno uvezeni",
     "An error occurred while importing data. Please contact your administrator." : "Došlo je do pogreške pri uvozu podataka. Obratite se svom administratoru.",

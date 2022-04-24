@@ -1,0 +1,14 @@
+{ "translations": {
+    "Username" : "Nomine de usator",
+    "Password" : "Contrasigno",
+    "Destination" : "Destination",
+    "Name" : "Nomine",
+    "Delete" : "Deler",
+    "Cancel" : "Cancellar",
+    "Confirm" : "Confirmar",
+    "Email" : "E-posta",
+    "Edit" : "Modificar",
+    "Activities" : "Activitates",
+    "Unknown" : "Incognite"
+},"pluralForm" :"nplurals=2; plural=(n != 1);"
+}

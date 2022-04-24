@@ -1,0 +1,11 @@
+{ "translations": {
+    "Username" : "ئىشلەتكۈچى ئاتى",
+    "Password" : "ئىم",
+    "Destination" : "Destination",
+    "Name" : "ئاتى",
+    "Delete" : "ئۆچۈر",
+    "Cancel" : "ۋاز كەچ",
+    "Email" : "تورخەت",
+    "Edit" : "تەھرىر"
+},"pluralForm" :"nplurals=2; plural=(n != 1);"
+}
