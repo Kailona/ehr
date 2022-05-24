@@ -98,5 +98,5 @@
     "This is an automatically sent email, please do not reply." : "Ceci est un message automatique, merci de ne pas y répondre.",
     "EHR (Electronic Health Records)" : "DSE (Dossier de Santé Électronique)",
     "EHR" : "DSE"
-},"pluralForm" :"nplurals=2; plural=(n > 1);"
+},"pluralForm" :"nplurals=3; plural=(n == 0 || n == 1) ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;"
 }

@@ -15,4 +15,4 @@ OC.L10N.register(
     "Unknown" : "Desconocido",
     "This is an automatically sent email, please do not reply." : "Este es un correo enviado automáticamente, por favor no lo contestes. "
 },
-"nplurals=2; plural=(n != 1);");
+"nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");
