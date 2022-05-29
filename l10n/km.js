@@ -8,6 +8,7 @@ OC.L10N.register(
     "Delete" : "លុប",
     "Cancel" : "បោះបង់",
     "Email" : "អ៊ីមែល",
-    "Edit" : "កែប្រែ"
+    "Edit" : "កែប្រែ",
+    "Activities" : "សកម្មភាពផ្សេងៗ"
 },
 "nplurals=1; plural=0;");
