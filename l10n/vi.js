@@ -11,6 +11,7 @@ OC.L10N.register(
     "Confirm" : "Xác nhận",
     "Email" : "Thư điện tử",
     "Select Date" : "Chọn ngày",
+    "Calories" : "Lượng calo",
     "Edit" : "Chỉnh sửa",
     "Activities" : "Hoạt động",
     "Unknown" : "Không xác định",
