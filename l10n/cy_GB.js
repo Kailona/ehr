@@ -7,6 +7,7 @@ OC.L10N.register(
     "Name" : "Enw",
     "Delete" : "Dileu",
     "Cancel" : "Diddymu",
+    "Confirm" : "Cadarnhau",
     "Email" : "E-bost",
     "Select Date" : "Dewis Dyddiad",
     "Edit" : "Golygu",
