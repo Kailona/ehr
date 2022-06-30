@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Username" : "Корисничко име",
     "Password" : "Лозинка",
+    "Select options" : "Изберете опции",
     "File name" : "Име на датотека",
     "Destination" : "Дестинација",
     "Welcome" : "Добредојде",
