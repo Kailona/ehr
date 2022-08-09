@@ -10,6 +10,7 @@ OC.L10N.register(
     "Shortcuts" : "Raccourcis",
     "Request Data from Provider" : "Demander vos données à un fournisseur",
     "Import Data" : "Importer des données",
+    "Select options" : "Sélectionnez des options",
     "File name" : "Nom du fichier",
     "Destination" : "Destination",
     "Data has been successfully imported" : "Les données ont bien été importées",
