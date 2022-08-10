@@ -28,7 +28,7 @@ OC.L10N.register(
     "Cancel" : "Abbrechen",
     "Confirm" : "Bestätigen",
     "I hereby request all data from my last exam to be uploaded to my personal health data archive on the Kailona platform. Please comply within the 30 day period as required by the Berufsordnung der Ärztekammern, §630g Abs. 2  BGB and Art. 15  Abs. 3 DSGVO." : "Ich beantrage hiermit, dass alle Daten meiner letzten Untersuchung in mein persönliches Gesundheitsdatenarchiv auf der Kailona-Plattform hochgeladen werden. Bitte komme der Aufforderung innerhalb der 30-Tage-Frist gemäß der Berufsordnung der Ärztekammern, §630g Abs. 2 BGB und Art. 15 Abs. 3 DSGVO nach.",
-    "Unable to send health data request. Please set your email address in user profile settings!" : "Senden der Anfrage deiner Gesundheitsdaten fehlgeschlagen. Bitte stelle Deine E-Mail-Adresse in den Benutzerprofileinstellungen ein!",
+    "Unable to send health data request. Please set your email address in user profile settings!" : "Senden der Anfrage deiner Gesundheitsdaten fehlgeschlagen. Bitte stelle deine E-Mail-Adresse in den Benutzerprofileinstellungen ein!",
     "Health data request was successfully sent" : "Anfrage der Gesundheitsdaten erfolgreich versandt",
     "Unable to send health data request. Please contact your administrator!" : "Anfrage für Gesundheitsdaten fehlgeschlagen. Bitte kontaktiere deinen Administrator!",
     "Request Data" : "Daten anfragen",
