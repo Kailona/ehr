@@ -14,6 +14,7 @@ OC.L10N.register(
     "Select Date" : "Вкажіть дату",
     "Edit" : "Редагувати",
     "Activities" : "Події",
+    "Filter by" : "Фільтрувати за",
     "Unknown" : "Невідомо",
     "Documents" : "Документи"
 },
