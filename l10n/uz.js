@@ -1,13 +1,13 @@
 OC.L10N.register(
     "ehr",
     {
-    "Username" : "Foydalanuvchi nomi",
-    "Password" : "Parol",
-    "Name" : "Ism...",
-    "Delete" : "O'chir",
-    "Cancel" : "Bekor qilish",
-    "Confirm" : "Tasdiqlash",
-    "Activities" : "Faoliyatlar",
-    "Unknown" : "Noma'lum"
+    "Username" : "Username",
+    "Password" : "Password",
+    "Name" : "Name",
+    "Delete" : "Delete",
+    "Cancel" : "Cancel",
+    "Confirm" : "Confirm",
+    "Activities" : "Activities",
+    "Unknown" : "Unknown"
 },
 "nplurals=1; plural=0;");
