@@ -99,7 +99,7 @@
     "Diastolic" : "Diastolisch",
     "Health Data Request" : "Gesundheitsdaten anfordern",
     "This is health data request from %s" : "Dies ist eine Gesundheitsdatenabfrage von %s",
-    "Please confirm that the following patient information match with your records before sending health data!" : "Bitte bestätige vor dem Versenden der Gesundheitsdaten, dass die folgenden Patienteninformationen mit deinen Daten übereinstimmen!",
+    "Please confirm that the following patient information match with your records before sending health data!" : "Bitte bestätige vor dem Senden der Gesundheitsdaten, dass die folgenden Patienteninformationen mit deinen Daten übereinstimmen!",
     "Patient Name: %s" : "Name des Patienten: %s",
     "Patient Email: %s" : "E-Mail des Patienten: %s",
     "Upload Health Data" : "Gesundheitsdaten hochladen",
