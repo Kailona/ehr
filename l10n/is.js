@@ -18,6 +18,8 @@ OC.L10N.register(
     "Activities" : "Aðgerðir",
     "Unknown" : "Óþekkt",
     "Documents" : "Skjöl",
+    "Age" : "Aldur",
+    "Body Temperature" : "Líkamshiti",
     "This is an automatically sent email, please do not reply." : "Þetta er sjálfvirk tölvupóstsending, ekki svara þessu."
 },
 "nplurals=2; plural=(n % 10 != 1 || n % 100 == 11);");

@@ -11,6 +11,7 @@ OC.L10N.register(
     "Cancel" : "Cancelar",
     "Confirm" : "Confirmar",
     "Email" : "E-mail",
+    "Timeline" : "Linha do tempo",
     "Select Date" : "Escolha a data",
     "Distance" : "Distancia",
     "Calories" : "Calorias",
