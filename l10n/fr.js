@@ -32,7 +32,7 @@ OC.L10N.register(
     "Health data request was successfully sent" : "Requête de données de santé envoyée",
     "Unable to send health data request. Please contact your administrator!" : "Impossible d'envoyer la requête de données de santé. Contactez votre administrateur !",
     "Request Data" : "Demander les données",
-    "Email" : "Courriel",
+    "Email" : "E-mail",
     "Message to Provider:" : "Message au fournisseur :",
     "Send Request" : "Envoyer la requête",
     "Timeline" : "Ligne du temps",
