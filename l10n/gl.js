@@ -38,6 +38,7 @@ OC.L10N.register(
     "Edit" : "Editar",
     "Activities" : "Actividades",
     "Add New Activity" : "Engadir unha nova actividade",
+    "Filter by" : "Filtrar por",
     "Filter by date" : "Filtrar pola data",
     "Update Activity" : "Actualizar a actividade",
     "Start Date/Time" : "Día/hora de comezo",
