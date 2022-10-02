@@ -13,6 +13,7 @@ OC.L10N.register(
     "Email" : "Електронна пошта",
     "Timeline" : "Дії",
     "Select Date" : "Вкажіть дату",
+    "Distance" : "Дистанція",
     "Edit" : "Редагувати",
     "Activities" : "Події",
     "Filter by" : "Фільтрувати за",
