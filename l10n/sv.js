@@ -16,6 +16,7 @@ OC.L10N.register(
     "Email" : "E-post",
     "Timeline" : "Tidslinje",
     "Select Date" : "Välj datum",
+    "No data available" : "Inget data tillgängligt",
     "Steps" : "Steg",
     "Distance" : "Distans",
     "Calories" : "Kalorier",
