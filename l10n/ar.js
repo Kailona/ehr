@@ -15,6 +15,7 @@ OC.L10N.register(
     "Distance" : "المسافة",
     "Edit" : "تعديل",
     "Activities" : "النشاطات",
+    "Filter by" : ": فلترة بـ",
     "Unknown" : "غير معروف",
     "Documents" : "الوثائق",
     "This is an automatically sent email, please do not reply." : "هذه رسالة آلية، يرجى عدم الرد عليها."
