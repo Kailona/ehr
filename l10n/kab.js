@@ -6,6 +6,7 @@ OC.L10N.register(
     "Name" : "Nom",
     "Delete" : "Kkes",
     "Cancel" : "Sefsex",
+    "Confirm" : "Serggeg",
     "Email" : "Imayl",
     "Edit" : "Ẓreg",
     "Activities" : "Irmuden",
