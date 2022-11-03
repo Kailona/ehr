@@ -41,6 +41,6 @@ OC.L10N.register(
     "Heart Rate" : "Puls",
     "Blood Pressure" : "Blodtryck",
     "Patient Name: %s" : "Patientnamn: %s",
-    "This is an automatically sent email, please do not reply." : "Detta är ett automatiskt skickat e-postmeddelande, svara inte på detta meddelande."
+    "This is an automatically sent email, please do not reply." : "Detta är ett automatiskt e-postmeddelande, du kan därmed inte svara på det."
 },
 "nplurals=2; plural=(n != 1);");
