@@ -66,6 +66,29 @@ server {
 
 This will run the proxy at `http://localhost:3001/`
 
+```
+After that, need to make some configurations about Nextcloud on config.php document where is under the nextcloud file.
+
+'trusted_domains' => 
+  array (
+    0 => 'localhost:3001',
+  ),
+
+'overwritehost' => 'localhost:3001',
+'overwrite.cli.url' => 'http://localhost:3001',
+
+Make sure to be changed url hosts as localhost:3001.
+
+Then, add this code line at the end of lines;
+
+'debug' => true,
+'theme' => '',
+'loglevel' => 0,
+'maintenance' => false,
+'allow_local_remote_servers' => true,
+
+```
+
 With the proxy configured you can start the webpack dev server and specify where the Nextcloud proxy is.
 
 ```
