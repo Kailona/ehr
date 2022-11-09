@@ -18,3 +18,8 @@
     flex-basis: auto !important;
     align-items: center;
 }
+
+.MuiPickersCalendar-week button {
+    width: 10px;
+    margin-left: 5px;
+}
