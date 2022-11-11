@@ -224,24 +224,22 @@ class ExportDataModal extends React.Component {
                                 code: 'http://loinc.org|34565-2',
                                 _include: 'Observation:has-member',
                                 //_sort: '-date', // not supported with _include by ibm fhir server
-                                _count: 10,
                             },
                         ];
-                        await new PhysicalDataService().fetchData(params).then(data => {
+                        return await new PhysicalDataService().fetchData(params).then(data => {
                             allData.push({
                                 name: plugin.name,
                                 data,
                             });
                         });
                     } else if (plugin.name === 'Documents' || plugin.priority === 50) {
-                        await this.documentService.fetch().then(data => {
+                        return await this.documentService.fetch().then(data => {
                             allData.push({
                                 name: plugin.name,
                                 data: data.data,
                             });
                         });
                     }
-                    return;
                 }
 
                 if (typeof timelineModule.getData === 'function') {
