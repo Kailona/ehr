@@ -27,6 +27,7 @@ class KailonaDateRangePicker extends Component {
 
         this.state = {
             dateFormat: this.props.dateFormat || DATE_FORMAT,
+            date: this.props.date,
         };
         this.handleChange = this.handleChange.bind(this);
     }

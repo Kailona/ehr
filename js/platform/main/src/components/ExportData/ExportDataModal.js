@@ -17,7 +17,10 @@ import { KailonaTextField, KailonaButton, KailonaCloseButton } from '@kailona/ui
 import './ExportDataModal.styl';
 import KailonaDateRangePicker from '../../../../ui/src/elements/DatePicker/KailonaDateRangePicker';
 import moment from 'moment';
-import { ModuleTypeEnum, PluginManager, getIcon } from '@kailona/core';
+import { ModuleTypeEnum, PluginManager, getIcon, DocumentService } from '@kailona/core';
+import PhysicalDataService from '../../../../../plugins/physicalData/src/services/PhysicalDataService';
+import Logger from '@kailona/core/src/services/Logger';
+import { withNotification } from '../../context/NotificationContext';
 
 const DialogContent = withStyles({
     root: {
@@ -43,12 +46,14 @@ const FormControl = styled(MuiFormControl)({
     },
 });
 
+const logger = new Logger('main.ExportData');
+
 class ExportDataModal extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            loading: false,
+            exporting: false,
             filters: {
                 dateRange: {
                     begin: moment().clone(),
@@ -61,7 +66,10 @@ class ExportDataModal extends React.Component {
             pluginColorModules: [],
         };
 
+        this.timelineModules = [];
         this.toEmailRef = React.createRef();
+
+        this.documentService = new DocumentService();
     }
 
     getPlugins = () => {
@@ -77,7 +85,7 @@ class ExportDataModal extends React.Component {
             }
 
             // Get the plugin's color data to use when checked.
-            const color = this.getPluginColorModule(plugin);
+            const color = this.getPluginTimelineModule(plugin);
             menuItems.push({
                 path,
                 color: color,
@@ -91,16 +99,24 @@ class ExportDataModal extends React.Component {
         this.state.plugins = menuItems;
     };
 
-    getPluginColorModule = plugin => {
+    getPluginTimelineModule = plugin => {
         const timelineModule = plugin.modules[ModuleTypeEnum.TimelineModule];
 
+        if (timelineModule && typeof timelineModule.getData === 'function') {
+            return this.timelineModules.push(timelineModule);
+        }
+
         if (Array.isArray(timelineModule) && timelineModule.length) {
-            const validModules = timelineModule.filter(
+            const validModules = timelineModule.find(
                 m =>
                     typeof m.getData === 'function' ||
                     (Array.isArray(m.children) && m.children.every(c => c.name && typeof c.getData === 'function'))
             );
-            return validModules[0].color;
+            this.timelineModules.push({
+                ...validModules,
+                plugin: plugin,
+            });
+            return validModules.color;
         }
 
         if (timelineModule) {
@@ -108,17 +124,17 @@ class ExportDataModal extends React.Component {
         }
     };
 
-    getMenuItems = () => {
-        const { selectedPlugins, plugins } = this.state;
+    getCheckboxItems = () => {
+        const { selectedPlugins, plugins, exporting } = this.state;
         // After get plugins first time, then not need to get again
         plugins.length == 0 && this.getPlugins();
 
-        return plugins.map(menuItem => {
-            const isChecked = selectedPlugins.some(element => element.name === menuItem.name);
+        return plugins.map(checkboxItem => {
+            const isChecked = selectedPlugins.some(element => element.name === checkboxItem.name);
 
             // That's not worked on Diabets img. So, changed it as scan with style.
-            // ? getIcon(menuItem.icon, 30, menuItem.color ? menuItem.color : "#4dd0e1")
-            const menuItemIcon = getIcon(menuItem.icon);
+            // ? getIcon(checkboxItem.icon, 30, checkboxItem.color ? checkboxItem.color : "#4dd0e1")
+            const checkboxItemIcon = getIcon(checkboxItem.icon);
 
             return (
                 <Grid item xs={4}>
@@ -126,12 +142,12 @@ class ExportDataModal extends React.Component {
                         control={
                             <Checkbox
                                 checked={isChecked}
-                                onChange={() => this.onCheckboxChange(menuItem)}
-                                icon={<scan>{menuItemIcon}</scan>}
-                                checkedIcon={<scan style={{ color: menuItem.color }}>{menuItemIcon}</scan>}
+                                onChange={() => this.onCheckboxChange(checkboxItem)}
+                                icon={<scan>{checkboxItemIcon}</scan>}
+                                checkedIcon={<scan style={{ color: checkboxItem.color }}>{checkboxItemIcon}</scan>}
                             />
                         }
-                        label={menuItem.name}
+                        label={checkboxItem.name}
                     />
                 </Grid>
             );
@@ -158,9 +174,131 @@ class ExportDataModal extends React.Component {
         this.setState({ ...this.state, selectedPlugins: newSelectedPlugins, checkAll: !checkAll });
     };
 
+    fetchData = () => {
+        const { filters, selectedPlugins } = this.state;
+        const allData = [];
+
+        if (selectedPlugins.length === 0) {
+            // TODO: Will add into language folders.
+            return this.props.showNotification({
+                severity: 'warning',
+                message: t('ehr', 'Please select at least one'),
+            });
+        }
+        if (this.toEmailRef.current.value === '') {
+            // TODO: Will add into language folders.
+            return this.props.showNotification({
+                severity: 'warning',
+                message: t('ehr', 'Need to enter an email address'),
+            });
+        }
+
+        try {
+            this.setState({
+                exporting: true,
+            });
+
+            selectedPlugins.forEach(async plugin => {
+                const timelineModule = this.timelineModules.find(module => module.plugin.name === plugin.name);
+
+                if (!timelineModule) {
+                    if (plugin.name === 'Physical Data' || plugin.priority === 100) {
+                        const params = [
+                            {
+                                date: `ge${moment(filters.dateRange.begin)
+                                    .hour(0)
+                                    .minute(0)
+                                    .second(0)
+                                    .utc()
+                                    .toISOString()}`,
+                            },
+                            {
+                                date: `le${moment(filters.dateRange.end)
+                                    .hour(23)
+                                    .minute(59)
+                                    .second(59)
+                                    .utc()
+                                    .toISOString()}`,
+                            },
+                            {
+                                code: 'http://loinc.org|34565-2',
+                                _include: 'Observation:has-member',
+                                //_sort: '-date', // not supported with _include by ibm fhir server
+                                _count: 10,
+                            },
+                        ];
+                        await new PhysicalDataService().fetchData(params).then(data => {
+                            allData.push({
+                                name: plugin.name,
+                                data,
+                            });
+                        });
+                    } else if (plugin.name === 'Documents' || plugin.priority === 50) {
+                        await this.documentService.fetch().then(data => {
+                            allData.push({
+                                name: plugin.name,
+                                data: data.data,
+                            });
+                        });
+                    }
+                    return;
+                }
+
+                if (typeof timelineModule.getData === 'function') {
+                    await timelineModule.getData(filters.begin, filters.end).then(data => {
+                        allData.push({
+                            name: timelineModule.name,
+                            data,
+                        });
+                    });
+                } else if (timelineModule.children) {
+                    const promises = [];
+
+                    timelineModule.children.forEach(child => {
+                        const promise = new Promise(resolve => {
+                            child.getData(filters.begin, filters.end).then(data => {
+                                resolve({
+                                    name: child.name,
+                                    data,
+                                });
+                            });
+                        });
+
+                        promises.push(promise);
+                    });
+
+                    const promiseResults = await Promise.all(promises);
+                    allData.push(...promiseResults);
+                }
+            });
+
+            this.setState({
+                exporting: false,
+            });
+
+            this.props.onClose();
+
+            this.props.showNotification({
+                severity: 'success',
+                message: t('ehr', 'Data has been successfully exported and sent to related email.'),
+            });
+        } catch (error) {
+            logger.error('Failed to export data', error);
+
+            this.setState({
+                exporting: false,
+            });
+
+            this.props.showNotification({
+                severity: 'error',
+                message: t('ehr', 'An error occurred while exporting data. Please contact your administrator.'),
+            });
+        }
+    };
+
     render() {
-        const { loading, filters, checkAll } = this.state;
-        const menuItems = this.getMenuItems();
+        const { exporting, checkAll } = this.state;
+        const checkboxItems = this.getCheckboxItems();
 
         return (
             <Dialog fullWidth={true} open={this.props.isOpen}>
@@ -177,8 +315,11 @@ class ExportDataModal extends React.Component {
                         <Grid item xs={6}>
                             <KailonaDateRangePicker
                                 id="date"
-                                defaultValue={filters.dateRange}
-                                onChange={dateRange => this.setState({ ...this.state, filters: dateRange })}
+                                // As a default value. To give user only today's data if he/she doesn't choose date.
+                                date={{ begin: new Date(), end: new Date() }}
+                                onChange={dateRange =>
+                                    this.setState({ ...this.state, filters: { dateRange: dateRange } })
+                                }
                                 ariaLabel={t('ehr', 'Filter by date')}
                                 maxDate={new Date()}
                             />
@@ -200,7 +341,7 @@ class ExportDataModal extends React.Component {
                                 label={t('ehr', 'All')}
                             />
                         </Grid>
-                        <FormGroup row>{menuItems}</FormGroup>
+                        <FormGroup row>{checkboxItems}</FormGroup>
                     </FormControl>
                 </DialogContent>
                 <DialogActions>
@@ -208,19 +349,19 @@ class ExportDataModal extends React.Component {
                         class="default"
                         title={t('ehr', 'Cancel')}
                         onClick={this.props.onClose}
-                        disabled={loading}
+                        disabled={exporting}
                     />
-                    {/* <KailonaButton
+                    <KailonaButton
                         class="primary"
                         title={t('ehr', 'Send Request')}
-                        onClick={this.sendRequest}
-                        loading={loading}
-                        disabled={loading}
-                    /> */}
+                        onClick={this.fetchData}
+                        loading={exporting}
+                        disabled={exporting}
+                    />
                 </DialogActions>
             </Dialog>
         );
     }
 }
 
-export default ExportDataModal;
+export default withNotification(ExportDataModal);
