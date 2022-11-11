@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import { Box, FormControl, Grid, Typography } from '@material-ui/core';
-import { KailonaButton, KailonaDatePicker, KailonaDateRangePicker, KailonaTable, Loader } from '@kailona/ui';
+import { KailonaButton, KailonaDateRangePicker, KailonaTable, Loader } from '@kailona/ui';
 import { Delete, Edit } from '@material-ui/icons';
 import PhysicalDataEditModal from './PhysicalDataEditModal';
 import PhysicalDataService from '../services/PhysicalDataService';
