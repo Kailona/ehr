@@ -174,10 +174,9 @@ class ExportDataModal extends React.Component {
         this.setState({ ...this.state, selectedPlugins: newSelectedPlugins, checkAll: !checkAll });
     };
 
-    fetchData = () => {
+    fetchData = async () => {
         const { filters, selectedPlugins } = this.state;
         const allData = [];
-
         if (selectedPlugins.length === 0) {
             // TODO: Will add into language folders.
             return this.props.showNotification({
@@ -198,7 +197,7 @@ class ExportDataModal extends React.Component {
                 exporting: true,
             });
 
-            selectedPlugins.forEach(async plugin => {
+            for (const plugin of selectedPlugins) {
                 const timelineModule = this.timelineModules.find(module => module.plugin.name === plugin.name);
 
                 if (!timelineModule) {
@@ -226,49 +225,74 @@ class ExportDataModal extends React.Component {
                                 //_sort: '-date', // not supported with _include by ibm fhir server
                             },
                         ];
-                        return await new PhysicalDataService().fetchData(params).then(data => {
+                        await new PhysicalDataService().fetchData(params).then(data => {
                             allData.push({
                                 name: plugin.name,
                                 data,
                             });
                         });
                     } else if (plugin.name === 'Documents' || plugin.priority === 50) {
-                        return await this.documentService.fetch().then(data => {
+                        await this.documentService.fetch().then(data => {
                             allData.push({
                                 name: plugin.name,
                                 data: data.data,
                             });
                         });
                     }
-                }
-
-                if (typeof timelineModule.getData === 'function') {
-                    await timelineModule.getData(filters.begin, filters.end).then(data => {
-                        allData.push({
-                            name: timelineModule.name,
-                            data,
-                        });
-                    });
-                } else if (timelineModule.children) {
-                    const promises = [];
-
-                    timelineModule.children.forEach(child => {
-                        const promise = new Promise(resolve => {
-                            child.getData(filters.begin, filters.end).then(data => {
-                                resolve({
-                                    name: child.name,
-                                    data,
-                                });
+                } else {
+                    if (typeof timelineModule.getData === 'function') {
+                        await timelineModule.getData(filters.begin, filters.end).then(data => {
+                            allData.push({
+                                name: timelineModule.name,
+                                data,
                             });
                         });
+                    } else if (timelineModule.children) {
+                        const promises = [];
 
-                        promises.push(promise);
-                    });
+                        timelineModule.children.forEach(child => {
+                            const promise = new Promise(resolve => {
+                                child.getData(filters.begin, filters.end).then(data => {
+                                    resolve({
+                                        name: child.name,
+                                        data,
+                                    });
+                                });
+                            });
 
-                    const promiseResults = await Promise.all(promises);
-                    allData.push(...promiseResults);
+                            promises.push(promise);
+                        });
+
+                        await Promise.all(promises).then(result => {
+                            allData.push(...result);
+                        });
+                    }
                 }
+            }
+
+            // TODO: Converting to CSV Format. Will carry into utils folder as common.
+            let formattedArray = [];
+            allData.map(element => {
+                const objectData = Object.assign({}, ...element.data);
+                formattedArray.push({
+                    name: element.name,
+                    ...objectData,
+                });
             });
+
+            const csvContent = formattedArray
+                .map(e => {
+                    let value = Object.keys(e).join(',') + '\n';
+                    Object.keys(e).map(key => {
+                        // replaceAll for the date's format. Because of date values have comma.
+                        value += e[key].toString().replaceAll(',', '') + ',';
+                    });
+                    return value;
+                })
+                .join('\n');
+
+            var encodedUri = encodeURI(`data:text/csv;charset=utf-8,${csvContent}`);
+            window.open(encodedUri);
 
             this.setState({
                 exporting: false,
