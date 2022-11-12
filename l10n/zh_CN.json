@@ -99,7 +99,8 @@
         "This is an automatically sent email, please do not reply.": "这是一封自动发送的电子邮件，请不要回复。",
         "EHR (Electronic Health Records)": "EHR(电子健康纪录)",
         "EHR": "EHR",
-        "Kailona: Personal Health Records": "Kailona：个人健康记录"
+        "Kailona: Personal Health Records": "Kailona：个人健康记录",
+        "Please select at least one": "请至少选择一项"
     },
     "pluralForm": "nplurals=1; plural=0;"
 }

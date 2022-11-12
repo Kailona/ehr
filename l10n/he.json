@@ -62,7 +62,8 @@
         "Patient Name: %s": "שם המטופל/ת: %s",
         "Patient Email: %s": "דוא״ל המטופל/ת: %s",
         "Upload Health Data": "העלאת נתוני בריאות",
-        "This is an automatically sent email, please do not reply.": "זאת הודעת דוא״ל שנשלחת אוטומטית, נא לא להגיב."
+        "This is an automatically sent email, please do not reply.": "זאת הודעת דוא״ל שנשלחת אוטומטית, נא לא להגיב.",
+        "Please select at least one": "אנא בחר לפחות אחד"
     },
     "pluralForm": "nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n == 2 && n % 1 == 0) ? 1: (n % 10 == 0 && n % 1 == 0 && n > 10) ? 2 : 3;"
 }

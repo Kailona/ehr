@@ -101,7 +101,7 @@ OC.L10N.register(
         'Please confirm that the following patient information match with your records before sending health data!':
             'Potrdite, da so podatki pacienta skladni z zapisi, preden pošljete podatke!',
         'Patient Name: %s': 'Ime pacienta: %s',
-        'Patient Email: %s': 'Elektronski naslov pacienta: %s',
+        'Patient Email: %s': '   naslov pacienta: %s',
         'Upload Health Data': 'Pošlji zdravstvene podatke',
         'This is an automatically sent email, please do not reply.':
             'To sporočilo je samodejno poslano, nanj se nima smisla odzvati.',
@@ -110,6 +110,7 @@ OC.L10N.register(
         'Kailona: Personal Health Records': 'Kailona: osebni zdravstveni karton',
         'The Kailona Personal Health Record allows you to regain control over your health data. We provide an open source platform that allows everyone to add plugins and make improvements.\n\nIt helps you aggregate, manage, securely share and visualize your health data including lab data, medical images, FHIR data from hospitals, vital signs, nutritional and activity data.\n\nThis app works with a FHIR server. Please read the [documentation](https://docs.kailona.org/docs/#installation) to learn more about that.\n\n**Note that this app is under alpha development!**':
             'Osebni zdravstveni karton Kailona omogoča popoln nadzor nad osebnimi zdravstvenimi podatki. Odprtokodno okolje omogoča razvoj, dodajanje vstavkov in javno izboljševanje sistema.\n\nOmogoča združevanje, upravljanje in varno souporabo, izmenjavo in predstavitev zdravstvenih podatkov, vključno z laboratorijskimi podatki, medicinskimi slikami, bolnišničnimi podatki FHIR, telesnimi podatki, podatki o hranilni vrednosti živil in podatki različnih dejavnosti.\n\nProgram uporablja strežnik FHIR. Več podrobnosti o tem je zbranih v [dokumentaciji](https://docs.kailona.org/docs/#installation) namestitve.\n\n** Program je trenutno še v preizkusni različici! **',
+        'Please select at least one': 'Izberite vsaj enega',
     },
     'nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);'
 );

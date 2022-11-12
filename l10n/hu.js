@@ -112,6 +112,7 @@ OC.L10N.register(
         'Kailona: Personal Health Records': 'Kailona: Személyes egészségügyi nyilvántartás',
         'The Kailona Personal Health Record allows you to regain control over your health data. We provide an open source platform that allows everyone to add plugins and make improvements.\n\nIt helps you aggregate, manage, securely share and visualize your health data including lab data, medical images, FHIR data from hospitals, vital signs, nutritional and activity data.\n\nThis app works with a FHIR server. Please read the [documentation](https://docs.kailona.org/docs/#installation) to learn more about that.\n\n**Note that this app is under alpha development!**':
             'A Kailona személyes egészségügyi nyilvántartása lehetővé teszi, hogy visszanyerje az egészségügyi adatok feletti ellenőrzést. Nyílt forráskódú platformot kínálunk, amely lehetővé teszi mindenki számára, hogy bővítményeket adjon hozzá és javítson rajta.\n\nSegít összesíteni, kezelni, biztonságosan megosztani és vizualizálni az egészségügyi adatait, beleértve a laboratóriumi adatokat, az orvosi képeket, a kórházakból származó FHIR-adatokat, a életjeleket, a táplálkozási és az aktivitási adatokat.\n\nEz az alkalmazás egy FHIR kiszolgálóval működik. Bővebb információkért, olvassa el a [dokumentációt](https://docs.kailona.org/docs/#installation)…\n\n**Vegye figyelembe, hogy ez az alkalmazás alfa fejlesztés alatt áll!**',
+        'Please select at least one': 'Kérjük, válasszon legalább egyet',
     },
     'nplurals=2; plural=(n != 1);'
 );

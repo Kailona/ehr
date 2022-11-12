@@ -71,6 +71,7 @@ OC.L10N.register(
         'Patient Email: %s': 'E-mail du patient : %s',
         'This is an automatically sent email, please do not reply.':
             'Ceci est un message automatique, merci de ne pas y répondre.',
+        'Please select at least one': 'Veuillez sélectionner au moins un',
     },
     'nplurals=2; plural=(n > 1);'
 );

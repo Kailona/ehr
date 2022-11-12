@@ -112,6 +112,7 @@ OC.L10N.register(
         'Kailona: Personal Health Records': 'Kailona: Persönliche Gesundheitsakte',
         'The Kailona Personal Health Record allows you to regain control over your health data. We provide an open source platform that allows everyone to add plugins and make improvements.\n\nIt helps you aggregate, manage, securely share and visualize your health data including lab data, medical images, FHIR data from hospitals, vital signs, nutritional and activity data.\n\nThis app works with a FHIR server. Please read the [documentation](https://docs.kailona.org/docs/#installation) to learn more about that.\n\n**Note that this app is under alpha development!**':
             'Die Kailona persönliche Gesundheitsakte ermöglicht es Ihnen, die Kontrolle über Ihre Gesundheitsdaten zurückzugewinnen. Wir bieten eine Open-Source-Plattform, die es jedem erlaubt, Plugins hinzuzufügen und Verbesserungen vorzunehmen.\n\nSie hilft Ihnen, Ihre Gesundheitsdaten zu bündeln, zu verwalten, sicher zu teilen und zu visualisieren, einschließlich Labordaten, medizinischer Bilder, FHIR-Daten aus Krankenhäusern, Vitaldaten, Ernährungs- und Aktivitätsdaten.\n\nDiese App arbeitet mit einem FHIR-Server. Bitte lesen Sie die [Dokumentation](https://docs.kailona.org/docs/#installation), um mehr darüber zu erfahren.\n\n**Beachten Sie, dass sich diese App in der Alpha-Entwicklung befindet!**',
+        'Please select at least one': 'Bitte wählen Sie mindestens eine aus',
     },
     'nplurals=2; plural=(n != 1);'
 );

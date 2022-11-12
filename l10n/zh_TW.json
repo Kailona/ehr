@@ -100,7 +100,8 @@
         "EHR (Electronic Health Records)": "EHR（電子健康紀錄）",
         "EHR": "EHR",
         "Kailona: Personal Health Records": "Kailona：個人健康紀錄",
-        "The Kailona Personal Health Record allows you to regain control over your health data. We provide an open source platform that allows everyone to add plugins and make improvements.\n\nIt helps you aggregate, manage, securely share and visualize your health data including lab data, medical images, FHIR data from hospitals, vital signs, nutritional and activity data.\n\nThis app works with a FHIR server. Please read the [documentation](https://docs.kailona.org/docs/#installation) to learn more about that.\n\n**Note that this app is under alpha development!**": "Kailona 個人健康紀錄讓您可以取回您對健康資料的控制權。我們提供了開放原始碼平臺，每個人都可以新增外掛程式並做出改進。\n\n其協助您聚合、管理、安全地分享與可視化您的健康資料，包含了實驗室資料、醫學影像、從醫院而來的 FHIR 資料、生命徵象、營養與活動資料。\n\n此應用程式可與 FHIR 伺服器一起使用。請閱讀[文件](https://docs.kailona.org/docs/#installation)以取得更多關於這個的資訊。\n\n**請注意，此應用程式目前仍在開發階段！**"
+        "The Kailona Personal Health Record allows you to regain control over your health data. We provide an open source platform that allows everyone to add plugins and make improvements.\n\nIt helps you aggregate, manage, securely share and visualize your health data including lab data, medical images, FHIR data from hospitals, vital signs, nutritional and activity data.\n\nThis app works with a FHIR server. Please read the [documentation](https://docs.kailona.org/docs/#installation) to learn more about that.\n\n**Note that this app is under alpha development!**": "Kailona 個人健康紀錄讓您可以取回您對健康資料的控制權。我們提供了開放原始碼平臺，每個人都可以新增外掛程式並做出改進。\n\n其協助您聚合、管理、安全地分享與可視化您的健康資料，包含了實驗室資料、醫學影像、從醫院而來的 FHIR 資料、生命徵象、營養與活動資料。\n\n此應用程式可與 FHIR 伺服器一起使用。請閱讀[文件](https://docs.kailona.org/docs/#installation)以取得更多關於這個的資訊。\n\n**請注意，此應用程式目前仍在開發階段！**",
+        "Please select at least one": "請至少選擇一項"
     },
     "pluralForm": "nplurals=1; plural=0;"
 }

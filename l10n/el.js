@@ -84,6 +84,7 @@ OC.L10N.register(
         'EHR (Electronic Health Records)': 'ΗΑΥ (Ηλεκτρονικό Αρχείο Υγείας)',
         EHR: 'ΗΑΥ',
         'Kailona: Personal Health Records': 'Kailona: Προσωπικό Αρχείο Υγείας',
+        'Please select at least one': 'Επιλέξτε τουλάχιστον ένα',
     },
     'nplurals=2; plural=(n != 1);'
 );

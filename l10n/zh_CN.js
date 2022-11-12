@@ -107,6 +107,7 @@ OC.L10N.register(
         'EHR (Electronic Health Records)': 'EHR(电子健康纪录)',
         EHR: 'EHR',
         'Kailona: Personal Health Records': 'Kailona：个人健康记录',
+        'Please select at least one': '请至少选择一项',
     },
     'nplurals=1; plural=0;'
 );
