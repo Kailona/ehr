@@ -178,7 +178,6 @@ class ExportDataModal extends React.Component {
         const { filters, selectedPlugins } = this.state;
         const allData = [];
         if (selectedPlugins.length === 0) {
-            // TODO: Will add into language folders.
             return this.props.showNotification({
                 severity: 'warning',
                 message: t('ehr', 'Please select at least one'),
@@ -198,33 +197,33 @@ class ExportDataModal extends React.Component {
             });
 
             for (const plugin of selectedPlugins) {
+                let params = [
+                    {
+                        date: `ge${moment(filters.dateRange.begin)
+                            .hour(0)
+                            .minute(0)
+                            .second(0)
+                            .utc()
+                            .toISOString()}`,
+                    },
+                    {
+                        date: `le${moment(filters.dateRange.end)
+                            .hour(23)
+                            .minute(59)
+                            .second(59)
+                            .utc()
+                            .toISOString()}`,
+                    },
+                ];
                 const timelineModule = this.timelineModules.find(module => module.plugin.name === plugin.name);
 
                 if (!timelineModule) {
                     if (plugin.name === 'Physical Data' || plugin.priority === 100) {
-                        const params = [
-                            {
-                                date: `ge${moment(filters.dateRange.begin)
-                                    .hour(0)
-                                    .minute(0)
-                                    .second(0)
-                                    .utc()
-                                    .toISOString()}`,
-                            },
-                            {
-                                date: `le${moment(filters.dateRange.end)
-                                    .hour(23)
-                                    .minute(59)
-                                    .second(59)
-                                    .utc()
-                                    .toISOString()}`,
-                            },
-                            {
-                                code: 'http://loinc.org|34565-2',
-                                _include: 'Observation:has-member',
-                                //_sort: '-date', // not supported with _include by ibm fhir server
-                            },
-                        ];
+                        params.push({
+                            code: 'http://loinc.org|34565-2',
+                            _include: 'Observation:has-member',
+                        });
+
                         await new PhysicalDataService().fetchData(params).then(data => {
                             allData.push({
                                 name: plugin.name,
@@ -241,7 +240,7 @@ class ExportDataModal extends React.Component {
                     }
                 } else {
                     if (typeof timelineModule.getData === 'function') {
-                        await timelineModule.getData(filters.begin, filters.end).then(data => {
+                        await timelineModule.getData(filters.dateRange.begin, filters.dateRange.end).then(data => {
                             allData.push({
                                 name: timelineModule.name,
                                 data,
@@ -252,7 +251,7 @@ class ExportDataModal extends React.Component {
 
                         timelineModule.children.forEach(child => {
                             const promise = new Promise(resolve => {
-                                child.getData(filters.begin, filters.end).then(data => {
+                                child.getData(filters.dateRange.begin, filters.dateRange.end).then(data => {
                                     resolve({
                                         name: child.name,
                                         data,
