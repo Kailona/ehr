@@ -177,6 +177,7 @@ class ExportDataModal extends React.Component {
     fetchData = async () => {
         const { filters, selectedPlugins } = this.state;
         const allData = [];
+
         if (selectedPlugins.length === 0) {
             return this.props.showNotification({
                 severity: 'warning',
@@ -184,7 +185,6 @@ class ExportDataModal extends React.Component {
             });
         }
         if (this.toEmailRef.current.value === '') {
-            // TODO: Will add into language folders.
             return this.props.showNotification({
                 severity: 'warning',
                 message: t('ehr', 'Need to enter an email address'),
@@ -197,32 +197,32 @@ class ExportDataModal extends React.Component {
             });
 
             for (const plugin of selectedPlugins) {
-                let params = [
-                    {
-                        date: `ge${moment(filters.dateRange.begin)
-                            .hour(0)
-                            .minute(0)
-                            .second(0)
-                            .utc()
-                            .toISOString()}`,
-                    },
-                    {
-                        date: `le${moment(filters.dateRange.end)
-                            .hour(23)
-                            .minute(59)
-                            .second(59)
-                            .utc()
-                            .toISOString()}`,
-                    },
-                ];
                 const timelineModule = this.timelineModules.find(module => module.plugin.name === plugin.name);
 
                 if (!timelineModule) {
                     if (plugin.name === 'Physical Data' || plugin.priority === 100) {
-                        params.push({
-                            code: 'http://loinc.org|34565-2',
-                            _include: 'Observation:has-member',
-                        });
+                        let params = [
+                            {
+                                date: `ge${moment(filters.dateRange.begin)
+                                    .hour(0)
+                                    .minute(0)
+                                    .second(0)
+                                    .utc()
+                                    .toISOString()}`,
+                            },
+                            {
+                                date: `le${moment(filters.dateRange.end)
+                                    .hour(23)
+                                    .minute(59)
+                                    .second(59)
+                                    .utc()
+                                    .toISOString()}`,
+                            },
+                            {
+                                code: 'http://loinc.org|34565-2',
+                                _include: 'Observation:has-member',
+                            },
+                        ];
 
                         await new PhysicalDataService().fetchData(params).then(data => {
                             allData.push({
@@ -269,29 +269,7 @@ class ExportDataModal extends React.Component {
                 }
             }
 
-            // TODO: Converting to CSV Format. Will carry into utils folder as common.
-            let formattedArray = [];
-            allData.map(element => {
-                const objectData = Object.assign({}, ...element.data);
-                formattedArray.push({
-                    name: element.name,
-                    ...objectData,
-                });
-            });
-
-            const csvContent = formattedArray
-                .map(e => {
-                    let value = Object.keys(e).join(',') + '\n';
-                    Object.keys(e).map(key => {
-                        // replaceAll for the date's format. Because of date values have comma.
-                        value += e[key].toString().replaceAll(',', '') + ',';
-                    });
-                    return value;
-                })
-                .join('\n');
-
-            var encodedUri = encodeURI(`data:text/csv;charset=utf-8,${csvContent}`);
-            window.open(encodedUri);
+            this.convertToCSVFormat(allData);
 
             this.setState({
                 exporting: false,
@@ -315,6 +293,51 @@ class ExportDataModal extends React.Component {
                 message: t('ehr', 'An error occurred while exporting data. Please contact your administrator.'),
             });
         }
+    };
+
+    convertToCSVFormat = allData => {
+        // TODO: Converting to CSV Format. Will carry into utils folder as common.
+        let formattedArray = [];
+        allData.map(element => {
+            const objectData = Object.assign({}, ...element.data);
+            formattedArray.push({
+                name: element.name,
+                ...objectData,
+            });
+        });
+
+        const csvContent = formattedArray
+            .map(e => {
+                let value = Object.keys(e).join(',') + '\n';
+                Object.keys(e).map(key => {
+                    // replaceAll for the date's format. Because of date values have comma.
+                    value += e[key].toString().replaceAll(',', '') + ',';
+                });
+                return value;
+            })
+            .join('\n');
+
+        var exportedFilename = 'export.csv';
+        var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        if (navigator.msSaveBlob) {
+            navigator.msSaveBlob(blob, exportedFilename);
+        } else {
+            var link = document.createElement('a');
+            if (link.download !== undefined) {
+                var url = URL.createObjectURL(blob);
+                link.setAttribute('href', url);
+                link.setAttribute('download', exportedFilename);
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                // URL.revokeObjectURL(url);
+            }
+            console.log('URL', url);
+        }
+
+        // var encodedUri = encodeURI(`data:text/csv;charset=utf-8,${csvContent}`);
+        // window.open(url);
     };
 
     render() {
