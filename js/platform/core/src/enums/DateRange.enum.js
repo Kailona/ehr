@@ -1,4 +1,5 @@
 const DateRangeEnum = {
+    DAILY: 'DAILY',
     ONE_MONTH: '1M',
     THREE_MONTH: '3M',
     SIX_MONTH: '6M',

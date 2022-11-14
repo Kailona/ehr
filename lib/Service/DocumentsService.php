@@ -107,4 +107,56 @@ class DocumentsService {
 
         return $files;
     }
+
+    public function export($file, $parent) {
+        $parentFolder =  'Kailona/Data Exports/' . date('Y-m-d H:i:s');
+        $fileName = $parentFolder . '/' . $file['name'];
+
+        $content = fopen($file['tmp_name'], 'rb');
+        if ($content === false) {
+            $this->logger->logError('Unable to read file content, ' . $fileName);
+            return new JSONResponse(array(), Http::STATUS_BAD_REQUEST);
+        }
+
+        if (!$this->userFolder->nodeExists($parentFolder)) {
+            $this->userFolder->newFolder($parentFolder);
+        }
+
+        if ($this->userFolder->nodeExists($fileName)) {
+            $target = $this->userFolder->get($fileName);
+        } else {
+            $target = $this->userFolder->newFile($fileName);
+        }
+
+        $target->fopen('w');
+        $target->putContent($content);
+    }
+
+    private function createExportLink($parentFolder) {
+        $folderName = 'Kailona/Data Exports/' . $parentFolder ;
+
+        if (!$this->userFolder->nodeExists($folderName)) {
+            $this->userFolder->newFolder($folderName);
+        }
+
+        $share = $this->shareManager->newShare();
+
+        $folder = $this->userFolder->get($folderName);
+        $share->setNode($folder);
+
+        // File drop (upload only)
+        $share->setPermissions(1);
+        $share->setShareType(3);
+
+        $share->setSharedBy($this->currentUser);
+
+        // Expire in 2 months
+        $expireDate = new DateTime();
+        $expireDate->add(new DateInterval('P2M'));
+        $share->setExpirationDate($expireDate);
+
+        $share = $this->shareManager->createShare($share);
+
+        return $this->urlGenerator->linkToRouteAbsolute('files_sharing.sharecontroller.showShare', ['token' => $share->getToken()]);
+    }
 }

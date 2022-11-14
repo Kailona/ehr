@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
 import Chart from 'chart.js';
 import moment from 'moment';
-import { Card, Grid, Box, Typography, Link as MuiLink, withStyles, CircularProgress } from '@material-ui/core';
+import {
+    Card,
+    Grid,
+    Box,
+    Typography,
+    Link as MuiLink,
+    withStyles,
+    CircularProgress,
+    IconButton,
+} from '@material-ui/core';
 import { ModuleTypeEnum, PluginManager, Logger, getIcon, ProfileManager } from '@kailona/core';
+import { KailonaDateRangePicker } from '@kailona/ui';
 import TimeRangeFilter from './TimeRangeFilter';
 import DateRangeEnum from '@kailona/core/src/enums/DateRange.enum';
 import { withMain } from '../../context/MainContext';
+import { ZoomIn, ZoomOut } from '@material-ui/icons';
 
 const logger = new Logger('main.Timeline');
 
@@ -54,6 +65,11 @@ class Timeline extends Component {
             slotWidth: 30,
             completedPlugins: [],
             userId: this.props.userId,
+            zoomRatio: 0,
+            dailyDateRange: {
+                begin: undefined,
+                end: undefined,
+            },
         };
 
         Chart.pluginService.register({
@@ -155,6 +171,11 @@ class Timeline extends Component {
         this.setState(
             {
                 selectedDateRange: dateRangeEnumValue,
+                zoomRatio: 0,
+                dailyDateRange: {
+                    begin: undefined,
+                    end: undefined,
+                },
             },
             () => {
                 this.fetchChartData();
@@ -205,6 +226,7 @@ class Timeline extends Component {
         };
 
         let found = false;
+
         for (let i = 0; i < chartData.datasets.length; i++) {
             if (chartData.datasets[i].label !== name) {
                 continue;
@@ -332,46 +354,74 @@ class Timeline extends Component {
     };
 
     getDateRangeValues = () => {
-        const { selectedDateRange } = this.state;
+        const { selectedDateRange, zoomRatio, dailyDateRange } = this.state;
+
+        console.log(dailyDateRange);
+
+        if (selectedDateRange === DateRangeEnum.DAILY) {
+            if (dailyDateRange.begin && dailyDateRange.end) {
+                return {
+                    dateStart: moment(dailyDateRange.begin).add(zoomRatio, 'days'),
+                    dateEnd: moment(dailyDateRange.end),
+                };
+            }
+
+            return {
+                dateStart: moment().add(zoomRatio, 'days'),
+                dateEnd: moment(),
+            };
+        }
 
         if (selectedDateRange === DateRangeEnum.ONE_MONTH) {
             return {
-                dateStart: moment().subtract(1, 'month'),
+                dateStart: moment()
+                    .subtract(1, 'month')
+                    .add(zoomRatio, 'days'),
                 dateEnd: moment(),
             };
         }
 
         if (selectedDateRange === DateRangeEnum.THREE_MONTH) {
             return {
-                dateStart: moment().subtract(3, 'month'),
+                dateStart: moment()
+                    .subtract(3, 'month')
+                    .add(zoomRatio, 'days'),
                 dateEnd: moment(),
             };
         }
 
         if (selectedDateRange === DateRangeEnum.SIX_MONTH) {
             return {
-                dateStart: moment().subtract(6, 'month'),
+                dateStart: moment()
+                    .subtract(6, 'month')
+                    .add(zoomRatio, 'days'),
                 dateEnd: moment(),
             };
         }
 
         if (selectedDateRange === DateRangeEnum.NINE_MONTH) {
             return {
-                dateStart: moment().subtract(9, 'month'),
+                dateStart: moment()
+                    .subtract(9, 'month')
+                    .add(zoomRatio, 'days'),
                 dateEnd: moment(),
             };
         }
 
         if (selectedDateRange === DateRangeEnum.ONE_YEAR) {
             return {
-                dateStart: moment().subtract(1, 'year'),
+                dateStart: moment()
+                    .subtract(1, 'year')
+                    .add(zoomRatio, 'days'),
                 dateEnd: moment(),
             };
         }
 
         if (selectedDateRange === DateRangeEnum.TWO_YEAR) {
             return {
-                dateStart: moment().subtract(2, 'year'),
+                dateStart: moment()
+                    .subtract(2, 'year')
+                    .add(zoomRatio, 'days'),
                 dateEnd: moment(),
             };
         }
@@ -380,14 +430,16 @@ class Timeline extends Component {
         const { patientDob } = ProfileManager.activeProfile;
         if (patientDob) {
             return {
-                dateStart: moment(patientDob),
+                dateStart: moment(patientDob).add(zoomRatio, 'days'),
                 dateEnd: moment(),
             };
         }
 
         // Revert back to 1M
         return {
-            dateStart: moment().subtract(1, 'month'),
+            dateStart: moment()
+                .subtract(1, 'month')
+                .add(zoomRatio, 'days'),
             dateEnd: moment(),
         };
     };
@@ -612,13 +664,66 @@ class Timeline extends Component {
         });
     }
 
+    ZoomIn = () => {
+        const { begin, end } = this.state.dailyDateRange;
+
+        const zoomRatio = this.state.zoomRatio + 7;
+        const beginDate = begin ? new Date(begin.setDate(begin.getDate() + zoomRatio)) : undefined;
+
+        console.log(beginDate, this.state);
+
+        this.setState(
+            {
+                zoomRatio,
+                dailyDateRange: {
+                    begin: beginDate,
+                    end: end,
+                },
+            },
+            () => {
+                this.fetchChartData();
+            }
+        );
+    };
+
+    ZoomOut = () => {
+        this.setState({ zoomRatio: this.state.zoomRatio - 7 }, () => {
+            this.fetchChartData();
+        });
+    };
+
+    setDailyDateRange = date => {
+        this.setState({ dailyDateRange: date, zoomRatio: 0 }, () => {
+            this.fetchChartData();
+        });
+    };
+
     render() {
         return (
             <React.Fragment>
                 <Box>
-                    <Typography variant="h3" color="primary" style={{ margin: '5px 15px 0 30px' }}>
-                        {t('ehr', 'Timeline')}
-                    </Typography>
+                    <Grid container direction="row" justify="space-between" alignItems="center">
+                        <Typography variant="h3" color="primary" style={{ margin: '5px 15px 0 30px' }}>
+                            {t('ehr', 'Timeline')}
+                        </Typography>
+                        {this.state.selectedDateRange === DateRangeEnum.DAILY && (
+                            <KailonaDateRangePicker
+                                id="date"
+                                date={this.state.dailyDateRange}
+                                onChange={e => this.setDailyDateRange(e)}
+                                ariaLabel={t('ehr', 'Filter by date')}
+                                maxDate={new Date()}
+                            />
+                        )}
+                        <Grid style={{ margin: '5px 30px 0 15px' }}>
+                            <IconButton style={{ border: 'none', backgroundColor: 'transparent', padding: 5 }}>
+                                <ZoomIn onClick={this.ZoomIn} />
+                            </IconButton>
+                            <IconButton style={{ border: 'none', backgroundColor: 'transparent', padding: 5 }}>
+                                <ZoomOut onClick={this.ZoomOut} />
+                            </IconButton>
+                        </Grid>
+                    </Grid>
                 </Box>
                 <Card>
                     <Box mt={1} style={{ position: 'relative' }}>
