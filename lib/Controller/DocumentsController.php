@@ -34,4 +34,13 @@ class DocumentsController extends Controller
     public function fetch($parent, $offset, $limit) {
         return $this->service->fetch($parent, $offset, $limit);
     }
+
+    /**
+     * @NoAdminRequired
+     * @NoCSRFRequired
+     */
+    public function export() {
+        $file = $this->request->getUploadedFile('file');
+        return $this->service->export($file);
+    }
 }

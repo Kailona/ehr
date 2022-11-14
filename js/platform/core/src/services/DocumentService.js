@@ -28,4 +28,17 @@ export default class DocumentService {
             limit,
         });
     }
+
+    async export(files) {
+        const url = `${this.baseUrl}/export`;
+        const parent = ProfileManager.activePatientId;
+
+        const formData = new FormData();
+        formData.append('parent', parent);
+        // for(const file of files){
+        formData.append('file', files[0]);
+        // }
+
+        return await axios.post(url, formData);
+    }
 }

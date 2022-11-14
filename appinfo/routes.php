@@ -18,4 +18,5 @@ return ['routes' => [
     ['name' => 'fhir#search', 'url' => '/fhir/{type}', 'verb' => 'GET'],
     ['name' => 'documents#import', 'url' => '/documents/import', 'verb' => 'POST'],
     ['name' => 'documents#fetch', 'url' => '/documents/fetch', 'verb' => 'POST'],
+    ['name' => 'documents#export', 'url' => '/documents/export', 'verb' => 'POST'],
 ]];

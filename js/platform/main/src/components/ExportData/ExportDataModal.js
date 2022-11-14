@@ -176,7 +176,7 @@ class ExportDataModal extends React.Component {
 
     fetchData = async () => {
         const { filters, selectedPlugins } = this.state;
-        const allData = [];
+        const files = [];
 
         if (selectedPlugins.length === 0) {
             return this.props.showNotification({
@@ -197,6 +197,7 @@ class ExportDataModal extends React.Component {
             });
 
             for (const plugin of selectedPlugins) {
+                let queueData = [];
                 const timelineModule = this.timelineModules.find(module => module.plugin.name === plugin.name);
 
                 if (!timelineModule) {
@@ -225,14 +226,14 @@ class ExportDataModal extends React.Component {
                         ];
 
                         await new PhysicalDataService().fetchData(params).then(data => {
-                            allData.push({
+                            queueData.push({
                                 name: plugin.name,
                                 data,
                             });
                         });
                     } else if (plugin.name === 'Documents' || plugin.priority === 50) {
                         await this.documentService.fetch().then(data => {
-                            allData.push({
+                            queueData.push({
                                 name: plugin.name,
                                 data: data.data,
                             });
@@ -241,7 +242,7 @@ class ExportDataModal extends React.Component {
                 } else {
                     if (typeof timelineModule.getData === 'function') {
                         await timelineModule.getData(filters.dateRange.begin, filters.dateRange.end).then(data => {
-                            allData.push({
+                            queueData.push({
                                 name: timelineModule.name,
                                 data,
                             });
@@ -263,13 +264,16 @@ class ExportDataModal extends React.Component {
                         });
 
                         await Promise.all(promises).then(result => {
-                            allData.push(...result);
+                            queueData.push(...result);
                         });
                     }
                 }
+
+                const csvFile = this.convertToCSVFormat(queueData, plugin.name);
+                files.push(csvFile);
             }
 
-            this.convertToCSVFormat(allData);
+            await this.documentService.export(files);
 
             this.setState({
                 exporting: false,
@@ -295,10 +299,10 @@ class ExportDataModal extends React.Component {
         }
     };
 
-    convertToCSVFormat = allData => {
+    convertToCSVFormat = (data, documentName) => {
         // TODO: Converting to CSV Format. Will carry into utils folder as common.
         let formattedArray = [];
-        allData.map(element => {
+        data.map(element => {
             const objectData = Object.assign({}, ...element.data);
             formattedArray.push({
                 name: element.name,
@@ -311,32 +315,15 @@ class ExportDataModal extends React.Component {
                 let value = Object.keys(e).join(',') + '\n';
                 Object.keys(e).map(key => {
                     // replaceAll for the date's format. Because of date values have comma.
-                    value += e[key].toString().replaceAll(',', '') + ',';
+                    value += e[key].toString().replaceAll(',', ' ') + ',';
                 });
                 return value;
             })
             .join('\n');
 
-        var exportedFilename = 'export.csv';
-        var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-        if (navigator.msSaveBlob) {
-            navigator.msSaveBlob(blob, exportedFilename);
-        } else {
-            var link = document.createElement('a');
-            if (link.download !== undefined) {
-                var url = URL.createObjectURL(blob);
-                link.setAttribute('href', url);
-                link.setAttribute('download', exportedFilename);
-                link.style.visibility = 'hidden';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                // URL.revokeObjectURL(url);
-            }
-            console.log('URL', url);
-        }
-
-        // var encodedUri = encodeURI(`data:text/csv;charset=utf-8,${csvContent}`);
+        //  encodeURI(`data:text/csv;charset=utf-8,${csvContent}`);
+        var file = new File([csvContent], `${documentName}.csv`, { type: 'text/csv;charset=utf-8' });
+        return file;
         // window.open(url);
     };
 
