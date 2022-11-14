@@ -1,0 +1,15 @@
+{
+    "translations": {
+        "Username": "Benotzernumm",
+        "Password": "Passwuert",
+        "Destination": "Destination",
+        "Name": "Numm",
+        "Delete": "Läschen",
+        "Cancel": "Ofbriechen",
+        "Email": "Email",
+        "Edit": "Änneren",
+        "Activities": "Aktivitéiten",
+        "Unknown": "Onbekannt"
+    },
+    "pluralForm": "nplurals=2; plural=(n != 1);"
+}
