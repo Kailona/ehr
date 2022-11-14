@@ -12,9 +12,8 @@ OC.L10N.register(
         Shortcuts: 'Zkratky',
         'Request Data from Provider': 'Vyžádat si data od poskytovatele',
         'Import Data': 'Importovat data',
-        'Export Data': 'Export dat',
         'Select options': 'Vyberte volby',
-        'File Name': 'Název souboru',
+        'File name': 'Název souboru',
         Destination: 'Cíl',
         'Data has been successfully imported': 'Data byla úspěšně naimportována',
         'An error occurred while importing data. Please contact your administrator.':
@@ -59,6 +58,16 @@ OC.L10N.register(
         'Update Activity': 'Aktualizovat aktivitu',
         'Start Date/Time': 'Datum/čas zahájení',
         'End Date/Time': 'Ukončit datum/čas',
+        'Glucose Value': 'Hodnota glukózy',
+        'Glucose Measurer': 'Měřič glukózy',
+        Diabetes: 'Cukrovka',
+        'Add Diabetes Data': 'Přidat údaje o cukrovce',
+        'Update Diabetes Data': 'Aktualizovat údaje o cukrovce',
+        Glucose: 'Glukóza',
+        Laboratory: 'Laboratoř',
+        Glucometer: 'Glukometr',
+        'CGM (Continuous Glucose Monitoring) Device': 'CGM (průběžné monitorování glukózy) zařízení',
+        Unknown: 'Neznámé',
         Documents: 'Dokumenty',
         Leukocytes: 'Leukocyty',
         Hemoglobin: 'Hemoglobin',
@@ -82,7 +91,6 @@ OC.L10N.register(
         'Body Weight': 'Tělesná hmotnost',
         'Physical Data': 'Tělesné údaje',
         'Add Physical Data': 'Přidat tělesný údaj',
-        Unknown: 'Neznámé',
         Underweight: 'Podváha',
         'Normal/Healthy': 'Normální/Zdravý',
         Overweight: 'Nadváha',
@@ -112,7 +120,6 @@ OC.L10N.register(
         'Kailona: Personal Health Records': 'Kailona: soukromé zdravotní záznamy',
         'The Kailona Personal Health Record allows you to regain control over your health data. We provide an open source platform that allows everyone to add plugins and make improvements.\n\nIt helps you aggregate, manage, securely share and visualize your health data including lab data, medical images, FHIR data from hospitals, vital signs, nutritional and activity data.\n\nThis app works with a FHIR server. Please read the [documentation](https://docs.kailona.org/docs/#installation) to learn more about that.\n\n**Note that this app is under alpha development!**':
             'Kailona: soukromé zdravotní záznamy Vám umožňuje získat kontrolu na svými zdravotními daty. Poskytujeme otevřenou platformu umožňující každému přidávat doplňky a dělat vylepšení.\n\nPomáhá shromažďovat, spravovat, bezpečně sdílet a zobrazovat vaše zdravotní záznamy, včetně laboratorních dat, obrázků, FHIR dat z nemocnic, zdravotní údaje, výživy a aktivit.\n\nTato aplikace funguje s FHIR serverem. Další informace jsou k dispozici v [documentaci](https://docs.kailona.org/docs/#installation).\n\n**Poznamenáváme, že tato aplikace je ve vývoji a ve verzi alpha!**',
-        'Please select at least one': 'Vyberte prosím alespoň jednu',
     },
     'nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;'
 );

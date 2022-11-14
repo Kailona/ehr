@@ -12,9 +12,8 @@ OC.L10N.register(
         Shortcuts: 'Atajos',
         'Request Data from Provider': 'Solicitar datos del proveedor',
         'Import Data': 'Importar datos',
-        'Export Data': 'Exportar datos',
         'Select options': 'Selecciona las opciones',
-        'File Name': 'Nombre del archivo',
+        'File name': 'Nombre de archivo',
         Destination: 'Destino',
         'Data has been successfully imported': 'Los datos se han importado con éxito',
         'An error occurred while importing data. Please contact your administrator.':
@@ -59,6 +58,16 @@ OC.L10N.register(
         'Update Activity': 'Actualizar actividad',
         'Start Date/Time': 'Fecha/Hora de inicio',
         'End Date/Time': 'Fecha/Hora de fin',
+        'Glucose Value': 'Valor Glucosa',
+        'Glucose Measurer': 'Medidor de Glucosa',
+        Diabetes: 'Diabetes',
+        'Add Diabetes Data': 'Añadir datos de Diabetes',
+        'Update Diabetes Data': 'Actualizar datos de Diabetes',
+        Glucose: 'Glucosa',
+        Laboratory: 'Laboratorio',
+        Glucometer: 'Glucómetro',
+        'CGM (Continuous Glucose Monitoring) Device': 'Dispositivo CGM (Monitor Continuo de Glucosa)',
+        Unknown: 'Desconocido',
         Documents: 'Documentos',
         Leukocytes: 'Leucocitos',
         Hemoglobin: 'Hemoglobina',
@@ -82,7 +91,6 @@ OC.L10N.register(
         'Body Weight': 'Peso del cuerpo',
         'Physical Data': 'Datos físicos',
         'Add Physical Data': 'Añadir datos físicos',
-        Unknown: 'Desconocido',
         Underweight: 'Peso inferior al normal',
         'Normal/Healthy': 'Normal/Sano',
         Overweight: 'Sobrepeso',
@@ -112,7 +120,6 @@ OC.L10N.register(
         'Kailona: Personal Health Records': 'Kailona: Historial médico personal',
         'The Kailona Personal Health Record allows you to regain control over your health data. We provide an open source platform that allows everyone to add plugins and make improvements.\n\nIt helps you aggregate, manage, securely share and visualize your health data including lab data, medical images, FHIR data from hospitals, vital signs, nutritional and activity data.\n\nThis app works with a FHIR server. Please read the [documentation](https://docs.kailona.org/docs/#installation) to learn more about that.\n\n**Note that this app is under alpha development!**':
             'La Historia Clínica Personal de Kailona te permite recuperar el control sobre tus datos de salud. Proporcionamos una plataforma de código abierto que permite a todo el mundo añadir plugins y realizar mejoras.\n\nTe ayuda a agregar, gestionar, compartir de forma segura y visualizar tus datos de salud, incluyendo datos de laboratorio, imágenes médicas, datos FHIR de hospitales, signos vitales, datos nutricionales y de actividad.\n\nEsta aplicación funciona con un servidor FHIR. Por favor, lea la [documentación](https://docs.kailona.org/docs/#installation) para saber más al respecto.\n\n**Tenga en cuenta que esta aplicación está en desarrollo alfa.',
-        'Please select at least one': 'Seleccione al menos uno',
     },
-    'nplurals=2; plural=(n != 1);'
+    'nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;'
 );

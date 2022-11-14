@@ -11,9 +11,8 @@ OC.L10N.register(
         Shortcuts: '捷徑',
         'Request Data from Provider': '向提供者請求資料',
         'Import Data': '匯入資料',
-        'Export Data': '導出數據',
         'Select options': '選取選項',
-        'File Name': '檔案名稱',
+        'File name': '檔案名稱',
         Destination: '目的地',
         'Data has been successfully imported': '資料已成功匯入',
         'An error occurred while importing data. Please contact your administrator.':
@@ -57,6 +56,16 @@ OC.L10N.register(
         'Update Activity': '更新活動',
         'Start Date/Time': '開始日期／時間',
         'End Date/Time': '結束日期／時間',
+        'Glucose Value': '血糖值',
+        'Glucose Measurer': '血糖儀',
+        Diabetes: '糖尿病',
+        'Add Diabetes Data': '新增糖尿病資料',
+        'Update Diabetes Data': '更新糖尿病資料',
+        Glucose: '血糖',
+        Laboratory: '實驗室',
+        Glucometer: '血糖儀',
+        'CGM (Continuous Glucose Monitoring) Device': 'CGM（連續血糖監測）裝置',
+        Unknown: '未知',
         Documents: '文件',
         Leukocytes: '白血球',
         Hemoglobin: '血紅素',
@@ -80,7 +89,6 @@ OC.L10N.register(
         'Body Weight': '體重',
         'Physical Data': '生理資料',
         'Add Physical Data': '新增生理資料',
-        Unknown: '未知',
         Underweight: '過輕',
         'Normal/Healthy': '正常／健康',
         Overweight: '過重',
@@ -109,7 +117,6 @@ OC.L10N.register(
         'Kailona: Personal Health Records': 'Kailona：個人健康紀錄',
         'The Kailona Personal Health Record allows you to regain control over your health data. We provide an open source platform that allows everyone to add plugins and make improvements.\n\nIt helps you aggregate, manage, securely share and visualize your health data including lab data, medical images, FHIR data from hospitals, vital signs, nutritional and activity data.\n\nThis app works with a FHIR server. Please read the [documentation](https://docs.kailona.org/docs/#installation) to learn more about that.\n\n**Note that this app is under alpha development!**':
             'Kailona 個人健康紀錄讓您可以取回您對健康資料的控制權。我們提供了開放原始碼平臺，每個人都可以新增外掛程式並做出改進。\n\n其協助您聚合、管理、安全地分享與可視化您的健康資料，包含了實驗室資料、醫學影像、從醫院而來的 FHIR 資料、生命徵象、營養與活動資料。\n\n此應用程式可與 FHIR 伺服器一起使用。請閱讀[文件](https://docs.kailona.org/docs/#installation)以取得更多關於這個的資訊。\n\n**請注意，此應用程式目前仍在開發階段！**',
-        'Please select at least one': '請至少選擇一項',
     },
     'nplurals=1; plural=0;'
 );

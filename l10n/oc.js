@@ -1,12 +1,21 @@
 OC.L10N.register(
-    "ehr",
+    'ehr',
     {
-    "Username" : "Nom d'utilizaire",
-    "Password" : "Senhal",
-    "Welcome" : "La benvenguda",
-    "Cancel" : "Anullar",
-    "Distance" : "Distància",
-    "Calories" : "Calorias",
-    "Edit" : "Modificar"
-},
-"nplurals=2; plural=(n > 1);");
+        Username: "Nom d'utilizaire",
+        Password: 'Senhal',
+        'File name': 'Nom de fichièr',
+        Destination: 'Destination',
+        Welcome: 'La benvenguda',
+        Name: 'Nom',
+        Delete: 'Suprimir',
+        Cancel: 'Anullar',
+        Confirm: 'Confirmar',
+        Email: 'Corrièl',
+        Distance: 'Distància',
+        Calories: 'Calorias',
+        Edit: 'Modificar',
+        Activities: 'Activitats',
+        Unknown: 'Desconegut',
+    },
+    'nplurals=2; plural=(n > 1);'
+);

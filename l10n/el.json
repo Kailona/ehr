@@ -9,7 +9,8 @@
         "Shortcuts": "Συντομεύσεις",
         "Request Data from Provider": "Αίτηση δεδομένων από τον πάροχο",
         "Import Data": "Εισαγωγή δεδομένων",
-        "Export Data": "Εξαγωγή δεδομένων",
+        "File name": "Όνομα αρχείου",
+        "Destination": "Απόσταση",
         "Data has been successfully imported": "Τα δεδομένα εισήχθησαν με επιτυχία",
         "An error occurred while importing data. Please contact your administrator.": "Παρουσιάστηκε σφάλμα κατά την εισαγωγή δεδομένων. Επικοινωνήστε με τον διαχειριστή σας.",
         "Add More Files": "Προσθήκη περισσότερων αρχείων",
@@ -41,11 +42,13 @@
         "Distance": "Απόσταση",
         "Calories": "Θερμίδες",
         "Edit": "Επεξεργασία",
+        "Activities": "Δραστηριότητες",
         "Add New Activity": "Προσθήκη νέας δραστηριότητας",
         "Filter by date": "Φιλτράρισμα κατά ημερομηνία",
         "Update Activity": "Ενημέρωση δραστηριότητας",
         "Start Date/Time": "Ημερομηνία/Ώρα έναρξης",
         "End Date/Time": "Ημερομηνία/Ώρα λήξης",
+        "Unknown": "Άγνωστο",
         "Documents": "Έγγραφα",
         "Age": "Ηλικία",
         "Body Mass Index": "Δείκτης μάζας σώματος",
@@ -53,7 +56,6 @@
         "Weight": "Βάρος",
         "Body Height": "Ύψος",
         "Body Weight": "Βάρος",
-        "Unknown": "Άγνωστο",
         "Underweight": "Λιποβαρής",
         "Overweight": "Υπέρβαρος",
         "Obese": "Παχυσαρκία",
@@ -73,8 +75,7 @@
         "This is an automatically sent email, please do not reply.": "Αυτό είναι ένα μήνυμα που αποστέλλεται αυτόματα, μην απαντήσετε.",
         "EHR (Electronic Health Records)": "ΗΑΥ (Ηλεκτρονικό Αρχείο Υγείας)",
         "EHR": "ΗΑΥ",
-        "Kailona: Personal Health Records": "Kailona: Προσωπικό Αρχείο Υγείας",
-        "Please select at least one": "Επιλέξτε τουλάχιστον ένα"
+        "Kailona: Personal Health Records": "Kailona: Προσωπικό Αρχείο Υγείας"
     },
     "pluralForm": "nplurals=2; plural=(n != 1);"
 }

@@ -12,9 +12,8 @@ OC.L10N.register(
         Shortcuts: 'Skróty',
         'Request Data from Provider': 'Poproś o dane od dostawcy',
         'Import Data': 'Importuj dane',
-        'Export Data': 'Eksportuj dane',
         'Select options': 'Wybierz opcje',
-        'File Name': 'Nazwa pliku',
+        'File name': 'Nazwa pliku',
         Destination: 'Cel',
         'Data has been successfully imported': 'Dane zostały pomyślnie zaimportowane',
         'An error occurred while importing data. Please contact your administrator.':
@@ -35,7 +34,7 @@ OC.L10N.register(
         'I hereby request all data from my last exam to be uploaded to my personal health data archive on the Kailona platform. Please comply within the 30 day period as required by the Berufsordnung der Ärztekammern, §630g Abs. 2  BGB and Art. 15  Abs. 3 DSGVO.':
             'Niniejszym proszę o niezwłoczne przesłanie wszystkich danych z mojego ostatniego badania do mojego osobistego archiwum danych zdrowotnych na platformie Kailona. Proszę przestrzegać terminu 30-sto dniowego zgodnie z art. 35 § 3 k.p.a.',
         'Unable to send health data request. Please set your email address in user profile settings!':
-            'Nie można wysłać zapytania o dane zdrowotne. Prosimy o ustawienie adresu e-mail w ustawieniach użytkownika!',
+            'Nie można wysłać prośby o dane dotyczące stanu zdrowia. Ustaw swój adres e-mail w ustawieniach profilu użytkownika!',
         'Health data request was successfully sent': 'Raport zdrowotny został poprawnie wysłany',
         'Unable to send health data request. Please contact your administrator!':
             'Nie można wysłać zapytania o dane zdrowotne. Prosimy o kontakt z administratorem!',
@@ -59,6 +58,16 @@ OC.L10N.register(
         'Update Activity': 'Zaktualizuj aktywność',
         'Start Date/Time': 'Data/godzina rozpoczęcia',
         'End Date/Time': 'Data/godzina zakończenia',
+        'Glucose Value': 'Wartość glukozy',
+        'Glucose Measurer': 'Miernik glukozy',
+        Diabetes: 'Cukrzyca',
+        'Add Diabetes Data': 'Dodaj dane o cukrzycy',
+        'Update Diabetes Data': 'Zaktualizuj dane o cukrzycy',
+        Glucose: 'Glukoza',
+        Laboratory: 'Laboratorium',
+        Glucometer: 'Glukometr',
+        'CGM (Continuous Glucose Monitoring) Device': 'Urządzenie CGM (ciągłe monitorowanie stężenia glukozy)',
+        Unknown: 'Nieznany',
         Documents: 'Dokumenty',
         Leukocytes: 'Leukocyty',
         Hemoglobin: 'Hemoglobina',
@@ -82,7 +91,6 @@ OC.L10N.register(
         'Body Weight': 'Waga',
         'Physical Data': 'Dane fizyczne',
         'Add Physical Data': 'Dodaj dane fizyczne',
-        Unknown: 'Nieznany',
         Underweight: 'Niedowaga',
         'Normal/Healthy': 'Normalne/zdrowe',
         Overweight: 'Nadwaga',
@@ -112,7 +120,6 @@ OC.L10N.register(
         'Kailona: Personal Health Records': 'Kailona: osobisty monitor zdrowia',
         'The Kailona Personal Health Record allows you to regain control over your health data. We provide an open source platform that allows everyone to add plugins and make improvements.\n\nIt helps you aggregate, manage, securely share and visualize your health data including lab data, medical images, FHIR data from hospitals, vital signs, nutritional and activity data.\n\nThis app works with a FHIR server. Please read the [documentation](https://docs.kailona.org/docs/#installation) to learn more about that.\n\n**Note that this app is under alpha development!**':
             'Osobisty monitor zdrowia Kailona umożliwia odzyskanie kontroli nad danymi dotyczącymi zdrowia. Zapewniamy platformę open source, która umożliwia każdemu dodawanie wtyczek i wprowadzanie ulepszeń.\n\nPomaga w agregowaniu, zarządzaniu, bezpiecznym udostępnianiu i wizualizacji danych zdrowotnych, w tym danych laboratoryjnych, obrazów medycznych, danych FHIR ze szpitali, parametrów życiowych, danych żywieniowych i danych dotyczących aktywności.\n\nAplikacja ta współpracuje z serwerem FHIR. Przeczytaj [dokumentację](https://docs.kailona.org/docs/#installation), aby dowiedzieć się więcej na ten temat.\n\n**Pamiętaj, że aplikacja jest w fazie rozwoju alfa!**',
-        'Please select at least one': 'Wybierz co najmniej jeden',
     },
     'nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);'
 );

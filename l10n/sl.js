@@ -12,9 +12,8 @@ OC.L10N.register(
         Shortcuts: 'Bližnjice',
         'Request Data from Provider': 'Pridobi podatke ponudnika',
         'Import Data': 'Uvozi podatke',
-        'Export Data': 'Izvoz podatkov',
         'Select options': 'Izbor možnosti',
-        'File Name': 'Ime datoteke',
+        'File name': 'Ime datoteke',
         Destination: 'Cilj',
         'Data has been successfully imported': 'Podatki so uspešno uvoženi',
         'An error occurred while importing data. Please contact your administrator.':
@@ -58,6 +57,16 @@ OC.L10N.register(
         'Update Activity': 'Posodobi dejavnost',
         'Start Date/Time': 'Čas in datum začetka',
         'End Date/Time': 'Čas in datum konca',
+        'Glucose Value': 'Vrednost glukoze',
+        'Glucose Measurer': 'Merilnik glukoze',
+        Diabetes: 'Diabetes',
+        'Add Diabetes Data': 'Dodaj podatke sladkorne bolezni',
+        'Update Diabetes Data': 'Posodobi podatke sladkorne bolezni',
+        Glucose: 'Glukoza',
+        Laboratory: 'Laboratorij',
+        Glucometer: 'Glukometer',
+        'CGM (Continuous Glucose Monitoring) Device': 'Naprava CGM (Continuous Glucose Monitoring)',
+        Unknown: 'Neznano',
         Documents: 'Dokumenti',
         Leukocytes: 'Levkociti',
         Hemoglobin: 'Hemoglobin',
@@ -81,7 +90,6 @@ OC.L10N.register(
         'Body Weight': 'Telesna masa',
         'Physical Data': 'Telesni podatki',
         'Add Physical Data': 'Dodaj telesne podatke',
-        Unknown: 'Neznano',
         Underweight: 'Podmerna telesna masa',
         'Normal/Healthy': 'Normalna / Zdrava telesna teža',
         Overweight: 'Prekomerna telesna teža',
@@ -101,7 +109,7 @@ OC.L10N.register(
         'Please confirm that the following patient information match with your records before sending health data!':
             'Potrdite, da so podatki pacienta skladni z zapisi, preden pošljete podatke!',
         'Patient Name: %s': 'Ime pacienta: %s',
-        'Patient Email: %s': '   naslov pacienta: %s',
+        'Patient Email: %s': 'Elektronski naslov pacienta: %s',
         'Upload Health Data': 'Pošlji zdravstvene podatke',
         'This is an automatically sent email, please do not reply.':
             'To sporočilo je samodejno poslano, nanj se nima smisla odzvati.',
@@ -110,7 +118,6 @@ OC.L10N.register(
         'Kailona: Personal Health Records': 'Kailona: osebni zdravstveni karton',
         'The Kailona Personal Health Record allows you to regain control over your health data. We provide an open source platform that allows everyone to add plugins and make improvements.\n\nIt helps you aggregate, manage, securely share and visualize your health data including lab data, medical images, FHIR data from hospitals, vital signs, nutritional and activity data.\n\nThis app works with a FHIR server. Please read the [documentation](https://docs.kailona.org/docs/#installation) to learn more about that.\n\n**Note that this app is under alpha development!**':
             'Osebni zdravstveni karton Kailona omogoča popoln nadzor nad osebnimi zdravstvenimi podatki. Odprtokodno okolje omogoča razvoj, dodajanje vstavkov in javno izboljševanje sistema.\n\nOmogoča združevanje, upravljanje in varno souporabo, izmenjavo in predstavitev zdravstvenih podatkov, vključno z laboratorijskimi podatki, medicinskimi slikami, bolnišničnimi podatki FHIR, telesnimi podatki, podatki o hranilni vrednosti živil in podatki različnih dejavnosti.\n\nProgram uporablja strežnik FHIR. Več podrobnosti o tem je zbranih v [dokumentaciji](https://docs.kailona.org/docs/#installation) namestitve.\n\n** Program je trenutno še v preizkusni različici! **',
-        'Please select at least one': 'Izberite vsaj enega',
     },
     'nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);'
 );

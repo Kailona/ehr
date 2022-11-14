@@ -11,7 +11,8 @@ OC.L10N.register(
         Shortcuts: 'Incurtzaduras',
         'Request Data from Provider': 'Rechede datos dae su frunidore',
         'Import Data': 'Importa datos',
-        'Export Data': 'Exportar dades',
+        'File name': 'Nùmene de archìviu',
+        Destination: 'Destinu',
         'Data has been successfully imported': 'Datos importados',
         'An error occurred while importing data. Please contact your administrator.':
             "B'at àpidu un'errore importende is datos. Cuntata a s'amministratzione.",
@@ -48,11 +49,13 @@ OC.L10N.register(
         Distance: 'Distàntzia',
         Calories: 'Calorias',
         Edit: 'Modìfica ',
+        Activities: 'Atividades',
         'Add New Activity': 'Agiunghe atividade noa',
         'Filter by date': 'Filtra pro data',
         'Update Activity': 'Agiorna atividade',
         'Start Date/Time': 'Data/ora de cumintzu',
         'End Date/Time': 'Data/ora de fine',
+        Unknown: 'Disconnotu',
         Documents: 'Documentos',
         'Update Physical Data': 'Agiorna datos fìsicos',
         Age: 'Edade',
@@ -63,7 +66,6 @@ OC.L10N.register(
         'Body Weight': 'Pesu de su corpus',
         'Physical Data': 'Datos fìsicos',
         'Add Physical Data': 'Agiunghe datos fìsicos',
-        Unknown: 'Disconnotu',
         Underweight: 'Sutapesu',
         'Normal/Healthy': 'Normale/sanu',
         Overweight: 'Subrapesu',
@@ -90,7 +92,6 @@ OC.L10N.register(
         'Kailona: Personal Health Records': 'Kailona: Registros sanitàrios personales',
         'The Kailona Personal Health Record allows you to regain control over your health data. We provide an open source platform that allows everyone to add plugins and make improvements.\n\nIt helps you aggregate, manage, securely share and visualize your health data including lab data, medical images, FHIR data from hospitals, vital signs, nutritional and activity data.\n\nThis app works with a FHIR server. Please read the [documentation](https://docs.kailona.org/docs/#installation) to learn more about that.\n\n**Note that this app is under alpha development!**':
             "Su registru sanitàriu personale Kailona ti permitit de controllare is datos sanitàrios tuos. Est una prataforma de còdighe abertu pro chi siat possìbile a ddu megiorare e a ddi agiunghere plugin.\n\nTi serbit pro regòllere, gestire, cumpartzire e visualizare in seguresa is datos sanitàrios, comente datos de laboratòriu, radiografias, datos FHIR dae s'ospedale, sinnos vitales, datos de s'atividade e de sa nutritzione.\n\nCusta aplicatzione funtzionat cun unu serbidore FHIR. Leghe sa [documentation](https://docs.kailona.org/docs/#installation) pro nd'ischire de prus.\n\n**Custa aplicatzione est suta isvilupu alpha!**",
-        'Please select at least one': 'Per piacè selezziunate almenu unu',
     },
     'nplurals=2; plural=(n != 1);'
 );
