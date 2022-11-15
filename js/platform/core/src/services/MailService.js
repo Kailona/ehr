@@ -18,4 +18,17 @@ export default class MailService {
 
         return await axios.post(url, data);
     }
+
+    async sendExportData(patientId, fromName, to, body) {
+        const url = `${this.baseUrl}/sendExportData`;
+
+        const data = {
+            patientId,
+            fromName,
+            to,
+            body,
+        };
+
+        return await axios.post(url, data);
+    }
 }

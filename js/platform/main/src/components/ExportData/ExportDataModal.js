@@ -17,7 +17,7 @@ import { KailonaTextField, KailonaButton, KailonaCloseButton } from '@kailona/ui
 import './ExportDataModal.styl';
 import KailonaDateRangePicker from '../../../../ui/src/elements/DatePicker/KailonaDateRangePicker';
 import moment from 'moment';
-import { ModuleTypeEnum, PluginManager, getIcon, DocumentService } from '@kailona/core';
+import { ModuleTypeEnum, PluginManager, getIcon, DocumentService, MailService, ProfileManager } from '@kailona/core';
 import PhysicalDataService from '../../../../../plugins/physicalData/src/services/PhysicalDataService';
 import Logger from '@kailona/core/src/services/Logger';
 import { withNotification } from '../../context/NotificationContext';
@@ -70,6 +70,7 @@ class ExportDataModal extends React.Component {
         this.toEmailRef = React.createRef();
 
         this.documentService = new DocumentService();
+        this.mailService = new MailService();
     }
 
     getPlugins = () => {
@@ -226,54 +227,84 @@ class ExportDataModal extends React.Component {
                         ];
 
                         await new PhysicalDataService().fetchData(params).then(data => {
-                            queueData.push({
-                                name: plugin.name,
-                                data,
-                            });
+                            if (data.length) {
+                                queueData.push({
+                                    name: plugin.name,
+                                    data,
+                                });
+                            }
                         });
                     } else if (plugin.name === 'Documents' || plugin.priority === 50) {
+                        // parameters can be changed.
                         await this.documentService.fetch().then(data => {
-                            queueData.push({
-                                name: plugin.name,
-                                data: data.data,
-                            });
+                            if (data.length) {
+                                queueData.push({
+                                    name: plugin.name,
+                                    data: data.data,
+                                });
+                            }
                         });
                     }
                 } else {
                     if (typeof timelineModule.getData === 'function') {
                         await timelineModule.getData(filters.dateRange.begin, filters.dateRange.end).then(data => {
-                            queueData.push({
-                                name: timelineModule.name,
-                                data,
-                            });
+                            if (data.length) {
+                                queueData.push({
+                                    name: timelineModule.name,
+                                    data,
+                                });
+                            }
                         });
                     } else if (timelineModule.children) {
                         const promises = [];
 
                         timelineModule.children.forEach(child => {
-                            const promise = new Promise(resolve => {
-                                child.getData(filters.dateRange.begin, filters.dateRange.end).then(data => {
-                                    resolve({
-                                        name: child.name,
-                                        data,
-                                    });
-                                });
+                            child.getData(filters.dateRange.begin, filters.dateRange.end).then(data => {
+                                if (data.length) {
+                                    const promise = new Promise(resolve =>
+                                        resolve({
+                                            name: child.name,
+                                            data,
+                                        })
+                                    );
+                                    promises.push(promise);
+                                }
                             });
-
-                            promises.push(promise);
                         });
 
-                        await Promise.all(promises).then(result => {
-                            queueData.push(...result);
-                        });
+                        promises.length &&
+                            (await Promise.all(promises).then(result => {
+                                queueData.push(...result);
+                            }));
                     }
                 }
 
-                const csvFile = this.convertToCSVFormat(queueData, plugin.name);
-                files.push(csvFile);
+                if (queueData.length) {
+                    const csvFile = this.convertToCSVFormat(queueData, plugin.name);
+                    files.push(csvFile);
+                }
+            }
+            if (!files.length) {
+                this.setState({
+                    exporting: false,
+                });
+
+                this.props.onClose();
+
+                return this.props.showNotification({
+                    severity: 'info',
+                    message: t('ehr', 'Data not found on the related date to export.'),
+                });
             }
 
-            await this.documentService.export(files);
+            // Export files in nextcloud folder and create a link inside of export function. At then, send the link via email.
+            await this.documentService.export(files).then(async result => {
+                const to = this.toEmailRef.current.value;
+                const patientId = ProfileManager.activePatientId;
+                const { patientFullName: fromName } = ProfileManager.activeProfile;
+                console.log(to, patientId, fromName, result.data);
+                await this.mailService.sendExportData(patientId, fromName, to, result.data);
+            });
 
             this.setState({
                 exporting: false,
@@ -321,10 +352,8 @@ class ExportDataModal extends React.Component {
             })
             .join('\n');
 
-        //  encodeURI(`data:text/csv;charset=utf-8,${csvContent}`);
         var file = new File([csvContent], `${documentName}.csv`, { type: 'text/csv;charset=utf-8' });
         return file;
-        // window.open(url);
     };
 
     render() {

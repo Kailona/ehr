@@ -43,4 +43,12 @@ class DocumentsController extends Controller
         $file = $this->request->getUploadedFile('file');
         return $this->service->export($file);
     }
+
+    /**
+     * @NoAdminRequired
+     * @NoCSRFRequired
+     */
+    public function createExportLink($folderName) {
+        return $this->service->createExportLink($folderName);
+    }
 }
