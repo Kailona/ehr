@@ -1,15 +1,14 @@
 OC.L10N.register(
-    'ehr',
+    "ehr",
     {
-        Username: 'ឈ្មោះ​អ្នកប្រើ',
-        Password: 'ពាក្យសម្ងាត់',
-        Destination: 'Destination',
-        Name: 'ឈ្មោះ',
-        Delete: 'លុប',
-        Cancel: 'បោះបង់',
-        Email: 'អ៊ីមែល',
-        Edit: 'កែប្រែ',
-        Activities: 'សកម្មភាពផ្សេងៗ',
-    },
-    'nplurals=1; plural=0;'
-);
+    "Username" : "ឈ្មោះ​អ្នកប្រើ",
+    "Password" : "ពាក្យសម្ងាត់",
+    "Destination" : "Destination",
+    "Name" : "ឈ្មោះ",
+    "Delete" : "លុប",
+    "Cancel" : "បោះបង់",
+    "Email" : "អ៊ីមែល",
+    "Edit" : "កែប្រែ",
+    "Activities" : "សកម្មភាពផ្សេងៗ"
+},
+"nplurals=1; plural=0;");

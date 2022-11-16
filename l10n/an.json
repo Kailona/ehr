@@ -1,12 +1,10 @@
-{
-    "translations": {
-        "Username": "Nombre d'usuario",
-        "Password": "Clau",
-        "Name": "Nombre",
-        "Delete": "Borrar",
-        "Cancel": "Canzelar",
-        "Email": "Correu electronico",
-        "Activities": "Actividat"
-    },
-    "pluralForm": "nplurals=2; plural=(n != 1);"
+{ "translations": {
+    "Username" : "Nombre d'usuario",
+    "Password" : "Clau",
+    "Name" : "Nombre",
+    "Delete" : "Borrar",
+    "Cancel" : "Canzelar",
+    "Email" : "Correu electronico",
+    "Activities" : "Actividat"
+},"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

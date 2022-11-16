@@ -1,11 +1,9 @@
-{
-    "translations": {
-        "Username": "کارن نوم",
-        "Password": "پاسورډ",
-        "Name": "نوم",
-        "Delete": "ړنګول",
-        "Cancel": "پرېښول",
-        "Activities": "کړنې"
-    },
-    "pluralForm": "nplurals=2; plural=(n != 1);"
+{ "translations": {
+    "Username" : "کارن نوم",
+    "Password" : "پاسورډ",
+    "Name" : "نوم",
+    "Delete" : "ړنګول",
+    "Cancel" : "پرېښول",
+    "Activities" : "کړنې"
+},"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

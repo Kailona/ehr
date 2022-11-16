@@ -1,13 +1,12 @@
 OC.L10N.register(
-    'ehr',
+    "ehr",
     {
-        Username: "Nombre d'usuario",
-        Password: 'Clau',
-        Name: 'Nombre',
-        Delete: 'Borrar',
-        Cancel: 'Canzelar',
-        Email: 'Correu electronico',
-        Activities: 'Actividat',
-    },
-    'nplurals=2; plural=(n != 1);'
-);
+    "Username" : "Nombre d'usuario",
+    "Password" : "Clau",
+    "Name" : "Nombre",
+    "Delete" : "Borrar",
+    "Cancel" : "Canzelar",
+    "Email" : "Correu electronico",
+    "Activities" : "Actividat"
+},
+"nplurals=2; plural=(n != 1);");

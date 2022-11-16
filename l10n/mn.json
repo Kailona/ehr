@@ -1,17 +1,15 @@
-{
-    "translations": {
-        "Username": "Хэрэглэгчийн нэр",
-        "Password": "Нууц үг",
-        "Destination": "Destination",
-        "Welcome": "Тавтай морил",
-        "Name": "Нэр",
-        "Delete": "Устгах",
-        "Cancel": "болиулах",
-        "Confirm": "Батлах",
-        "Email": "Цахим шуудан",
-        "Edit": "засварлах",
-        "Activities": "Үйлдлүүд",
-        "Unknown": "Үл танигдах зүйл"
-    },
-    "pluralForm": "nplurals=2; plural=(n != 1);"
+{ "translations": {
+    "Username" : "Хэрэглэгчийн нэр",
+    "Password" : "Нууц үг",
+    "Destination" : "Destination",
+    "Welcome" : "Тавтай морил",
+    "Name" : "Нэр",
+    "Delete" : "Устгах",
+    "Cancel" : "болиулах",
+    "Confirm" : "Батлах",
+    "Email" : "Цахим шуудан",
+    "Edit" : "засварлах",
+    "Activities" : "Үйлдлүүд",
+    "Unknown" : "Үл танигдах зүйл"
+},"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
