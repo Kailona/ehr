@@ -110,14 +110,13 @@ class MailService {
         return new JSONResponse(array('status' => 0, 'error' => 'Success'));
     }
 
-    public function sendExportDataMail(string $patientId, string $fromName, string $to, string $body) {
-        // $this->userFolder->newFolder('SSs.csv');
+    public function sendExportDataMail(string $patientId, string $fromName, string $to, string $body, $link) {
         $fromEmail = $this->userSession->getUser()->getEMailAddress();
-        // $this->userFolder->newFolder($fromEmail . '.csv');
+
         if (empty($fromEmail)) {
             return new JSONResponse(array('status' => 1, 'error' => 'Missing Email Address'), Http::STATUS_NOT_FOUND);
         }
-
+        
         $emailTemplate = $this->mailer->createEMailTemplate('emailTemplates.ExportData', [
             'link' => $link,
             'displayname' => $fromName,

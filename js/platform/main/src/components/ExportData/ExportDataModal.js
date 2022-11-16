@@ -302,8 +302,14 @@ class ExportDataModal extends React.Component {
                 const to = this.toEmailRef.current.value;
                 const patientId = ProfileManager.activePatientId;
                 const { patientFullName: fromName } = ProfileManager.activeProfile;
-                console.log(to, patientId, fromName, result.data);
-                await this.mailService.sendExportData(patientId, fromName, to, result.data);
+                const body = t(
+                    'ehr',
+                    'The exported data is uploaded to health data archive on Kailona platform, ' +
+                        `${moment().format('MMMM Do YYYY h:mm:ss a')}. ` +
+                        'Please comply within the 30 day period as ' +
+                        'required by the Berufsordnung der Ärztekammern, §630g Abs. 2  BGB and Art. 15  Abs. 3 DSGVO.'
+                );
+                await this.mailService.sendExportData(patientId, fromName, to, body, result.data);
             });
 
             this.setState({
@@ -413,7 +419,7 @@ class ExportDataModal extends React.Component {
                     />
                     <KailonaButton
                         class="primary"
-                        title={t('ehr', 'Send Request')}
+                        title={t('ehr', 'Get Exported Data')}
                         onClick={this.fetchData}
                         loading={exporting}
                         disabled={exporting}
