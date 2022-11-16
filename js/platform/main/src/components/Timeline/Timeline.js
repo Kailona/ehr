@@ -65,7 +65,6 @@ class Timeline extends Component {
             slotWidth: 30,
             completedPlugins: [],
             userId: this.props.userId,
-            zoomRatio: 0,
             dailyDateRange: {
                 begin: undefined,
                 end: undefined,
@@ -171,7 +170,6 @@ class Timeline extends Component {
         this.setState(
             {
                 selectedDateRange: dateRangeEnumValue,
-                zoomRatio: 0,
                 dailyDateRange: {
                     begin: undefined,
                     end: undefined,
@@ -354,74 +352,60 @@ class Timeline extends Component {
     };
 
     getDateRangeValues = () => {
-        const { selectedDateRange, zoomRatio, dailyDateRange } = this.state;
+        const { selectedDateRange, dailyDateRange } = this.state;
 
-        console.log(dailyDateRange);
-
-        if (selectedDateRange === DateRangeEnum.DAILY) {
+        if (selectedDateRange === DateRangeEnum.ONE_DAY) {
             if (dailyDateRange.begin && dailyDateRange.end) {
                 return {
-                    dateStart: moment(dailyDateRange.begin).add(zoomRatio, 'days'),
+                    dateStart: moment(dailyDateRange.begin),
                     dateEnd: moment(dailyDateRange.end),
                 };
             }
 
             return {
-                dateStart: moment().add(zoomRatio, 'days'),
+                dateStart: moment(),
                 dateEnd: moment(),
             };
         }
 
         if (selectedDateRange === DateRangeEnum.ONE_MONTH) {
             return {
-                dateStart: moment()
-                    .subtract(1, 'month')
-                    .add(zoomRatio, 'days'),
+                dateStart: moment().subtract(1, 'month'),
                 dateEnd: moment(),
             };
         }
 
         if (selectedDateRange === DateRangeEnum.THREE_MONTH) {
             return {
-                dateStart: moment()
-                    .subtract(3, 'month')
-                    .add(zoomRatio, 'days'),
+                dateStart: moment().subtract(3, 'month'),
                 dateEnd: moment(),
             };
         }
 
         if (selectedDateRange === DateRangeEnum.SIX_MONTH) {
             return {
-                dateStart: moment()
-                    .subtract(6, 'month')
-                    .add(zoomRatio, 'days'),
+                dateStart: moment().subtract(6, 'month'),
                 dateEnd: moment(),
             };
         }
 
         if (selectedDateRange === DateRangeEnum.NINE_MONTH) {
             return {
-                dateStart: moment()
-                    .subtract(9, 'month')
-                    .add(zoomRatio, 'days'),
+                dateStart: moment().subtract(9, 'month'),
                 dateEnd: moment(),
             };
         }
 
         if (selectedDateRange === DateRangeEnum.ONE_YEAR) {
             return {
-                dateStart: moment()
-                    .subtract(1, 'year')
-                    .add(zoomRatio, 'days'),
+                dateStart: moment().subtract(1, 'year'),
                 dateEnd: moment(),
             };
         }
 
         if (selectedDateRange === DateRangeEnum.TWO_YEAR) {
             return {
-                dateStart: moment()
-                    .subtract(2, 'year')
-                    .add(zoomRatio, 'days'),
+                dateStart: moment().subtract(2, 'year'),
                 dateEnd: moment(),
             };
         }
@@ -430,16 +414,14 @@ class Timeline extends Component {
         const { patientDob } = ProfileManager.activeProfile;
         if (patientDob) {
             return {
-                dateStart: moment(patientDob).add(zoomRatio, 'days'),
+                dateStart: moment(patientDob),
                 dateEnd: moment(),
             };
         }
 
         // Revert back to 1M
         return {
-            dateStart: moment()
-                .subtract(1, 'month')
-                .add(zoomRatio, 'days'),
+            dateStart: moment().subtract(1, 'month'),
             dateEnd: moment(),
         };
     };
@@ -664,36 +646,32 @@ class Timeline extends Component {
         });
     }
 
-    ZoomIn = () => {
-        const { begin, end } = this.state.dailyDateRange;
+    ZoomFunction = value => {
+        const { selectedDateRange } = this.state;
+        const dateRangeEnums = Object.values(DateRangeEnum);
 
-        const zoomRatio = this.state.zoomRatio + 7;
-        const beginDate = begin ? new Date(begin.setDate(begin.getDate() + zoomRatio)) : undefined;
+        const indexOfSelectedDateRange = dateRangeEnums.indexOf(selectedDateRange);
+        const newDateRange = dateRangeEnums[indexOfSelectedDateRange + value];
 
-        console.log(beginDate, this.state);
-
-        this.setState(
-            {
-                zoomRatio,
-                dailyDateRange: {
-                    begin: beginDate,
-                    end: end,
+        // check for the limit dates. Don't decrease after 1 Day, don't increase after all
+        if (newDateRange) {
+            this.setState(
+                {
+                    selectedDateRange: newDateRange,
+                    dailyDateRange: {
+                        begin: undefined,
+                        end: undefined,
+                    },
                 },
-            },
-            () => {
-                this.fetchChartData();
-            }
-        );
-    };
-
-    ZoomOut = () => {
-        this.setState({ zoomRatio: this.state.zoomRatio - 7 }, () => {
-            this.fetchChartData();
-        });
+                () => {
+                    this.fetchChartData();
+                }
+            );
+        }
     };
 
     setDailyDateRange = date => {
-        this.setState({ dailyDateRange: date, zoomRatio: 0 }, () => {
+        this.setState({ dailyDateRange: date }, () => {
             this.fetchChartData();
         });
     };
@@ -706,7 +684,7 @@ class Timeline extends Component {
                         <Typography variant="h3" color="primary" style={{ margin: '5px 15px 0 30px' }}>
                             {t('ehr', 'Timeline')}
                         </Typography>
-                        {this.state.selectedDateRange === DateRangeEnum.DAILY && (
+                        {this.state.selectedDateRange === DateRangeEnum.ONE_DAY && (
                             <KailonaDateRangePicker
                                 id="date"
                                 date={this.state.dailyDateRange}
@@ -715,14 +693,6 @@ class Timeline extends Component {
                                 maxDate={new Date()}
                             />
                         )}
-                        <Grid style={{ margin: '5px 30px 0 15px' }}>
-                            <IconButton style={{ border: 'none', backgroundColor: 'transparent', padding: 5 }}>
-                                <ZoomIn onClick={this.ZoomIn} />
-                            </IconButton>
-                            <IconButton style={{ border: 'none', backgroundColor: 'transparent', padding: 5 }}>
-                                <ZoomOut onClick={this.ZoomOut} />
-                            </IconButton>
-                        </Grid>
                     </Grid>
                 </Box>
                 <Card>
@@ -744,8 +714,25 @@ class Timeline extends Component {
                                 <Grid item xs={8}>
                                     <Grid container>{this.getDataButtons()}</Grid>
                                 </Grid>
-                                <Grid item xs={4} style={{ textAlign: 'right' }}>
-                                    <TimeRangeFilter handleDateRangeChange={this.handleDateRangeChange} />
+                                <Grid item xs={1}>
+                                    <Grid container>
+                                        <IconButton
+                                            style={{ border: 'none', backgroundColor: 'transparent', padding: 5 }}
+                                        >
+                                            <ZoomIn onClick={() => this.ZoomFunction(+1)} />
+                                        </IconButton>
+                                        <IconButton
+                                            style={{ border: 'none', backgroundColor: 'transparent', padding: 5 }}
+                                        >
+                                            <ZoomOut onClick={() => this.ZoomFunction(-1)} />
+                                        </IconButton>
+                                    </Grid>
+                                </Grid>
+                                <Grid item xs={3} style={{ textAlign: 'right' }}>
+                                    <TimeRangeFilter
+                                        dateRange={this.state.selectedDateRange}
+                                        handleDateRangeChange={this.handleDateRangeChange}
+                                    />
                                 </Grid>
                             </Grid>
                         </Box>
