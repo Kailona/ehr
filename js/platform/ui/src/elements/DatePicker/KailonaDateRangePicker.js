@@ -52,7 +52,7 @@ class KailonaDateRangePicker extends Component {
 
     render() {
         const { classes } = this.props;
-        console.log(this.state.date);
+
         return (
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <CustomDateRangePicker

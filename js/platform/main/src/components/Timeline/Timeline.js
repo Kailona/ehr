@@ -213,29 +213,8 @@ class Timeline extends Component {
                         }
                     });
             }
-            // TODO: Try to make sorting with using date. Problem on AM, PM
-            xLabels.sort((a, b) => {
-                // check on 12:00 AM and 12:.. AM values. They makes problem on sorting.
-                // These first two if statements are to prevent these problems.
-                if (a === xLabels[0] || b === xLabels[0]) return;
-                if (a.split(':')[0] == '12' && a.split(' ')[1] == 'AM') {
-                    a = '0' + a;
-                    return a.localeCompare(b);
-                }
-                // add 0 for 2:00 AM. It needs to be sorted at the beginning (left) side against 11:00 AM
-                // sorting 11:00 vs 2:00 ; 1 < 2 and  1 > 02.
-                else if (a.split(' ')[1] === b.split(' ')[1]) {
-                    // TODO: can be problem here. Will be checked.
-                    if (a.split(':')[0] === '12' || b.split(':')[0] === '12') {
-                        return b.localeCompare(a);
-                    }
-                    const splittedA = a.split(':')[0];
-                    const splittedB = b.split(':')[0];
-                    a = splittedA.length === 1 ? '0' + a : a;
-                    b = splittedB.length === 1 ? '0' + b : b;
-                    return a.localeCompare(b);
-                }
-            });
+
+            this.sortLabelsByHourAndMinute(xLabels);
         }
 
         chartData.labels = xLabels;
@@ -284,6 +263,44 @@ class Timeline extends Component {
         }
 
         return chartData;
+    };
+
+    sortLabelsByHourAndMinute = labels => {
+        labels.sort((a, b) => {
+            const splittedA = a.split(':');
+            const splittedB = b.split(':');
+            const timeZoneA = splittedA[1].split(' ');
+            const timeZoneB = splittedB[1].split(' ');
+
+            let hourA = splittedA[0];
+            let hourB = splittedB[0];
+
+            // Convert AM and PM to hour values for a
+            if (splittedA[0] === '12') {
+                // For 12:00 AM, need to be as 00:00 AM, For PM, 12:00 PM
+                hourA = timeZoneA[1] === 'AM' ? 0 : parseInt(splittedA[0] + 12);
+            } else if (timeZoneA[1] === 'PM') {
+                // To can sort correctly, need to add 12 hours to PM values.
+                hourA = parseInt(splittedA[0]) + 12;
+            }
+            a = moment()
+                .hour(hourA)
+                .minute(timeZoneA[0]);
+
+            // Convert AM and PM to hour values for b
+            if (splittedB[0] === '12') {
+                // For 12:00 AM, need to be as 00:00 AM, For PM, 12:00 PM
+                hourB = timeZoneB[1] === 'AM' ? 0 : parseInt(splittedB[0] + 12);
+            } else if (timeZoneB[1] === 'PM') {
+                // To can sort correctly, need to add 12 hours to PM values.
+                hourB = parseInt(splittedB[0]) + 12;
+            }
+            b = moment()
+                .hour(hourB)
+                .minute(timeZoneB[0]);
+
+            return a - b;
+        });
     };
 
     getChartOptions = (existingChartOptions, name, mappedData) => {
@@ -892,25 +909,34 @@ class Timeline extends Component {
                                 <Grid item xs={8}>
                                     <Grid container>{this.getDataButtons()}</Grid>
                                 </Grid>
-                                <Grid item xs={1}>
-                                    <Grid container>
-                                        <IconButton
-                                            style={{ border: 'none', backgroundColor: 'transparent', padding: 5 }}
-                                        >
-                                            <ZoomIn onClick={() => this.ZoomFunction(+1)} />
-                                        </IconButton>
-                                        <IconButton
-                                            style={{ border: 'none', backgroundColor: 'transparent', padding: 5 }}
-                                        >
-                                            <ZoomOut onClick={() => this.ZoomFunction(-1)} />
-                                        </IconButton>
-                                    </Grid>
-                                </Grid>
-                                <Grid item xs={3} style={{ textAlign: 'right' }}>
-                                    <TimeRangeFilter
-                                        dateRange={this.state.selectedDateRange}
-                                        handleDateRangeChange={this.handleDateRangeChange}
-                                    />
+                                <Grid item xs={4}>
+                                    <div
+                                        style={{
+                                            display: 'flex',
+                                            justifyContent: 'end',
+                                            alignItems: 'center',
+                                            flexDirection: 'row',
+                                        }}
+                                    >
+                                        <div>
+                                            <IconButton
+                                                style={{ border: 'none', backgroundColor: 'transparent', padding: 5 }}
+                                            >
+                                                <ZoomIn onClick={() => this.ZoomFunction(+1)} />
+                                            </IconButton>
+                                            <IconButton
+                                                style={{ border: 'none', backgroundColor: 'transparent', padding: 5 }}
+                                            >
+                                                <ZoomOut onClick={() => this.ZoomFunction(-1)} />
+                                            </IconButton>
+                                        </div>
+                                        <div>
+                                            <TimeRangeFilter
+                                                dateRange={this.state.selectedDateRange}
+                                                handleDateRangeChange={this.handleDateRangeChange}
+                                            />
+                                        </div>
+                                    </div>
                                 </Grid>
                             </Grid>
                         </Box>
