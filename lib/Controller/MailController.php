@@ -27,4 +27,12 @@ class MailController extends Controller {
 	public function requestdata(string $patientId, string $fromName, string $to, string $body) {
 	    return $this->service->sendRequestDataMail($patientId, $fromName, $to, $body);
     }
+
+    /**
+     * @NoAdminRequired
+     * @NoCSRFRequired
+     */
+	public function sendExportData(string $patientId, string $fromName, string $to, string $body, $link) {
+	    return $this->service->sendExportDataMail($patientId, $fromName, $to, $body, $link);
+    }
 }

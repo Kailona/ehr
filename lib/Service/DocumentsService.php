@@ -2,6 +2,8 @@
 
 namespace OCA\EHR\Service;
 
+use \DateTime;
+use \DateInterval;
 use OCP\Files\IRootFolder;
 use OCP\Files\Folder;
 use OCP\Files\Node;
@@ -10,18 +12,25 @@ use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IDateTimeFormatter;
 use OCP\ILogger;
+use OCP\Share;
+use OCP\Share\IManager;
+use OCP\IURLGenerator;
 
 class DocumentsService {
     public function __construct(
         IRootFolder $rootFolder,
         IDateTimeFormatter $dateTimeFormatter,
         ILogger $logger,
+        IManager $shareManager,
+        IURLGenerator $urlGenerator,
         string $userId = null
     ) {
         $this->rootFolder = $rootFolder;
         $this->dateTimeFormatter = $dateTimeFormatter;
         $this->logger = $logger;
         $this->currentUser = $userId;
+        $this->shareManager = $shareManager;
+        $this->urlGenerator = $urlGenerator;
 
         $this->folderName = 'Kailona/Documents';
 
@@ -108,9 +117,23 @@ class DocumentsService {
         return $files;
     }
 
-    public function export($file, $parent) {
+    public function export($file) {
         $parentFolder =  'Kailona/Data Exports/' . date('Y-m-d H:i:s');
+        // check 1 second before for multiple files recording process.
+        // While awaiting each file, due to network, the date could be different so folder name is different also.
+        $before1SecondDate = date_add(date_create('now'), date_interval_create_from_date_string("-1 second"));
+        $parentFolderFor1SecondBefore = 'Kailona/Data Exports/' . date_format($before1SecondDate, 'Y-m-d H:i:s');
+
+        $returnParentFolder = $parentFolder;
         $fileName = $parentFolder . '/' . $file['name'];
+
+        if($this->userFolder->nodeExists($parentFolderFor1SecondBefore)){
+            $returnParentFolder = $parentFolderFor1SecondBefore;
+            $fileName = $parentFolderFor1SecondBefore . '/' . $file['name'];
+        }
+        else if (!$this->userFolder->nodeExists($parentFolder)) {
+            $this->userFolder->newFolder($parentFolder);
+        }
 
         $content = fopen($file['tmp_name'], 'rb');
         if ($content === false) {
@@ -118,26 +141,17 @@ class DocumentsService {
             return new JSONResponse(array(), Http::STATUS_BAD_REQUEST);
         }
 
-        if (!$this->userFolder->nodeExists($parentFolder)) {
-            $this->userFolder->newFolder($parentFolder);
-        }
-
         if ($this->userFolder->nodeExists($fileName)) {
             $target = $this->userFolder->get($fileName);
         } else {
             $target = $this->userFolder->newFile($fileName);
         }
-
-        $target->fopen('w');
+        $target->fopen('r');
         $target->putContent($content);
+        return $returnParentFolder;
     }
 
-    private function createExportLink($parentFolder) {
-        $folderName = 'Kailona/Data Exports/' . $parentFolder ;
-
-        if (!$this->userFolder->nodeExists($folderName)) {
-            $this->userFolder->newFolder($folderName);
-        }
+    public function createExportLink($folderName) {
 
         $share = $this->shareManager->newShare();
 

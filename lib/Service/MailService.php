@@ -81,6 +81,7 @@ class MailService {
 
     public function sendRequestDataMail(string $patientId, string $fromName, string $to, string $body) {
         $fromEmail = $this->userSession->getUser()->getEMailAddress();
+
         if (empty($fromEmail)) {
             return new JSONResponse(array('status' => 1, 'error' => 'Missing Email Address'), Http::STATUS_NOT_FOUND);
         }
@@ -96,6 +97,35 @@ class MailService {
         $emailTemplate->addHeading($this->l10n->t('This is health data request from %s', [$fromName]));
         $emailTemplate->addBodyText($body);
         $emailTemplate->addBodyText($this->l10n->t('Please confirm that the following patient information match with your records before sending health data!'));
+        $emailTemplate->addBodyText($this->l10n->t('Patient Name: %s', [$fromName]));
+        $emailTemplate->addBodyText($this->l10n->t('Patient Email: %s', [$fromEmail]));
+        $emailTemplate->addBodyButton($this->l10n->t('Upload Health Data'), $link);
+        $emailTemplate->addFooter($this->l10n->t('This is an automatically sent email, please do not reply.'));
+
+        $message = $this->mailer->createMessage();
+        $message->setTo(array($to => $to));
+        $message->useTemplate($emailTemplate);
+        $this->mailer->send($message);
+
+        return new JSONResponse(array('status' => 0, 'error' => 'Success'));
+    }
+
+    public function sendExportDataMail(string $patientId, string $fromName, string $to, string $body, $link) {
+        $fromEmail = $this->userSession->getUser()->getEMailAddress();
+
+        if (empty($fromEmail)) {
+            return new JSONResponse(array('status' => 1, 'error' => 'Missing Email Address'), Http::STATUS_NOT_FOUND);
+        }
+        
+        $emailTemplate = $this->mailer->createEMailTemplate('emailTemplates.ExportData', [
+            'link' => $link,
+            'displayname' => $fromName,
+        ]);
+        $emailTemplate->setSubject($this->l10n->t('Health Data Export'));
+        $emailTemplate->addHeader();
+        $emailTemplate->addHeading($this->l10n->t('This is exported data sent from %s', [$fromName]));
+        $emailTemplate->addBodyText($body);
+        $emailTemplate->addBodyText($this->l10n->t('Please confirm that the following patient information match with your records before uploading health data!'));
         $emailTemplate->addBodyText($this->l10n->t('Patient Name: %s', [$fromName]));
         $emailTemplate->addBodyText($this->l10n->t('Patient Email: %s', [$fromEmail]));
         $emailTemplate->addBodyButton($this->l10n->t('Upload Health Data'), $link);

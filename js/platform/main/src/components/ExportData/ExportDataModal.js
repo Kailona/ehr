@@ -17,7 +17,7 @@ import { KailonaTextField, KailonaButton, KailonaCloseButton } from '@kailona/ui
 import './ExportDataModal.styl';
 import KailonaDateRangePicker from '../../../../ui/src/elements/DatePicker/KailonaDateRangePicker';
 import moment from 'moment';
-import { ModuleTypeEnum, PluginManager, getIcon, DocumentService } from '@kailona/core';
+import { ModuleTypeEnum, PluginManager, getIcon, DocumentService, MailService, ProfileManager } from '@kailona/core';
 import PhysicalDataService from '../../../../../plugins/physicalData/src/services/PhysicalDataService';
 import Logger from '@kailona/core/src/services/Logger';
 import { withNotification } from '../../context/NotificationContext';
@@ -70,6 +70,7 @@ class ExportDataModal extends React.Component {
         this.toEmailRef = React.createRef();
 
         this.documentService = new DocumentService();
+        this.mailService = new MailService();
     }
 
     getPlugins = () => {
@@ -176,7 +177,7 @@ class ExportDataModal extends React.Component {
 
     fetchData = async () => {
         const { filters, selectedPlugins } = this.state;
-        const allData = [];
+        const files = [];
 
         if (selectedPlugins.length === 0) {
             return this.props.showNotification({
@@ -197,6 +198,7 @@ class ExportDataModal extends React.Component {
             });
 
             for (const plugin of selectedPlugins) {
+                let queueData = [];
                 const timelineModule = this.timelineModules.find(module => module.plugin.name === plugin.name);
 
                 if (!timelineModule) {
@@ -225,51 +227,90 @@ class ExportDataModal extends React.Component {
                         ];
 
                         await new PhysicalDataService().fetchData(params).then(data => {
-                            allData.push({
-                                name: plugin.name,
-                                data,
-                            });
+                            if (data.length) {
+                                queueData.push({
+                                    name: plugin.name,
+                                    data,
+                                });
+                            }
                         });
                     } else if (plugin.name === 'Documents' || plugin.priority === 50) {
+                        // parameters can be changed.
                         await this.documentService.fetch().then(data => {
-                            allData.push({
-                                name: plugin.name,
-                                data: data.data,
-                            });
+                            if (data.length) {
+                                queueData.push({
+                                    name: plugin.name,
+                                    data: data.data,
+                                });
+                            }
                         });
                     }
                 } else {
                     if (typeof timelineModule.getData === 'function') {
                         await timelineModule.getData(filters.dateRange.begin, filters.dateRange.end).then(data => {
-                            allData.push({
-                                name: timelineModule.name,
-                                data,
-                            });
+                            if (data.length) {
+                                queueData.push({
+                                    name: timelineModule.name,
+                                    data,
+                                });
+                            }
                         });
                     } else if (timelineModule.children) {
                         const promises = [];
 
                         timelineModule.children.forEach(child => {
-                            const promise = new Promise(resolve => {
-                                child.getData(filters.dateRange.begin, filters.dateRange.end).then(data => {
-                                    resolve({
-                                        name: child.name,
-                                        data,
-                                    });
-                                });
+                            child.getData(filters.dateRange.begin, filters.dateRange.end).then(data => {
+                                if (data.length) {
+                                    const promise = new Promise(resolve =>
+                                        resolve({
+                                            name: child.name,
+                                            data,
+                                        })
+                                    );
+                                    promises.push(promise);
+                                }
                             });
-
-                            promises.push(promise);
                         });
 
-                        await Promise.all(promises).then(result => {
-                            allData.push(...result);
-                        });
+                        promises.length &&
+                            (await Promise.all(promises).then(result => {
+                                queueData.push(...result);
+                            }));
                     }
                 }
+
+                if (queueData.length) {
+                    const csvFile = this.convertToCSVFormat(queueData, plugin.name);
+                    files.push(csvFile);
+                }
+            }
+            if (!files.length) {
+                this.setState({
+                    exporting: false,
+                });
+
+                this.props.onClose();
+
+                return this.props.showNotification({
+                    severity: 'info',
+                    message: t('ehr', 'Data not found on the related date to export.'),
+                });
             }
 
-            this.convertToCSVFormat(allData);
+            // Export files in nextcloud folder and create a link inside of export function. At then, send the link via email.
+            await this.documentService.export(files).then(async result => {
+                const to = this.toEmailRef.current.value;
+                const patientId = ProfileManager.activePatientId;
+                const { patientFullName: fromName } = ProfileManager.activeProfile;
+                const body = t(
+                    'ehr',
+                    'The exported data is uploaded to health data archive on Kailona platform, ' +
+                        `${moment().format('MMMM Do YYYY h:mm:ss a')}. ` +
+                        'Please comply within the 30 day period as ' +
+                        'required by the Berufsordnung der Ärztekammern, §630g Abs. 2  BGB and Art. 15  Abs. 3 DSGVO.'
+                );
+                await this.mailService.sendExportData(patientId, fromName, to, body, result.data);
+            });
 
             this.setState({
                 exporting: false,
@@ -295,10 +336,10 @@ class ExportDataModal extends React.Component {
         }
     };
 
-    convertToCSVFormat = allData => {
+    convertToCSVFormat = (data, documentName) => {
         // TODO: Converting to CSV Format. Will carry into utils folder as common.
         let formattedArray = [];
-        allData.map(element => {
+        data.map(element => {
             const objectData = Object.assign({}, ...element.data);
             formattedArray.push({
                 name: element.name,
@@ -311,33 +352,14 @@ class ExportDataModal extends React.Component {
                 let value = Object.keys(e).join(',') + '\n';
                 Object.keys(e).map(key => {
                     // replaceAll for the date's format. Because of date values have comma.
-                    value += e[key].toString().replaceAll(',', '') + ',';
+                    value += e[key].toString().replaceAll(',', ' ') + ',';
                 });
                 return value;
             })
             .join('\n');
 
-        var exportedFilename = 'export.csv';
-        var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-        if (navigator.msSaveBlob) {
-            navigator.msSaveBlob(blob, exportedFilename);
-        } else {
-            var link = document.createElement('a');
-            if (link.download !== undefined) {
-                var url = URL.createObjectURL(blob);
-                link.setAttribute('href', url);
-                link.setAttribute('download', exportedFilename);
-                link.style.visibility = 'hidden';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-                // URL.revokeObjectURL(url);
-            }
-            console.log('URL', url);
-        }
-
-        // var encodedUri = encodeURI(`data:text/csv;charset=utf-8,${csvContent}`);
-        // window.open(url);
+        var file = new File([csvContent], `${documentName}.csv`, { type: 'text/csv;charset=utf-8' });
+        return file;
     };
 
     render() {
@@ -397,7 +419,7 @@ class ExportDataModal extends React.Component {
                     />
                     <KailonaButton
                         class="primary"
-                        title={t('ehr', 'Send Request')}
+                        title={t('ehr', 'Get Exported Data')}
                         onClick={this.fetchData}
                         loading={exporting}
                         disabled={exporting}

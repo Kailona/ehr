@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import { Typography, Box, Link } from '@material-ui/core';
 import { KailonaTable } from '@kailona/ui';
-import { DocumentService } from '@kailona/core';
+import { DocumentService, Logger } from '@kailona/core';
+
+const logger = new Logger('DocumentsData.DocumentsDataModule');
 
 export default class DocumentsDataModule extends Component {
     constructor(props) {
