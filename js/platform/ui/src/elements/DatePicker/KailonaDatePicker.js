@@ -3,14 +3,28 @@ import { MuiPickersUtilsProvider, KeyboardDatePicker as MuiKeyboardDatePicker } 
 import DateFnsUtils from '@date-io/date-fns';
 import { withStyles } from '@material-ui/core';
 import KailonaTextField from '../TextField/KailonaTextField';
+import './KailonaDatePicker.css';
 
-const KeyboardDatePicker = withStyles({
+const KeyboardDatePicker = withStyles(theme => ({
     root: {
+        '& .MuiPaper-root': {
+            borderRadius: '100px',
+            boxShadow: '10px 10px 5px 0px rgba(0,0,0,0.75);',
+        },
         '& input': {
+            color: `${theme.palette.primary.main} !important`,
             border: 'none !important',
         },
+        '& .MuiButtonBase-root': {
+            backgroundColor: 'transparent !important',
+            border: 'none !important',
+
+            '&:hover': {
+                backgroundColor: 'transparent !important',
+            },
+        },
     },
-})(MuiKeyboardDatePicker);
+}))(MuiKeyboardDatePicker);
 
 const DATE_FORMAT = 'MMM d, yyyy';
 

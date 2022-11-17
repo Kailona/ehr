@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core/styles';
-import { CircularProgress } from '@material-ui/core';
+import { styled, withStyles, withTheme } from '@material-ui/core/styles';
+import { CircularProgress, IconButton as MuiIconButton } from '@material-ui/core';
+import { Close as CloseIcon } from '@material-ui/icons';
 
 const styles = theme => ({
     'kailona-button': {
@@ -33,7 +34,7 @@ const styles = theme => ({
             },
         },
         '&.primary': {
-            color: theme.palette.primary.main,
+            color: `${theme.palette.primary.main} !important`,
             backgroundColor: '#fff !important',
             border: '1px solid #9FA8DA !important',
 
@@ -82,4 +83,26 @@ class KailonaButton extends Component {
     }
 }
 
+const IconButton = styled(withTheme(MuiIconButton))(props => ({
+    backgroundColor: 'transparent !important',
+    border: 'none !important',
+}));
+
+class KailonaCloseButton extends Component {
+    render() {
+        const { classes } = this.props;
+        return (
+            <IconButton
+                onClick={this.props.onClose}
+                disableRipple={true}
+                style={{ paddingRight: '0', marginRight: '0' }}
+            >
+                <CloseIcon />
+            </IconButton>
+        );
+    }
+}
+
 export default withStyles(styles)(KailonaButton);
+
+export { KailonaCloseButton };

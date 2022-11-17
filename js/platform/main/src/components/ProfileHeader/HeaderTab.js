@@ -35,6 +35,8 @@ const styles = theme => ({
             minHeight: '40px important',
             margin: 0,
             padding: 0,
+            backgroundColor: 'transparent',
+            border: 'none',
             '&:active': {
                 backgroundColor: 'transparent !important',
             },

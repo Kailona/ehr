@@ -5,15 +5,13 @@ import {
     DialogTitle,
     DialogActions,
     DialogContent as MuiDialogContent,
-    IconButton,
     TextareaAutosize,
     Grid,
     Typography,
     withStyles,
 } from '@material-ui/core';
-import { Close as CloseIcon } from '@material-ui/icons';
 import { ProfileManager, MailService, Logger } from '@kailona/core';
-import { KailonaTextField, KailonaButton } from '@kailona/ui';
+import { KailonaTextField, KailonaButton, KailonaCloseButton } from '@kailona/ui';
 import { withNotification } from '../../context/NotificationContext';
 
 const logger = new Logger('main.RequestDataModal');
@@ -100,9 +98,7 @@ class RequestDataModal extends React.Component {
                     <Box display="flex" alignItems="center">
                         <Box flexGrow={1}>{t('ehr', 'Request Data')}</Box>
                         <Box>
-                            <IconButton onClick={this.props.onClose}>
-                                <CloseIcon />
-                            </IconButton>
+                            <KailonaCloseButton onClose={this.props.onClose} />
                         </Box>
                     </Box>
                 </DialogTitle>

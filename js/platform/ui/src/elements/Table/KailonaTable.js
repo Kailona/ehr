@@ -125,7 +125,11 @@ export default class KailonaTable extends Component {
                                     })}
                                     {this.props.contextMenu && (
                                         <TableCell>
-                                            <IconButton onClick={e => this.toggleContextMenu(e, record)}>
+                                            <IconButton
+                                                disableRipple={true}
+                                                style={{ backgroundColor: 'transparent', border: 'none' }}
+                                                onClick={e => this.toggleContextMenu(e, record)}
+                                            >
                                                 <MoreHoriz />
                                             </IconButton>
                                         </TableCell>

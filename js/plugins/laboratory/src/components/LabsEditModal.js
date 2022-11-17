@@ -13,8 +13,7 @@ import {
     Typography,
     withStyles,
 } from '@material-ui/core';
-import { Close as CloseIcon } from '@material-ui/icons';
-import { KailonaButton, KailonaDateTimePicker, KailonaTextField } from '@kailona/ui';
+import { KailonaButton, KailonaCloseButton, KailonaDateTimePicker, KailonaTextField } from '@kailona/ui';
 import GridColumn from '../lib/GridColumn';
 
 const DialogContent = withStyles({
@@ -102,9 +101,7 @@ export default class LabsEditModal extends Component {
                             </Typography>
                         </Box>
                         <Box>
-                            <IconButton onClick={() => this.toggleModal(false)}>
-                                <CloseIcon />
-                            </IconButton>
+                            <KailonaCloseButton onClose={() => this.toggleModal(false)} />
                         </Box>
                     </Box>
                 </DialogTitle>
