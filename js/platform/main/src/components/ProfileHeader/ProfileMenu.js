@@ -166,11 +166,11 @@ class ProfileMenu extends Component {
                     {providerItem}
                     <MenuItem className="menuItem" onClick={this.onImportDataMenuItemClick}>
                         <span className="menuItemIcon">{getIcon('CloudUploadOutlined')}</span>
-                        <span className="menuItemLabel">Import Data</span>
+                        <span className="menuItemLabel">{t('ehr', 'Import Data')}</span>
                     </MenuItem>
                     <MenuItem className="menuItem" onClick={this.onPatientProfileMenuItemClick}>
                         <span className="menuItemIcon">{getIcon('PersonOutline')}</span>
-                        <span className="menuItemLabel">Patient Profile</span>
+                        <span className="menuItemLabel">{t('ehr', 'Patient Profile')}</span>
                     </MenuItem>
                 </Menu>
             </div>

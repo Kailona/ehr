@@ -18,6 +18,7 @@
         "@kailona/plugin-vitals": "^0.1.0",
         "@kailona/plugin-documents": "^0.1.0",
         "@kailona/provider-google-fit": "^1.0.0",
+        "@kailona/plugin-laboratory": "^0.1.0",
         "react-router-dom": "^5.2.0"
     }
 }

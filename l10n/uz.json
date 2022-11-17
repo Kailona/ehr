@@ -1,0 +1,13 @@
+{
+    "translations": {
+        "Username": "Username",
+        "Password": "Password",
+        "Name": "Name",
+        "Delete": "Delete",
+        "Cancel": "Cancel",
+        "Confirm": "Confirm",
+        "Activities": "Activities",
+        "Unknown": "Unknown"
+    },
+    "pluralForm": "nplurals=1; plural=0;"
+}

@@ -1,0 +1,14 @@
+{
+    "translations": {
+        "Username": "Ulanyjy ady",
+        "Password": "Açarsöz",
+        "Name": "Ady",
+        "Delete": "Pozmak",
+        "Cancel": "ýatyrmak",
+        "Edit": "Redaktirläň",
+        "Activities": "Çäreler",
+        "Unknown": "Näbelli",
+        "Documents": "Dokumentlar"
+    },
+    "pluralForm": "nplurals=2; plural=(n != 1);"
+}

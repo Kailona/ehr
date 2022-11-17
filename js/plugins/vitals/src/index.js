@@ -6,39 +6,39 @@ import getTimelineBodyTemperature from './timelineData/getTimelineBodyTemperatur
 export default {
     id: 'plugin-vitals',
     path: '/vitals',
-    name: 'Vitals',
+    name: t('ehr', 'Vitals'),
     MenuModule: {
-        name: 'Vitals',
+        name: t('ehr', 'Vitals'),
         icon: 'FavoriteBorder',
-        priority: 90,
+        priority: 80,
     },
     WidgetModule: {
-        name: 'Vitals',
+        name: t('ehr', 'Vitals'),
         icon: 'FavoriteBorder',
-        priority: 90,
+        priority: 80,
     },
     DataModule: {
         Component: VitalsDataModule,
     },
     TimelineModule: [
         {
-            name: 'Blood Pressure',
+            name: t('ehr', 'Blood Pressure'),
             color: '#36a3eb',
             icon: 'FavoriteBorder',
             children: [
                 {
-                    name: 'Systolic',
+                    name: t('ehr', 'Systolic'),
                     getData: getTimelineBloodPressureSystolic,
                 },
 
                 {
-                    name: 'Diastolic',
+                    name: t('ehr', 'Diastolic'),
                     getData: getTimelineBloodPressureDiastolic,
                 },
             ],
         },
         {
-            name: 'Body Temperature',
+            name: t('ehr', 'Body Temperature'),
             color: '#ff6384',
             icon: 'WhatshotOutlined',
             getData: getTimelineBodyTemperature,
