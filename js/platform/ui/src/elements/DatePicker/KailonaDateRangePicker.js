@@ -13,6 +13,7 @@ const CustomDateRangePicker = withStyles({
 
 const styles = {
     datepicker: {
+        width: '200px',
         '& input, & input:hover': {
             border: 'none !important',
         },

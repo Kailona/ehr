@@ -124,7 +124,7 @@ class MailService {
         $emailTemplate->setSubject($this->l10n->t('Health Data Export'));
         $emailTemplate->addHeader();
         $emailTemplate->addBodyText($body);
-        $emailTemplate->addBodyButton($this->l10n->t('Export Data'), $link);
+        $emailTemplate->addBodyButton($this->l10n->t('See Health Data'), $link);
         $emailTemplate->addFooter($this->l10n->t('This is an automatically sent email, please do not reply.'));
 
         $message = $this->mailer->createMessage();
