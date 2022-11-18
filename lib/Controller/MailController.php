@@ -32,7 +32,7 @@ class MailController extends Controller {
      * @NoAdminRequired
      * @NoCSRFRequired
      */
-	public function sendExportData(string $patientId, string $fromName, string $to, string $body, $link) {
+	public function sendExportData(string $patientId, string $fromName, string $to, string $body, string $link) {
 	    return $this->service->sendExportDataMail($patientId, $fromName, $to, $body, $link);
     }
 }
