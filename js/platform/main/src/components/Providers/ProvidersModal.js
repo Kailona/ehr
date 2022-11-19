@@ -9,15 +9,14 @@ import {
     Card,
     CardContent,
     CardActions,
-    CardMedia,
-    Button,
     GridList,
     GridListTile,
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Close as CloseIcon } from '@material-ui/icons';
-import { getIcon, Logger, ProviderManager } from '@kailona/core';
+import { Logger, ProviderManager } from '@kailona/core';
 import { withNotification } from '../../context/NotificationContext';
+import { KailonaButton } from '@kailona/ui';
 
 const logger = new Logger('main.ProvidersModal');
 
@@ -31,14 +30,15 @@ const Dialog = withStyles({
 
 const styles = theme => ({
     cardRoot: {
-        maxWidth: 345,
-        elevation: 3,
-    },
-    cardMedia: {
-        height: 140,
+        display: 'flex',
+        justifyContent: 'space-between',
+        padding: '16px 32px 16px 32px',
     },
     cardContentRoot: {
         padding: '0px 16px 0px 16px',
+        '& img': {
+            marginTop: '5px',
+        },
     },
     cardActionsRoot: {
         padding: '0px 8px 0px 8px',
@@ -53,41 +53,71 @@ class ProvidersModal extends Component {
 
     constructor(props) {
         super(props);
+
+        this.state = {
+            loading: false,
+        };
     }
 
     onSyncButtonClicked = async provider => {
         const { retrieveData } = provider;
+        this.setState({ loading: true });
 
-        await retrieveData();
+        const result = await retrieveData();
+
+        this.setState({ loading: false });
+
+        this.props.onClose();
+
+        if (!result) {
+            return this.props.showNotification({
+                severity: 'error',
+                message: t('ehr', 'Google fit data unsynchronized.'),
+            });
+        }
+        // return for signIn window
+        if (result == 1) {
+            return this.props.showNotification({
+                severity: 'info',
+                message: t('ehr', 'Need to sign in for the data synchronize.'),
+            });
+        }
+
+        return this.props.showNotification({
+            severity: 'success',
+            message: t('ehr', 'Google fit account data synchronized successfully.'),
+        });
     };
 
     getProviderComponents = providers => {
         const { classes } = this.props;
+        const { loading } = this.state;
 
         return (
-            <GridList cols={3}>
+            <GridList>
                 {providers.map(provider => {
                     return (
                         <GridListTile
                             style={{
                                 height: '100%',
+                                width: '100%',
                             }}
                         >
                             <Card className={classes.cardRoot}>
-                                {getIcon(provider.icon)}
                                 <CardContent className={classes.cardContentRoot}>
                                     <Typography gutterBottom variant="h5" component="h2">
+                                        <img src={provider.icon} style={{ marginTop: '5px' }} />
                                         {provider.name}
                                     </Typography>
                                 </CardContent>
                                 <CardActions className={classes.cardActionsRoot}>
-                                    <Button
-                                        size="small"
-                                        color="primary"
+                                    <KailonaButton
+                                        class="primary"
+                                        disabled={loading}
+                                        loading={loading}
                                         onClick={() => this.onSyncButtonClicked(provider)}
-                                    >
-                                        {t('ehr', 'SYNC')}
-                                    </Button>
+                                        title={t('ehr', 'Synchronize')}
+                                    />
                                 </CardActions>
                             </Card>
                         </GridListTile>
@@ -101,14 +131,14 @@ class ProvidersModal extends Component {
         const providers = ProviderManager.providers;
 
         return (
-            <Dialog maxWidth="sm" fullWidth={true} open={this.props.isOpen}>
+            <Dialog maxWidth="xs" fullWidth={true} open={this.props.isOpen}>
                 <DialogTitle>
                     <Box display="flex" alignItems="center">
                         <Box flexGrow={1}>
                             <Typography variant="h3">{t('ehr', 'Providers')}</Typography>
                         </Box>
                         <Box>
-                            <IconButton onClick={this.props.onClose}>
+                            <IconButton disabled={this.state.loading} onClick={this.props.onClose}>
                                 <CloseIcon />
                             </IconButton>
                         </Box>

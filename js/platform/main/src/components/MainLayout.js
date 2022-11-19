@@ -30,7 +30,6 @@ class MainLayout extends Component {
         }
 
         const { hash } = location;
-
         // Parse hash to retrieve access token for a provider and sync data with the token
         const parsedHash = parseHash(hash);
         if (!parsedHash) {

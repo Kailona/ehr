@@ -88,7 +88,8 @@ class ProfileMenu extends Component {
         };
 
         return (
-            <MenuItem className="menuItem" onClick={() => this.onProvidersMenuItemClick()}>
+            <MenuItem className="menuItem" onClick={this.onProvidersMenuItemClick}>
+                <span className="menuItemIcon">{getIcon('Sync')}</span>
                 <span className="menuItemLabel">{providerMainPage.name}</span>
             </MenuItem>
         );

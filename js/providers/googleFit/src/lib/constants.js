@@ -6,7 +6,7 @@ const auth = {
             response_type: 'token',
             scope: 'https://www.googleapis.com/auth/fitness.activity.read',
             include_granted_scopes: true,
-            client_id: '',
+            client_id: '614617486987-qv917ol911j5cq8ghpldhaj5aoqqhtm4.apps.googleusercontent.com',
             state: 'provider-google-fit',
         },
     },
@@ -48,4 +48,15 @@ const api = {
     },
 };
 
-export { api, auth };
+const dataSourceId = {
+    // TODO: gonna make for sessionData also.
+    baseSessionDataSourceId:
+        'derived:com.google.activity.segment:com.google.android.apps.fitness:session_activity_segment',
+    baseUserInputDataSourceId: 'raw:{dataTypeName}:com.google.android.apps.fitness:user_input',
+    userInputDataTypeName: {
+        steps: 'com.google.step_count.delta',
+        calories: 'com.google.calories.expended',
+    },
+};
+
+export { api, auth, dataSourceId };

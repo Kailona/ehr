@@ -22,6 +22,7 @@ export default class App extends Component {
         this.state = {
             loading: true,
             error: null,
+            isUpdated: false,
         };
     }
 

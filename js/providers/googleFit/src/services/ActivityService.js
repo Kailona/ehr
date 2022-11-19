@@ -2,7 +2,7 @@ import { Logger } from '@kailona/core';
 import moment from 'moment-timezone';
 import BaseService from './BaseService';
 import { api } from '../lib/constants';
-import convertMStoNS from '../lib/convertMStoNS';
+import { convertMStoNS } from '../lib/convertMS_NS';
 
 const logger = new Logger('GoogleFitProvider.ActivityService');
 
@@ -190,6 +190,9 @@ class ActivityService extends BaseService {
 
         // Retrieve dataset by the dataStreamIdList and default date interval in nanoseconds
         const datasets = await this._retrieveDatasets(dataStreamIdListToRead);
+
+        // minStartTimeNs: Ns, maxEndTimeNs: Ns, dataSourceId: string, point: [... , value: [...]]
+        return datasets;
     }
 }
 

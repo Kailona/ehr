@@ -2,6 +2,8 @@ import { Logger } from '@kailona/core';
 import authService from '../services/AuthService';
 import ActivityService from '../services/ActivityService';
 import UnauthorizedException from '../exceptions/UnauthorizedException';
+import { convertToFHIR } from '../lib/convertToFHIR';
+import ActivitiesService from '../../../../plugins/activities/src/services/ActivitiesService';
 
 const logger = new Logger('GoogleFitProvider.DataServiceManager');
 
@@ -23,7 +25,7 @@ class DataServiceManager {
         // Redirect user to google sign-in page
         if (!isAccessTokenValid) {
             authService.signIn();
-            return;
+            return 1;
         }
 
         // Retrieve Google Fit data for each registered data type
@@ -43,7 +45,34 @@ class DataServiceManager {
             }
         }
 
-        return dataList;
+        const convertDataToFHIR = convertToFHIR(dataList);
+
+        for (const convertedData of convertDataToFHIR) {
+            try {
+                const { start, end } = convertedData.datePeriod;
+                const params = [
+                    {
+                        date: `ge${moment(start)
+                            .utc()
+                            .toISOString()}`,
+                    },
+                    {
+                        date: `le${moment(end)
+                            .utc()
+                            .toISOString()}`,
+                    },
+                    {
+                        _count: 1,
+                    },
+                ];
+                await new ActivitiesService().upsertDataFromGoogleFit(convertedData, params);
+            } catch (error) {
+                logger.error(error);
+                return false;
+            }
+        }
+
+        return true;
     }
 }
 
