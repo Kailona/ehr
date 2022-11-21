@@ -116,7 +116,7 @@ export default function mapTCXtoFHIR(tcxData) {
                                 text: 'Calories',
                             },
                             valueQuantity: {
-                                value: parseInt(lapChildNode.textContent),
+                                value: parseFloat(lapChildNode.textContent),
                                 unit: 'cal',
                                 system: 'http://unitsofmeasure.org',
                                 code: 'cal',

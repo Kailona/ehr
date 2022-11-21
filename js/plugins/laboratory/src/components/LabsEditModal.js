@@ -123,6 +123,7 @@ export default class LabsEditModal extends Component {
                                 <FormControl>
                                     <KailonaTextField
                                         inputRef={this.leukocytesRef}
+                                        type="number"
                                         id="leukocytes"
                                         className="kailona-MuiTextField"
                                         label={t('ehr', 'Leukocytes')}
