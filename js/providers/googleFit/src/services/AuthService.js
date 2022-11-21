@@ -54,6 +54,8 @@ class AuthService {
     signIn() {
         const { signIn } = auth;
         const { url, queryParameters } = signIn;
+        const height = window.innerHeight;
+        const width = window.innerWidth;
 
         const queryParametersInString = Object.keys(queryParameters)
             .map(key => `${key}=${queryParameters[key]}`)
@@ -61,7 +63,11 @@ class AuthService {
 
         const signInUrl = `${url}?${queryParametersInString}`;
 
-        const signInWindow = window.open(signInUrl, queryParameters.state, `width=500,height=650,toolbar=0,menubar=0`);
+        const signInWindow = window.open(
+            signInUrl,
+            queryParameters.state,
+            `width=500,height=500,top=${height / 2},left=${width / 2},toolbar=0,menubar=0`
+        );
 
         signInWindow.focus();
     }

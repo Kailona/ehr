@@ -14,11 +14,12 @@ import {
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Close as CloseIcon } from '@material-ui/icons';
-import { Logger, ProviderManager } from '@kailona/core';
+import { Logger, ProviderManager, LocalStorageService } from '@kailona/core';
 import { withNotification } from '../../context/NotificationContext';
 import { KailonaButton } from '@kailona/ui';
 
 const logger = new Logger('main.ProvidersModal');
+const accessTokenKey = 'google_fit_access_token';
 
 const Dialog = withStyles({
     paper: {
@@ -31,7 +32,7 @@ const Dialog = withStyles({
 const styles = theme => ({
     cardRoot: {
         display: 'flex',
-        justifyContent: 'space-between',
+        justifyContent: 'space-evenly',
         padding: '16px 32px 16px 32px',
     },
     cardContentRoot: {
@@ -56,6 +57,7 @@ class ProvidersModal extends Component {
 
         this.state = {
             loading: false,
+            googleFitToken: LocalStorageService.getItem(accessTokenKey),
         };
     }
 
@@ -64,6 +66,14 @@ class ProvidersModal extends Component {
         this.setState({ loading: true });
 
         const result = await retrieveData();
+
+        // return for signIn window
+        if (result === 1) {
+            return this.props.showNotification({
+                severity: 'info',
+                message: t('ehr', 'Need to sign in for the data synchronize.'),
+            });
+        }
 
         this.setState({ loading: false });
 
@@ -75,19 +85,22 @@ class ProvidersModal extends Component {
                 message: t('ehr', 'Google fit data unsynchronized.'),
             });
         }
-        // return for signIn window
-        if (result == 1) {
-            return this.props.showNotification({
-                severity: 'info',
-                message: t('ehr', 'Need to sign in for the data synchronize.'),
-            });
-        }
 
         return this.props.showNotification({
             severity: 'success',
             message: t('ehr', 'Google fit account data synchronized successfully.'),
         });
     };
+
+    componentDidUpdate(prevProps, prevState) {
+        // check on is token get from DataProvider window to can close modal.
+        const googleFitToken = LocalStorageService.getItem(accessTokenKey);
+
+        if (prevState.googleFitToken != googleFitToken) {
+            this.setState({ loading: false, googleFitToken: googleFitToken });
+            this.props.onClose();
+        }
+    }
 
     getProviderComponents = providers => {
         const { classes } = this.props;
@@ -116,7 +129,7 @@ class ProvidersModal extends Component {
                                         disabled={loading}
                                         loading={loading}
                                         onClick={() => this.onSyncButtonClicked(provider)}
-                                        title={t('ehr', 'Synchronize')}
+                                        title={t('ehr', loading ? 'Synchronizing' : 'Synchronize')}
                                     />
                                 </CardActions>
                             </Card>
@@ -131,14 +144,14 @@ class ProvidersModal extends Component {
         const providers = ProviderManager.providers;
 
         return (
-            <Dialog maxWidth="xs" fullWidth={true} open={this.props.isOpen}>
+            <Dialog maxWidth="sm" fullWidth={true} open={this.props.isOpen}>
                 <DialogTitle>
                     <Box display="flex" alignItems="center">
                         <Box flexGrow={1}>
                             <Typography variant="h3">{t('ehr', 'Providers')}</Typography>
                         </Box>
                         <Box>
-                            <IconButton disabled={this.state.loading} onClick={this.props.onClose}>
+                            <IconButton onClick={this.props.onClose}>
                                 <CloseIcon />
                             </IconButton>
                         </Box>
