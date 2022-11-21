@@ -319,9 +319,10 @@ class ExportDataModal extends React.Component {
                 const { patientFullName: fromName } = ProfileManager.activeProfile;
                 const body = t(
                     'ehr',
-                    `The data for patient ${fromName} was exported on Kailona platform 
+                    `The data for patient "${fromName}" was exported on Kailona platform 
                     ${moment().format('MMMM Do YYYY h:mm:ss a')}. `
                 );
+
                 await this.mailService.sendExportData(patientId, fromName, to, body, result.data);
             });
 
@@ -374,10 +375,16 @@ class ExportDataModal extends React.Component {
 
         const csvContent = formattedArray
             .map(e => {
-                let value = Object.keys(e).join('|') + '\n';
-                Object.keys(e).map(key => {
+                let value = '';
+                // first get keys with pipe between of each
+                Object.keys(e).forEach(key => {
+                    value += `${key.charAt(0).toUpperCase()}${key.slice(1)}|`;
+                });
+                value += '\n';
+                // then get values with pipe between of each
+                Object.values(e).map(valueKey => {
                     // replaceAll for the date's format. Because of date values have comma.
-                    value += e[key].toString() + '|';
+                    value += valueKey.toString() + '|';
                 });
                 return value;
             })
