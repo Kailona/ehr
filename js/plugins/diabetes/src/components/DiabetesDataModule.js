@@ -252,7 +252,11 @@ export default class DiabetesDataModule extends Component {
                         <Typography variant="h3">{t('ehr', 'Diabetes')}</Typography>
                     </div>
                     <Box className="add-new" mt={2}>
-                        <KailonaButton title={t('ehr', 'Add Diabetes Data')} onClick={this.onAddNewDiabetes} />
+                        <KailonaButton
+                            class="primary"
+                            title={t('ehr', 'Add Diabetes Data')}
+                            onClick={this.onAddNewDiabetes}
+                        />
                     </Box>
                     <Box className="filters" mt={2}>
                         <Grid container alignItems="center" justifyContent="center">

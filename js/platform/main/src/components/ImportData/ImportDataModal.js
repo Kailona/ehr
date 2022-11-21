@@ -11,9 +11,8 @@ import {
     CircularProgress,
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import { Close as CloseIcon } from '@material-ui/icons';
 import { Logger, ModuleTypeEnum, PluginManager, getIcon } from '@kailona/core';
-import { KailonaButton } from '@kailona/ui';
+import { KailonaButton, KailonaCloseButton } from '@kailona/ui';
 import ImportDataBrowser from './ImportDataBrowser';
 import { withNotification } from '../../context/NotificationContext';
 import { importJSON } from '../../lib/importFHIRData';
@@ -190,9 +189,7 @@ class ImportDataModal extends Component {
                             <Typography variant="h3">{t('ehr', 'Import Data')}</Typography>
                         </Box>
                         <Box>
-                            <IconButton onClick={this.props.onClose}>
-                                <CloseIcon />
-                            </IconButton>
+                            <KailonaCloseButton onClose={this.props.onClose} />
                         </Box>
                     </Box>
                 </DialogTitle>

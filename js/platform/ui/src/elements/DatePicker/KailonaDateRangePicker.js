@@ -3,6 +3,7 @@ import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 import DateFnsUtils from '@date-io/date-fns';
 import { withStyles } from '@material-ui/core';
 import DateRangePicker from './lib/DateRangePicker';
+import './KailonaDatePicker.css';
 
 const CustomDateRangePicker = withStyles({
     root: {

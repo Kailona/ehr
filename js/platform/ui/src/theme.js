@@ -96,17 +96,6 @@ const theme = createMuiTheme({
             color: '#000',
             fontWeight: '600',
         },
-        button: {
-            height: '40px',
-            borderRadius: '4px',
-            borderColor: '#9FA8DA',
-            textAlign: 'center',
-            fontFamily: 'Nunito Sans',
-            fontSize: '15px',
-            letterSpacing: '0.5px',
-            color: '#3F51B5',
-            fontWeight: '800',
-        },
     },
 });
 

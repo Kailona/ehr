@@ -252,7 +252,11 @@ export default class ActivitiesDataModule extends Component {
                         <Typography variant="h3">{t('ehr', 'Activities')}</Typography>
                     </div>
                     <Box className="add-new" mt={2}>
-                        <KailonaButton title={t('ehr', 'Add New Activity')} onClick={this.onAddNewActivities} />
+                        <KailonaButton
+                            class="primary"
+                            title={t('ehr', 'Add New Activity')}
+                            onClick={this.onAddNewActivities}
+                        />
                     </Box>
                     <Box className="filters" mt={2}>
                         <Grid container alignItems="center" justifyContent="center">

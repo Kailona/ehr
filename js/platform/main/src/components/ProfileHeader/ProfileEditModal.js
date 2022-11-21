@@ -4,16 +4,14 @@ import {
     Dialog,
     DialogTitle,
     Typography,
-    IconButton,
     Link,
     DialogActions,
     Grid,
     withStyles,
     DialogContent as MuiDialogContent,
 } from '@material-ui/core';
-import { Close as CloseIcon } from '@material-ui/icons';
 import { ProfileManager } from '@kailona/core';
-import { KailonaButton, KailonaDatePicker, KailonaTextField } from '@kailona/ui';
+import { KailonaButton, KailonaCloseButton, KailonaDatePicker, KailonaTextField } from '@kailona/ui';
 
 const styles = {
     dialogActions: {
@@ -43,12 +41,19 @@ export default class ProfileEditModal extends React.Component {
     constructor(props) {
         super(props);
 
-        this.profileNameRef = React.createRef();
         this.profileDobRef = React.createRef();
 
         this.state = {
             loading: false,
+            profileName: '',
         };
+    }
+
+    onChangeHandler(key, value) {
+        const field = {};
+        field[key] = value;
+
+        this.setState(field);
     }
 
     onCancel = () => {
@@ -63,12 +68,12 @@ export default class ProfileEditModal extends React.Component {
         const { profile } = this.props;
         if (profile) {
             // Update
-            profile.patientFullName = this.profileNameRef.current.value;
+            profile.patientFullName = this.state.profileName;
             profile.patientDob = this.profileDobRef.current.value;
             await ProfileManager.updateProfile(profile);
         } else {
             // Create
-            const patientFullName = this.profileNameRef.current.value;
+            const patientFullName = this.state.profileName;
             const patientDob = this.profileDobRef.current.value;
             await ProfileManager.addProfile({
                 patientFullName,
@@ -128,9 +133,7 @@ export default class ProfileEditModal extends React.Component {
                     <Box display="flex" alignItems="center">
                         <Box flexGrow={1}>{title}</Box>
                         <Box>
-                            <IconButton onClick={this.props.onClose}>
-                                <CloseIcon />
-                            </IconButton>
+                            <KailonaCloseButton onClose={this.props.onClose} />
                         </Box>
                     </Box>
                 </DialogTitle>
@@ -157,7 +160,7 @@ export default class ProfileEditModal extends React.Component {
                             className="kailona-MuiTextField"
                             label={t('ehr', 'Name')}
                             style={{ backgroundColor: 'transparent !important' }}
-                            inputRef={this.profileNameRef}
+                            onChange={e => this.onChangeHandler('profileName', e.currentTarget.value)}
                             defaultValue={profile ? profile.patientFullName : null}
                             fullWidth
                         />
@@ -185,16 +188,14 @@ export default class ProfileEditModal extends React.Component {
                         </Grid>
                         <Grid item xs={8} align="right">
                             <KailonaButton
-                                variant="outlined"
                                 class="default"
                                 disabled={loading}
                                 onClick={this.onCancel}
                                 title={t('ehr', 'Cancel')}
                             />
                             <KailonaButton
-                                variant="outlined"
                                 class="primary"
-                                disabled={loading}
+                                disabled={loading || !this.state.profileName}
                                 onClick={this.onConfirm}
                                 title={t('ehr', 'Confirm')}
                                 loading={loading}

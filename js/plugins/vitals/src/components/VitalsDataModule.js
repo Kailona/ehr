@@ -265,7 +265,11 @@ export default class VitalsDataModule extends Component {
                         <Typography variant="h3">{t('ehr', 'Vitals')}</Typography>
                     </div>
                     <Box className="add-new" mt={2}>
-                        <KailonaButton title={t('ehr', 'Add New Vitals')} onClick={this.onAddNewVitals} />
+                        <KailonaButton
+                            class="primary"
+                            title={t('ehr', 'Add New Vitals')}
+                            onClick={this.onAddNewVitals}
+                        />
                     </Box>
                     <Box className="filters" mt={2}>
                         <Grid container alignItems="center" justifyContent="center">

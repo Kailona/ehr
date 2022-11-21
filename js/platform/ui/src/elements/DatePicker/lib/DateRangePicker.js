@@ -83,8 +83,8 @@ function DateRangePicker({
                         setPrevEnd(undefined);
                     }
                 } else {
+                    utils.isSameDay(day, begin) ? setEnd(day) : setEnd(undefined);
                     setBegin(day);
-                    setEnd(undefined);
                 }
             },
             onMouseEnter: () => requestAnimationFrame(() => setHover(day)),
@@ -102,6 +102,7 @@ function DateRangePicker({
                 [classes.beginCap]: utils.isSameDay(day, min),
                 [classes.endCap]: utils.isSameDay(day, max),
             }),
+            style: { width: 10, marginLeft: 5 },
         });
     }
 
@@ -176,7 +177,7 @@ export const styles = theme => {
             fontSize: theme.typography.caption.fontSize,
             margin: 0,
             color: theme.palette.text.primary,
-            fontWeight: theme.typography.fontWeightMedium,
+            fontWeight: theme.typography.body1,
             padding: 0,
             transition: 'none',
             '&::after': {

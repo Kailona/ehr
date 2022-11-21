@@ -185,7 +185,12 @@ class ImportDataBrowser extends Component {
                         </FormControl>
                     </div>
                     <div className={classes.deleteFile}>
-                        <IconButton edge="end" aria-label="delete" onClick={() => this.props.onFileRemove(file)}>
+                        <IconButton
+                            edge="end"
+                            aria-label="delete"
+                            onClick={() => this.props.onFileRemove(file)}
+                            style={{ border: 'none', backgroundColor: 'transparent' }}
+                        >
                             <DeleteIcon className={classes.deleteIcon} />
                         </IconButton>
                     </div>
