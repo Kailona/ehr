@@ -43,6 +43,7 @@ class ModalProvider extends React.Component {
                     toggleImportDataModal: this.toggleImportDataModal,
                     toggleRequestDataModal: this.toggleRequestDataModal,
                     toggleProfileEditModal: this.toggleProfileEditModal,
+                    isImportDataModalOpen: this.state.isImportDataModalOpen,
                 }}
             >
                 {this.props.children}

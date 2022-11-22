@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import { Typography, Box, Link } from '@material-ui/core';
 import { KailonaTable, KailonaButton } from '@kailona/ui';
-import { DocumentService } from '@kailona/core';
+import { DocumentService, Logger } from '@kailona/core';
 import { withModal } from '../../../../platform/main/src/context/ModalContext';
+
+const logger = new Logger('Documents.DocumentsDataModule');
 
 class DocumentsDataModule extends Component {
     constructor(props) {
@@ -61,6 +63,7 @@ class DocumentsDataModule extends Component {
         try {
             const page = this.state.page + 1;
             const offset = page * this.state.rowsPerPage;
+
             const { data: nextData } = await this.documentService.fetch(offset, this.state.rowsPerPage);
 
             const data = [...this.state.data, ...nextData];
@@ -76,6 +79,18 @@ class DocumentsDataModule extends Component {
             this.setState({
                 loading: false,
             });
+        }
+    };
+
+    componentDidUpdate = (prevProps, prevState) => {
+        if (prevProps.isImportDataModalOpen && !this.props.isImportDataModalOpen) {
+            this.setState(
+                {
+                    page: -1,
+                    data: [],
+                },
+                () => this.fetchFiles()
+            );
         }
     };
 
