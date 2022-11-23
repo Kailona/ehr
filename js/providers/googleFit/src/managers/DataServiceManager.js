@@ -40,7 +40,7 @@ class DataServiceManager {
                 if (error instanceof UnauthorizedException) {
                     // Redirect user to google sign-in page
                     authService.signIn();
-                    return;
+                    return 1;
                 }
             }
         }

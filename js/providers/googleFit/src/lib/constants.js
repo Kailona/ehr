@@ -1,3 +1,5 @@
+import sessionStorageService from '@kailona/core/src/services/SessionStorageService';
+
 const auth = {
     signIn: {
         url: 'https://accounts.google.com/o/oauth2/v2/auth',
@@ -6,7 +8,7 @@ const auth = {
             response_type: 'token',
             scope: 'https://www.googleapis.com/auth/fitness.activity.read',
             include_granted_scopes: true,
-            client_id: '614617486987-qv917ol911j5cq8ghpldhaj5aoqqhtm4.apps.googleusercontent.com',
+            client_id: getClientId(),
             state: 'provider-google-fit',
         },
     },
@@ -58,5 +60,9 @@ const dataSourceId = {
         calories: 'com.google.calories.expended',
     },
 };
+
+function getClientId() {
+    return sessionStorageService.getItem('googleFitClientId');
+}
 
 export { api, auth, dataSourceId };

@@ -9,7 +9,8 @@ class SettingsService {
     protected $adminSettings = [
         'fhirBaseUrl' => null,
         'fhirUsername' => null,
-        'fhirPassword' => null
+        'fhirPassword' => null,
+        'googleFitClientId' => null
     ];
 
     public function __construct(ILogger $logger, string $appName, IClientService $clientService) {

@@ -9,6 +9,7 @@ import App from './App';
 import AppAdminSettings from './AppAdminSettings';
 
 import config from './config/default';
+import sessionStorageService from '@kailona/core/src/services/SessionStorageService';
 
 // Set App Config
 ConfigManager.appConfig = config;
@@ -28,6 +29,8 @@ function render(App, rootElement, props = {}) {
 $(document).ready(() => {
     const rootElement = document.getElementById('ehr-root');
     if (rootElement) {
+        const rootData = JSON.parse(rootElement.getAttribute('data-app'));
+        sessionStorageService.upsertItem('googleFitClientId', rootData.googleFitClientId);
         render(App, rootElement);
     }
 
