@@ -50,6 +50,7 @@ OC.L10N.register(
     "Body Height" : "גובה גוף",
     "Body Weight" : "משקל גוף",
     "Add Physical Data" : "הוספת נתונים פיזיים",
+    "BMI" : "מדד מסת גוף",
     "Underweight" : "תת־משקל",
     "Normal/Healthy" : "רגיל/בריא",
     "Overweight" : "משקל עודף",

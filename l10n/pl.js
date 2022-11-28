@@ -84,6 +84,7 @@ OC.L10N.register(
     "Body Weight" : "Waga",
     "Physical Data" : "Dane fizyczne",
     "Add Physical Data" : "Dodaj dane fizyczne",
+    "BMI" : "BMI",
     "Underweight" : "Niedowaga",
     "Normal/Healthy" : "Normalne/zdrowe",
     "Overweight" : "Nadwaga",

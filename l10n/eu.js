@@ -84,6 +84,7 @@ OC.L10N.register(
     "Body Weight" : "Gorputzaren pisua",
     "Physical Data" : "Datu fisikoak",
     "Add Physical Data" : "Gehitu datu fisikoak",
+    "BMI" : "GMI",
     "Underweight" : "Gutxiegizko pisua",
     "Normal/Healthy" : "Normala/osasuntsua",
     "Overweight" : "Gehiegizko pisua",

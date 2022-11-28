@@ -22,6 +22,7 @@ OC.L10N.register(
     "Age" : "Idade",
     "Height" : "Altura",
     "Weight" : "Peso",
+    "BMI" : "IMC",
     "Underweight" : "Abaixo do peso",
     "This is an automatically sent email, please do not reply." : "Este e-mail foi enviado automaticamente, por favor não responda a este e-mail."
 },

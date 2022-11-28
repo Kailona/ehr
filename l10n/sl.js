@@ -83,6 +83,7 @@ OC.L10N.register(
     "Body Weight" : "Telesna masa",
     "Physical Data" : "Telesni podatki",
     "Add Physical Data" : "Dodaj telesne podatke",
+    "BMI" : "ITM",
     "Underweight" : "Podmerna telesna masa",
     "Normal/Healthy" : "Normalna / Zdrava telesna teža",
     "Overweight" : "Prekomerna telesna teža",

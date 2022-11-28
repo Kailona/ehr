@@ -84,6 +84,7 @@ OC.L10N.register(
     "Body Weight" : "體重",
     "Physical Data" : "身體數據",
     "Add Physical Data" : "添加身體數據",
+    "BMI" : "體重指數",
     "Underweight" : "體重不足",
     "Normal/Healthy" : "正常/健康",
     "Overweight" : "超重",

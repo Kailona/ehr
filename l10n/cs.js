@@ -84,6 +84,7 @@ OC.L10N.register(
     "Body Weight" : "Tělesná hmotnost",
     "Physical Data" : "Tělesné údaje",
     "Add Physical Data" : "Přidat tělesný údaj",
+    "BMI" : "BMI",
     "Underweight" : "Podváha",
     "Normal/Healthy" : "Normální/Zdravý",
     "Overweight" : "Nadváha",
