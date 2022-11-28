@@ -242,7 +242,7 @@ class ExportDataModal extends React.Component {
                         ];
 
                         await new PhysicalDataService().fetchData(params).then(data => {
-                            if (data.length) {
+                            if (!!data.length) {
                                 queueData.push({
                                     name: plugin.name,
                                     data,
@@ -252,7 +252,7 @@ class ExportDataModal extends React.Component {
                     } else if (plugin.name === 'Documents' || plugin.priority === 50) {
                         // parameters can be changed.
                         await this.documentService.fetch().then(data => {
-                            if (data.length) {
+                            if (!!data.length) {
                                 queueData.push({
                                     name: plugin.name,
                                     data: data.data,
@@ -263,7 +263,7 @@ class ExportDataModal extends React.Component {
                 } else {
                     if (typeof timelineModule.getData === 'function') {
                         await timelineModule.getData(filters.dateRange.begin, filters.dateRange.end).then(data => {
-                            if (data.length) {
+                            if (!!data.length) {
                                 queueData.push({
                                     name: timelineModule.name,
                                     data,
@@ -275,7 +275,7 @@ class ExportDataModal extends React.Component {
 
                         timelineModule.children.forEach(child => {
                             child.getData(filters.dateRange.begin, filters.dateRange.end).then(data => {
-                                if (data.length) {
+                                if (!!data.length) {
                                     const promise = new Promise(resolve =>
                                         resolve({
                                             name: child.name,
@@ -353,7 +353,6 @@ class ExportDataModal extends React.Component {
     convertToCSVFormat = (allData, documentName) => {
         // TODO: Converting to CSV Format. Will carry into utils folder as common.
         let formattedArray = [];
-
         allData.map(element => {
             element.data.map(e => {
                 const keys = Object.keys(e);
@@ -365,7 +364,6 @@ class ExportDataModal extends React.Component {
                     }
                 });
             });
-
             const objectData = Object.assign({}, ...element.data);
             formattedArray.push({
                 name: element.name,

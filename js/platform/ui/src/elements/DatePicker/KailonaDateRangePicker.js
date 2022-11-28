@@ -4,6 +4,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import { withStyles } from '@material-ui/core';
 import DateRangePicker from './lib/DateRangePicker';
 import './KailonaDatePicker.css';
+import moment from 'moment';
 
 const CustomDateRangePicker = withStyles({
     root: {
@@ -42,6 +43,10 @@ class KailonaDateRangePicker extends Component {
     }
 
     handleChange(date) {
+        if (moment(date.end).dayOfYear() === moment(new Date()).dayOfYear()) {
+            date.end = new Date();
+        }
+
         this.setState({
             date,
         });
