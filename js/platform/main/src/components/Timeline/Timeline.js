@@ -547,6 +547,10 @@ class Timeline extends Component {
         this.timelineModules.forEach(async timelineModule => {
             const { name, color, getData, children } = timelineModule;
 
+            if (typeof getData !== 'function' && !children) {
+                return;
+            }
+
             // Fetch data using timeline data function(s)
             const dataSetList = [];
             if (typeof getData === 'function') {
@@ -579,8 +583,6 @@ class Timeline extends Component {
 
                 const promiseResults = await Promise.all(promises);
                 dataSetList.push(...promiseResults);
-            } else {
-                return;
             }
 
             // Prevent race condition with react state since this is lazy loading for multiple timeline data
@@ -624,6 +626,10 @@ class Timeline extends Component {
         this.timelineModules.forEach(async timelineModule => {
             const { name, color, getData, children } = timelineModule;
 
+            if (typeof getData !== 'function' && !children) {
+                return;
+            }
+
             // Fetch data using timeline data function(s)
             const dataSetList = [];
             if (typeof getData === 'function') {
@@ -656,8 +662,6 @@ class Timeline extends Component {
 
                 const promiseResults = await Promise.all(promises);
                 dataSetList.push(...promiseResults);
-            } else {
-                return;
             }
 
             // Prevent race condition with react state since this is lazy loading for multiple timeline data
@@ -844,20 +848,22 @@ class Timeline extends Component {
         const newDateRange = dateRangeEnums[indexOfSelectedDateRange + value];
 
         // check for the limit dates. Don't decrease after 1 Day, don't increase after all
-        if (newDateRange) {
-            this.setState(
-                {
-                    selectedDateRange: newDateRange,
-                    dailyDateRange: {
-                        begin: newDateRange === DateRangeEnum.ONE_DAY ? new Date() : undefined,
-                        end: newDateRange === DateRangeEnum.ONE_DAY ? new Date() : undefined,
-                    },
-                },
-                () => {
-                    this.fetchChartData();
-                }
-            );
+        if (!newDateRange) {
+            return;
         }
+
+        this.setState(
+            {
+                selectedDateRange: newDateRange,
+                dailyDateRange: {
+                    begin: newDateRange === DateRangeEnum.ONE_DAY ? new Date() : undefined,
+                    end: newDateRange === DateRangeEnum.ONE_DAY ? new Date() : undefined,
+                },
+            },
+            () => {
+                this.fetchChartData();
+            }
+        );
     };
 
     setDailyDateRange = date => {
