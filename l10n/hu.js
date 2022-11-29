@@ -84,6 +84,8 @@ OC.L10N.register(
     "Body Weight" : "Testsúly",
     "Physical Data" : "Fizikai adatok",
     "Add Physical Data" : "Fizikai adatok hozzáadása",
+    "BodyWeight" : "Testsúly",
+    "BodyHeight" : "Testmagasság",
     "BMI" : "BMI",
     "Underweight" : "Sovány",
     "Normal/Healthy" : "Normál/egészséges",
