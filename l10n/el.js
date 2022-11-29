@@ -57,6 +57,7 @@ OC.L10N.register(
     "Weight" : "Βάρος",
     "Body Height" : "Ύψος",
     "Body Weight" : "Βάρος",
+    "BMI" : "ΔΜΣ",
     "Underweight" : "Λιποβαρής",
     "Overweight" : "Υπέρβαρος",
     "Obese" : "Παχυσαρκία",

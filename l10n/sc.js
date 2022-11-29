@@ -60,6 +60,7 @@ OC.L10N.register(
     "Body Weight" : "Pesu de su corpus",
     "Physical Data" : "Datos fìsicos",
     "Add Physical Data" : "Agiunghe datos fìsicos",
+    "BMI" : "IMC",
     "Underweight" : "Sutapesu",
     "Normal/Healthy" : "Normale/sanu",
     "Overweight" : "Subrapesu",
