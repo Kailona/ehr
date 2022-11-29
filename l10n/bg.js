@@ -84,6 +84,7 @@ OC.L10N.register(
     "Body Weight" : "Телесно тегло",
     "Physical Data" : "Физически данни",
     "Add Physical Data" : "Добавяне на физически данни",
+    "BMI" : "ИТМ /Индекс на телесна маса/",
     "Underweight" : "Поднормено тегло",
     "Normal/Healthy" : "Нормално/Здравословно",
     "Overweight" : "Наднормено тегло",

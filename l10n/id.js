@@ -13,6 +13,7 @@ OC.L10N.register(
     "Timeline" : "Linimasa",
     "Edit" : "Sunting",
     "Activities" : "Aktivitas",
+    "Filter by" : "Saring berdasarkan",
     "Unknown" : "Tidak diketahui"
 },
 "nplurals=1; plural=0;");

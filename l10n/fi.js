@@ -29,6 +29,7 @@ OC.L10N.register(
     "Weight" : "Paino",
     "Body Height" : "Kehon pituus",
     "Body Weight" : "Kehon paino",
+    "BMI" : "BMI",
     "Underweight" : "Alipainoinen",
     "Normal/Healthy" : "Normaali/Terveellinen",
     "Overweight" : "Ylipainoinen",
