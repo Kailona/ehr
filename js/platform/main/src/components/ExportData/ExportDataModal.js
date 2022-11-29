@@ -21,6 +21,7 @@ import { ModuleTypeEnum, PluginManager, getIcon, DocumentService, MailService, P
 import PhysicalDataService from '../../../../../plugins/physicalData/src/services/PhysicalDataService';
 import Logger from '@kailona/core/src/services/Logger';
 import { withNotification } from '../../context/NotificationContext';
+import theme from '../../../../ui/src/theme';
 
 const DialogContent = withStyles({
     root: {
@@ -126,7 +127,7 @@ class ExportDataModal extends React.Component {
     };
 
     getCheckboxItems = () => {
-        const { selectedPlugins, plugins, exporting } = this.state;
+        const { selectedPlugins, plugins } = this.state;
         // After get plugins first time, then not need to get again
         plugins.length == 0 && this.getPlugins();
 
@@ -148,7 +149,21 @@ class ExportDataModal extends React.Component {
                                 checkedIcon={<scan style={{ color: checkboxItem.color }}>{checkboxItemIcon}</scan>}
                             />
                         }
-                        label={checkboxItem.name}
+                        label={
+                            <label
+                                style={{
+                                    color: isChecked
+                                        ? checkboxItem.color
+                                            ? checkboxItem.color
+                                            : theme.palette.secondary.main
+                                        : 'black',
+                                    fontWeight: isChecked ? 'bold' : 'normal',
+                                }}
+                                onClick={() => this.onCheckboxChange(checkboxItem)}
+                            >
+                                {checkboxItem.name}
+                            </label>
+                        }
                     />
                 </Grid>
             );
@@ -227,7 +242,7 @@ class ExportDataModal extends React.Component {
                         ];
 
                         await new PhysicalDataService().fetchData(params).then(data => {
-                            if (data.length) {
+                            if (!!data.length) {
                                 queueData.push({
                                     name: plugin.name,
                                     data,
@@ -237,7 +252,7 @@ class ExportDataModal extends React.Component {
                     } else if (plugin.name === 'Documents' || plugin.priority === 50) {
                         // parameters can be changed.
                         await this.documentService.fetch().then(data => {
-                            if (data.length) {
+                            if (!!data.length) {
                                 queueData.push({
                                     name: plugin.name,
                                     data: data.data,
@@ -248,7 +263,7 @@ class ExportDataModal extends React.Component {
                 } else {
                     if (typeof timelineModule.getData === 'function') {
                         await timelineModule.getData(filters.dateRange.begin, filters.dateRange.end).then(data => {
-                            if (data.length) {
+                            if (!!data.length) {
                                 queueData.push({
                                     name: timelineModule.name,
                                     data,
@@ -260,7 +275,7 @@ class ExportDataModal extends React.Component {
 
                         timelineModule.children.forEach(child => {
                             child.getData(filters.dateRange.begin, filters.dateRange.end).then(data => {
-                                if (data.length) {
+                                if (!!data.length) {
                                     const promise = new Promise(resolve =>
                                         resolve({
                                             name: child.name,
@@ -304,11 +319,10 @@ class ExportDataModal extends React.Component {
                 const { patientFullName: fromName } = ProfileManager.activeProfile;
                 const body = t(
                     'ehr',
-                    'The exported data is uploaded to health data archive on Kailona platform, ' +
-                        `${moment().format('MMMM Do YYYY h:mm:ss a')}. ` +
-                        'Please comply within the 30 day period as ' +
-                        'required by the Berufsordnung der Ärztekammern, §630g Abs. 2  BGB and Art. 15  Abs. 3 DSGVO.'
+                    `The data for patient "${fromName}" was exported on Kailona platform 
+                    ${moment().format('MMMM Do YYYY h:mm:ss a')}. `
                 );
+
                 await this.mailService.sendExportData(patientId, fromName, to, body, result.data);
             });
 
@@ -336,10 +350,20 @@ class ExportDataModal extends React.Component {
         }
     };
 
-    convertToCSVFormat = (data, documentName) => {
+    convertToCSVFormat = (allData, documentName) => {
         // TODO: Converting to CSV Format. Will carry into utils folder as common.
         let formattedArray = [];
-        data.map(element => {
+        allData.map(element => {
+            element.data.map(e => {
+                const keys = Object.keys(e);
+                const values = Object.values(e);
+
+                values.map((value, index) => {
+                    if (Array.isArray(value) || typeof value === 'object') {
+                        delete e[keys[index]];
+                    }
+                });
+            });
             const objectData = Object.assign({}, ...element.data);
             formattedArray.push({
                 name: element.name,
@@ -349,10 +373,16 @@ class ExportDataModal extends React.Component {
 
         const csvContent = formattedArray
             .map(e => {
-                let value = Object.keys(e).join(',') + '\n';
-                Object.keys(e).map(key => {
+                let value = '';
+                // first get keys with pipe between of each
+                Object.keys(e).forEach(key => {
+                    value += `${key.charAt(0).toUpperCase()}${key.slice(1)}|`;
+                });
+                value += '\n';
+                // then get values with pipe between of each
+                Object.values(e).map(valueKey => {
                     // replaceAll for the date's format. Because of date values have comma.
-                    value += e[key].toString().replaceAll(',', ' ') + ',';
+                    value += valueKey.toString() + '|';
                 });
                 return value;
             })
@@ -381,7 +411,6 @@ class ExportDataModal extends React.Component {
                         <Grid item xs={6}>
                             <KailonaDateRangePicker
                                 id="date"
-                                // As a default value. To give user only today's data if he/she doesn't choose date.
                                 date={{ begin: new Date(), end: new Date() }}
                                 onChange={dateRange =>
                                     this.setState({ ...this.state, filters: { dateRange: dateRange } })
@@ -404,7 +433,17 @@ class ExportDataModal extends React.Component {
                         <Grid item xs={4}>
                             <FormControlLabel
                                 control={<Checkbox checked={checkAll} onChange={this.onCheckAllChange} />}
-                                label={t('ehr', 'All')}
+                                label={
+                                    <label
+                                        style={{
+                                            color: checkAll ? theme.palette.secondary.main : theme.palette.black.main,
+                                            fontWeight: checkAll ? 'bold' : 'normal',
+                                        }}
+                                        onClick={this.onCheckAllChange}
+                                    >
+                                        {t('ehr', 'All')}
+                                    </label>
+                                }
                             />
                         </Grid>
                         <FormGroup row>{checkboxItems}</FormGroup>
@@ -419,7 +458,7 @@ class ExportDataModal extends React.Component {
                     />
                     <KailonaButton
                         class="primary"
-                        title={t('ehr', 'Get Exported Data')}
+                        title={t('ehr', 'Export Data')}
                         onClick={this.fetchData}
                         loading={exporting}
                         disabled={exporting}

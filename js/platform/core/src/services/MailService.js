@@ -28,6 +28,7 @@ export default class MailService {
             body,
             link,
         };
+
         return await axios.post(url, data);
     }
 }

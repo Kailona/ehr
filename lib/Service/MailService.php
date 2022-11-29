@@ -110,7 +110,7 @@ class MailService {
         return new JSONResponse(array('status' => 0, 'error' => 'Success'));
     }
 
-    public function sendExportDataMail(string $patientId, string $fromName, string $to, string $body, $link) {
+    public function sendExportDataMail(string $patientId, string $fromName, string $to, string $body, string $link) {
         $fromEmail = $this->userSession->getUser()->getEMailAddress();
 
         if (empty($fromEmail)) {
@@ -123,12 +123,8 @@ class MailService {
         ]);
         $emailTemplate->setSubject($this->l10n->t('Health Data Export'));
         $emailTemplate->addHeader();
-        $emailTemplate->addHeading($this->l10n->t('This is exported data sent from %s', [$fromName]));
         $emailTemplate->addBodyText($body);
-        $emailTemplate->addBodyText($this->l10n->t('Please confirm that the following patient information match with your records before uploading health data!'));
-        $emailTemplate->addBodyText($this->l10n->t('Patient Name: %s', [$fromName]));
-        $emailTemplate->addBodyText($this->l10n->t('Patient Email: %s', [$fromEmail]));
-        $emailTemplate->addBodyButton($this->l10n->t('Upload Health Data'), $link);
+        $emailTemplate->addBodyButton($this->l10n->t('See Health Data'), $link);
         $emailTemplate->addFooter($this->l10n->t('This is an automatically sent email, please do not reply.'));
 
         $message = $this->mailer->createMessage();
