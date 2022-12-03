@@ -1,5 +1,6 @@
 import moment from 'moment';
 import { ProfileManager } from '@kailona/core';
+import convertToFloatWith2Digit from '../../../lib/twoDigitFloatConverter';
 
 function mapToFHIRBodyWeight(physicalData) {
     const fhirPatientId = ProfileManager.activePatientId;
@@ -43,7 +44,7 @@ function mapToFHIRBodyWeight(physicalData) {
             .utc()
             .toISOString(),
         valueQuantity: {
-            value: parseInt(bodyWeight, 10),
+            value: convertToFloatWith2Digit(bodyWeight),
             unit: 'kg',
             system: 'http://unitsofmeasure.org',
             code: 'kg',
@@ -100,7 +101,7 @@ function mapToFHIRBodyHeight(physicalData) {
             .utc()
             .toISOString(),
         valueQuantity: {
-            value: parseInt(bodyHeight, 10),
+            value: convertToFloatWith2Digit(bodyHeight),
             unit: 'cm',
             system: 'http://unitsofmeasure.org',
             code: 'cm',

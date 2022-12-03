@@ -8,7 +8,6 @@ import {
     DialogTitle,
     FormControl,
     Grid,
-    IconButton,
     InputAdornment as MuiInputAdornment,
     Typography,
     withStyles,
@@ -143,8 +142,9 @@ export default class PhysicalDataEditModal extends Component {
 
     getBodyHeight = (useStored = true) => {
         const { bodyHeight } = this.props.physicalData || {};
+
         if (useStored && bodyHeight) {
-            return parseInt(this.getValue(bodyHeight));
+            return this.getValue(bodyHeight);
         }
 
         return this.heightRef.current && this.heightRef.current.value;
@@ -152,8 +152,9 @@ export default class PhysicalDataEditModal extends Component {
 
     getBodyWeight = (useStored = true) => {
         const { bodyWeight } = this.props.physicalData || {};
+
         if (useStored && bodyWeight) {
-            return parseInt(this.getValue(bodyWeight));
+            return this.getValue(bodyWeight);
         }
 
         return this.weightRef.current && this.weightRef.current.value;

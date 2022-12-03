@@ -1,5 +1,6 @@
 import moment from 'moment';
 import { ProfileManager } from '@kailona/core';
+import convertToFloatWith2Digit from '../../../lib/twoDigitFloatConverter';
 
 function mapToFHIRLeukocytes(labsData) {
     const fhirPatientId = ProfileManager.activePatientId;
@@ -43,7 +44,7 @@ function mapToFHIRLeukocytes(labsData) {
             .utc()
             .toISOString(),
         valueQuantity: {
-            value: parseFloat(leukocytes),
+            value: convertToFloatWith2Digit(leukocytes),
             unit: '10^3/μl',
             system: 'http://unitsofmeasure.org',
             code: '10^3/μl',
@@ -100,7 +101,7 @@ function mapToFHIRHemoglobin(labsData) {
             .utc()
             .toISOString(),
         valueQuantity: {
-            value: parseFloat(hemoglobin),
+            value: convertToFloatWith2Digit(hemoglobin),
             unit: 'g/dl',
             system: 'http://unitsofmeasure.org',
             code: 'g/dL',
@@ -157,7 +158,7 @@ function mapToFHIRPlatelets(labsData) {
             .utc()
             .toISOString(),
         valueQuantity: {
-            value: parseFloat(platelets),
+            value: convertToFloatWith2Digit(platelets),
             unit: '10^3/μl',
             system: 'http://unitsofmeasure.org',
             code: '10^3/μl',
@@ -214,7 +215,7 @@ function mapToFHIRLymphocytes(labsData) {
             .utc()
             .toISOString(),
         valueQuantity: {
-            value: parseFloat(lymphocytes),
+            value: convertToFloatWith2Digit(lymphocytes),
             unit: '10^3/μl',
             system: 'http://unitsofmeasure.org',
             code: '10^3/μl',
@@ -271,7 +272,7 @@ function mapToFHIRNeutrophils(labsData) {
             .utc()
             .toISOString(),
         valueQuantity: {
-            value: parseFloat(neutrophils),
+            value: convertToFloatWith2Digit(neutrophils),
             unit: '10^3/μl',
             system: 'http://unitsofmeasure.org',
             code: '10^3/μl',
@@ -328,7 +329,7 @@ function mapToFHIREosinophils(labsData) {
             .utc()
             .toISOString(),
         valueQuantity: {
-            value: parseFloat(eosinophils),
+            value: convertToFloatWith2Digit(eosinophils),
             unit: '10^3/μl',
             system: 'http://unitsofmeasure.org',
             code: '10^3/μl',
@@ -385,7 +386,7 @@ function mapToFHIRBasophils(labsData) {
             .utc()
             .toISOString(),
         valueQuantity: {
-            value: parseFloat(basophils),
+            value: convertToFloatWith2Digit(basophils),
             unit: '10^3/μl',
             system: 'http://unitsofmeasure.org',
             code: '10^3/μl',
@@ -442,7 +443,7 @@ function mapToFHIRMonocytes(labsData) {
             .utc()
             .toISOString(),
         valueQuantity: {
-            value: parseFloat(monocytes),
+            value: convertToFloatWith2Digit(monocytes),
             unit: '10^3/μl',
             system: 'http://unitsofmeasure.org',
             code: '10^3/μl',
