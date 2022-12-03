@@ -84,6 +84,8 @@ OC.L10N.register(
     "Body Weight" : "Beden ağırlığı",
     "Physical Data" : "Fiziksel veri",
     "Add Physical Data" : "Fiziksel veri ekle",
+    "BodyWeight" : "BedenAğırlığı",
+    "BodyHeight" : "BedenAğırlığı",
     "BMI" : "BMI",
     "Underweight" : "Zayıf",
     "Normal/Healthy" : "Normal/sağlıklı",
