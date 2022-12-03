@@ -139,6 +139,7 @@ class Timeline extends Component {
         });
     };
 
+    // TODO: can create into utils folder also.
     getDataButtonColor = timelineDataName => {
         if (
             !this.state.activeDataNames.includes(timelineDataName) ||

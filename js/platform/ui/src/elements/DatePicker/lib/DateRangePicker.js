@@ -20,8 +20,8 @@ function DateRangePicker({
     open: openForward,
     ...props
 }) {
-    const [begin, setBegin] = useState(value[0]);
-    const [end, setEnd] = useState(value[1]);
+    const [begin, setBegin] = useState(value.begin);
+    const [end, setEnd] = useState(value.end);
     const [prevBegin, setPrevBegin] = useState(undefined);
     const [prevEnd, setPrevEnd] = useState(undefined);
     const [hasClicked, setHasClicked] = useState(false);
@@ -107,7 +107,6 @@ function DateRangePicker({
     }
 
     const formatDate = date => utils.format(date, format || utils.dateFormat);
-
     return (
         <DatePicker
             {...props}
