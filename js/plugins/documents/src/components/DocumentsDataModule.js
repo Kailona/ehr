@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import { Typography, Box, Link } from '@material-ui/core';
-import { KailonaTable } from '@kailona/ui';
+import { KailonaTable, KailonaButton } from '@kailona/ui';
 import { DocumentService, Logger } from '@kailona/core';
+import { withModal } from '../../../../platform/main/src/context/ModalContext';
 
-const logger = new Logger('DocumentsData.DocumentsDataModule');
+const logger = new Logger('Documents.DocumentsDataModule');
 
-export default class DocumentsDataModule extends Component {
+class DocumentsDataModule extends Component {
     constructor(props) {
         super(props);
 
@@ -62,6 +63,7 @@ export default class DocumentsDataModule extends Component {
         try {
             const page = this.state.page + 1;
             const offset = page * this.state.rowsPerPage;
+
             const { data: nextData } = await this.documentService.fetch(offset, this.state.rowsPerPage);
 
             const data = [...this.state.data, ...nextData];
@@ -80,6 +82,18 @@ export default class DocumentsDataModule extends Component {
         }
     };
 
+    componentDidUpdate = (prevProps, prevState) => {
+        if (prevProps.isImportDataModalOpen && !this.props.isImportDataModalOpen) {
+            this.setState(
+                {
+                    page: -1,
+                    data: [],
+                },
+                () => this.fetchFiles()
+            );
+        }
+    };
+
     render() {
         return (
             <div>
@@ -88,6 +102,13 @@ export default class DocumentsDataModule extends Component {
                         <div className="title">
                             <Typography variant="h3">{t('ehr', 'Documents')}</Typography>
                         </div>
+                        <Box className="add-new" mt={2}>
+                            <KailonaButton
+                                class="primary"
+                                title={t('ehr', 'Add Document')}
+                                onClick={() => this.props.toggleImportDataModal(true)}
+                            />
+                        </Box>
                     </div>
 
                     <Box className="content" mt={3} style={{ display: 'flex', flex: 1 }}>
@@ -105,3 +126,5 @@ export default class DocumentsDataModule extends Component {
         );
     }
 }
+
+export default withModal(DocumentsDataModule);
