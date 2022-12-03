@@ -6,6 +6,7 @@ return ['routes' => [
 
     // API Endpoints
     ['name' => 'mail#requestdata', 'url' => '/mail/requestdata', 'verb' => 'POST'],
+    ['name' => 'mail#sendExportData', 'url' => '/mail/sendExportData', 'verb' => 'POST'],
     ['name' => 'settings#admin', 'url' => '/settings/admin', 'verb' => 'POST'],
     ['name' => 'fhir#transaction', 'url' => '/fhir', 'verb' => 'POST'],
     ['name' => 'fhir#create', 'url' => '/fhir/{type}', 'verb' => 'POST'],
@@ -18,4 +19,6 @@ return ['routes' => [
     ['name' => 'fhir#search', 'url' => '/fhir/{type}', 'verb' => 'GET'],
     ['name' => 'documents#import', 'url' => '/documents/import', 'verb' => 'POST'],
     ['name' => 'documents#fetch', 'url' => '/documents/fetch', 'verb' => 'POST'],
+    ['name' => 'documents#export', 'url' => '/documents/export', 'verb' => 'POST'],
+    ['name' => 'documents#createExportLink', 'url' => '/documents/createExportLink', 'verb' => 'POST'],
 ]];

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid as MuiGrid, withStyles, Typography, Link as MuiLink } from '@material-ui/core';
+import { Grid as MuiGrid, withStyles, Link as MuiLink } from '@material-ui/core';
 import DateRangeEnum from '@kailona/core/src/enums/DateRange.enum';
 import { ProfileManager } from '@kailona/core';
 
@@ -25,15 +25,9 @@ const Link = withStyles(theme => ({
 export default class TimeRangeFilter extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            dateRange: '1M',
-        };
     }
+
     handleDateRangeChange(dateRange) {
-        this.setState({
-            dateRange,
-        });
         if (typeof this.props.handleDateRangeChange === 'function') {
             return this.props.handleDateRangeChange(dateRange);
         }
@@ -51,7 +45,7 @@ export default class TimeRangeFilter extends Component {
                     <Grid key={index} item>
                         <Link
                             href="#"
-                            className={this.state.dateRange === dateRange ? 'active' : ''}
+                            className={this.props.dateRange === dateRange ? 'active' : ''}
                             onClick={() => this.handleDateRangeChange(dateRange)}
                         >
                             {dateRange}

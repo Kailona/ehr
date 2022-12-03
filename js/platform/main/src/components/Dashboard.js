@@ -82,6 +82,13 @@ class Dashboard extends Component {
                                         name={t('ehr', 'Import Data')}
                                     />
                                 </Grid>
+                                <Grid item>
+                                    <DashboardWidget
+                                        onClick={() => this.props.toggleExportDataModal(true)}
+                                        icon="CloudDownloadOutlined"
+                                        name={t('ehr', 'Export Data')}
+                                    />
+                                </Grid>
                                 {widgets}
                             </Grid>
                         </Box>

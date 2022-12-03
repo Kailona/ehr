@@ -34,6 +34,7 @@ OC.L10N.register(
     "Age" : "年齢",
     "Height" : "身長",
     "Weight" : "重量",
+    "BMI" : "BMI",
     "Underweight" : "低体重",
     "Heart Rate" : "心拍数",
     "Body Temperature" : "体温",

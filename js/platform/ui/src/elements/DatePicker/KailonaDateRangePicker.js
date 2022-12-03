@@ -4,6 +4,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import { withStyles } from '@material-ui/core';
 import DateRangePicker from './lib/DateRangePicker';
 import './KailonaDatePicker.css';
+import moment from 'moment';
 
 const CustomDateRangePicker = withStyles({
     root: {
@@ -13,6 +14,7 @@ const CustomDateRangePicker = withStyles({
 
 const styles = {
     datepicker: {
+        width: '200px',
         '& input, & input:hover': {
             border: 'none !important',
         },
@@ -27,6 +29,7 @@ class KailonaDateRangePicker extends Component {
 
         this.state = {
             dateFormat: this.props.dateFormat || DATE_FORMAT,
+            date: this.props.date,
         };
         this.handleChange = this.handleChange.bind(this);
     }
@@ -40,6 +43,10 @@ class KailonaDateRangePicker extends Component {
     }
 
     handleChange(date) {
+        if (moment(date.end).dayOfYear() === moment(new Date()).dayOfYear()) {
+            date.end = new Date();
+        }
+
         this.setState({
             date,
         });
@@ -51,6 +58,7 @@ class KailonaDateRangePicker extends Component {
 
     render() {
         const { classes } = this.props;
+
         return (
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
                 <CustomDateRangePicker

@@ -57,6 +57,7 @@ OC.L10N.register(
     "Weight" : "Вес",
     "Body Height" : "Рост тела",
     "Body Weight" : "Вес тела",
+    "BMI" : "ИМС",
     "Underweight" : "Пониженный вес",
     "Normal/Healthy" : "Нормальный/здоровый",
     "Overweight" : "Избыточный вес",
