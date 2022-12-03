@@ -1,13 +1,18 @@
 import moment from 'moment';
 import ActivitiesService from '../services/ActivitiesService';
 
-function mapTimelineSteps(data) {
+function mapTimelineSteps(data, isDaily) {
     // Group by date: Sum the entries at the same date range interval
     const dataByDate = data.reduce((acc, item) => {
         const { date: actualDate, value } = item;
 
-        const dateRangeItemFormat = 'YYYY-MM-DD'; // group day by day
-        const date = moment(actualDate).format(dateRangeItemFormat);
+        let date = moment(actualDate);
+
+        if (!isDaily) {
+            const dateRangeItemFormat = 'YYYY-MM-DD'; // group day by day
+            date = moment(actualDate).format(dateRangeItemFormat);
+        }
+
         acc[date] = (acc[date] || 0) + value;
         return acc;
     }, {});
@@ -18,7 +23,7 @@ function mapTimelineSteps(data) {
     }));
 }
 
-export default async function getTimelineSteps(startDate, endDate) {
+export default async function getTimelineSteps(startDate, endDate, isDaily) {
     const activitiesService = new ActivitiesService();
 
     const params = [
@@ -60,5 +65,5 @@ export default async function getTimelineSteps(startDate, endDate) {
         });
     });
 
-    return mapTimelineSteps(timelineData);
+    return mapTimelineSteps(timelineData, isDaily);
 }
