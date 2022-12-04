@@ -3,11 +3,12 @@ OC.L10N.register(
     {
     "Username" : "Brukarnamn",
     "Password" : "Passord",
+    "Email" : "Epost",
+    "All" : "Alle",
+    "Cancel" : "Avbryt",
     "Destination" : "Destination",
     "Name" : "Namn",
     "Delete" : "Slett",
-    "Cancel" : "Avbryt",
-    "Email" : "Epost",
     "Edit" : "Rediger",
     "Activities" : "Aktivitetar",
     "Unknown" : "Ukjend"

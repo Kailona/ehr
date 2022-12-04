@@ -3,11 +3,11 @@ OC.L10N.register(
     {
     "Username" : "Isem n useqdac",
     "Password" : "Awal uffir",
+    "Email" : "Imayl",
+    "Cancel" : "Sefsex",
     "Name" : "Nom",
     "Delete" : "Kkes",
-    "Cancel" : "Sefsex",
     "Confirm" : "Serggeg",
-    "Email" : "Imayl",
     "Edit" : "Ẓreg",
     "Activities" : "Irmuden",
     "Unknown" : "Arussin",

@@ -3,12 +3,13 @@ OC.L10N.register(
     {
     "Username" : "ชื่อผู้ใช้",
     "Password" : "รหัสผ่าน",
+    "Email" : "อีเมล",
+    "All" : "ทั้งหมด",
+    "Cancel" : "ยกเลิก",
     "Destination" : "ปลายทาง",
     "Name" : "ชื่อ",
     "Delete" : "ลบ",
-    "Cancel" : "ยกเลิก",
     "Confirm" : "ยืนยัน",
-    "Email" : "อีเมล",
     "Edit" : "แก้ไข",
     "Activities" : "กิจกรรม",
     "Unknown" : "ไม่ทราบ"

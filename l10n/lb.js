@@ -3,11 +3,12 @@ OC.L10N.register(
     {
     "Username" : "Benotzernumm",
     "Password" : "Passwuert",
+    "Email" : "Email",
+    "All" : "All",
+    "Cancel" : "Ofbriechen",
     "Destination" : "Destination",
     "Name" : "Numm",
     "Delete" : "Läschen",
-    "Cancel" : "Ofbriechen",
-    "Email" : "Email",
     "Edit" : "Änneren",
     "Activities" : "Aktivitéiten",
     "Unknown" : "Onbekannt"

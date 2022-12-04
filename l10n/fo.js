@@ -3,9 +3,10 @@ OC.L10N.register(
     {
     "Username" : "Brúkaranavn",
     "Password" : "Loyniorð",
-    "Delete" : "Strika",
-    "Cancel" : "strika",
     "Email" : "T-post",
+    "All" : "Øll",
+    "Cancel" : "strika",
+    "Delete" : "Strika",
     "Activities" : "Virksemi"
 },
 "nplurals=2; plural=(n != 1);");

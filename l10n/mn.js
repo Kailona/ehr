@@ -3,13 +3,14 @@ OC.L10N.register(
     {
     "Username" : "Хэрэглэгчийн нэр",
     "Password" : "Нууц үг",
+    "Email" : "Цахим шуудан",
+    "All" : "бүх",
+    "Cancel" : "болиулах",
     "Destination" : "Destination",
     "Welcome" : "Тавтай морил",
     "Name" : "Нэр",
     "Delete" : "Устгах",
-    "Cancel" : "болиулах",
     "Confirm" : "Батлах",
-    "Email" : "Цахим шуудан",
     "Edit" : "засварлах",
     "Activities" : "Үйлдлүүд",
     "Unknown" : "Үл танигдах зүйл"

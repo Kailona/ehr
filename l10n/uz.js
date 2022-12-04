@@ -3,9 +3,10 @@ OC.L10N.register(
     {
     "Username" : "Username",
     "Password" : "Password",
+    "All" : "All",
+    "Cancel" : "Cancel",
     "Name" : "Name",
     "Delete" : "Delete",
-    "Cancel" : "Cancel",
     "Confirm" : "Confirm",
     "Activities" : "Activities",
     "Unknown" : "Unknown"

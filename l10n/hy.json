@@ -1,11 +1,11 @@
 { "translations": {
     "Username" : "Օգտանուն",
     "Password" : "Գաղտնաբառ",
+    "Email" : "Էլ․փոստ",
+    "Cancel" : "ընդհատել",
     "Destination" : "Destination",
     "Name" : "Անուն",
     "Delete" : "հեռացնել",
-    "Cancel" : "ընդհատել",
-    "Email" : "Էլ․փոստ",
     "Edit" : "մշակել",
     "Unknown" : "Անհայտ"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"

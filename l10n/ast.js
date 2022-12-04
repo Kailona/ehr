@@ -3,14 +3,14 @@ OC.L10N.register(
     {
     "Username" : "Nome d'usuariu",
     "Password" : "Password",
+    "Email" : "email",
+    "Cancel" : "Encaboxar",
     "File name" : "Nome del ficheru",
     "Destination" : "Destín",
     "Welcome" : "Afáyate",
     "Name" : "Nome",
     "Delete" : "Desaniciar",
-    "Cancel" : "Encaboxar",
     "Confirm" : "Confirmar",
-    "Email" : "email",
     "Edit" : "Editar",
     "Activities" : "Actividaes",
     "Unknown" : "Desconozse"

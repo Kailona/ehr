@@ -3,11 +3,11 @@ OC.L10N.register(
     {
     "Username" : "İstifadəçi adı",
     "Password" : "Şifrə",
+    "Email" : "Email",
+    "Cancel" : "Dayandır",
     "Destination" : "Destination",
     "Name" : "Ad",
     "Delete" : "Sil",
-    "Cancel" : "Dayandır",
-    "Email" : "Email",
     "Edit" : "Dəyişiklik et"
 },
 "nplurals=2; plural=(n != 1);");

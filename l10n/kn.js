@@ -3,11 +3,12 @@ OC.L10N.register(
     {
     "Username" : "﻿ಬಳಕೆಯ ಹೆಸರು",
     "Password" : "ಗುಪ್ತ ಪದ",
+    "Email" : "﻿ಇ-ಅಂಚೆ",
+    "All" : "﻿ಎಲ್ಲಾ",
+    "Cancel" : "﻿ರದ್ದು",
     "Destination" : "Destination",
     "Name" : "﻿ಹೆಸರು",
     "Delete" : "﻿ಅಳಿಸಿ",
-    "Cancel" : "﻿ರದ್ದು",
-    "Email" : "﻿ಇ-ಅಂಚೆ",
     "Edit" : "ಸಂಪಾದಿಸು"
 },
 "nplurals=2; plural=(n > 1);");
