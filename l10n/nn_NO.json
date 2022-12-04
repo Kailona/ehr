@@ -1,15 +1,14 @@
-{
-    "translations": {
-        "Username": "Brukarnamn",
-        "Password": "Passord",
-        "Destination": "Destination",
-        "Name": "Namn",
-        "Delete": "Slett",
-        "Cancel": "Avbryt",
-        "Email": "Epost",
-        "Edit": "Rediger",
-        "Activities": "Aktivitetar",
-        "Unknown": "Ukjend"
-    },
-    "pluralForm": "nplurals=2; plural=(n != 1);"
+{ "translations": {
+    "Username" : "Brukarnamn",
+    "Password" : "Passord",
+    "Email" : "Epost",
+    "All" : "Alle",
+    "Cancel" : "Avbryt",
+    "Destination" : "Destination",
+    "Name" : "Namn",
+    "Delete" : "Slett",
+    "Edit" : "Rediger",
+    "Activities" : "Aktivitetar",
+    "Unknown" : "Ukjend"
+},"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

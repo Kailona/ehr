@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
 import Chart from 'chart.js';
 import moment from 'moment';
-import { Card, Grid, Box, Typography, Link as MuiLink, withStyles, CircularProgress } from '@material-ui/core';
+import {
+    Card,
+    Grid,
+    Box,
+    Typography,
+    Link as MuiLink,
+    withStyles,
+    CircularProgress,
+    IconButton,
+} from '@material-ui/core';
 import { ModuleTypeEnum, PluginManager, Logger, getIcon, ProfileManager } from '@kailona/core';
+import { KailonaDateRangePicker } from '@kailona/ui';
 import TimeRangeFilter from './TimeRangeFilter';
 import DateRangeEnum from '@kailona/core/src/enums/DateRange.enum';
 import { withMain } from '../../context/MainContext';
+import { ZoomIn, ZoomOut } from '@material-ui/icons';
 
 const logger = new Logger('main.Timeline');
 
@@ -54,6 +65,10 @@ class Timeline extends Component {
             slotWidth: 30,
             completedPlugins: [],
             userId: this.props.userId,
+            dailyDateRange: {
+                begin: undefined,
+                end: undefined,
+            },
         };
 
         Chart.pluginService.register({
@@ -139,6 +154,7 @@ class Timeline extends Component {
         });
     };
 
+    // TODO: can create into utils folder also.
     getDataButtonColor = timelineDataName => {
         if (
             !this.state.activeDataNames.includes(timelineDataName) ||
@@ -154,6 +170,10 @@ class Timeline extends Component {
         this.setState(
             {
                 selectedDateRange: dateRangeEnumValue,
+                dailyDateRange: {
+                    begin: dateRangeEnumValue === DateRangeEnum.ONE_DAY ? new Date() : undefined,
+                    end: dateRangeEnumValue === DateRangeEnum.ONE_DAY ? new Date() : undefined,
+                },
             },
             () => {
                 this.fetchChartData();
@@ -161,7 +181,7 @@ class Timeline extends Component {
         );
     };
 
-    getChartData = (existingChartData, xLabels, name, color, mappedData) => {
+    getChartData = (existingChartData, xLabels, name, color, mappedData, isDaily) => {
         // Do not get this.state here since it is a lazy loading function
         // Keep the existing datasets
         const chartData = Object.assign(
@@ -172,7 +192,31 @@ class Timeline extends Component {
             existingChartData || {}
         );
 
-        // Use the new xLabels
+        if (isDaily && mappedData.length) {
+            // Use the new xLabels
+            for (const data of mappedData) {
+                // xLabel format: '10:00 PM' , data.x format: '10:00 PM'
+                xLabels
+                    .filter(e => e.split(' ')[1] === data.x.split(' ')[1])
+                    // Find the same time reference. Then if the value isn't in xLabel, add it.
+                    .map(element => {
+                        // element format: '10: 00 PM'
+                        const splitElement = element.split(':');
+                        const splitData = data.x.split(':');
+                        // splitted format: '['10', '00 PM']'
+                        if (
+                            splitElement[0] === splitData[0] &&
+                            splitElement[1] !== splitData[1] &&
+                            !xLabels.includes(data.x)
+                        ) {
+                            xLabels.push(data.x);
+                        }
+                    });
+            }
+
+            this.sortLabelsByHourAndMinute(xLabels);
+        }
+
         chartData.labels = xLabels;
 
         // Resize data points dynamically
@@ -204,6 +248,7 @@ class Timeline extends Component {
         };
 
         let found = false;
+
         for (let i = 0; i < chartData.datasets.length; i++) {
             if (chartData.datasets[i].label !== name) {
                 continue;
@@ -218,6 +263,44 @@ class Timeline extends Component {
         }
 
         return chartData;
+    };
+
+    sortLabelsByHourAndMinute = labels => {
+        labels.sort((a, b) => {
+            const splittedA = a.split(':');
+            const splittedB = b.split(':');
+            const timeZoneA = splittedA[1].split(' ');
+            const timeZoneB = splittedB[1].split(' ');
+
+            let hourA = splittedA[0];
+            let hourB = splittedB[0];
+
+            // Convert AM and PM to hour values for a
+            if (splittedA[0] === '12') {
+                // For 12:00 AM, need to be as 00:00 AM, For PM, 12:00 PM
+                hourA = timeZoneA[1] === 'AM' ? 0 : parseInt(splittedA[0] + 12);
+            } else if (timeZoneA[1] === 'PM') {
+                // To can sort correctly, need to add 12 hours to PM values.
+                hourA = parseInt(splittedA[0]) + 12;
+            }
+            a = moment()
+                .hour(hourA)
+                .minute(timeZoneA[0]);
+
+            // Convert AM and PM to hour values for b
+            if (splittedB[0] === '12') {
+                // For 12:00 AM, need to be as 00:00 AM, For PM, 12:00 PM
+                hourB = timeZoneB[1] === 'AM' ? 0 : parseInt(splittedB[0] + 12);
+            } else if (timeZoneB[1] === 'PM') {
+                // To can sort correctly, need to add 12 hours to PM values.
+                hourB = parseInt(splittedB[0]) + 12;
+            }
+            b = moment()
+                .hour(hourB)
+                .minute(timeZoneB[0]);
+
+            return a - b;
+        });
     };
 
     getChartOptions = (existingChartOptions, name, mappedData) => {
@@ -331,7 +414,31 @@ class Timeline extends Component {
     };
 
     getDateRangeValues = () => {
-        const { selectedDateRange } = this.state;
+        const { selectedDateRange, dailyDateRange } = this.state;
+
+        if (selectedDateRange === DateRangeEnum.ONE_DAY) {
+            if (moment(dailyDateRange.begin).dayOfYear() === moment().dayOfYear()) {
+                // return Date now
+                return {
+                    dateStart: moment()
+                        .hour(0)
+                        .minute(0)
+                        .second(0),
+                    dateEnd: moment(),
+                };
+            }
+            // If date selected from DatePicker
+            return {
+                dateStart: moment(dailyDateRange.begin)
+                    .hour(0)
+                    .minute(0)
+                    .second(0),
+                dateEnd: moment(dailyDateRange.end)
+                    .hour(23)
+                    .minute(59)
+                    .second(59),
+            };
+        }
 
         if (selectedDateRange === DateRangeEnum.ONE_MONTH) {
             return {
@@ -401,7 +508,7 @@ class Timeline extends Component {
         return xLabels;
     };
 
-    loadChart = (currentState, xLabels, dataSetList) => {
+    loadChart = (currentState, xLabels, dataSetList, isDaily) => {
         let existingChartData = currentState.chartData && Object.assign({}, currentState.chartData);
         let existingChartOptions = currentState.chartOptions && Object.assign({}, currentState.chartOptions);
 
@@ -409,7 +516,7 @@ class Timeline extends Component {
         dataSetList.forEach(({ name, color, mappedData }) => {
             allMappedDataInGroup.push(...mappedData);
 
-            const chartData = this.getChartData(existingChartData, xLabels, name, color, mappedData);
+            const chartData = this.getChartData(existingChartData, xLabels, name, color, mappedData, isDaily);
             const chartOptions = this.getChartOptions(existingChartOptions, name, allMappedDataInGroup);
 
             existingChartData = chartData && Object.assign({}, chartData);
@@ -424,6 +531,12 @@ class Timeline extends Component {
 
     fetchChartData = async () => {
         const { dateStart, dateEnd } = this.getDateRangeValues();
+
+        if (dateStart.dayOfYear() === dateEnd.dayOfYear()) {
+            this.fetchOneDayChartData();
+            return;
+        }
+
         const isYearDifferent = dateStart.year() !== dateEnd.year();
         const completedPlugins = [];
         this.setState({ completedPlugins });
@@ -433,6 +546,10 @@ class Timeline extends Component {
 
         this.timelineModules.forEach(async timelineModule => {
             const { name, color, getData, children } = timelineModule;
+
+            if (typeof getData !== 'function' && !children) {
+                return;
+            }
 
             // Fetch data using timeline data function(s)
             const dataSetList = [];
@@ -466,8 +583,6 @@ class Timeline extends Component {
 
                 const promiseResults = await Promise.all(promises);
                 dataSetList.push(...promiseResults);
-            } else {
-                return;
             }
 
             // Prevent race condition with react state since this is lazy loading for multiple timeline data
@@ -498,6 +613,120 @@ class Timeline extends Component {
                 };
             });
         });
+    };
+
+    fetchOneDayChartData = async () => {
+        const { dateStart, dateEnd } = this.getDateRangeValues();
+        const completedPlugins = [];
+        this.setState({ completedPlugins });
+
+        const xLabels = this.getXLabelsForOneDay(dateStart, dateEnd);
+        this.setSlotWidth(xLabels.length);
+
+        this.timelineModules.forEach(async timelineModule => {
+            const { name, color, getData, children } = timelineModule;
+
+            if (typeof getData !== 'function' && !children) {
+                return;
+            }
+
+            // Fetch data using timeline data function(s)
+            const dataSetList = [];
+            if (typeof getData === 'function') {
+                const data = await getData(dateStart, dateEnd, true);
+                const mappedData = this.mapTimelineDataForOneDay(data);
+
+                dataSetList.push({
+                    name,
+                    color,
+                    mappedData,
+                });
+            } else if (children) {
+                const promises = [];
+
+                children.forEach(child => {
+                    const promise = new Promise(resolve => {
+                        child.getData(dateStart, dateEnd, true).then(data => {
+                            const mappedData = this.mapTimelineDataForOneDay(data);
+
+                            resolve({
+                                name: child.name,
+                                color: child.color || color,
+                                mappedData,
+                            });
+                        });
+                    });
+
+                    promises.push(promise);
+                });
+
+                const promiseResults = await Promise.all(promises);
+                dataSetList.push(...promiseResults);
+            }
+
+            // Prevent race condition with react state since this is lazy loading for multiple timeline data
+            completedPlugins.push(name);
+            this.setState(currentState => {
+                const { chartData, chartOptions } = this.loadChart(currentState, xLabels, dataSetList, true);
+
+                // Destroy the previous chart
+                if (currentState.chart) {
+                    currentState.chart.destroy();
+                }
+
+                const chart = new Chart(this.chartRef.current, {
+                    type: 'line',
+                    data: Object.assign({}, chartData),
+                    options: Object.assign({}, chartOptions),
+                });
+
+                // Show only active ones after date range change
+                chart.data.datasets = this.filterVisibleDatasets(chartData);
+                chart.update();
+
+                return {
+                    chartData,
+                    chartOptions,
+                    chart,
+                    completedPlugins,
+                };
+            });
+        });
+    };
+
+    getXLabelsForOneDay = (dateStart, dateEnd) => {
+        const xLabels = [];
+
+        for (let date = dateStart.clone(); date.isSameOrBefore(dateEnd); date.add(1, 'hour')) {
+            xLabels.push(moment(date).format('LT'));
+        }
+
+        return xLabels;
+    };
+
+    mapTimelineDataForOneDay = data => {
+        const mappedData = [];
+
+        data.forEach(dataItem => {
+            const { date, value, values } = dataItem;
+            const x = moment(date).format('LT');
+
+            if (value) {
+                mappedData.push({
+                    x,
+                    y: value,
+                });
+            } else if (values && values.length) {
+                mappedData.push(
+                    values.map(v => ({
+                        x,
+                        y: v,
+                    }))
+                );
+            }
+        });
+
+        return mappedData;
     };
 
     setSlotWidth = labelsCount => {
@@ -611,13 +840,61 @@ class Timeline extends Component {
         });
     }
 
+    ZoomFunction = value => {
+        const { selectedDateRange } = this.state;
+        const dateRangeEnums = Object.values(DateRangeEnum);
+
+        const indexOfSelectedDateRange = dateRangeEnums.indexOf(selectedDateRange);
+        const newDateRange = dateRangeEnums[indexOfSelectedDateRange + value];
+
+        // check for the limit dates. Don't decrease after 1 Day, don't increase after all
+        if (!newDateRange) {
+            return;
+        }
+
+        this.setState(
+            {
+                selectedDateRange: newDateRange,
+                dailyDateRange: {
+                    begin: newDateRange === DateRangeEnum.ONE_DAY ? new Date() : undefined,
+                    end: newDateRange === DateRangeEnum.ONE_DAY ? new Date() : undefined,
+                },
+            },
+            () => {
+                this.fetchChartData();
+            }
+        );
+    };
+
+    setDailyDateRange = date => {
+        this.setState(
+            {
+                dailyDateRange: date,
+            },
+            () => {
+                this.fetchChartData();
+            }
+        );
+    };
+
     render() {
         return (
             <React.Fragment>
                 <Box>
-                    <Typography variant="h3" color="primary" style={{ margin: '5px 15px 0 30px' }}>
-                        {t('ehr', 'Timeline')}
-                    </Typography>
+                    <Grid container direction="row" justify="space-between" alignItems="center">
+                        <Typography variant="h3" color="primary" style={{ margin: '5px 15px 0 30px' }}>
+                            {t('ehr', 'Timeline')}
+                        </Typography>
+                        {this.state.selectedDateRange === DateRangeEnum.ONE_DAY && (
+                            <KailonaDateRangePicker
+                                id="date"
+                                date={this.state.dailyDateRange}
+                                onChange={e => this.setDailyDateRange(e)}
+                                ariaLabel={t('ehr', 'Filter by date')}
+                                maxDate={new Date()}
+                            />
+                        )}
+                    </Grid>
                 </Box>
                 <Card>
                     <Box mt={1} style={{ position: 'relative' }}>
@@ -638,8 +915,34 @@ class Timeline extends Component {
                                 <Grid item xs={8}>
                                     <Grid container>{this.getDataButtons()}</Grid>
                                 </Grid>
-                                <Grid item xs={4} style={{ textAlign: 'right' }}>
-                                    <TimeRangeFilter handleDateRangeChange={this.handleDateRangeChange} />
+                                <Grid item xs={4}>
+                                    <div
+                                        style={{
+                                            display: 'flex',
+                                            justifyContent: 'end',
+                                            alignItems: 'center',
+                                            flexDirection: 'row',
+                                        }}
+                                    >
+                                        <div>
+                                            <IconButton
+                                                style={{ border: 'none', backgroundColor: 'transparent', padding: 5 }}
+                                            >
+                                                <ZoomIn onClick={() => this.ZoomFunction(+1)} />
+                                            </IconButton>
+                                            <IconButton
+                                                style={{ border: 'none', backgroundColor: 'transparent', padding: 5 }}
+                                            >
+                                                <ZoomOut onClick={() => this.ZoomFunction(-1)} />
+                                            </IconButton>
+                                        </div>
+                                        <div>
+                                            <TimeRangeFilter
+                                                dateRange={this.state.selectedDateRange}
+                                                handleDateRangeChange={this.handleDateRangeChange}
+                                            />
+                                        </div>
+                                    </div>
                                 </Grid>
                             </Grid>
                         </Box>

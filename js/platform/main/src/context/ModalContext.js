@@ -3,6 +3,7 @@ import ImportDataModal from '../components/ImportData/ImportDataModal';
 import RequestDataModal from '../components/RequestData/RequestDataModal';
 import ProfileEditModal from '../components/ProfileHeader/ProfileEditModal';
 import ProvidersModal from '../components/Providers/ProvidersModal';
+import ExportDataModal from '../components/ExportData/ExportDataModal';
 
 const ModalContext = React.createContext();
 
@@ -15,6 +16,7 @@ class ModalProvider extends React.Component {
             isImportDataModalOpen: false,
             isRequestDataModalOpen: false,
             isProfileEditModalOpen: false,
+            isExportModalDataOpen: false,
             profileEditModalProps: {},
         };
     }
@@ -44,6 +46,12 @@ class ModalProvider extends React.Component {
         });
     };
 
+    toggleExportDataModal = open => {
+        this.setState({
+            isExportModalDataOpen: open,
+        });
+    };
+
     render() {
         return (
             <ModalContext.Provider
@@ -52,6 +60,8 @@ class ModalProvider extends React.Component {
                     toggleImportDataModal: this.toggleImportDataModal,
                     toggleRequestDataModal: this.toggleRequestDataModal,
                     toggleProfileEditModal: this.toggleProfileEditModal,
+                    toggleExportDataModal: this.toggleExportDataModal,
+                    isImportDataModalOpen: this.state.isImportDataModalOpen,
                 }}
             >
                 {this.props.children}
@@ -71,6 +81,10 @@ class ModalProvider extends React.Component {
                     isOpen={this.state.isProfileEditModalOpen}
                     onClose={() => this.toggleProfileEditModal(false)}
                     {...this.state.profileEditModalProps}
+                />
+                <ExportDataModal
+                    isOpen={this.state.isExportModalDataOpen}
+                    onClose={() => this.toggleExportDataModal(false)}
                 />
             </ModalContext.Provider>
         );

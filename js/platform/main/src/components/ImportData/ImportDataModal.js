@@ -1,15 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
-import {
-    Box,
-    Grid,
-    Typography,
-    Dialog as MuiDialog,
-    DialogTitle,
-    IconButton,
-    CircularProgress,
-} from '@material-ui/core';
+import { Box, Grid, Typography, Dialog as MuiDialog, DialogTitle, CircularProgress } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import { Logger, ModuleTypeEnum, PluginManager, getIcon } from '@kailona/core';
 import { KailonaButton, KailonaCloseButton } from '@kailona/ui';

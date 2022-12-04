@@ -1,6 +1,7 @@
 import moment from 'moment';
 import { ProfileManager } from '@kailona/core';
 import { GlucoseSystemCodes, getGlucoseSystemDisplay } from '../lib/GlucoseSystemCodes';
+import convertToFloatWith2Digit from '../../../lib/twoDigitFloatConverter';
 
 function mapToFHIRGlucose(diabetesData) {
     const fhirPatientId = ProfileManager.activePatientId;
@@ -39,7 +40,7 @@ function mapToFHIRGlucose(diabetesData) {
             .utc()
             .toISOString(),
         valueQuantity: {
-            value: Number(glucoseValue),
+            value: convertToFloatWith2Digit(glucoseValue),
             unit: 'mmol/L',
             system: 'http://unitsofmeasure.org',
             code: 'mmol/L',

@@ -1,18 +1,16 @@
-{
-    "translations": {
-        "Username": "Nome d'usuariu",
-        "Password": "Password",
-        "File name": "Nome del ficheru",
-        "Destination": "Destín",
-        "Welcome": "Afáyate",
-        "Name": "Nome",
-        "Delete": "Desaniciar",
-        "Cancel": "Encaboxar",
-        "Confirm": "Confirmar",
-        "Email": "email",
-        "Edit": "Editar",
-        "Activities": "Actividaes",
-        "Unknown": "Desconozse"
-    },
-    "pluralForm": "nplurals=2; plural=(n != 1);"
+{ "translations": {
+    "Username" : "Nome d'usuariu",
+    "Password" : "Password",
+    "Email" : "email",
+    "Cancel" : "Encaboxar",
+    "File name" : "Nome del ficheru",
+    "Destination" : "Destín",
+    "Welcome" : "Afáyate",
+    "Name" : "Nome",
+    "Delete" : "Desaniciar",
+    "Confirm" : "Confirmar",
+    "Edit" : "Editar",
+    "Activities" : "Actividaes",
+    "Unknown" : "Desconozse"
+},"pluralForm" :"nplurals=2; plural=(n != 1);"
 }

@@ -1,4 +1,7 @@
 import PhysicalDataModule from './components/PhysicalDataModule';
+import getTimelineBmi from './timelineData/getTimelineBmi';
+import getTimelineBodyHeight from './timelineData/getTimelineBodyHeight';
+import getTimelineBodyWeight from './timelineData/getTimelineBodyWeight';
 
 export default {
     id: 'plugin-physical-data',
@@ -17,4 +20,25 @@ export default {
     DataModule: {
         Component: PhysicalDataModule,
     },
+    TimelineModule: [
+        {
+            name: t('ehr', 'Physical Data'),
+            color: '#95631D',
+            icon: 'FolderSharedOutlined',
+            children: [
+                {
+                    name: t('ehr', 'BodyWeight'),
+                    getData: getTimelineBodyWeight,
+                },
+                {
+                    name: t('ehr', 'BodyHeight'),
+                    getData: getTimelineBodyHeight,
+                },
+                {
+                    name: t('ehr', 'BMI'),
+                    getData: getTimelineBmi,
+                },
+            ],
+        },
+    ],
 };

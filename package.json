@@ -79,9 +79,11 @@
         }
     },
     "lint-staged": {
-        "*.{js,css,json}": [
-            "prettier --single-quote --write",
-            "git add"
-        ]
+        "linters": {
+            "!(l10n)/**/*.{js,css,json}": [
+                "prettier --single-quote --write",
+                "git add"
+            ]
+        }
     }
 }

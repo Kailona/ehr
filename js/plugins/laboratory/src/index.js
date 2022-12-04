@@ -32,40 +32,40 @@ export default {
             icon: 'Opacity',
             children: [
                 {
-                    name: 'Leukocytes',
+                    name: t('ehr', 'Leukocytes'),
                     getData: getTimelineLeukocytes,
                 },
 
                 {
-                    name: 'Hemoglobin',
+                    name: t('ehr', 'Hemoglobin'),
                     getData: getTimelineHemoglobin,
                 },
 
                 {
-                    name: 'Platelets',
+                    name: t('ehr', 'Platelets'),
                     getData: getTimelinePlatelets,
                 },
                 {
-                    name: 'Lymphocytes',
+                    name: t('ehr', 'Lymphocytes'),
                     getData: getTimelineLymphocytes,
                 },
 
                 {
-                    name: 'Neutrophils',
+                    name: t('ehr', 'Neutrophils'),
                     getData: getTimelineNeutrophils,
                 },
                 {
-                    name: 'Eosinophils',
+                    name: t('ehr', 'Eosinophils'),
                     getData: getTimelineEosinophils,
                 },
 
                 {
-                    name: 'Basophils',
+                    name: t('ehr', 'Basophils'),
                     getData: getTimelineBasophils,
                 },
 
                 {
-                    name: 'Monocytes',
+                    name: t('ehr', 'Monocytes'),
                     getData: getTimelineMonocytes,
                 },
             ],

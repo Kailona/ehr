@@ -1,5 +1,6 @@
 import moment from 'moment';
 import { ProfileManager } from '@kailona/core';
+import convertToFloatWith2Digit from '../../../lib/twoDigitFloatConverter';
 
 export default function mapToFHIR(activitiesData) {
     const fhirPatientId = ProfileManager.activePatientId;
@@ -81,7 +82,7 @@ export default function mapToFHIR(activitiesData) {
                 text: 'Distance',
             },
             valueQuantity: {
-                value: parseFloat(distance),
+                value: convertToFloatWith2Digit(distance),
                 unit: 'm',
                 system: 'http://unitsofmeasure.org',
                 code: 'm',
@@ -102,7 +103,7 @@ export default function mapToFHIR(activitiesData) {
                 text: 'Calories',
             },
             valueQuantity: {
-                value: parseFloat(calories),
+                value: convertToFloatWith2Digit(calories),
                 unit: 'cal',
                 system: 'http://unitsofmeasure.org',
                 code: 'cal',

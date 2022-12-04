@@ -115,6 +115,12 @@ class ProfileMenu extends Component {
         this.props.toggleProvidersModal(true);
     };
 
+    onExportDataMenuItemClick = () => {
+        this.handleClose();
+
+        this.props.toggleExportDataModal(true);
+    };
+
     onPatientProfileMenuItemClick = () => {
         this.handleClose();
 
@@ -172,6 +178,10 @@ class ProfileMenu extends Component {
                     <MenuItem className="menuItem" onClick={this.onPatientProfileMenuItemClick}>
                         <span className="menuItemIcon">{getIcon('PersonOutline')}</span>
                         <span className="menuItemLabel">{t('ehr', 'Patient Profile')}</span>
+                    </MenuItem>
+                    <MenuItem className="menuItem" onClick={this.onExportDataMenuItemClick}>
+                        <span className="menuItemIcon">{getIcon('CloudDownloadOutlined')}</span>
+                        <span className="menuItemLabel">{t('ehr', 'Export Data')}</span>
                     </MenuItem>
                 </Menu>
             </div>
