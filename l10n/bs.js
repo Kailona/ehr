@@ -4,6 +4,7 @@ OC.L10N.register(
     "Username" : "Korisničko ime",
     "Password" : "Lozinka",
     "Email" : "E-pošta",
+    "All" : "Sve",
     "Cancel" : "Otkaži",
     "Destination" : "Destination",
     "Name" : "Ime",

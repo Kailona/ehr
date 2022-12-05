@@ -4,6 +4,7 @@ OC.L10N.register(
     "Username" : "İstifadəçi adı",
     "Password" : "Şifrə",
     "Email" : "Email",
+    "All" : "Hamısı",
     "Cancel" : "Dayandır",
     "Destination" : "Destination",
     "Name" : "Ad",

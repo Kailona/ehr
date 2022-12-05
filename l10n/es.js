@@ -12,6 +12,7 @@ OC.L10N.register(
     "Import Data" : "Importar datos",
     "Filter by date" : "Filtrar por fecha",
     "Email" : "Correo electrónico",
+    "All" : "Todo",
     "Cancel" : "Cancelar",
     "Select options" : "Selecciona las opciones",
     "File name" : "Nombre de archivo",

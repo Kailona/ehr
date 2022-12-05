@@ -4,6 +4,7 @@ OC.L10N.register(
     "Username" : "Enw defnyddiwr",
     "Password" : "Cyfrinair",
     "Email" : "E-bost",
+    "All" : "Popeth",
     "Cancel" : "Diddymu",
     "Destination" : "Destination",
     "Name" : "Enw",

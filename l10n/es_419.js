@@ -4,6 +4,7 @@ OC.L10N.register(
     "Username" : "Usuario",
     "Password" : "Contraseña",
     "Email" : "Correo electrónico",
+    "All" : "Todos",
     "Cancel" : "Cancelar",
     "Destination" : "Destino",
     "Welcome" : "Bienvenido",
