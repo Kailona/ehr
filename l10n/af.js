@@ -4,6 +4,7 @@ OC.L10N.register(
     "Username" : "Gebruikersnaam",
     "Password" : "Wagwoord",
     "Email" : "E-pos",
+    "All" : "Alle",
     "Cancel" : "Kanselleer",
     "File name" : "Lêernaam",
     "Destination" : "Bestemming",

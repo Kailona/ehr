@@ -4,6 +4,7 @@ OC.L10N.register(
     "Username" : "Nombre d'usuario",
     "Password" : "Clau",
     "Email" : "Correu electronico",
+    "All" : "Tot",
     "Cancel" : "Canzelar",
     "Name" : "Nombre",
     "Delete" : "Borrar",

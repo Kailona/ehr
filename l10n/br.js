@@ -4,6 +4,7 @@ OC.L10N.register(
     "Username" : "anv implijer",
     "Password" : "Ger-tremen",
     "Email" : "Postel",
+    "All" : "Pep tra",
     "Cancel" : "Arrest",
     "Destination" : "Pall",
     "Name" : "Anv",

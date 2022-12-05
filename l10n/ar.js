@@ -4,6 +4,7 @@ OC.L10N.register(
     "Username" : "اسم المستخدم",
     "Password" : "كلمة السر",
     "Email" : "البريد الإلكتروني",
+    "All" : "الكل",
     "Cancel" : "إلغاء",
     "Destination" : "الهدف",
     "Welcome" : "مرحباً",

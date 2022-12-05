@@ -12,6 +12,7 @@ OC.L10N.register(
     "Import Data" : "Daten importieren",
     "Filter by date" : "Nach Datum filtern",
     "Email" : "E-Mail",
+    "All" : "Benötigt keine Übersetzung. Hier wird nur die formelle Übersetzung verwendet (de_DE).",
     "Cancel" : "Abbrechen",
     "Select options" : "Optionen auswählen",
     "File name" : "Dateiname",

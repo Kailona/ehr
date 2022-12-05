@@ -12,6 +12,7 @@ OC.L10N.register(
     "Import Data" : "Внасяне на данни",
     "Filter by date" : "Филтриране по дата",
     "Email" : "Имейл",
+    "All" : "Всички",
     "Cancel" : "Отказ",
     "Select options" : "Избор на опции",
     "File name" : "Име на файл",

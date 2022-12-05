@@ -4,6 +4,7 @@ OC.L10N.register(
     "Username" : "Uzantnomo",
     "Password" : "Pasvorto",
     "Email" : "Retpoŝtadreso",
+    "All" : "Ĉiuj",
     "Cancel" : "Nuligi",
     "File name" : "Dosiernomo",
     "Destination" : "Destination",

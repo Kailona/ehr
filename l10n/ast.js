@@ -4,6 +4,7 @@ OC.L10N.register(
     "Username" : "Nome d'usuariu",
     "Password" : "Password",
     "Email" : "email",
+    "All" : "Too",
     "Cancel" : "Encaboxar",
     "File name" : "Nome del ficheru",
     "Destination" : "Destín",

@@ -4,6 +4,7 @@ OC.L10N.register(
     "Username" : "ব্যবহারকারী",
     "Password" : "কূটশব্দ",
     "Email" : "ইমেইল",
+    "All" : "সবাই",
     "Cancel" : "বাতির",
     "Destination" : "Destination",
     "Name" : "নাম",

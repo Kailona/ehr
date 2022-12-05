@@ -4,6 +4,7 @@ OC.L10N.register(
     "Username" : "Brugernavn",
     "Password" : "Adgangskode",
     "Email" : "E-mail",
+    "All" : "Alle",
     "Cancel" : "Annuller",
     "File name" : "Filnavn",
     "Destination" : "Destination",
