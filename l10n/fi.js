@@ -1,5 +1,5 @@
 OC.L10N.register(
-    "ehr",
+    'ehr',
     {
     "FHIR Server" : "FHIR-palvelin",
     "Username" : "Käyttäjätunnus",

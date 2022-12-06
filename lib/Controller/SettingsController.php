@@ -25,12 +25,13 @@ class SettingsController extends Controller {
     /**
      * @NoCSRFRequired
      */
-	public function admin(string $fhirBaseUrl, string $fhirUsername, string $fhirPassword) {
+	public function admin(string $fhirBaseUrl, string $fhirUsername, string $fhirPassword, string $googleFitClientId) {
         try {
             return $this->service->saveAdminSettings([
                 'fhirBaseUrl' => $fhirBaseUrl,
                 'fhirUsername' => $fhirUsername,
-                'fhirPassword' => $fhirPassword
+                'fhirPassword' => $fhirPassword,
+                'googleFitClientId' => $googleFitClientId,
             ]);
         } catch (\Exception $ex) {
             return new DataResponse([], Http::STATUS_BAD_REQUEST);

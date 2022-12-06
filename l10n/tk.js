@@ -1,5 +1,5 @@
 OC.L10N.register(
-    "ehr",
+    'ehr',
     {
     "Username" : "Ulanyjy ady",
     "Password" : "Açarsöz",

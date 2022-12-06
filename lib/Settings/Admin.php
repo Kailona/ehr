@@ -39,7 +39,8 @@ class Admin implements ISettings {
                 'settings' => [
                     'fhirBaseUrl' => $this->config->getAppValue('ehr', 'fhirBaseUrl'),
                     'fhirUsername' => $this->config->getAppValue('ehr', 'fhirUsername'),
-                    'fhirPassword' => $fhirPassword
+                    'fhirPassword' => $fhirPassword,
+                    'googleFitClientId' => $this->config->getAppValue('ehr', 'googleFitClientId')
                 ]
             ]
         );

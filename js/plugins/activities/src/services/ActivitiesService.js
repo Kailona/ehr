@@ -27,4 +27,12 @@ export default class ActivitiesService extends BaseResourceService {
         const observationToUpsert = mapToFHIR(data);
         return await super.upsertData(observationToUpsert);
     }
+
+    async upsertDataFromGoogleFit(data, params) {
+        const checkIsDataValid = await this.fetchData(params);
+        if (!!checkIsDataValid.length) return;
+
+        const observationToUpsert = mapToFHIR(data);
+        return await super.upsertData(observationToUpsert);
+    }
 }

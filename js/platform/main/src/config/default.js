@@ -2,6 +2,7 @@ import PhysicalDataPlugin from '@kailona/plugin-physical-data';
 import ActivitiesPlugin from '@kailona/plugin-activities';
 import VitalsPlugin from '@kailona/plugin-vitals';
 import DocumentsPlugin from '@kailona/plugin-documents';
+import GoogleFitProvider from '@kailona/provider-google-fit';
 import LaboratoryPlugin from '@kailona/plugin-laboratory';
 import DiabetesPlugin from '@kailona/plugin-diabetes';
 
@@ -10,6 +11,7 @@ export default {
     fontsPath: {
         nunitosans: OC.filePath('ehr', 'fonts', 'nunitosans'),
     },
+    providers: [GoogleFitProvider],
     plugins: [PhysicalDataPlugin, ActivitiesPlugin, VitalsPlugin, DocumentsPlugin, LaboratoryPlugin, DiabetesPlugin],
     settings: {
         fhirBaseUrl: OC.generateUrl('/apps/ehr/fhir'),

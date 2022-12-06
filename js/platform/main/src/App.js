@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { Logger, ConfigManager, ModuleTypeEnum, PluginManager } from '@kailona/core';
+import { Logger, ConfigManager, ModuleTypeEnum, PluginManager, ProviderManager } from '@kailona/core';
 import { ThemeProvider, Loader } from '@kailona/ui';
 import { ModalProvider } from './context/ModalContext';
 import { NotificationProvider } from './context/NotificationContext';
@@ -22,6 +22,7 @@ export default class App extends Component {
         this.state = {
             loading: true,
             error: null,
+            isUpdated: false,
         };
     }
 
@@ -35,6 +36,11 @@ export default class App extends Component {
             // Register available plugins
             ConfigManager.appConfig.plugins.forEach(plugin => {
                 PluginManager.registerPlugin(plugin);
+            });
+
+            // Register available providers
+            ConfigManager.appConfig.providers.forEach(provider => {
+                ProviderManager.registerProvider(provider);
             });
 
             this.setState({

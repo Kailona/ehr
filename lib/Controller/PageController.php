@@ -18,12 +18,16 @@ class PageController extends Controller {
 	 * @return TemplateResponse
 	 */
 	public function index() {
-
+		$googleFitClientId = \OC::$server->getConfig()->getAppValue('ehr', 'googleFitClientId');
+		
 		$response = new TemplateResponse(
 			$this->appName,
 			'index',
 			[
-				'appId' => $this->appName
+				'appId' => $this->appName,
+				'data' => [
+					'googleFitClientId' => $googleFitClientId
+				]
 			]
 		);
 

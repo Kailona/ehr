@@ -23,6 +23,7 @@ export default class AdminSettings extends Component {
                 fhirBaseUrl: null,
                 fhirUsername: null,
                 fhirPassword: null,
+                googleFitClientId: null,
             },
             settings: this.props.settings,
         };
@@ -133,6 +134,33 @@ export default class AdminSettings extends Component {
                         {this.state.saveIndicators.fhirPassword === false && (
                             <span className="icon icon-error-color" title={t('ehr', 'Failed to save changes!')} />
                         )}
+                    </div>
+                </div>
+                <div className="googleFit-settings-container">
+                    <h2>{t('ehr', 'Google Fit Synchronize')}</h2>
+                    <p>
+                        {t(
+                            'ehr',
+                            'You can synchronize your Google Fit Application data. Just need to set your client id here.'
+                        )}
+                    </p>
+
+                    <div className="fhir-server-container">
+                        <div className="fhir-server-content">
+                            <label>{t('ehr', 'Client ID')}</label>
+                            <input
+                                type="text"
+                                defaultValue={this.state.settings.googleFitClientId}
+                                placeholder="Client ID"
+                                onBlur={e => this.onChange('googleFitClientId', e.currentTarget.value)}
+                            />
+                            {this.state.saveIndicators.googleFitClientId === true && (
+                                <span className="icon icon-checkmark-color" />
+                            )}
+                            {this.state.saveIndicators.googleFitClientId === false && (
+                                <span className="icon icon-error-color" title={t('ehr', 'Failed to save changes!')} />
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>

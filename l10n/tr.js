@@ -1,5 +1,5 @@
 OC.L10N.register(
-    "ehr",
+    'ehr',
     {
     "Failed to initialize! Please contact your administrator!" : "Hazırlanamadı! Lütfen yöneticiniz ile görüşün!",
     "FHIR Server" : "FHIR sunucusu",

@@ -3,7 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { Box, Menu, MenuItem as MuiMenuItem, IconButton, Divider } from '@material-ui/core';
 import { ArrowDropDown } from '@material-ui/icons';
 import { styled } from '@material-ui/core/styles';
-import { ModuleTypeEnum, PluginManager, getIcon, ProfileManager } from '@kailona/core';
+import { ModuleTypeEnum, PluginManager, getIcon, ProfileManager, ProviderManager } from '@kailona/core';
 import { withModal } from '../../context/ModalContext';
 
 const DropdownIcon = styled(IconButton)({
@@ -77,6 +77,24 @@ class ProfileMenu extends Component {
         });
     };
 
+    getProviderItem = () => {
+        const providersEnabled = ProviderManager.providersEnabled();
+        if (!providersEnabled) {
+            return null;
+        }
+
+        const providerMainPage = {
+            name: t('ehr', 'Providers'),
+        };
+
+        return (
+            <MenuItem className="menuItem" onClick={this.onProvidersMenuItemClick}>
+                <span className="menuItemIcon">{getIcon('Sync')}</span>
+                <span className="menuItemLabel">{providerMainPage.name}</span>
+            </MenuItem>
+        );
+    };
+
     onMenuItemClick = path => {
         this.handleClose();
 
@@ -89,6 +107,12 @@ class ProfileMenu extends Component {
         this.handleClose();
 
         this.props.toggleImportDataModal(true);
+    };
+
+    onProvidersMenuItemClick = () => {
+        this.handleClose();
+
+        this.props.toggleProvidersModal(true);
     };
 
     onExportDataMenuItemClick = () => {
@@ -115,6 +139,7 @@ class ProfileMenu extends Component {
 
     render() {
         const menuItems = this.getMenuItems();
+        const providerItem = this.getProviderItem();
         const { anchorEl } = this.state;
         const open = Boolean(anchorEl);
 
@@ -145,6 +170,7 @@ class ProfileMenu extends Component {
                     <Box m={1}>
                         <Divider />
                     </Box>
+                    {providerItem}
                     <MenuItem className="menuItem" onClick={this.onImportDataMenuItemClick}>
                         <span className="menuItemIcon">{getIcon('CloudUploadOutlined')}</span>
                         <span className="menuItemLabel">{t('ehr', 'Import Data')}</span>
