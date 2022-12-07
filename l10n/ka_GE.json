@@ -1,6 +1,7 @@
 { "translations": {
     "Username" : "მომხმარებელი",
     "Password" : "პაროლი",
+    "Client ID" : "კლიენტის ID",
     "Email" : "ელ-ფოსტა",
     "All" : "ყველა",
     "Cancel" : "უარყოფა",

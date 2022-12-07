@@ -1,5 +1,5 @@
 OC.L10N.register(
-    'ehr',
+    "ehr",
     {
     "Username" : "ឈ្មោះ​អ្នកប្រើ",
     "Password" : "ពាក្យសម្ងាត់",

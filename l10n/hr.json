@@ -5,6 +5,7 @@
     "Base URL" : "Osnovni URL",
     "Username" : "Korisničko ime",
     "Password" : "Zaporka",
+    "Client ID" : "ID klijenta",
     "Shortcuts" : "Prečaci",
     "Request Data from Provider" : "Zatraži podatke od davatelja usluge",
     "Import Data" : "Uvezi podatke",

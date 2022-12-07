@@ -1,8 +1,9 @@
 OC.L10N.register(
-    'ehr',
+    "ehr",
     {
     "Username" : "Benotzernumm",
     "Password" : "Passwuert",
+    "Client ID" : "Client ID",
     "Email" : "Email",
     "All" : "All",
     "Cancel" : "Ofbriechen",

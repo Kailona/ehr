@@ -1,6 +1,7 @@
 { "translations": {
     "Username" : "Username",
     "Password" : "Kata sandi",
+    "Client ID" : "ID Klien",
     "Email" : "Surel",
     "All" : "Semua",
     "Cancel" : "Membatalkan",

@@ -1,6 +1,7 @@
 { "translations": {
     "Username" : "Корисничко име",
     "Password" : "Лозинка",
+    "Client ID" : "Клиент ИД",
     "Email" : "Е-пошта",
     "All" : "Сите",
     "Cancel" : "Откажи",

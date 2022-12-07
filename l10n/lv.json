@@ -1,6 +1,7 @@
 { "translations": {
     "Username" : "Lietotājvārds",
     "Password" : "Parole",
+    "Client ID" : "Klienta ID",
     "Email" : "E-pasts",
     "All" : "Visi",
     "Cancel" : "Atcelt",

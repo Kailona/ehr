@@ -1,5 +1,5 @@
 OC.L10N.register(
-    'ehr',
+    "ehr",
     {
     "Failed to initialize! Please contact your administrator!" : "초기 설정에 실패하였습니다. 관리자에게 문의하십시오!",
     "FHIR Server" : "FHIR 서버",
@@ -7,6 +7,7 @@ OC.L10N.register(
     "Base URL" : "기본 URL",
     "Username" : "사용자 이름",
     "Password" : "암호",
+    "Client ID" : "클라이언트 ID",
     "Shortcuts" : "단축키",
     "Request Data from Provider" : "공급자로부터 데이터 요청",
     "Import Data" : "데이터 가져오기",

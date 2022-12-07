@@ -5,6 +5,7 @@
     "Base URL" : "URL base",
     "Username" : "Nombre de usuario",
     "Password" : "Contraseña",
+    "Client ID" : "ID de cliente",
     "Shortcuts" : "Atajos",
     "Request Data from Provider" : "Solicitar datos del proveedor",
     "Import Data" : "Importar datos",

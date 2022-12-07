@@ -5,6 +5,7 @@
     "Base URL" : "URL de base",
     "Username" : "Nom d'utilisateur",
     "Password" : "Mot de passe",
+    "Client ID" : "ID Client",
     "Shortcuts" : "Raccourcis",
     "Request Data from Provider" : "Demander vos données à un fournisseur",
     "Import Data" : "Importer des données",

@@ -1,8 +1,9 @@
 OC.L10N.register(
-    'ehr',
+    "ehr",
     {
     "Username" : "Tên đăng nhập",
     "Password" : "Mật khẩu",
+    "Client ID" : "ID khách hàng",
     "Email" : "Thư điện tử",
     "All" : "Tất cả",
     "Cancel" : "Hủy",

@@ -1,6 +1,7 @@
 { "translations": {
     "Username" : "Kasutajanimi",
     "Password" : "Parool",
+    "Client ID" : "Kliendi ID",
     "Email" : "Epost",
     "All" : "Kõik",
     "Cancel" : "Loobu",

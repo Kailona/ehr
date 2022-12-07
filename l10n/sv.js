@@ -1,8 +1,9 @@
 OC.L10N.register(
-    'ehr',
+    "ehr",
     {
     "Username" : "Användarnamn",
     "Password" : "Lösenord",
+    "Client ID" : "Klient-ID",
     "Shortcuts" : "Genvägar",
     "Import Data" : "Importera data",
     "Filter by date" : "Filtrera efter datum",

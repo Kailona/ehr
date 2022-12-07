@@ -1,8 +1,9 @@
 OC.L10N.register(
-    'ehr',
+    "ehr",
     {
     "Username" : "Notandanafn",
     "Password" : "Lykilorð",
+    "Client ID" : "Biðlaraauðkenni",
     "Email" : "Tölvupóstur",
     "All" : "Allt",
     "Cancel" : "Hætta við",

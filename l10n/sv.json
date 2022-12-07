@@ -1,6 +1,7 @@
 { "translations": {
     "Username" : "Användarnamn",
     "Password" : "Lösenord",
+    "Client ID" : "Klient-ID",
     "Shortcuts" : "Genvägar",
     "Import Data" : "Importera data",
     "Filter by date" : "Filtrera efter datum",

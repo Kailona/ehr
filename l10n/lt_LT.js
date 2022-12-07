@@ -1,10 +1,11 @@
 OC.L10N.register(
-    'ehr',
+    "ehr",
     {
     "Failed to initialize! Please contact your administrator!" : "Nepavyko inicijuoti! Susisiekite su savo administratoriumi!",
     "FHIR Server" : "FHIR serveris",
     "Username" : "Naudotojo vardas",
     "Password" : "Slaptažodis",
+    "Client ID" : "Kliento ID",
     "Import Data" : "Importuoti duomenis",
     "Email" : "El. paštas",
     "All" : "Visos",

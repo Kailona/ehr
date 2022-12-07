@@ -1,6 +1,7 @@
 { "translations": {
     "Username" : "Nume utilizator",
     "Password" : "Parolă",
+    "Client ID" : "ID client",
     "Email" : "E-mail",
     "All" : "Toate ",
     "Cancel" : "Anulare",

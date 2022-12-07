@@ -1,8 +1,9 @@
 OC.L10N.register(
-    'ehr',
+    "ehr",
     {
     "Username" : "Brukernavn",
     "Password" : "PassordP",
+    "Client ID" : "Klient-ID",
     "Shortcuts" : "Snarveier",
     "Email" : "E-post",
     "All" : "Alle",

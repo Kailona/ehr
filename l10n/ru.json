@@ -5,6 +5,7 @@
     "Base URL" : "Основной URL",
     "Username" : "Имя пользователя",
     "Password" : "Пароль",
+    "Client ID" : "ID клиента",
     "Shortcuts" : "Горячие клавиши",
     "Request Data from Provider" : "Запрос данных у провайдера",
     "Import Data" : "Импорт данных",

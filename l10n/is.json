@@ -1,6 +1,7 @@
 { "translations": {
     "Username" : "Notandanafn",
     "Password" : "Lykilorð",
+    "Client ID" : "Biðlaraauðkenni",
     "Email" : "Tölvupóstur",
     "All" : "Allt",
     "Cancel" : "Hætta við",

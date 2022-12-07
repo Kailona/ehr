@@ -1,8 +1,9 @@
 OC.L10N.register(
-    'ehr',
+    "ehr",
     {
     "Username" : "نام کاربری",
     "Password" : "کلمه عبور",
+    "Client ID" : "شناسه مشتری",
     "Email" : "رایانامه",
     "All" : "همه",
     "Cancel" : "لغو",

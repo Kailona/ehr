@@ -1,8 +1,9 @@
 OC.L10N.register(
-    'ehr',
+    "ehr",
     {
     "Username" : "Корисничко име",
     "Password" : "Лозинка",
+    "Client ID" : "ID клијента",
     "Email" : "Е-пошта",
     "All" : "Све",
     "Cancel" : "Поништи",

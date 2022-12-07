@@ -1,8 +1,9 @@
 OC.L10N.register(
-    'ehr',
+    "ehr",
     {
     "Username" : "მომხმარებელი",
     "Password" : "პაროლი",
+    "Client ID" : "კლიენტის ID",
     "Email" : "ელ-ფოსტა",
     "All" : "ყველა",
     "Cancel" : "უარყოფა",

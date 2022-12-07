@@ -1,5 +1,5 @@
 OC.L10N.register(
-    'ehr',
+    "ehr",
     {
     "Failed to initialize! Please contact your administrator!" : "Az előkészítés sikertelen. Lépjen kapcsolatba a rendszergazdával.",
     "FHIR Server" : "FHIR-kiszolgáló",
@@ -7,6 +7,7 @@ OC.L10N.register(
     "Base URL" : "Alap URL",
     "Username" : "Felhasználónév",
     "Password" : "Jelszó",
+    "Client ID" : "Kliensazonosító",
     "Shortcuts" : "Gyorsbillentyűk",
     "Request Data from Provider" : "Adatok kérése a szolgáltatótól",
     "Import Data" : "Adatok importálása",

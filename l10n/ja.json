@@ -1,6 +1,7 @@
 { "translations": {
     "Username" : "ユーザー名",
     "Password" : "パスワード",
+    "Client ID" : "クライアント ID",
     "Email" : "メール",
     "All" : "すべて",
     "Cancel" : "キャンセル",

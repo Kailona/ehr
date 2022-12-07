@@ -5,6 +5,7 @@
     "Base URL" : "Alap URL",
     "Username" : "Felhasználónév",
     "Password" : "Jelszó",
+    "Client ID" : "Kliensazonosító",
     "Shortcuts" : "Gyorsbillentyűk",
     "Request Data from Provider" : "Adatok kérése a szolgáltatótól",
     "Import Data" : "Adatok importálása",

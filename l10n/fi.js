@@ -1,9 +1,10 @@
 OC.L10N.register(
-    'ehr',
+    "ehr",
     {
     "FHIR Server" : "FHIR-palvelin",
     "Username" : "Käyttäjätunnus",
     "Password" : "Salasana",
+    "Client ID" : "Asiakas-ID",
     "Filter by date" : "Suodata päivämäärän mukaan",
     "Email" : "Sähköposti",
     "All" : "Kaikki",

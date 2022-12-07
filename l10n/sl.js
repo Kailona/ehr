@@ -1,5 +1,5 @@
 OC.L10N.register(
-    'ehr',
+    "ehr",
     {
     "Failed to initialize! Please contact your administrator!" : "Začenjanje je spodletelo! Stopite v stik s skrbnikom sistema.",
     "FHIR Server" : "Strežnik FHIR",
@@ -7,6 +7,7 @@ OC.L10N.register(
     "Base URL" : "Osnovni naslov URL",
     "Username" : "Uporabniško ime",
     "Password" : "Geslo",
+    "Client ID" : "ID Odjemalca",
     "Shortcuts" : "Bližnjice",
     "Request Data from Provider" : "Pridobi podatke ponudnika",
     "Import Data" : "Uvozi podatke",

@@ -1,8 +1,9 @@
 OC.L10N.register(
-    'ehr',
+    "ehr",
     {
     "Username" : "Username",
     "Password" : "Fjalëkalim",
+    "Client ID" : "ID klienti",
     "Email" : "Emaili",
     "All" : "Të gjithë",
     "Cancel" : "Anullo",

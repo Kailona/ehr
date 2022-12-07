@@ -3,6 +3,7 @@
     "FHIR Server" : "FHIR serveris",
     "Username" : "Naudotojo vardas",
     "Password" : "Slaptažodis",
+    "Client ID" : "Kliento ID",
     "Import Data" : "Importuoti duomenis",
     "Email" : "El. paštas",
     "All" : "Visos",

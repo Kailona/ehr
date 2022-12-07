@@ -1,5 +1,5 @@
 OC.L10N.register(
-    'ehr',
+    "ehr",
     {
     "Failed to initialize! Please contact your administrator!" : "Αποτυχία αρχικοποίησης! Επικοινωνήστε με τον διαχειριστή σας!",
     "FHIR Server" : "Διακομιστής FHIR",
@@ -7,6 +7,7 @@ OC.L10N.register(
     "Base URL" : "Βασική URL",
     "Username" : "Όνομα χρήστη",
     "Password" : "Συνθηματικό",
+    "Client ID" : "Αναγνωριστικό πελάτη",
     "Shortcuts" : "Συντομεύσεις",
     "Request Data from Provider" : "Αίτηση δεδομένων από τον πάροχο",
     "Import Data" : "Εισαγωγή δεδομένων",

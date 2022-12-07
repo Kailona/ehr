@@ -1,5 +1,5 @@
 OC.L10N.register(
-    'ehr',
+    "ehr",
     {
     "Failed to initialize! Please contact your administrator!" : "¡Fallo al inicializar! Por favor, contacta con tu administrador.",
     "FHIR Server" : "Servidor FHIR",
@@ -7,6 +7,7 @@ OC.L10N.register(
     "Base URL" : "URL base",
     "Username" : "Nombre de usuario",
     "Password" : "Contraseña",
+    "Client ID" : "ID de cliente",
     "Shortcuts" : "Atajos",
     "Request Data from Provider" : "Solicitar datos del proveedor",
     "Import Data" : "Importar datos",
