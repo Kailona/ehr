@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Username" : "İstifadəçi adı",
     "Password" : "Şifrə",
+    "Client ID" : "Müştəri İD-s",
     "Email" : "Email",
     "All" : "Hamısı",
     "Cancel" : "Dayandır",

@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Username" : "Nome d'usuariu",
     "Password" : "Password",
+    "Client ID" : "ID de veceru",
     "Email" : "email",
     "All" : "Too",
     "Cancel" : "Encaboxar",

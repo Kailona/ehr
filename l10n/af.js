@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Username" : "Gebruikersnaam",
     "Password" : "Wagwoord",
+    "Client ID" : "Kliënt-ID",
     "Email" : "E-pos",
     "All" : "Alle",
     "Cancel" : "Kanselleer",
