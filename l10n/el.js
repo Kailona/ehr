@@ -48,6 +48,7 @@ OC.L10N.register(
     "Edit" : "Επεξεργασία",
     "Activities" : "Δραστηριότητες",
     "Add New Activity" : "Προσθήκη νέας δραστηριότητας",
+    "Filter by" : "Φιτράρισμα κατά",
     "Update Activity" : "Ενημέρωση δραστηριότητας",
     "Start Date/Time" : "Ημερομηνία/Ώρα έναρξης",
     "End Date/Time" : "Ημερομηνία/Ώρα λήξης",
