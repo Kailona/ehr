@@ -109,7 +109,7 @@ OC.L10N.register(
     "Please confirm that the following patient information match with your records before sending health data!" : "Merci de confirmer que les informations du patient correspondent avec vos informations avant d’envoyer les données de santé!",
     "Patient Name: %s" : "Nom du patient : %s",
     "Patient Email: %s" : "E-mail du patient : %s",
-    "Upload Health Data" : "Envoyer la données de santé",
+    "Upload Health Data" : "Téléverser les données de santé",
     "This is an automatically sent email, please do not reply." : "Ceci est un message automatique, merci de ne pas y répondre.",
     "EHR (Electronic Health Records)" : "DSE (Dossier de Santé Électronique)",
     "EHR" : "DSE",
