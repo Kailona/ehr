@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Username" : "Brugernavn",
     "Password" : "Adgangskode",
+    "Client ID" : "Klient-ID",
     "Email" : "E-mail",
     "All" : "Alle",
     "Cancel" : "Annuller",

@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Username" : "anv implijer",
     "Password" : "Ger-tremen",
+    "Client ID" : "ID kliant",
     "Email" : "Postel",
     "All" : "Pep tra",
     "Cancel" : "Arrest",

@@ -7,6 +7,7 @@ OC.L10N.register(
     "Base URL" : "URL base",
     "Username" : "Nom d'usuari",
     "Password" : "Contrasenya",
+    "Client ID" : "ID del client",
     "Shortcuts" : "Enllaços directes",
     "Request Data from Provider" : "Sol·licitar dades al proveïdor",
     "Import Data" : "Importació de dades",

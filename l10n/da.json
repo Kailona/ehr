@@ -1,6 +1,7 @@
 { "translations": {
     "Username" : "Brugernavn",
     "Password" : "Adgangskode",
+    "Client ID" : "Klient-ID",
     "Email" : "E-mail",
     "All" : "Alle",
     "Cancel" : "Annuller",
