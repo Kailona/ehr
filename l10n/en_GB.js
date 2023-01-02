@@ -17,6 +17,7 @@ OC.L10N.register(
     "Please select at least one" : "Please select at least one",
     "Need to enter an email address" : "Need to enter an email address",
     "Data not found on the related date to export." : "Export data not found on the related date.",
+    "${fromName}" : "${fromName}",
     "Data has been successfully exported and sent to related email." : "Data has been successfully exported and sent to related email.",
     "An error occurred while exporting data. Please contact your administrator." : "An error occurred while exporting data. Please contact your administrator.",
     "Filter by date" : "Filter by date",
