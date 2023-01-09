@@ -312,7 +312,8 @@ class ExportDataModal extends React.Component {
                 });
             }
 
-            // Export files in nextcloud folder and create a link inside of export function. At then, send the link via email.
+            // Export files in nextcloud folder and
+            // create a link inside of export function. At then, send the link via email.
             await this.documentService.export(files).then(async result => {
                 const to = this.toEmailRef.current.value;
                 const patientId = ProfileManager.activePatientId;

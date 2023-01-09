@@ -141,7 +141,8 @@ export default class AdminSettings extends Component {
                     <p>
                         {t(
                             'ehr',
-                            'You can synchronize your Google Fit Application data. Just need to set your client id here.'
+                            'You can synchronize your Google Fit Application data. ' +
+                                'Just need to set your client id here.'
                         )}
                     </p>
 
