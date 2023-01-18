@@ -36,8 +36,8 @@ export default class DiabetesDataModule extends Component {
                     key: 'glucoseValue',
                 },
                 {
-                    label: t('ehr', 'Glucose Measurer'),
-                    key: 'glucoseMeasurer',
+                    label: t('ehr', 'Glucose Meter'),
+                    key: 'glucoseMeter',
                 },
             ],
             diabetesToUpdate: null,

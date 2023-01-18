@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { GlucoseSystemCodes, getGlucoseMeasurer } from '../lib/GlucoseSystemCodes';
+import { GlucoseSystemCodes, getGlucoseMeter } from '../lib/GlucoseSystemCodes';
 
 function _getValueQuantity(observation) {
     const { valueQuantity } = observation;
@@ -40,7 +40,7 @@ function _mapObservations(observations) {
         diabetes = Object.assign({}, diabetes, {
             glucoseValue: _getValueQuantity(observation),
             glucoseSystem,
-            glucoseMeasurer: getGlucoseMeasurer(glucoseSystem),
+            glucoseMeter: getGlucoseMeter(glucoseSystem),
         });
     });
 

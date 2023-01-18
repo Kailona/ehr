@@ -14,7 +14,7 @@ import {
     withStyles,
 } from '@material-ui/core';
 import { KailonaButton, KailonaDateTimePicker, KailonaTextField, KailonaSelect, KailonaCloseButton } from '@kailona/ui';
-import { getGlucoseMeasurer, GlucoseSystemCodes } from '../lib/GlucoseSystemCodes';
+import { getGlucoseMeter, GlucoseSystemCodes } from '../lib/GlucoseSystemCodes';
 
 const GridColumn = withStyles({
     root: {
@@ -81,9 +81,9 @@ export default class DiabetesEditModal extends Component {
         this.glucoseValueRef = React.createRef();
         this.glucoseSystemRef = React.createRef();
 
-        this.glucoseMeasurerOptions = Object.keys(GlucoseSystemCodes).map(k => ({
+        this.glucoseMeterOptions = Object.keys(GlucoseSystemCodes).map(k => ({
             value: k,
-            text: getGlucoseMeasurer(k),
+            text: getGlucoseMeter(k),
         }));
     }
 
@@ -177,11 +177,11 @@ export default class DiabetesEditModal extends Component {
                                 <FormControl>
                                     <KailonaSelect
                                         inputRef={this.glucoseSystemRef}
-                                        id="glucoseMeasurer"
+                                        id="glucoseMeter"
                                         className="kailona-MuiTextField"
-                                        name={t('ehr', 'Glucose Measurer')}
+                                        name={t('ehr', 'Glucose Meter')}
                                         defaultValue={glucoseSystem}
-                                        options={this.glucoseMeasurerOptions}
+                                        options={this.glucoseMeterOptions}
                                         onChange={this.onInputDataChanged}
                                     />
                                 </FormControl>

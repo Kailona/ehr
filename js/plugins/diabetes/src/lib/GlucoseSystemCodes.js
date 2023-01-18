@@ -4,7 +4,7 @@ const GlucoseSystemCodes = {
     bodyFluid: 'http://loinc.org|14745-4', // Continuous Glucose Monitoring (CGM) Device
 };
 
-function getGlucoseMeasurer(glucoseSystem) {
+function getGlucoseMeter(glucoseSystem) {
     switch (glucoseSystem) {
         case 'blood':
             return t('ehr', 'Laboratory');
@@ -30,4 +30,4 @@ function getGlucoseSystemDisplay(glucoseSystem) {
     }
 }
 
-export { GlucoseSystemCodes, getGlucoseMeasurer, getGlucoseSystemDisplay };
+export { GlucoseSystemCodes, getGlucoseMeter, getGlucoseSystemDisplay };
