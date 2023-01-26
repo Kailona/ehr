@@ -3,7 +3,7 @@ OC.L10N.register(
     {
     "Username" : "ชื่อผู้ใช้",
     "Password" : "รหัสผ่าน",
-    "Client ID" : "Client ID",
+    "Client ID" : "รหัสไคลเอ็นต์",
     "Email" : "อีเมล",
     "All" : "ทั้งหมด",
     "Cancel" : "ยกเลิก",
