@@ -840,7 +840,7 @@ class Timeline extends Component {
         });
     }
 
-    ZoomFunction = value => {
+    zoomFunction = value => {
         const { selectedDateRange } = this.state;
         const dateRangeEnums = Object.values(DateRangeEnum);
 
@@ -928,12 +928,12 @@ class Timeline extends Component {
                                             <IconButton
                                                 style={{ border: 'none', backgroundColor: 'transparent', padding: 5 }}
                                             >
-                                                <ZoomIn onClick={() => this.ZoomFunction(+1)} />
+                                                <ZoomIn onClick={() => this.zoomFunction(-1)} />
                                             </IconButton>
                                             <IconButton
                                                 style={{ border: 'none', backgroundColor: 'transparent', padding: 5 }}
                                             >
-                                                <ZoomOut onClick={() => this.ZoomFunction(-1)} />
+                                                <ZoomOut onClick={() => this.zoomFunction(+1)} />
                                             </IconButton>
                                         </div>
                                         <div>
