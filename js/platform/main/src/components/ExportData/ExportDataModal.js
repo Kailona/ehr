@@ -335,7 +335,7 @@ class ExportDataModal extends React.Component {
 
             this.props.showNotification({
                 severity: 'success',
-                message: t('ehr', 'Data has been successfully exported and sent to related email.'),
+                message: t('ehr', 'Data has been successfully exported. An email will be sent with a link to kailona.')
             });
         } catch (error) {
             logger.error('Failed to export data', error);
