@@ -47,8 +47,11 @@ const theme = createMuiTheme({
         green: {
             main: '#008000',
             light: '#00FF00'
-        }
-
+        },
+        red: {
+            main: '#FF0000',
+            light: '#E75353'
+        },
     },
     spacing: 8,
     typography: {

@@ -140,7 +140,6 @@ export default class DiabetesDataModule extends Component {
         }
 
         let backgroundColor = theme.palette.white.main;
-
         diabetesData.map((item) => {
             const { glucoseValue } = item;
             if (!glucoseValue) {
@@ -149,9 +148,15 @@ export default class DiabetesDataModule extends Component {
 
             const values = glucoseValue.split(' ');
             const value = +values[0];
-            
+
             if (value >= 3.9 && value <= 5.5) {
-                backgroundColor = theme.palette.green.main
+                item.backgroundColor = theme.palette.green.main;
+                return;
+            }
+
+            if (value >= 6.9375) {
+                item.backgroundColor = theme.palette.red.light;
+                return;
             }
 
             item.backgroundColor = backgroundColor;
