@@ -6,6 +6,7 @@ import { Delete, Edit } from '@material-ui/icons';
 import DiabetesEditModal from './DiabetesEditModal';
 import DiabetesDataService from '../services/DiabetesDataService';
 import { Logger, ProfileManager } from '@kailona/core';
+import theme from '../../../../platform/ui/src/theme';
 
 const logger = new Logger('Diabetes.DiabetesDataModule');
 
@@ -98,6 +99,7 @@ export default class DiabetesDataModule extends Component {
             ];
 
             const diabetesItems = await this.diabetesDataService.fetchData(params);
+            this.setBackGroundColor(diabetesItems);
 
             this.setState({
                 loading: false,
@@ -119,6 +121,8 @@ export default class DiabetesDataModule extends Component {
 
         try {
             const nextDiabetesItems = await this.diabetesDataService.fetchNextData(this.state.data);
+            this.setBackGroundColor(nextDiabetesItems);
+
             const allDiabetesItems = [...this.state.data, ...nextDiabetesItems];
 
             this.setState({
@@ -129,6 +133,30 @@ export default class DiabetesDataModule extends Component {
             logger.error(error);
         }
     };
+
+    setBackGroundColor = (diabetesData) => {
+        if (!diabetesData && !diabetesData.length) {
+            return;
+        }
+
+        let backgroundColor = theme.palette.white.main;
+
+        diabetesData.map((item) => {
+            const { glucoseValue } = item;
+            if (!glucoseValue) {
+                return;
+            }
+
+            const values = glucoseValue.split(' ');
+            const value = +values[0];
+            
+            if (value >= 3.9 && value <= 5.5) {
+                backgroundColor = theme.palette.green.main
+            }
+
+            item.backgroundColor = backgroundColor;
+        })
+    }
 
     componentDidMount = () => {
         const { patientDob } = ProfileManager.activeProfile;

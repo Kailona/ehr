@@ -21,6 +21,7 @@ import {
 } from '@material-ui/core';
 import { MoreHoriz } from '@material-ui/icons';
 import { Loader } from '@kailona/ui';
+import theme from '../../theme';
 
 const HeadCell = withStyles(theme => ({
     root: {
@@ -90,6 +91,7 @@ export default class KailonaTable extends Component {
         const isWayPointAvailable =
             !this.state.loading && this.props.data.length === this.props.rowsPerPage * (this.props.page + 1);
         const tableHeight = (this.props.rowsPerPage + 1) * rowHeight;
+        const defaultBackGroundColor = theme.palette.white.main;
 
         return (
             <Paper style={{ height: `${tableHeight}px`, width: '100%', position: 'relative', overflowY: 'auto' }}>
@@ -105,7 +107,7 @@ export default class KailonaTable extends Component {
                         </TableHead>
                         <TableBody>
                             {this.props.data.map(record => (
-                                <TableRow>
+                                <TableRow style={{ backgroundColor: record.backgroundColor || defaultBackGroundColor }}>
                                     {this.props.columns.map((col, index) => {
                                         let displayText = record[col.key];
 
