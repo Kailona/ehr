@@ -32,6 +32,10 @@ export default class DiabetesDataModule extends Component {
                     key: 'date',
                 },
                 {
+                    label: t('ehr', 'Time of blood draw'),
+                    key: 'timeOfBloodDraw',
+                },
+                {
                     label: t('ehr', 'Glucose Value'),
                     key: 'glucoseValue',
                 },
@@ -156,6 +160,7 @@ export default class DiabetesDataModule extends Component {
             savingDiabetes: true,
         });
 
+        debugger
         try {
             await this.diabetesDataService.upsertData(diabetes);
 

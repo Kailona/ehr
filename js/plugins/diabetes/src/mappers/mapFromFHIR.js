@@ -34,6 +34,12 @@ function _mapObservations(observations) {
                 .local()
                 .format(`ddd, MMM D, YYYY, HH:mm`);
 
+        diabetes.bloodDrawDate =
+            diabetes.bloodDrawDate ||
+            moment(observation.valueDateTime)
+                .local()
+                .format(`ddd, MMM D, YYYY, HH:mm`);
+
         // Glucose
         const glucoseSystem = Object.keys(GlucoseSystemCodes).find(k => GlucoseSystemCodes[k] === `${system}|${code}`);
         diabetes.idMap.glucose = observation.id;

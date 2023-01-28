@@ -9,7 +9,7 @@ function mapToFHIRGlucose(diabetesData) {
         throw new Error('Invalid patient id');
     }
 
-    const { date, glucoseValue, glucoseSystem = 'blood' } = diabetesData;
+    const { date, bloodDrawDate, glucoseValue, glucoseSystem = 'blood' } = diabetesData;
     if (!date || !glucoseValue) {
         return null;
     }
@@ -45,6 +45,9 @@ function mapToFHIRGlucose(diabetesData) {
             system: 'http://unitsofmeasure.org',
             code: 'mmol/L',
         },
+        valueDateTime: moment(bloodDrawDate || date)
+            .utc()
+            .toISOString()
     };
 
     const { idMap } = diabetesData;

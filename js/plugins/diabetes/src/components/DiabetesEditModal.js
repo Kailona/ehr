@@ -78,6 +78,7 @@ export default class DiabetesEditModal extends Component {
         };
 
         this.dateRef = React.createRef();
+        this.bloodDrawDateRef = React.createRef();
         this.glucoseValueRef = React.createRef();
         this.glucoseSystemRef = React.createRef();
 
@@ -96,6 +97,7 @@ export default class DiabetesEditModal extends Component {
     onConfirm = () => {
         const newDiabetes = {
             date: moment(this.dateRef.current.value),
+            bloodDrawDate: moment(this.bloodDrawDateRef.current.value),
             glucoseValue: this.glucoseValueRef.current.value,
             glucoseSystem: this.glucoseSystemRef.current.value,
         };
@@ -123,7 +125,7 @@ export default class DiabetesEditModal extends Component {
     };
 
     render() {
-        const { date, glucoseValue, glucoseSystem = 'capillaryBloodByGlucometer' } = this.props.diabetes || {};
+        const { date, bloodDrawDate, glucoseValue, glucoseSystem = 'capillaryBloodByGlucometer' } = this.props.diabetes || {};
 
         return (
             <Dialog open={this.state.isOpen} onClose={() => this.toggleModal(false)}>
@@ -141,16 +143,35 @@ export default class DiabetesEditModal extends Component {
                 </DialogTitle>
                 <DialogContent>
                     <form>
-                        <Grid container>
-                            <FormControl>
+                        <Grid container alignItems='center' style={{ display: 'flex' }}>
+                            <Grid item xs={5}>
+                                <Typography variant="body1">
+                                    {t('ehr', 'Date')}
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={7}>
                                 <KailonaDateTimePicker
                                     inputRef={this.dateRef}
                                     id="date"
                                     ariaLabel={t('ehr', 'Select Date/Time')}
-                                    defaultValue={date ? moment(date) : null}
-                                    onChange={this.onInputDataChanged}
+                                    defaultValue={date ? moment(date) : moment(new Date())}
                                 />
-                            </FormControl>
+                            </Grid>
+                        </Grid>
+                        <Grid container alignItems='center' style={{ display: 'flex' }}>
+                            <Grid item xs={5}>
+                                <Typography variant="body1">
+                                    {t('ehr', 'Time of blood draw')}
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={7}>
+                                <KailonaDateTimePicker
+                                    inputRef={this.bloodDrawDateRef}
+                                    id="timeOfBloodDraw"
+                                    ariaLabel={t('ehr', 'Select Blooad Draw Date/Time')}
+                                    defaultValue={bloodDrawDate ? moment(bloodDrawDate) : moment(new Date())}
+                                />
+                            </Grid>
                         </Grid>
                         <Grid container alignItems="center">
                             <GridColumn className="left-column" item>
@@ -169,7 +190,6 @@ export default class DiabetesEditModal extends Component {
                                                 </InputAdornment>
                                             ),
                                         }}
-                                        onChange={this.onInputDataChanged}
                                     />
                                 </FormControl>
                             </GridColumn>
@@ -182,7 +202,6 @@ export default class DiabetesEditModal extends Component {
                                         name={t('ehr', 'Glucose Measurer')}
                                         defaultValue={glucoseSystem}
                                         options={this.glucoseMeasurerOptions}
-                                        onChange={this.onInputDataChanged}
                                     />
                                 </FormControl>
                             </GridColumn>
@@ -204,7 +223,7 @@ export default class DiabetesEditModal extends Component {
                         loading={this.props.savingDiabetes}
                     />
                 </DialogActions>
-            </Dialog>
+            </Dialog >
         );
     }
 }
