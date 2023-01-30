@@ -8,6 +8,7 @@ OC.L10N.register(
     "All" : "ทั้งหมด",
     "Cancel" : "ยกเลิก",
     "Destination" : "ปลายทาง",
+    "Welcome" : "ยินดีต้อนรับ",
     "Name" : "ชื่อ",
     "Delete" : "ลบ",
     "Confirm" : "ยืนยัน",
