@@ -13,9 +13,15 @@ OC.L10N.register(
     "Name" : "Nombre",
     "Delete" : "Eliminar",
     "Confirm" : "Confirmar",
+    "Distance" : "Distancia",
     "Edit" : "Editar",
     "Activities" : "Actividades",
     "Unknown" : "Desconocido",
+    "Age" : "Edad",
+    "Height" : "Altura",
+    "Weight" : "Peso",
+    "BMI" : "IMC",
+    "Underweight" : "Peso inferior al normal",
     "This is an automatically sent email, please do not reply." : "Este es un correo enviado automáticamente, por favor no lo contestes. "
 },
 "nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");
