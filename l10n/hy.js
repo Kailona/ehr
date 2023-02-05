@@ -9,6 +9,7 @@ OC.L10N.register(
     "Name" : "Անուն",
     "Delete" : "հեռացնել",
     "Edit" : "մշակել",
+    "Activities" : "Ակտիվություններ",
     "Unknown" : "Անհայտ"
 },
 "nplurals=2; plural=(n != 1);");
