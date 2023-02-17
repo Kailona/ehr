@@ -33,7 +33,7 @@ OC.L10N.register(
     "Confirm" : "Potrdi",
     "I hereby request all data from my last exam to be uploaded to my personal health data archive on the Kailona platform. Please comply within the 30 day period as required by the Berufsordnung der Ärztekammern, §630g Abs. 2  BGB and Art. 15  Abs. 3 DSGVO." : "S tem sporočilom potrjujem oddajo zahtevka za prenos podatkov mojega zadnjega pregleda pri zdravniku v moj osebni karton zdravstvenih podatkov, zbranem v okolju Kailona. Izvedbo prenosa podatkov pričakujem v zakonsko določenem roku. ",
     "Unable to send health data request. Please set your email address in user profile settings!" : "Pošiljanje zahtevka na prenos podatkov je spodletelo. Med nastavitvami je treba vpisati ustrezen elektronski naslov.",
-    "Health data request was successfully sent" : "Zahtevek za prenos zdravstvenih pdoatkov je uspešno poslan.",
+    "Health data request was successfully sent" : "Zahtevek za prenos zdravstvenih podatkov je uspešno poslan.",
     "Unable to send health data request. Please contact your administrator!" : "Pošiljanje zahtevka na prenos podatkov je spodletelo. Stopite v stik s skrbnikom sistema.",
     "Request Data" : "Zahtevek za dostop do podatkov",
     "Message to Provider:" : "Sporočilo za ponudnika:",
