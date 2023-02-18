@@ -18,6 +18,7 @@ OC.L10N.register(
     "Distance" : "Удаљеност",
     "Edit" : "Измени",
     "Activities" : "Активности",
+    "Filter by" : "Филтрирај по",
     "Unknown" : "Непознато",
     "Documents" : "Документи",
     "This is an automatically sent email, please do not reply." : "Ово је аутоматски генерисана порука, не одговарајте на њу."
