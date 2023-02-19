@@ -7,6 +7,7 @@ OC.L10N.register(
     "Email" : "Електронна пошта",
     "All" : "Всі",
     "Cancel" : "Скасувати",
+    "Select options" : "Виберіть",
     "File name" : "Ім'я файлу",
     "Destination" : "Пункт призначення",
     "Welcome" : "Вітання",

@@ -16,6 +16,7 @@ OC.L10N.register(
     "Calories" : "Lượng calo",
     "Edit" : "Chỉnh sửa",
     "Activities" : "Hoạt động",
+    "Filter by" : "Lọc theo",
     "Unknown" : "Không xác định",
     "Documents" : "Tài liệu"
 },
