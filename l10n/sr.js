@@ -16,6 +16,7 @@ OC.L10N.register(
     "Timeline" : "Временска оса",
     "Select Date" : "Одаберите датум",
     "Distance" : "Удаљеност",
+    "Calories" : "Калорије",
     "Edit" : "Измени",
     "Activities" : "Активности",
     "Filter by" : "Филтрирај по",
