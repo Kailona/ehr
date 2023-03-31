@@ -21,6 +21,7 @@ OC.L10N.register(
     "Edit" : "編集",
     "Activities" : "アクティビティ",
     "Add New Activity" : "新しいアクティビティを追加",
+    "Filter by" : "フィルター",
     "Update Activity" : "アクティビティを更新",
     "Start Date/Time" : "開始日時",
     "Unknown" : "不明",
