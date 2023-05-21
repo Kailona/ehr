@@ -7,7 +7,7 @@ OC.L10N.register(
     "Base URL" : "基础 URL",
     "Username" : "用户名",
     "Password" : "密码",
-    "Client ID" : "客户端 ID",
+    "Client ID" : "客户端ID",
     "Shortcuts" : "快捷方式",
     "Request Data from Provider" : "从供应商请求数据",
     "Import Data" : "导入数据",
