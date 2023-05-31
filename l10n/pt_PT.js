@@ -19,6 +19,7 @@ OC.L10N.register(
     "Calories" : "Calorias",
     "Edit" : "Editar",
     "Activities" : "Atividades",
+    "Filter by" : "Filtrar por",
     "Unknown" : "Desconhecido",
     "Documents" : "Documentos",
     "Age" : "Idade",
