@@ -17,6 +17,7 @@ OC.L10N.register(
     "Cancel" : "Cancelar",
     "File name" : "Nome de ficheiro",
     "Destination" : "Destino",
+    "Drag and Drop Files" : "Arrastrar e soltar ficheiros",
     "Patient Profile" : "Perfil do paciente",
     "Welcome" : "Benvido",
     "New Patient Profile" : "Perfil do novo paciente",
