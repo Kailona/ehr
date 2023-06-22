@@ -7,6 +7,7 @@ OC.L10N.register(
     "Email" : "البريد الإلكتروني",
     "All" : "الكل",
     "Cancel" : "إلغاء",
+    "File name" : "اسم ملف",
     "Destination" : "الهدف",
     "Welcome" : "مرحباً",
     "Name" : "الاسم",
