@@ -9,6 +9,7 @@ OC.L10N.register(
     "Cancel" : "Kanselleer",
     "File name" : "Lêernaam",
     "Destination" : "Bestemming",
+    "Welcome" : "Welkom",
     "Name" : "Naam",
     "Delete" : "Skrap",
     "Confirm" : "Bevestig",
