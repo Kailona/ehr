@@ -118,7 +118,7 @@ OC.L10N.register(
     "Diastolic" : "Diastolique",
     "Health Data Request" : "Requête de données de santé",
     "This is health data request from %s" : "Ceci est une requête de données de santé de %s",
-    "Please confirm that the following patient information match with your records before sending health data!" : "Merci de confirmer que les informations du patient correspondent avec vos informations avant d’envoyer les données de santé!",
+    "Please confirm that the following patient information match with your records before sending health data!" : "Merci de confirmer que les informations du patient correspondent avec vos informations avant d’envoyer les données de santé !",
     "Patient Name: %s" : "Nom du patient : %s",
     "Patient Email: %s" : "E-mail du patient : %s",
     "Upload Health Data" : "Téléverser les données de santé",
