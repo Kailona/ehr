@@ -14,7 +14,9 @@ OC.L10N.register(
     "Confirm" : "Confirmar",
     "Edit" : "Editar",
     "Activities" : "Actividades",
+    "Filter by" : "Filtrar por",
     "Unknown" : "Desconocido",
+    "Documents" : "Documentos",
     "This is an automatically sent email, please do not reply." : "Este es un correo enviado automáticamente, por favor no lo contestes. "
 },
 "nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;");
