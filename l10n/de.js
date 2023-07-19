@@ -122,7 +122,7 @@ OC.L10N.register(
     "Patient Name: %s" : "Name des Patienten: %s",
     "Patient Email: %s" : "E-Mail des Patienten: %s",
     "Upload Health Data" : "Gesundheitsdaten hochladen",
-    "This is an automatically sent email, please do not reply." : "Dies ist eine automatisch gesendete E-Mail, bitte antworte nicht auf diese.",
+    "This is an automatically sent email, please do not reply." : "Dies ist eine automatisch gesendete E-Mail. Bitte antworte nicht auf diese E-Mail.",
     "Health Data Export" : "Export der Gesundheitsdaten",
     "See Health Data" : "Gesundheitsdaten anzeigen",
     "EHR (Electronic Health Records)" : "eGA (elektronische Gesundheitsakte)",
