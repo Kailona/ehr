@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Username" : "Хэрэглэгчийн нэр",
     "Password" : "Нууц үг",
+    "Client ID" : "Хэрэглэгчийн ID",
     "Email" : "Цахим шуудан",
     "All" : "бүх",
     "Cancel" : "болиулах",
