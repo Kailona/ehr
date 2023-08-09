@@ -7,6 +7,7 @@ OC.L10N.register(
     "Email" : "Thư điện tử",
     "All" : "Tất cả",
     "Cancel" : "Hủy",
+    "File name" : "Tên tệp tin",
     "Destination" : "Destination",
     "Welcome" : "Chào mừng",
     "Name" : "Tên",
