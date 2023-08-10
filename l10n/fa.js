@@ -7,6 +7,7 @@ OC.L10N.register(
     "Email" : "رایانامه",
     "All" : "همه",
     "Cancel" : "لغو",
+    "File name" : "نام فایل",
     "Destination" : "مقصد",
     "Welcome" : "خوش آمدی",
     "Name" : "نام",
