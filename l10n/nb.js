@@ -27,6 +27,8 @@ OC.L10N.register(
     "Age" : "Alder",
     "Height" : "Høyde",
     "Weight" : "Vekt",
+    "BMI" : "BMI",
+    "Underweight" : "Undervektig",
     "This is an automatically sent email, please do not reply." : "Dette er en automatisk sendt e-post, ikke svar."
 },
 "nplurals=2; plural=(n != 1);");
