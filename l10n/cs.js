@@ -63,7 +63,7 @@ OC.L10N.register(
     "Filter by" : "Filtrovat podle",
     "Update Activity" : "Aktualizovat aktivitu",
     "Start Date/Time" : "Datum/čas zahájení",
-    "End Date/Time" : "Ukončit datum/čas",
+    "End Date/Time" : "Datum/čas konce",
     "Glucose Value" : "Hodnota glukózy",
     "Glucose Measurer" : "Měřič glukózy",
     "Diabetes" : "Cukrovka",
