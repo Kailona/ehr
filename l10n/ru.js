@@ -11,6 +11,8 @@ OC.L10N.register(
     "Shortcuts" : "Горячие клавиши",
     "Request Data from Provider" : "Запрос данных у провайдера",
     "Import Data" : "Импорт данных",
+    "Need to enter an email address" : "Необходимо ввести адрес эл. почты",
+    "Data has been successfully exported and sent to related email." : "Данные были успешно экспортированы и отправлены на соответствующий адрес эл. почты.",
     "Filter by date" : "Фильтр по дате:",
     "Email" : "Электронная почта",
     "All" : "Все",
