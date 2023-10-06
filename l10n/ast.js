@@ -12,6 +12,7 @@ OC.L10N.register(
     "Steps" : "Pasos",
     "Distance" : "Distancia",
     "Calories" : "Caloríes",
+    "Activities" : "Actividaes",
     "Glucose Value" : "Valor de la glucosa",
     "Diabetes" : "Diabetes",
     "Glucose" : "Glucosa",
