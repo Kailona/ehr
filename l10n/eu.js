@@ -121,7 +121,7 @@ OC.L10N.register(
     "Please confirm that the following patient information match with your records before sending health data!" : "Ziurtatu ondorengo pazientearen informazioak bat egiten duela zure erregistroekin, osasun datuak bidali aurretik!",
     "Patient Name: %s" : "Pazientearen izena: %s",
     "Patient Email: %s" : "Pazientearen e-posta: %s",
-    "Upload Health Data" : "Kargatu osasun datuak",
+    "Upload Health Data" : "Igo osasun datuak",
     "This is an automatically sent email, please do not reply." : "Hau automatikoki bidalitako e-posta bat da, ez erantzun mesedez.",
     "Health Data Export" : "Osasun datuen esportazioa",
     "See Health Data" : "Ikusi osasun datuak",
