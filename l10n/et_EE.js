@@ -11,6 +11,7 @@ OC.L10N.register(
     "Name" : "Nimi",
     "Delete" : "Kustuta",
     "Confirm" : "Kinnita",
+    "Timeline" : "Ajajoon",
     "Edit" : "Redigeeri",
     "Activities" : "Tegevused",
     "Unknown" : "Teadmata",
