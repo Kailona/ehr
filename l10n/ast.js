@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Password" : "Contraseña",
     "An error occurred while exporting data. Please contact your administrator." : "Prodúxose un error mentanto s'esportaben los datos. Ponte en contautu cola alministración.",
+    "Cancel" : "Encaboxar",
     "Destination" : "Destín",
     "Data has been successfully imported" : "Los datos importáronse correutamente",
     "An error occurred while importing data. Please contact your administrator." : "Prodúxose un error mentanto s'importaben los datos. Ponte en contautu cola alministración.",
@@ -12,6 +13,7 @@ OC.L10N.register(
     "Steps" : "Pasos",
     "Distance" : "Distancia",
     "Calories" : "Caloríes",
+    "Edit" : "Editar",
     "Activities" : "Actividaes",
     "Glucose Value" : "Valor de la glucosa",
     "Diabetes" : "Diabetes",
