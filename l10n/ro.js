@@ -7,6 +7,7 @@ OC.L10N.register(
     "Email" : "E-mail",
     "All" : "Toate ",
     "Cancel" : "Anulare",
+    "File name" : "Nume fișier",
     "Destination" : "Destination",
     "Welcome" : "Bun venit",
     "Name" : "Nume",
