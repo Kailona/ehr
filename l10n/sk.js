@@ -11,6 +11,7 @@ OC.L10N.register(
     "Shortcuts" : "Skratky",
     "Request Data from Provider" : "Vyžiadať Dáta od Poskytovateľa",
     "Import Data" : "Importovať Dáta",
+    "Data has been successfully exported and sent to related email." : "Údaje boli úspešne exportované a odoslané na príslušný e-mail.",
     "Filter by date" : "Filtrovať podľa dátumu",
     "Email" : "Email",
     "All" : "Všetko",
