@@ -13,6 +13,8 @@ OC.L10N.register(
     "Name" : "Nume",
     "Delete" : "Șterge",
     "Confirm" : "Confirmă",
+    "Timeline" : "Cronologie",
+    "Select Date" : "Selectează data",
     "Edit" : "Editează",
     "Activities" : "Activități",
     "Unknown" : "Necunoscut",

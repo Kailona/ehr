@@ -14,6 +14,7 @@ OC.L10N.register(
     "Confirm" : "Konfirmi",
     "Timeline" : "Kronologio",
     "Select Date" : "Elekti daton",
+    "Calories" : "Kalorioj",
     "Edit" : "Modifi",
     "Activities" : "Aktivaĵoj",
     "Unknown" : "Nekonata",
