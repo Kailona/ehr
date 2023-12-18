@@ -8,7 +8,7 @@ OC.L10N.register(
     "Username" : "Kullanıcı adı",
     "Password" : "Parola",
     "Google Fit Synchronize" : "Google Fit eşitlemesi",
-    "You can synchronize your Google Fit Application data. Just need to set your client id here." : "Google Fit uygulaması verilerini eşitleyebilirsiniz. Bunun için buraya itemci kodunuzu yazmanz yeterlidir.",
+    "You can synchronize your Google Fit Application data. Just need to set your client id here." : "Google Fit uygulaması verilerini eşitleyebilirsiniz. Bunun için buraya istemci kimliğinizi yazmanz yeterlidir.",
     "Client ID" : "İstemci kimliği",
     "Shortcuts" : "Kısa yollar",
     "Request Data from Provider" : "Hizmet sağlayıcıdan veri isteği",
