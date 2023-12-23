@@ -9,6 +9,7 @@ OC.L10N.register(
     "An error occurred while importing data. Please contact your administrator." : "Prodúxose un error mentanto s'importaben los datos. Ponte en contautu cola alministración.",
     "Name" : "Nome",
     "Delete" : "Desaniciar",
+    "Confirm" : "Confirmar",
     "Providers" : "Fornidores",
     "Steps" : "Pasos",
     "Distance" : "Distancia",

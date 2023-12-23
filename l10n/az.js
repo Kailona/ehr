@@ -10,6 +10,7 @@ OC.L10N.register(
     "Destination" : "Destination",
     "Name" : "Ad",
     "Delete" : "Sil",
+    "Confirm" : "Təsdiq edin",
     "Edit" : "Dəyişiklik et"
 },
 "nplurals=2; plural=(n != 1);");
