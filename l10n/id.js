@@ -16,6 +16,7 @@ OC.L10N.register(
     "Edit" : "Sunting",
     "Activities" : "Aktivitas",
     "Filter by" : "Saring berdasarkan",
-    "Unknown" : "Tidak diketahui"
+    "Unknown" : "Tidak diketahui",
+    "Documents" : "Dokumen"
 },
 "nplurals=1; plural=0;");
