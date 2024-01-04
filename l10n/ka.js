@@ -1,0 +1,25 @@
+OC.L10N.register(
+    "ehr",
+    {
+    "Username" : "Username",
+    "Password" : "პაროლი",
+    "Client ID" : "Client ID",
+    "Email" : "Email",
+    "All" : "All",
+    "Cancel" : "Cancel",
+    "File name" : "File name",
+    "Destination" : "Destination",
+    "Welcome" : "Welcome",
+    "Name" : "Name",
+    "Delete" : "Delete",
+    "Confirm" : "Confirm",
+    "Timeline" : "Timeline",
+    "Select Date" : "Select Date",
+    "Distance" : "Distance",
+    "Edit" : "Edit",
+    "Activities" : "Activities",
+    "Unknown" : "Unknown",
+    "Documents" : "Documents",
+    "This is an automatically sent email, please do not reply." : "This is an automatically sent email, please do not reply."
+},
+"nplurals=2; plural=(n!=1);");
