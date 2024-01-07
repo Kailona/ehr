@@ -13,6 +13,7 @@ OC.L10N.register(
     "Name" : "Tên",
     "Delete" : "Xóa",
     "Confirm" : "Xác nhận",
+    "Timeline" : "Dòng thời gian",
     "Select Date" : "Chọn ngày",
     "Calories" : "Lượng calo",
     "Edit" : "Chỉnh sửa",
