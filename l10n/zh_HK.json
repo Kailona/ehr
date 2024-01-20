@@ -15,6 +15,7 @@
     "Please select at least one" : "請至少選擇一項",
     "Need to enter an email address" : "需要輸入電郵地址",
     "Data not found on the related date to export." : "在相關日期未找到導出數據。",
+    "${fromName}" : "${fromName}",
     "Data has been successfully exported and sent to related email." : "數據已成功導出並發送至相關電郵地址。",
     "An error occurred while exporting data. Please contact your administrator." : "導出數據時出錯。請聯絡您的管理員。",
     "Filter by date" : "按日期過濾",
