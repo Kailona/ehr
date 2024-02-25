@@ -31,7 +31,7 @@ OC.L10N.register(
     "Delete" : "Cantzella",
     "Confirm" : "Cunfirma",
     "I hereby request all data from my last exam to be uploaded to my personal health data archive on the Kailona platform. Please comply within the 30 day period as required by the Berufsordnung der Ärztekammern, §630g Abs. 2  BGB and Art. 15  Abs. 3 DSGVO." : "Rechedo chi totu is datos de s'ùrtimu esàmene siant carrigados in s'archìviu personale in sa prataforma Kailona. Rispeta su tempus de 30 dies comente rechertu dae Berufsordnung der Ärztekammern, §630g Abs. 2  BGB and Art. 15  Abs. 3 DSGVO.",
-    "Unable to send health data request. Please set your email address in user profile settings!" : "Impossìbile a imbiare sa rechesta de is datos sanitàrios. Imposta s'indiritzu de posta eletrònica in is impostatziones de su profilu!",
+    "Unable to send health data request. Please set your email address in user profile settings!" : "Impossìbile a imbiare sa rechesta de is datos sanitàrios. Cunfigura s'indiritzu de posta eletrònica in sa cunfiguratzione de su profilu!",
     "Health data request was successfully sent" : "Rechesta de is datos sanitàrios imbiada",
     "Unable to send health data request. Please contact your administrator!" : "Impossìbile a imbiare sa rechesta de is datos sanitàrios. Cuntata s'amministratzione!",
     "Request Data" : "Rechede datos",
