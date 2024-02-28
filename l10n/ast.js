@@ -4,6 +4,7 @@ OC.L10N.register(
     "Password" : "Contraseña",
     "An error occurred while exporting data. Please contact your administrator." : "Prodúxose un error mentanto s'esportaben los datos. Ponte en contautu cola alministración.",
     "Cancel" : "Encaboxar",
+    "File name" : "Nome del ficheru",
     "Destination" : "Destín",
     "Data has been successfully imported" : "Los datos importáronse correutamente",
     "An error occurred while importing data. Please contact your administrator." : "Prodúxose un error mentanto s'importaben los datos. Ponte en contautu cola alministración.",
