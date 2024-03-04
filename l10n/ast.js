@@ -21,6 +21,7 @@ OC.L10N.register(
     "An error occurred while importing data. Please contact your administrator." : "Prodúxose un error mentanto s'importaben los datos. Ponte en contautu cola alministración.",
     "Add More Files" : "Amestar más ficheros",
     "Drag and Drop Files" : "Arrastra y suelta ficheros",
+    "Welcome" : "Afáyate",
     "Please update your health information for data accuracy." : "Anueva la to información de salú pa la precisión de los datos.",
     "Enjoy your private health platform, Kailona!" : "Esfruta la to plataforma de salú privada, Kailona",
     "Name" : "Nome",
