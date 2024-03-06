@@ -4,6 +4,7 @@ OC.L10N.register(
     "Base URL" : "URL base",
     "Password" : "Contraseña",
     "Google Fit Synchronize" : "Sincronización de Google FIt",
+    "Client ID" : "ID de veceru",
     "Shortcuts" : "Atayos",
     "Import Data" : "Importar datos",
     "Export Data" : "Esportar los datos",
