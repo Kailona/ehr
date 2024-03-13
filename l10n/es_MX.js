@@ -20,6 +20,7 @@ OC.L10N.register(
     "Add New Activity" : "Añadir nueva actividad",
     "Update Activity" : "Actualizar actividad",
     "Unknown" : "Desconocido",
+    "Documents" : "Documentos",
     "Age" : "Edad",
     "Height" : "Altura",
     "Weight" : "Peso",
