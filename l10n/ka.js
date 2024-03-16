@@ -18,6 +18,7 @@ OC.L10N.register(
     "Distance" : "Distance",
     "Edit" : "Edit",
     "Activities" : "Activities",
+    "Filter by" : "გაფილტრვა...",
     "Unknown" : "Unknown",
     "Documents" : "Documents",
     "This is an automatically sent email, please do not reply." : "This is an automatically sent email, please do not reply."
