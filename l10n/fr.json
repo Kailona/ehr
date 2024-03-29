@@ -3,7 +3,7 @@
     "FHIR Server" : "Serveur FHIR",
     "FHIR is required to store health data. Basic HTTP Authentication is currently supported." : "FHIR est nécessaire pour stocker les informations de santé. L'authentification de base HTTP est actuellement possible.",
     "Base URL" : "URL de base",
-    "Username" : "Nom d'utilisateur",
+    "Username" : "Nom d’utilisateur",
     "Password" : "Mot de passe",
     "Google Fit Synchronize" : "Synchronisation Google Fit",
     "You can synchronize your Google Fit Application data. Just need to set your client id here." : "Vous pouvez synchroniser les données de votre application Google Fit. Il vous suffit de configurer votre ID client ici.",
