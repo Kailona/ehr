@@ -39,6 +39,7 @@ OC.L10N.register(
     "Calories" : "Caloríes",
     "Edit" : "Editar",
     "Activities" : "Actividaes",
+    "Filter by" : "Peñerar por",
     "Glucose Value" : "Valor de la glucosa",
     "Glucose Measurer" : "Mididor de glucosa",
     "Diabetes" : "Diabetes",
