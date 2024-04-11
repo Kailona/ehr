@@ -2,6 +2,7 @@ OC.L10N.register(
     "ehr",
     {
     "Base URL" : "URL base",
+    "Username" : "Nome d'usuariu",
     "Password" : "Contraseña",
     "Google Fit Synchronize" : "Sincronización de Google FIt",
     "Client ID" : "ID de veceru",
