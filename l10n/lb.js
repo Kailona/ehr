@@ -10,6 +10,7 @@ OC.L10N.register(
     "Destination" : "Destination",
     "Name" : "Numm",
     "Delete" : "Läschen",
+    "Confirm" : "Konfirméieren",
     "Edit" : "Änneren",
     "Activities" : "Aktivitéiten",
     "Unknown" : "Onbekannt"
