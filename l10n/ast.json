@@ -69,6 +69,7 @@
     "Obese" : "Obesidá",
     "Body Temperature" : "Temperatura corporal",
     "Oxygen Saturation (SpO2)" : "Saturación d'oxíxenu (SpO2)",
-    "Blood Pressure" : "Presión sanguinea"
+    "Blood Pressure" : "Presión sanguinea",
+    "This is an automatically sent email, please do not reply." : "Esti mensaxe unvióse automáticamente, nun respuendas."
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
 }
