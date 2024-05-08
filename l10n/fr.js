@@ -43,7 +43,7 @@ OC.L10N.register(
     "Providers" : "Fournisseurs",
     "Synchronizing" : "Synchronisation",
     "I hereby request all data from my last exam to be uploaded to my personal health data archive on the Kailona platform. Please comply within the 30 day period as required by the Berufsordnung der Ärztekammern, §630g Abs. 2  BGB and Art. 15  Abs. 3 DSGVO." : "Je demande par la présente que toutes les données de mon dernier examen soient téléchargées dans mes archives personnelles de données de santé sur la plateforme Kailona. Veuillez respecter le délai de 30 jours prévu par la Berufsordnung der Ärztekammern, §630g Abs. 2 BGB et art. 15 Abs. 3 DSGVO.",
-    "Unable to send health data request. Please set your email address in user profile settings!" : "Impossible d'envoyer la demande de données de santé. Veuillez définir votre adresse électronique dans les paramètres du profil d'utilisateur !",
+    "Unable to send health data request. Please set your email address in user profile settings!" : "Impossible d'envoyer la demande de données de santé. Veuillez définir votre adresse e-mail dans les paramètres du profil d'utilisateur !",
     "Health data request was successfully sent" : "Requête de données de santé envoyée",
     "Unable to send health data request. Please contact your administrator!" : "Impossible d'envoyer la requête de données de santé. Contactez votre administrateur !",
     "Request Data" : "Demander les données",
