@@ -4,7 +4,7 @@ OC.L10N.register(
     "Failed to initialize! Please contact your administrator!" : "初始化失敗！請聯絡您的管理員！",
     "FHIR Server" : "FHIR 伺服器",
     "FHIR is required to store health data. Basic HTTP Authentication is currently supported." : "需要FHIR來存儲健康數據。當前支持基本HTTP身分驗證。",
-    "Base URL" : "基本 URL",
+    "Base URL" : "基礎 URL",
     "Username" : "用戶名",
     "Password" : "密碼",
     "Google Fit Synchronize" : "Google Fit 同步",
