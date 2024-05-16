@@ -64,6 +64,7 @@ OC.L10N.register(
     "CGM (Continuous Glucose Monitoring) Device" : "Urządzenie CGM (ciągłe monitorowanie stężenia glukozy)",
     "Unknown" : "Nieznany",
     "Documents" : "Dokumenty",
+    "Add Document" : "Dodaj dokument",
     "Leukocytes" : "Leukocyty",
     "Hemoglobin" : "Hemoglobina",
     "Platelets" : "Płytki krwi",
