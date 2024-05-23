@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Username" : "Ainm úsáideora",
     "Password" : "Pasfhocal",
+    "All" : "Gach",
     "Cancel" : "Cealaigh",
     "Welcome" : "Fáilte",
     "Name" : "Ainm",

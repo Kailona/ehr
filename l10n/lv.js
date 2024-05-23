@@ -14,7 +14,7 @@ OC.L10N.register(
     "Delete" : "Dzēst",
     "Confirm" : "Apstiprināt",
     "Select Date" : "Izvēlieties datumu",
-    "Edit" : "Rediģēt",
+    "Edit" : "Labot",
     "Activities" : "Darbības",
     "Unknown" : "Nezināms"
 },
