@@ -7,7 +7,7 @@ OC.L10N.register(
     "Email" : "E-pasts",
     "All" : "Visi",
     "Cancel" : "Atcelt",
-    "File name" : "Faila nosaukums",
+    "File name" : "Datnes nosaukums",
     "Destination" : "Destination",
     "Welcome" : "Laipni lūdzam!",
     "Name" : "Vārds",

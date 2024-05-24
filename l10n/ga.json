@@ -1,6 +1,7 @@
 { "translations": {
     "Username" : "Ainm úsáideora",
     "Password" : "Pasfhocal",
+    "Email" : "Ríomhphost",
     "All" : "Gach",
     "Cancel" : "Cealaigh",
     "Welcome" : "Fáilte",
