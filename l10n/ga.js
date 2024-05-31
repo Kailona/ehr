@@ -3,9 +3,11 @@ OC.L10N.register(
     {
     "Username" : "Ainm úsáideora",
     "Password" : "Pasfhocal",
+    "Client ID" : "Aitheantas Cliant",
     "Email" : "Ríomhphost",
     "All" : "Gach",
     "Cancel" : "Cealaigh",
+    "File name" : "Ainm comhaid",
     "Welcome" : "Fáilte",
     "Name" : "Ainm",
     "Delete" : "Scrios",
