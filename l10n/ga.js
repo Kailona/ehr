@@ -15,6 +15,7 @@ OC.L10N.register(
     "Edit" : "Cuir in eagar",
     "Activities" : "Gníomhaíochtaí",
     "Unknown" : "Anaithnid",
-    "Documents" : "Doiciméid"
+    "Documents" : "Doiciméid",
+    "This is an automatically sent email, please do not reply." : "Seo ríomhphost a sheoltar go huathoibríoch, ná freagair le do thoil."
 },
 "nplurals=5; plural=(n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n<11 ? 3 : 4);");
