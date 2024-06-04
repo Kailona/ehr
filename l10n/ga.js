@@ -12,6 +12,8 @@ OC.L10N.register(
     "Name" : "Ainm",
     "Delete" : "Scrios",
     "Confirm" : "Deimhnigh",
+    "Timeline" : "Timeline",
+    "Select Date" : "Roghnaigh Dáta",
     "Edit" : "Cuir in eagar",
     "Activities" : "Gníomhaíochtaí",
     "Unknown" : "Anaithnid",
