@@ -14,6 +14,7 @@ OC.L10N.register(
     "Confirm" : "Deimhnigh",
     "Timeline" : "Timeline",
     "Select Date" : "Roghnaigh Dáta",
+    "Calories" : "Calraí",
     "Edit" : "Cuir in eagar",
     "Activities" : "Gníomhaíochtaí",
     "Unknown" : "Anaithnid",
