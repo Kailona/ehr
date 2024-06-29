@@ -14,6 +14,7 @@ OC.L10N.register(
     "Confirm" : "Confirmar",
     "Edit" : "Editar",
     "Activities" : "Actividades",
+    "Filter by" : "Filtrar por",
     "Unknown" : "Desconocido",
     "This is an automatically sent email, please do not reply." : "Este es un correo enviado automáticamente, por favor no lo contestes. "
 },
