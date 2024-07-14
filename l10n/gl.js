@@ -8,7 +8,7 @@ OC.L10N.register(
     "Username" : "Nome de usuario",
     "Password" : "Contrasinal",
     "Google Fit Synchronize" : "Sincronización de Google Fit",
-    "You can synchronize your Google Fit Application data. Just need to set your client id here." : "Pode sincronizar os datos da súa aplicación Google Fit. Só ten que estabelecer aquí o seu ID de cliente.",
+    "You can synchronize your Google Fit Application data. Just need to set your client id here." : "Pode sincronizar os datos da súa aplicación Google Fit. Só ten que definir aquí o seu ID de cliente.",
     "Client ID" : "ID de cliente",
     "Shortcuts" : "Atallos",
     "Request Data from Provider" : "Solicitar datos do provedor",
