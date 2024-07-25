@@ -20,6 +20,7 @@ OC.L10N.register(
     "Activities" : "Hoạt động",
     "Filter by" : "Lọc theo",
     "Unknown" : "Không xác định",
-    "Documents" : "Tài liệu"
+    "Documents" : "Tài liệu",
+    "Weight" : "Cân nặng"
 },
 "nplurals=1; plural=0;");
