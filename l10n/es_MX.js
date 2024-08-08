@@ -18,6 +18,7 @@ OC.L10N.register(
     "Edit" : "Editar",
     "Activities" : "Actividades",
     "Add New Activity" : "Añadir nueva actividad",
+    "Filter by" : "Filtrar según",
     "Update Activity" : "Actualizar actividad",
     "Unknown" : "Desconocido",
     "Documents" : "Documentos",
