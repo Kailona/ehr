@@ -29,9 +29,7 @@
     "An error occurred while importing data. Please contact your administrator." : "An error occurred while importing data. Please contact your administrator.",
     "Add More Files" : "Add More Files",
     "Drag and Drop Files" : "Drag and Drop Files",
-    "Patient Profile" : "Patient Profile",
     "Welcome" : "خوش آمدی",
-    "New Patient Profile" : "New Patient Profile",
     "Please update your health information for data accuracy." : "Please update your health information for data accuracy.",
     "Enjoy your private health platform, Kailona!" : "Enjoy your private health platform, Kailona!",
     "Name" : "نام",
@@ -41,7 +39,6 @@
     "Providers" : "Providers",
     "Synchronizing" : "Synchronizing",
     "I hereby request all data from my last exam to be uploaded to my personal health data archive on the Kailona platform. Please comply within the 30 day period as required by the Berufsordnung der Ärztekammern, §630g Abs. 2  BGB and Art. 15  Abs. 3 DSGVO." : "I hereby request all data from my last exam to be uploaded to my personal health data archive on the Kailona platform. Please comply within the 30 day period as required by the Berufsordnung der Ärztekammern, §630g Abs. 2  BGB and Art. 15  Abs. 3 DSGVO.",
-    "Unable to send health data request. Please set your email address in user profile settings!" : "Unable to send health data request. Please set your email address in user profile settings!",
     "Health data request was successfully sent" : "Health data request was successfully sent",
     "Unable to send health data request. Please contact your administrator!" : "Unable to send health data request. Please contact your administrator!",
     "Request Data" : "Request Data",
@@ -125,7 +122,6 @@
     "See Health Data" : "See Health Data",
     "EHR (Electronic Health Records)" : "EHR (Electronic Health Records)",
     "EHR" : "EHR",
-    "Kailona: Personal Health Records" : "Kailona: Personal Health Records",
-    "The Kailona Personal Health Record allows you to regain control over your health data. We provide an open source platform that allows everyone to add plugins and make improvements.\n\nIt helps you aggregate, manage, securely share and visualize your health data including lab data, medical images, FHIR data from hospitals, vital signs, nutritional and activity data.\n\nThis app works with a FHIR server. Please read the [documentation](https://docs.kailona.org/docs/#installation) to learn more about that.\n\n**Note that this app is under alpha development!**" : "The Kailona Personal Health Record allows you to regain control over your health data. We provide an open source platform that allows everyone to add plugins and make improvements.\n\nIt helps you aggregate, manage, securely share and visualize your health data including lab data, medical images, FHIR data from hospitals, vital signs, nutritional and activity data.\n\nThis app works with a FHIR server. Please read the [documentation](https://docs.kailona.org/docs/#installation) to learn more about that.\n\n**Note that this app is under alpha development!**"
+    "Kailona: Personal Health Records" : "Kailona: Personal Health Records"
 },"pluralForm" :"nplurals=2; plural=(n > 1);"
 }
