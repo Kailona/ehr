@@ -23,6 +23,7 @@ OC.L10N.register(
     "Calories" : "Kalorit",
     "Edit" : "Muokkaa",
     "Activities" : "Tapahtumat",
+    "Filter by" : "Suodata ",
     "Unknown" : "Tuntematon",
     "Documents" : "Asiakirjat",
     "Age" : "Ikä",
