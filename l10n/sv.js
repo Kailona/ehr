@@ -1,6 +1,7 @@
 OC.L10N.register(
     "ehr",
     {
+    "Base URL" : "Bas-URL",
     "Username" : "Användarnamn",
     "Password" : "Lösenord",
     "Client ID" : "Klient-ID",
