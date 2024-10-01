@@ -1,4 +1,5 @@
 { "translations": {
+    "Base URL" : "Основний URL",
     "Username" : "Ім'я користувача",
     "Password" : "Пароль",
     "Client ID" : "Ідентифікатор клієнта",
