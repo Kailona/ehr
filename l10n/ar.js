@@ -9,7 +9,7 @@ OC.L10N.register(
     "Password" : "كلمة المرور",
     "Google Fit Synchronize" : "المزامنة مع تطبيق متابعة النشاط البدني Google Fit",
     "You can synchronize your Google Fit Application data. Just need to set your client id here." : "يمكنك مزامنة بيانات تطبيق Google Fit. فقط تحتاج إلى تعيين معرف العميل الخاص بك هنا.",
-    "Client ID" : "مُعرّف العميل",
+    "Client ID" : "معرف العميل",
     "Shortcuts" : "الاختصارات",
     "Request Data from Provider" : "طلب البيانات من المزود",
     "Import Data" : "استيراد البيانات",
