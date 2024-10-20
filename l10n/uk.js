@@ -23,6 +23,7 @@ OC.L10N.register(
     "Filter by" : "Фільтрувати за",
     "Unknown" : "Невідомо",
     "Documents" : "Документи",
+    "Height" : "Висота",
     "Weight" : "Вага",
     "This is an automatically sent email, please do not reply." : "Це автоматично надісланий електронний лист, будь ласка, не відповідайте на нього."
 },
