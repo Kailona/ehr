@@ -61,7 +61,7 @@ OC.L10N.register(
     "Glucose" : "血糖",
     "Laboratory" : "实验室",
     "Glucometer" : "血糖仪",
-    "CGM (Continuous Glucose Monitoring) Device" : "CGM （连续血糖监测）装置",
+    "CGM (Continuous Glucose Monitoring) Device" : "CGM （连续血糖监测）设备",
     "Unknown" : "未知",
     "Documents" : "文档",
     "Leukocytes" : "白血球",
