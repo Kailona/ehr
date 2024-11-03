@@ -9,7 +9,7 @@ OC.L10N.register(
     "Import Data" : "Importuoti duomenis",
     "Email" : "El. paštas",
     "All" : "Visos",
-    "Cancel" : "Atšaukti",
+    "Cancel" : "Atsisakyti",
     "File name" : "Failo pavadinimas",
     "Destination" : "Paskirtis",
     "Data has been successfully imported" : "Duomenys sėkmingai importuoti",
