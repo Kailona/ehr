@@ -1,6 +1,7 @@
 OC.L10N.register(
     "ehr",
     {
+    "Base URL" : "ベース URL",
     "Username" : "ユーザー名",
     "Password" : "パスワード",
     "Client ID" : "クライアント ID",

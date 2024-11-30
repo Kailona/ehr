@@ -1,4 +1,5 @@
 { "translations": {
+    "Base URL" : "ベース URL",
     "Username" : "ユーザー名",
     "Password" : "パスワード",
     "Client ID" : "クライアント ID",
