@@ -49,7 +49,7 @@ OC.L10N.register(
     "Request Data" : "Demander les données",
     "Message to Provider:" : "Message au fournisseur :",
     "Send Request" : "Envoyer la requête",
-    "Timeline" : "Ligne du temps",
+    "Timeline" : "Fil chronologique",
     "self" : "soi-même",
     "Select Date" : "Choisir une date",
     "Select Date/Time" : "Choisir une date et heure",
