@@ -9,6 +9,7 @@ OC.L10N.register(
     "Name" : "Nama",
     "Delete" : "Padam",
     "Edit" : "Sunting",
-    "Activities" : "Aktiviti"
+    "Activities" : "Aktiviti",
+    "Filter by" : "Ditapis oleh"
 },
 "nplurals=1; plural=0;");
