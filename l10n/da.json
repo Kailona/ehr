@@ -1,4 +1,5 @@
 { "translations": {
+    "Base URL" : "Grund URL",
     "Username" : "Brugernavn",
     "Password" : "Adgangskode",
     "Client ID" : "Klient-ID",
