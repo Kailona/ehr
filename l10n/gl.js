@@ -16,7 +16,7 @@ OC.L10N.register(
     "Export Data" : "Exportar datos",
     "Please select at least one" : "Seleccione polo menos un",
     "Need to enter an email address" : "É necesario introducir un enderezo de correo",
-    "Data not found on the related date to export." : "Non se atoparon datos na data relacionada para exportar.",
+    "Data not found on the related date to export." : "Non se atopou ningún dato na data relacionada para exportar.",
     "${fromName}" : "${fromName}",
     "Data has been successfully exported and sent to related email." : "Os datos foron exportados e enviados correctamente a o correo relacionado.",
     "An error occurred while exporting data. Please contact your administrator." : "Produciuse un erro ao exportar os datos. Póñase en contacto cua administración desta instancia.",
