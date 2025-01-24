@@ -21,6 +21,7 @@ OC.L10N.register(
     "Unknown" : "Óþekkt",
     "Documents" : "Skjöl",
     "Age" : "Aldur",
+    "Height" : "Hæð",
     "Body Temperature" : "Líkamshiti",
     "This is an automatically sent email, please do not reply." : "Þetta er sjálfvirk tölvupóstsending, ekki svara þessu."
 },
