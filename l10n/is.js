@@ -1,6 +1,7 @@
 OC.L10N.register(
     "ehr",
     {
+    "Base URL" : "Grunnslóð",
     "Username" : "Notandanafn",
     "Password" : "Lykilorð",
     "Client ID" : "Biðlaraauðkenni",

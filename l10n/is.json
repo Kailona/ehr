@@ -1,4 +1,5 @@
 { "translations": {
+    "Base URL" : "Grunnslóð",
     "Username" : "Notandanafn",
     "Password" : "Lykilorð",
     "Client ID" : "Biðlaraauðkenni",
