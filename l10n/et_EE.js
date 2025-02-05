@@ -14,6 +14,7 @@ OC.L10N.register(
     "Timeline" : "Ajajoon",
     "Edit" : "Redigeeri",
     "Activities" : "Tegevused",
+    "Filter by" : "Filter",
     "Unknown" : "Teadmata",
     "This is an automatically sent email, please do not reply." : "See on automaatselt saadetud e-kiri, palun ära vasta."
 },
