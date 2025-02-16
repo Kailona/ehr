@@ -22,6 +22,7 @@ OC.L10N.register(
     "Filter by" : "Filter efter",
     "Unknown" : "Ukendt",
     "Documents" : "Dokumenter",
+    "Height" : "Højde",
     "Weight" : "Vægt",
     "This is an automatically sent email, please do not reply." : "Dette er en automatisk sendt e-mail, svar venligst ikke."
 },
