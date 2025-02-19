@@ -5,7 +5,7 @@ OC.L10N.register(
     "Password" : "Clau",
     "Email" : "Correu electronico",
     "All" : "Tot",
-    "Cancel" : "Canzelar",
+    "Cancel" : "Cancelar",
     "Name" : "Nombre",
     "Delete" : "Borrar",
     "Activities" : "Actividat"
