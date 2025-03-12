@@ -3,11 +3,13 @@ OC.L10N.register(
     {
     "Username" : "Username",
     "Password" : "Password",
+    "Email" : "Email",
     "All" : "All",
     "Cancel" : "Cancel",
     "Name" : "Name",
     "Delete" : "Delete",
     "Confirm" : "Confirm",
+    "Edit" : "Tahrirlash",
     "Activities" : "Activities",
     "Unknown" : "Unknown"
 },

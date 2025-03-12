@@ -1,11 +1,13 @@
 { "translations": {
     "Username" : "Username",
     "Password" : "Password",
+    "Email" : "Email",
     "All" : "All",
     "Cancel" : "Cancel",
     "Name" : "Name",
     "Delete" : "Delete",
     "Confirm" : "Confirm",
+    "Edit" : "Tahrirlash",
     "Activities" : "Activities",
     "Unknown" : "Unknown"
 },"pluralForm" :"nplurals=1; plural=0;"
