@@ -11,6 +11,7 @@ OC.L10N.register(
     "Confirm" : "Confirm",
     "Edit" : "Tahrirlash",
     "Activities" : "Activities",
+    "Filter by" : "Filtrlash",
     "Unknown" : "Unknown"
 },
 "nplurals=1; plural=0;");
