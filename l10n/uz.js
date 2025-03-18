@@ -1,6 +1,7 @@
 OC.L10N.register(
     "ehr",
     {
+    "Base URL" : "Asosiy URL",
     "Username" : "Username",
     "Password" : "Password",
     "Email" : "Email",
