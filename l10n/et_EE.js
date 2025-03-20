@@ -16,6 +16,7 @@ OC.L10N.register(
     "Activities" : "Tegevused",
     "Filter by" : "Filter",
     "Unknown" : "Teadmata",
+    "Documents" : "Dokumendid",
     "Height" : "Kõrgus",
     "This is an automatically sent email, please do not reply." : "See on automaatselt saadetud e-kiri, palun ära vasta."
 },
