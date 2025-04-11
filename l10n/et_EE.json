@@ -1,4 +1,5 @@
 { "translations": {
+    "Base URL" : "Baasaadress",
     "Username" : "Kasutajanimi",
     "Password" : "Parool",
     "Client ID" : "Kliendi ID",

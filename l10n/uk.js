@@ -11,6 +11,7 @@ OC.L10N.register(
     "Select options" : "Виберіть",
     "File name" : "Ім'я файлу",
     "Destination" : "Пункт призначення",
+    "Drag and Drop Files" : "Вибрати та перетягнути файли",
     "Welcome" : "Вітання",
     "Name" : "Ім'я",
     "Delete" : "Вилучити",
