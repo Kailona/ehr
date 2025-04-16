@@ -11,7 +11,7 @@ OC.L10N.register(
     "Destination" : "Destination",
     "Welcome" : "Laipni lūdzam!",
     "Name" : "Vārds",
-    "Delete" : "Dzēst",
+    "Delete" : "Izdzēst",
     "Confirm" : "Apstiprināt",
     "Select Date" : "Izvēlieties datumu",
     "Edit" : "Labot",
