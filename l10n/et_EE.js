@@ -9,6 +9,7 @@ OC.L10N.register(
     "All" : "Kõik",
     "Cancel" : "Loobu",
     "Destination" : "Sihtkoht",
+    "Welcome" : "Tere tulemast",
     "Name" : "Nimi",
     "Delete" : "Kustuta",
     "Confirm" : "Kinnita",
