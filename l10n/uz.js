@@ -4,6 +4,7 @@ OC.L10N.register(
     "Base URL" : "Asosiy URL",
     "Username" : "Username",
     "Password" : "Password",
+    "Client ID" : "Mijoz identifikatori",
     "Email" : "Email",
     "All" : "All",
     "Cancel" : "Cancel",
