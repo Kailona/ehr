@@ -13,6 +13,7 @@ OC.L10N.register(
     "Name" : "Vārds",
     "Delete" : "Izdzēst",
     "Confirm" : "Apstiprināt",
+    "Timeline" : "Laika līnija",
     "Select Date" : "Izvēlieties datumu",
     "Edit" : "Labot",
     "Activities" : "Darbības",
