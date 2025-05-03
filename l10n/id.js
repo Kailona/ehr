@@ -17,6 +17,7 @@ OC.L10N.register(
     "Activities" : "Aktivitas",
     "Filter by" : "Saring berdasarkan",
     "Unknown" : "Tidak diketahui",
-    "Documents" : "Dokumen"
+    "Documents" : "Dokumen",
+    "Height" : "Tinggi"
 },
 "nplurals=1; plural=0;");
