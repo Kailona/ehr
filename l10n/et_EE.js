@@ -14,6 +14,7 @@ OC.L10N.register(
     "Delete" : "Kustuta",
     "Confirm" : "Kinnita",
     "Timeline" : "Ajajoon",
+    "Distance" : "Vahemaa",
     "Edit" : "Redigeeri",
     "Activities" : "Tegevused",
     "Filter by" : "Filter",
