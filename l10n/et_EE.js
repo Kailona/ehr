@@ -15,6 +15,7 @@ OC.L10N.register(
     "Confirm" : "Kinnita",
     "Timeline" : "Ajajoon",
     "Distance" : "Vahemaa",
+    "Calories" : "Kaloreid",
     "Edit" : "Redigeeri",
     "Activities" : "Tegevused",
     "Filter by" : "Filter",
