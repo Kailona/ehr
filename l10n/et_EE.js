@@ -22,6 +22,7 @@ OC.L10N.register(
     "Unknown" : "Teadmata",
     "Documents" : "Dokumendid",
     "Height" : "Kõrgus",
+    "Weight" : "Kaal",
     "This is an automatically sent email, please do not reply." : "See on automaatselt saadetud e-kiri, palun ära vasta."
 },
 "nplurals=2; plural=(n != 1);");
