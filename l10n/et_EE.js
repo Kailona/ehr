@@ -8,6 +8,7 @@ OC.L10N.register(
     "Email" : "Epost",
     "All" : "Kõik",
     "Cancel" : "Loobu",
+    "File name" : "Failinimi",
     "Destination" : "Sihtkoht",
     "Welcome" : "Tere tulemast",
     "Name" : "Nimi",
