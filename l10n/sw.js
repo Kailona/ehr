@@ -6,6 +6,7 @@ OC.L10N.register(
     "Name" : "Jina",
     "Delete" : "Futa",
     "Confirm" : "Thibitisha",
+    "Select Date" : "Chagua tarehe",
     "Edit" : "Hariri",
     "Unknown" : "Haijulikani"
 },
