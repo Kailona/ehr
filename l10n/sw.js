@@ -8,6 +8,7 @@ OC.L10N.register(
     "Confirm" : "Thibitisha",
     "Select Date" : "Chagua tarehe",
     "Edit" : "Hariri",
-    "Unknown" : "Haijulikani"
+    "Unknown" : "Haijulikani",
+    "Documents" : "Nyaraka"
 },
 "nplurals=2; plural=(n != 1);");
