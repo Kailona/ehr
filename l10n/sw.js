@@ -1,6 +1,7 @@
 OC.L10N.register(
     "ehr",
     {
+    "Password" : "Nenosiri",
     "Email" : "Barua pepe",
     "Cancel" : "Cancel",
     "Name" : "Jina",
