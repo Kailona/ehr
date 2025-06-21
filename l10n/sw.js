@@ -2,6 +2,7 @@ OC.L10N.register(
     "ehr",
     {
     "Password" : "Nenosiri",
+    "Client ID" : "Kitambulisho cha mteja",
     "Email" : "Barua pepe",
     "Cancel" : "Cancel",
     "Name" : "Jina",
