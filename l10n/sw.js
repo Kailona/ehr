@@ -4,6 +4,7 @@ OC.L10N.register(
     "Password" : "Nenosiri",
     "Client ID" : "Kitambulisho cha mteja",
     "Email" : "Barua pepe",
+    "All" : "Zote",
     "Cancel" : "Cancel",
     "Name" : "Jina",
     "Delete" : "Futa",
