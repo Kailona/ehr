@@ -105,7 +105,7 @@ OC.L10N.register(
     "Normal/Healthy" : "Normal/Gesund",
     "Overweight" : "Übergewichtig",
     "Obese" : "fettleibig",
-    "Systolic Blood Pressure" : "Systole",
+    "Systolic Blood Pressure" : "Systolischer Blutdruck",
     "Diastolic Blood Pressure" : "Diastole",
     "Heart Rate" : "Puls",
     "Body Temperature" : "Körpertemperatur",
