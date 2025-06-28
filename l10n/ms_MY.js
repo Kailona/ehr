@@ -3,11 +3,11 @@ OC.L10N.register(
     {
     "Username" : "Nama pengguna",
     "Password" : "Kata laluan",
-    "Email" : "Email",
-    "Cancel" : "Batal",
     "Destination" : "Destination",
     "Name" : "Nama",
     "Delete" : "Padam",
+    "Cancel" : "Batal",
+    "Email" : "Email",
     "Edit" : "Sunting",
     "Activities" : "Aktiviti",
     "Filter by" : "Ditapis oleh"

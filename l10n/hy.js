@@ -3,11 +3,11 @@ OC.L10N.register(
     {
     "Username" : "Օգտանուն",
     "Password" : "Գաղտնաբառ",
-    "Email" : "Էլ․փոստ",
-    "Cancel" : "ընդհատել",
     "Destination" : "Destination",
     "Name" : "Անուն",
     "Delete" : "հեռացնել",
+    "Cancel" : "ընդհատել",
+    "Email" : "Էլ․փոստ",
     "Edit" : "մշակել",
     "Activities" : "Ակտիվություններ",
     "Unknown" : "Անհայտ"

@@ -3,9 +3,9 @@ OC.L10N.register(
     {
     "Username" : "Ulanyjy ady",
     "Password" : "Açarsöz",
-    "Cancel" : "ýatyrmak",
     "Name" : "Ady",
     "Delete" : "Pozmak",
+    "Cancel" : "ýatyrmak",
     "Edit" : "Redaktirläň",
     "Activities" : "Çäreler",
     "Unknown" : "Näbelli",

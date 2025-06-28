@@ -3,11 +3,11 @@ OC.L10N.register(
     {
     "Username" : "یوزر نیم",
     "Password" : "پاسورڈ",
-    "Email" : "email",
-    "Cancel" : "منسوخ کریں",
     "Destination" : "Destination",
     "Name" : "اسم",
     "Delete" : "حذف کریں",
+    "Cancel" : "منسوخ کریں",
+    "Email" : "email",
     "Edit" : "تدوین کریں"
 },
 "nplurals=2; plural=(n != 1);");

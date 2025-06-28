@@ -3,10 +3,10 @@ OC.L10N.register(
     {
     "Username" : "Ainm-cleachdaiche",
     "Password" : "Facal-faire",
-    "Email" : "Post-d",
-    "Cancel" : "Sguir dheth",
     "Name" : "Ainm",
     "Delete" : "Sguab às",
+    "Cancel" : "Sguir dheth",
+    "Email" : "Post-d",
     "Edit" : "Deasaich",
     "Activities" : "Gnìomhachdan",
     "Unknown" : "Chan eil fhios",
