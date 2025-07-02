@@ -3,9 +3,9 @@ OC.L10N.register(
     {
     "Username" : "Ainm-cleachdaiche",
     "Password" : "Facal-faire",
+    "Cancel" : "Sguir dheth",
     "Name" : "Ainm",
     "Delete" : "Sguab às",
-    "Cancel" : "Sguir dheth",
     "Email" : "Post-d",
     "Edit" : "Deasaich",
     "Activities" : "Gnìomhachdan",

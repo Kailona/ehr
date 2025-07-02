@@ -3,10 +3,11 @@ OC.L10N.register(
     {
     "Username" : "Nomine de usator",
     "Password" : "Contrasigno",
+    "All" : "Tote",
+    "Cancel" : "Cancellar",
     "Destination" : "Destination",
     "Name" : "Nomine",
     "Delete" : "Deler",
-    "Cancel" : "Cancellar",
     "Confirm" : "Confirmar",
     "Email" : "E-posta",
     "Edit" : "Modificar",

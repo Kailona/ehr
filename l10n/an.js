@@ -3,9 +3,9 @@ OC.L10N.register(
     {
     "Username" : "Nombre d'usuario",
     "Password" : "Clau",
+    "Cancel" : "Cancelar",
     "Name" : "Nombre",
     "Delete" : "Borrar",
-    "Cancel" : "Cancelar",
     "Email" : "Correu electronico",
     "Activities" : "Actividat"
 },

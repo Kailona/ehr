@@ -3,10 +3,10 @@ OC.L10N.register(
     {
     "Username" : "یوزر نیم",
     "Password" : "پاسورڈ",
+    "Cancel" : "منسوخ کریں",
     "Destination" : "Destination",
     "Name" : "اسم",
     "Delete" : "حذف کریں",
-    "Cancel" : "منسوخ کریں",
     "Email" : "email",
     "Edit" : "تدوین کریں"
 },

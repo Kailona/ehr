@@ -1,9 +1,10 @@
 { "translations": {
     "Password" : "Nenosiri",
     "Client ID" : "Kitambulisho cha mteja",
+    "All" : "Zote",
+    "Cancel" : "Cancel",
     "Name" : "Jina",
     "Delete" : "Futa",
-    "Cancel" : "Cancel",
     "Confirm" : "Thibitisha",
     "Email" : "Barua pepe",
     "Select Date" : "Chagua tarehe",

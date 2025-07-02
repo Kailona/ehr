@@ -3,10 +3,11 @@ OC.L10N.register(
     {
     "Username" : "Enw defnyddiwr",
     "Password" : "Cyfrinair",
+    "All" : "Popeth",
+    "Cancel" : "Diddymu",
     "Destination" : "Destination",
     "Name" : "Enw",
     "Delete" : "Dileu",
-    "Cancel" : "Diddymu",
     "Confirm" : "Cadarnhau",
     "Email" : "E-bost",
     "Select Date" : "Dewis Dyddiad",

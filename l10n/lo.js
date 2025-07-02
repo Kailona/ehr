@@ -3,10 +3,10 @@ OC.L10N.register(
     {
     "Username" : "ຊື່ຜູ້ໃຊ້",
     "Password" : "ລະຫັດຜ່ານ",
+    "Cancel" : "ຍົກເລີກ",
     "Destination" : "ປາຍທາງ",
     "Name" : "ຊື່",
     "Delete" : "ລຶບ",
-    "Cancel" : "ຍົກເລີກ",
     "Confirm" : "ຢືນຢັນ",
     "Email" : "ອິເມວ",
     "Edit" : "ແກ້ໄຂ",

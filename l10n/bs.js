@@ -3,10 +3,10 @@ OC.L10N.register(
     {
     "Username" : "Korisničko ime",
     "Password" : "Lozinka",
+    "Cancel" : "Otkaži",
     "Destination" : "Destination",
     "Name" : "Ime",
     "Delete" : "Obriši",
-    "Cancel" : "Otkaži",
     "Email" : "E-pošta",
     "Edit" : "Izmjeni",
     "Unknown" : "Nepoznato"

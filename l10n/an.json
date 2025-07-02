@@ -1,9 +1,9 @@
 { "translations": {
     "Username" : "Nombre d'usuario",
     "Password" : "Clau",
+    "Cancel" : "Cancelar",
     "Name" : "Nombre",
     "Delete" : "Borrar",
-    "Cancel" : "Cancelar",
     "Email" : "Correu electronico",
     "Activities" : "Actividat"
 },"pluralForm" :"nplurals=2; plural=(n != 1);"
