@@ -56,6 +56,7 @@ OC.L10N.register(
     "self" : "self",
     "Select Date" : "Select Date",
     "Select Date/Time" : "Select Date/Time",
+    "No data available" : "No data available",
     "Steps" : "Steps",
     "Distance" : "Distance",
     "Calories" : "Calories",

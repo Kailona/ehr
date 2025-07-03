@@ -56,6 +56,7 @@ OC.L10N.register(
     "self" : "Selbst",
     "Select Date" : "Datum auswählen",
     "Select Date/Time" : "Datum & Uhrzeit auswählen",
+    "No data available" : "Keine Daten verfügbar",
     "Steps" : "Schritte",
     "Distance" : "Entfernung",
     "Calories" : "Kalorien",

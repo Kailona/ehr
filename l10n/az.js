@@ -4,6 +4,7 @@ OC.L10N.register(
     "Username" : "İstifadəçi adı",
     "Password" : "Şifrə",
     "Client ID" : "Müştəri İD-s",
+    "All" : "Hamısı",
     "Cancel" : "Dayandır",
     "Destination" : "Destination",
     "Name" : "Ad",

@@ -1,0 +1,10 @@
+{ "translations": {
+    "Username" : "Brúkaranavn",
+    "Password" : "Loyniorð",
+    "All" : "Øll",
+    "Cancel" : "strika",
+    "Delete" : "Strika",
+    "Email" : "T-post",
+    "Activities" : "Virksemi"
+},"pluralForm" :"nplurals=2; plural=(n != 1);"
+}

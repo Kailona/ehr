@@ -3,6 +3,7 @@ OC.L10N.register(
     {
     "Username" : "Nombre d'usuario",
     "Password" : "Clau",
+    "All" : "Tot",
     "Cancel" : "Cancelar",
     "Name" : "Nombre",
     "Delete" : "Borrar",
