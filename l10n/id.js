@@ -12,7 +12,7 @@ OC.L10N.register(
     "Name" : "Nama",
     "Delete" : "Hapus",
     "Confirm" : "Konfirmasi",
-    "Email" : "Surel",
+    "Email" : "Email",
     "Timeline" : "Linimasa",
     "Edit" : "Sunting",
     "Activities" : "Aktivitas",
