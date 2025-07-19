@@ -5,6 +5,7 @@ OC.L10N.register(
     "Client ID" : "Kitambulisho cha mteja",
     "All" : "Zote",
     "Cancel" : "Cancel",
+    "Welcome" : "Karibu",
     "Name" : "Jina",
     "Delete" : "Futa",
     "Confirm" : "Thibitisha",

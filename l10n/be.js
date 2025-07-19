@@ -3,7 +3,7 @@ OC.L10N.register(
     {
     "Username" : "Username",
     "Password" : "Password",
-    "Cancel" : "Cancel",
+    "Cancel" : "Скасаваць",
     "Destination" : "Destination",
     "Delete" : "Delete",
     "Email" : "email",
