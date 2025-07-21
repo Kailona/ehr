@@ -5,6 +5,7 @@ OC.L10N.register(
     "Password" : "Пароль",
     "Cancel" : "Скасаваць",
     "Destination" : "Прызначэнне",
+    "Name" : "Назва",
     "Delete" : "Выдаліць",
     "Email" : "Электронная пошта",
     "Activities" : "Актыўнасць",
