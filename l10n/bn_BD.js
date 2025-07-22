@@ -4,6 +4,7 @@ OC.L10N.register(
     "Username" : "ব্যবহারকারী",
     "Password" : "কূটশব্দ",
     "Client ID" : "ক্লায়েন্ট পরিচিতি",
+    "All" : "সবাই",
     "Cancel" : "বাতির",
     "Destination" : "Destination",
     "Name" : "নাম",

@@ -1,6 +1,7 @@
 { "translations": {
     "Username" : "Korisničko ime",
     "Password" : "Lozinka",
+    "All" : "Sve",
     "Cancel" : "Otkaži",
     "Destination" : "Destination",
     "Name" : "Ime",

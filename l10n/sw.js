@@ -14,6 +14,7 @@ OC.L10N.register(
     "Select Date" : "Chagua tarehe",
     "Edit" : "Hariri",
     "Unknown" : "Haijulikani",
-    "Documents" : "Nyaraka"
+    "Documents" : "Nyaraka",
+    "Height" : "Urefu"
 },
 "nplurals=2; plural=(n != 1);");
