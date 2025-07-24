@@ -6,6 +6,7 @@ OC.L10N.register(
     "Cancel" : "Скасаваць",
     "Destination" : "Прызначэнне",
     "Name" : "Назва",
+    "Birth Date" : "Дата нараджэння",
     "Delete" : "Выдаліць",
     "Confirm" : "Пацвердзіць",
     "Email" : "Электронная пошта",
