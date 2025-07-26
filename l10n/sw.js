@@ -1,6 +1,7 @@
 OC.L10N.register(
     "ehr",
     {
+    "Username" : "Username",
     "Password" : "Nenosiri",
     "Client ID" : "Kitambulisho cha mteja",
     "All" : "Zote",
@@ -13,6 +14,7 @@ OC.L10N.register(
     "Email" : "Barua pepe",
     "Select Date" : "Chagua tarehe",
     "Edit" : "Hariri",
+    "Filter by" : "Filter by",
     "Unknown" : "Haijulikani",
     "Documents" : "Nyaraka",
     "Height" : "Urefu"

@@ -1,4 +1,5 @@
 { "translations": {
+    "Username" : "Username",
     "Password" : "Nenosiri",
     "Client ID" : "Kitambulisho cha mteja",
     "All" : "Zote",
@@ -11,6 +12,7 @@
     "Email" : "Barua pepe",
     "Select Date" : "Chagua tarehe",
     "Edit" : "Hariri",
+    "Filter by" : "Filter by",
     "Unknown" : "Haijulikani",
     "Documents" : "Nyaraka",
     "Height" : "Urefu"
