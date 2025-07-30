@@ -10,6 +10,7 @@ OC.L10N.register(
     "Delete" : "Выдаліць",
     "Confirm" : "Пацвердзіць",
     "Email" : "Электронная пошта",
+    "Edit" : "Рэдагаваць",
     "Activities" : "Актыўнасць",
     "Unknown" : "Невядомы",
     "Documents" : "Дакументы"
