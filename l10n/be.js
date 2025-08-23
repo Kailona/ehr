@@ -3,6 +3,8 @@ OC.L10N.register(
     {
     "Username" : "Імя карыстальніка",
     "Password" : "Пароль",
+    "Client ID" : "Ідэнтыфікатар кліента",
+    "All" : "Усе",
     "Cancel" : "Скасаваць",
     "Destination" : "Прызначэнне",
     "Name" : "Назва",
