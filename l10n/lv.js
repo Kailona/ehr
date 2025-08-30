@@ -14,7 +14,7 @@ OC.L10N.register(
     "Confirm" : "Apstiprināt",
     "Email" : "E-pasts",
     "Timeline" : "Laika līnija",
-    "Select Date" : "Izvēlieties datumu",
+    "Select Date" : "Atlasīt datumu",
     "Edit" : "Labot",
     "Activities" : "Darbības",
     "Filter by" : "Filtrēt pēc",
