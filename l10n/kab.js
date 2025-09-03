@@ -5,6 +5,7 @@ OC.L10N.register(
     "Password" : "Awal uffir",
     "All" : "Akk",
     "Cancel" : "Sefsex",
+    "Welcome" : "Ansuf",
     "Name" : "Nom",
     "Delete" : "Kkes",
     "Confirm" : "Serggeg",
