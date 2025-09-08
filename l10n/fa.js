@@ -32,7 +32,7 @@ OC.L10N.register(
     "Please update your health information for data accuracy." : "Please update your health information for data accuracy.",
     "Enjoy your private health platform, Kailona!" : "Enjoy your private health platform, Kailona!",
     "Name" : "نام",
-    "Birth Date" : "Birth Date",
+    "Birth Date" : "تاریخ تولد",
     "Delete" : "حذف",
     "Confirm" : "تائید",
     "Providers" : "Providers",
