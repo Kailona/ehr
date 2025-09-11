@@ -17,7 +17,7 @@ OC.L10N.register(
     "Timeline" : "Tidslinje",
     "Select Date" : "Vælg dato",
     "Calories" : "Kalorier",
-    "Edit" : "Rediger",
+    "Edit" : "Redigér",
     "Activities" : "Aktiviteter",
     "Filter by" : "Filter efter",
     "Unknown" : "Ukendt",
