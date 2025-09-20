@@ -5,6 +5,7 @@ OC.L10N.register(
     "Username" : "ユーザー名",
     "Password" : "パスワード",
     "Client ID" : "クライアント ID",
+    "Shortcuts" : "ショートカットキー",
     "All" : "すべて",
     "Cancel" : "キャンセル",
     "File name" : "ファイル名",
