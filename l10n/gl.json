@@ -1,5 +1,5 @@
 { "translations": {
-    "Failed to initialize! Please contact your administrator!" : "Produciuse un fallo na inicialización. Póñase en contacto coa administración desta instancia.",
+    "Failed to initialize! Please contact your administrator!" : "Produciuse un fallo na preparación!. Póñase en contacto coa administración desta instancia.",
     "FHIR Server" : "Servidor FHIR",
     "FHIR is required to store health data. Basic HTTP Authentication is currently supported." : "Requírese de FHIR para almacenar datos de saúde. Actualmente, a autenticación HTTP básica é compatíbel",
     "Base URL" : "URL base",
